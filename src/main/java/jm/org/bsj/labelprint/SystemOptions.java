@@ -61,14 +61,18 @@ public class SystemOptions {
     }
     
     private boolean readSystemData() {
-        //FileInputStream fileInputStream;
+       
         noError = true;
         
         try {
-            //fileInputStream = new FileInputStream(systemFile);
-            props.load(new FileInputStream(systemFile));
-            //fileInputStream.close();
-        } catch (Exception ex) {
+            
+            FileInputStream fis = new FileInputStream(getClass().
+                                getResource("/system/" + systemFile).getFile());
+            
+            props.load(fis);
+            
+        } catch (IOException ex) {
+            System.out.println(ex);
             noError = false;
         }
         
@@ -76,14 +80,15 @@ public class SystemOptions {
     }
     
     public boolean writeSystemData() {
-        //FileOutputStream fileOutputStream;
+ 
         noError = true;
         
         try {
-            //fileOutputStream = new FileOutputStream(systemFile);
+           
             props.store(new FileOutputStream(systemFile), "LabelPrint System Options");
-            //fileOutputStream.close();
-        } catch (Exception ex) {
+           
+        } catch (IOException ex) {
+            System.out.println(ex);
             noError = false;
         }
         
@@ -253,6 +258,7 @@ public class SystemOptions {
     }
     
     
+    @Override
     protected void finalize() throws Throwable {
         writeSystemData();
     }

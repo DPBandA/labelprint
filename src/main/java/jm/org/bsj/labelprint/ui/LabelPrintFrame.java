@@ -247,7 +247,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jToolBar.setFloatable(false);
 
-        NewLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jm/org/bsj/labelprint/newFile.gif"))); // NOI18N
+        NewLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/newFile.gif"))); // NOI18N
         NewLabel.setToolTipText("New label");
         NewLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,7 +256,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         });
         jToolBar.add(NewLabel);
 
-        OpenLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jm/org/bsj/labelprint/openFile.gif"))); // NOI18N
+        OpenLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/openFile.gif"))); // NOI18N
         OpenLabel.setToolTipText("Open label");
         OpenLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +265,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         });
         jToolBar.add(OpenLabel);
 
-        SaveLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jm/org/bsj/labelprint/saveFile.gif"))); // NOI18N
+        SaveLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saveFile.gif"))); // NOI18N
         SaveLabel.setToolTipText("Save label");
         SaveLabel.setEnabled(false);
         SaveLabel.addActionListener(new java.awt.event.ActionListener() {

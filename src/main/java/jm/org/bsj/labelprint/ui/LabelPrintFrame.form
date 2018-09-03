@@ -225,7 +225,7 @@
         <Component class="javax.swing.JButton" name="NewLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/jm/org/bsj/labelprint/newFile.gif"/>
+              <Image iconType="3" name="/images/newFile.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="New label"/>
           </Properties>
@@ -236,7 +236,7 @@
         <Component class="javax.swing.JButton" name="OpenLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/jm/org/bsj/labelprint/openFile.gif"/>
+              <Image iconType="3" name="/images/openFile.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Open label"/>
           </Properties>
@@ -247,7 +247,7 @@
         <Component class="javax.swing.JButton" name="SaveLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/jm/org/bsj/labelprint/saveFile.gif"/>
+              <Image iconType="3" name="/images/saveFile.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Save label"/>
             <Property name="enabled" type="boolean" value="false"/>

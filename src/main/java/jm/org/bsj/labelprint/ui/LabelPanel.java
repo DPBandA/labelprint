@@ -56,6 +56,7 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
 
     /**
      * Creates new form LabelPanel
+     * @param labelPrintFrame
      */
     public LabelPanel(jm.org.bsj.labelprint.ui.LabelPrintFrame labelPrintFrame) {
         this.labelPrintFrame = labelPrintFrame;
@@ -65,7 +66,10 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
 
         SystemOptions sysOptions = new SystemOptions("System.properties");
 
-        img = toolKit.createImage(sysOptions.getLabelLogoFile());
+        //img = toolKit.createImage(sysOptions.getLabelLogoFile());
+        // getClass().getResource("/system/" + systemFile)
+        // tk
+        img = toolKit.createImage(getClass().getResource("/images/BSJLogoPNG.png"));
         labelHeadingImg = toolKit.createImage(sysOptions.getHeadingImage());
     }
 
