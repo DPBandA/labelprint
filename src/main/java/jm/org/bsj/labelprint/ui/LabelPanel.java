@@ -69,8 +69,8 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
         //img = toolKit.createImage(sysOptions.getLabelLogoFile());
         // getClass().getResource("/system/" + systemFile)
         // tk
-        img = toolKit.createImage(getClass().getResource("/images/BSJLogoPNG.png"));
-        labelHeadingImg = toolKit.createImage(sysOptions.getHeadingImage());
+        img = toolKit.createImage(getClass().getResource(sysOptions.getLabelLogoFile()));
+        labelHeadingImg = toolKit.createImage(getClass().getResource(sysOptions.getHeadingImage()));
     }
 
     public void showGreenBackground(boolean flag) {
