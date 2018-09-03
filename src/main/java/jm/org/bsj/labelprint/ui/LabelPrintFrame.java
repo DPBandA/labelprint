@@ -1,0 +1,898 @@
+/*
+ * LabelPrintFrame.java
+ *
+ * Created on July 6, 2007, 4:39 PM
+ */
+package jm.org.bsj.labelprint.ui;
+
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.pdf.DefaultFontMapper;
+import java.awt.Cursor;
+import java.awt.ScrollPane;
+import java.awt.Toolkit;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import jm.org.bsj.labelprint.LabelPrintFileFilter;
+import jm.org.bsj.labelprint.SystemOptions;
+import jm.org.bsj.labelprint.model.EnergyLabelData;
+
+/**
+ *
+ * @author dbennett
+ */
+public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
+    // Data management
+
+    private SystemOptions sysOptions;
+    private boolean FileDirty;
+    private EntityManagerFactory emf;
+    private EntityManager em;
+    private BigInteger currentLabelID;
+    private EnergyLabelData reld;
+    private DefaultFontMapper defaultFontMapper;
+    private boolean chkGreenBackground;
+    private boolean chkYellowBackground;
+    private boolean chkContents = true;
+    // Data views/editors
+    private LabelDataDialog labelDataDialog;
+    private LabelPanel labelPanel;
+
+    /**
+     * Creates new form LabelPrintFrame
+     */
+    public LabelPrintFrame() {
+        initComponents();
+        Toolkit toolKit = Toolkit.getDefaultToolkit();
+        setIconImage(toolKit.createImage("images\\LabelPrintIcon.png"));
+        sysOptions = new SystemOptions("System.properties");
+        enableMenuItems(false);
+
+        // Centre frame
+        setLocationRelativeTo(null);
+        doSetup();
+
+    }
+
+    public SystemOptions getSystemOptions() {
+        return sysOptions;
+    }
+
+    public List<EnergyLabelData> findLabels(String searchField,
+            String searchPattern) {
+
+        List<EnergyLabelData> labelsFound = null;
+        String query = "SELECT r FROM EnergyLabelData r WHERE r." + searchField + " LIKE '%" + searchPattern + "%'";
+
+        // return empty list of frige data if the return list is null
+        // possibly due to a database error
+        try {
+            labelsFound = (List<EnergyLabelData>) em.createQuery(query).getResultList();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "An error occured while searching for labels.\n"
+                    + "This could occur because you do not have a database connection.\n"
+                    + "Try to connect to a database in the options dialog and try again.",
+                    "Search Error",
+                    JOptionPane.ERROR_MESSAGE);
+            labelsFound = new ArrayList<EnergyLabelData>();
+        }
+
+        return labelsFound;
+    }
+
+    public final void doSetup() {
+        SplashScreenJDialog ssd = new SplashScreenJDialog(this, false);
+        ssd.setVisible(true);
+    }
+
+    public EnergyLabelData getLabel(BigInteger id) {
+        EnergyLabelData labelData = em.find(EnergyLabelData.class, id);
+        currentLabelID = labelData.getEnergyLabelDataId();
+
+        return labelData;
+    }
+
+    public boolean setupFontDefaultFontMapper() {
+
+        try {
+            // Setup font mapper for pdf image export
+            defaultFontMapper = new DefaultFontMapper();
+            FontFactory.registerDirectories();
+            defaultFontMapper.insertDirectory(sysOptions.getFontsDirectory());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public DefaultFontMapper getDefaultFontMapper() {
+        return defaultFontMapper;
+    }
+
+    public boolean isLabelNameUsed(String labelName) {
+        try {
+
+            EnergyLabelData labelData
+                    = (EnergyLabelData) em.createNamedQuery("EnergyLabelData.findByLabelName").setParameter("labelName", labelName).getSingleResult();
+            if (labelData != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        return false;
+
+    }
+
+    public void setFileDirty(boolean flag) {
+        //labelDataDialog.getLabelData();        
+        FileDirty = flag;
+        if (FileDirty == true) {
+            this.setTitle("LabelPrint - " + reld.getLabelName() + " - MODIFIED");
+        } else {
+            this.setTitle("LabelPrint - " + reld.getLabelName());
+        }
+    }
+
+    public boolean isFileDirty() {
+        return FileDirty;
+    }
+
+    // print label
+    private void printLabel() {
+        try {
+            PrinterJob prnJob = PrinterJob.getPrinterJob();
+            PageFormat pf = prnJob.defaultPage();
+            Paper p = pf.getPaper();
+            p.setImageableArea(18.0, 18.0, 600.0, 600.0);
+            pf.setPaper(p);
+            prnJob.setPrintable(labelPanel, pf);
+            if (!prnJob.printDialog()) {
+                return;
+            }
+            setCursor(Cursor.getPredefinedCursor(
+                    Cursor.WAIT_CURSOR));
+            prnJob.print();
+            setCursor(Cursor.getPredefinedCursor(
+                    Cursor.DEFAULT_CURSOR));
+        } catch (PrinterException e) {
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            System.out.println(e);
+            System.err.println("Printing error: " + e.toString());
+            JOptionPane.showMessageDialog(this,
+                    "Error occured while printing",
+                    "Label Print",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // enable/disable menu items
+    public final void enableMenuItems(boolean flag) {
+        jMenuFileSave.setEnabled(flag);
+        SaveLabel.setEnabled(flag);
+        jMenuFileExport.setEnabled(flag);
+        jMenuFilePrint.setEnabled(flag);
+        jMenuEditLabel.setEnabled(flag);
+        jMenuFileClose.setEnabled(flag);
+        jCheckBoxMenuViewGreenBackground.setEnabled(flag);
+        jCheckBoxMenuViewYellowBackground.setEnabled(flag);
+        jCheckBoxMenuViewContent.setEnabled(flag);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jToolBar = new javax.swing.JToolBar();
+        NewLabel = new javax.swing.JButton();
+        OpenLabel = new javax.swing.JButton();
+        SaveLabel = new javax.swing.JButton();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuFileNew = new javax.swing.JMenuItem();
+        jMenuFileOpen = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
+        jMenuFileClose = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JSeparator();
+        jMenuFileSave = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JSeparator();
+        jMenuFilePrint = new javax.swing.JMenuItem();
+        jMenuFileExport = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JSeparator();
+        jMenuFileExit = new javax.swing.JMenuItem();
+        jMenuEdit = new javax.swing.JMenu();
+        jMenuEditLabel = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JSeparator();
+        jMenuEditOptions = new javax.swing.JMenuItem();
+        jMenuView = new javax.swing.JMenu();
+        jCheckBoxMenuViewGreenBackground = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuViewYellowBackground = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuViewContent = new javax.swing.JCheckBoxMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuHelpAbout = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("LabelPrint");
+        setBackground(new java.awt.Color(153, 255, 255));
+        setMinimumSize(new java.awt.Dimension(550, 500));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jToolBar.setFloatable(false);
+
+        NewLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jm/org/bsj/labelprint/newFile.gif"))); // NOI18N
+        NewLabel.setToolTipText("New label");
+        NewLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewLabelActionPerformed(evt);
+            }
+        });
+        jToolBar.add(NewLabel);
+
+        OpenLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jm/org/bsj/labelprint/openFile.gif"))); // NOI18N
+        OpenLabel.setToolTipText("Open label");
+        OpenLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpenLabelActionPerformed(evt);
+            }
+        });
+        jToolBar.add(OpenLabel);
+
+        SaveLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jm/org/bsj/labelprint/saveFile.gif"))); // NOI18N
+        SaveLabel.setToolTipText("Save label");
+        SaveLabel.setEnabled(false);
+        SaveLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveLabelActionPerformed(evt);
+            }
+        });
+        jToolBar.add(SaveLabel);
+
+        jTabbedPane.setMinimumSize(new java.awt.Dimension(400, 447));
+        jTabbedPane.setPreferredSize(new java.awt.Dimension(400, 447));
+        jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPaneStateChanged(evt);
+            }
+        });
+
+        jMenuFile.setMnemonic('F');
+        jMenuFile.setText("File");
+
+        jMenuFileNew.setMnemonic('N');
+        jMenuFileNew.setText("New...");
+        jMenuFileNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileNewActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFileNew);
+
+        jMenuFileOpen.setMnemonic('O');
+        jMenuFileOpen.setText("Open...");
+        jMenuFileOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileOpenActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFileOpen);
+        jMenuFile.add(jSeparator1);
+
+        jMenuFileClose.setMnemonic('C');
+        jMenuFileClose.setText("Close");
+        jMenuFileClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileCloseActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFileClose);
+        jMenuFile.add(jSeparator2);
+
+        jMenuFileSave.setMnemonic('S');
+        jMenuFileSave.setText("Save");
+        jMenuFileSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileSaveActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFileSave);
+        jMenuFile.add(jSeparator3);
+
+        jMenuFilePrint.setMnemonic('P');
+        jMenuFilePrint.setText("Print...");
+        jMenuFilePrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFilePrintActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFilePrint);
+
+        jMenuFileExport.setMnemonic('r');
+        jMenuFileExport.setText("Export...");
+        jMenuFileExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileExportActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFileExport);
+        jMenuFile.add(jSeparator4);
+
+        jMenuFileExit.setMnemonic('X');
+        jMenuFileExit.setText("Exit");
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileExitActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFileExit);
+
+        jMenuBar1.add(jMenuFile);
+
+        jMenuEdit.setMnemonic('E');
+        jMenuEdit.setText("Edit");
+
+        jMenuEditLabel.setText("Label");
+        jMenuEditLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEditLabelActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(jMenuEditLabel);
+        jMenuEdit.add(jSeparator5);
+
+        jMenuEditOptions.setText("Options...");
+        jMenuEditOptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEditOptionsActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(jMenuEditOptions);
+
+        jMenuBar1.add(jMenuEdit);
+
+        jMenuView.setText("View");
+
+        jCheckBoxMenuViewGreenBackground.setText("Green background");
+        jCheckBoxMenuViewGreenBackground.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuViewGreenBackgroundActionPerformed(evt);
+            }
+        });
+        jMenuView.add(jCheckBoxMenuViewGreenBackground);
+
+        jCheckBoxMenuViewYellowBackground.setText("Yellow background");
+        jCheckBoxMenuViewYellowBackground.setToolTipText("");
+        jCheckBoxMenuViewYellowBackground.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuViewYellowBackgroundActionPerformed(evt);
+            }
+        });
+        jMenuView.add(jCheckBoxMenuViewYellowBackground);
+
+        jCheckBoxMenuViewContent.setSelected(true);
+        jCheckBoxMenuViewContent.setText("Content");
+        jCheckBoxMenuViewContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuViewContentActionPerformed(evt);
+            }
+        });
+        jMenuView.add(jCheckBoxMenuViewContent);
+
+        jMenuBar1.add(jMenuView);
+
+        jMenuHelp.setText("Help");
+
+        jMenuHelpAbout.setText("About");
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuHelpAboutActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jMenuHelpAbout);
+
+        jMenuBar1.add(jMenuHelp);
+
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpAboutActionPerformed
+        JOptionPane.showMessageDialog(this,
+                "LabelPrint, Version 2.1\n"
+                + "Copyright 2012 Bureau of Standards, Jamaica\n"
+                + "Developer: D P Bennett & Associates Ltd.\n"
+                + "email: info@dpbennett.com.jm",
+                "About",
+                JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuHelpAboutActionPerformed
+
+    private void jMenuEditLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditLabelActionPerformed
+        jTabbedPane.setSelectedIndex(0);
+    }//GEN-LAST:event_jMenuEditLabelActionPerformed
+
+    private void NewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewLabelActionPerformed
+        newLabel();
+    }//GEN-LAST:event_NewLabelActionPerformed
+
+    private void jMenuEditOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditOptionsActionPerformed
+        OptionsJDialog odlg = new OptionsJDialog(this, true);
+        odlg.setVisible(true);
+        if (odlg.hasDatabaseConnectionOptionsChanged()) {
+            odlg = null;
+            new Thread(this).start();
+        }
+    }//GEN-LAST:event_jMenuEditOptionsActionPerformed
+
+    private void jCheckBoxMenuViewContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewContentActionPerformed
+        chkContents = jCheckBoxMenuViewContent.isSelected();
+        labelPanel.showContents(chkContents);
+        jTabbedPane.setSelectedIndex(1);
+        labelPanel.repaint();
+    }//GEN-LAST:event_jCheckBoxMenuViewContentActionPerformed
+
+    private void jCheckBoxMenuViewGreenBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
+        chkGreenBackground = jCheckBoxMenuViewGreenBackground.isSelected();
+        labelPanel.showGreenBackground(chkGreenBackground);
+        jTabbedPane.setSelectedIndex(1);
+        labelPanel.repaint();
+    }//GEN-LAST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
+
+    private void OpenLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenLabelActionPerformed
+        openLabel();
+    }//GEN-LAST:event_OpenLabelActionPerformed
+
+    private void jMenuFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileOpenActionPerformed
+        openLabel();
+    }//GEN-LAST:event_jMenuFileOpenActionPerformed
+
+    private void jMenuFilePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilePrintActionPerformed
+        Thread printThread = new Thread() {
+
+            public void run() {
+                printLabel();
+            }
+        };
+        printThread.start();
+    }//GEN-LAST:event_jMenuFilePrintActionPerformed
+
+    public String getFileAbsolutePath(String action) {
+        JFileChooser chooser = new JFileChooser();
+        LabelPrintFileFilter labelPrintFileFilter = new LabelPrintFileFilter();
+        labelPrintFileFilter.addExtension("gif");
+        labelPrintFileFilter.addExtension("jpg");
+        labelPrintFileFilter.addExtension("png");
+        labelPrintFileFilter.addExtension("pdf");
+        labelPrintFileFilter.setDescription("Gif, JPEG, PNG Images and PDF");
+        chooser.setFileFilter(labelPrintFileFilter);
+        chooser.setCurrentDirectory(new File("."));
+        int retVal = chooser.showDialog(this, action);
+        //chooser.
+        File file = chooser.getSelectedFile();
+        if ((file != null) && (retVal != JFileChooser.CANCEL_OPTION)) {
+            return file.getAbsolutePath();
+        }
+
+        return null;
+    }
+
+    private void jMenuFileExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExportActionPerformed
+        // to ensure that images are loaded, we display the label first
+        jTabbedPane.setSelectedIndex(1);
+        doLabelImageExport();
+    }//GEN-LAST:event_jMenuFileExportActionPerformed
+
+    public void doLabelImageExport() {
+        if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+
+        ExportJDialog exportJDialog = new ExportJDialog(this, true);
+        exportJDialog.setVisible(true);
+
+    }
+
+    public LabelPanel getLabelPanel() {
+        return labelPanel;
+    }
+
+    private void SaveLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLabelActionPerformed
+        saveLabel();
+    }//GEN-LAST:event_SaveLabelActionPerformed
+    private void openLabel() {
+
+        if (sysOptions.isConnectToDatabase()) {
+            if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
+                return;
+            }
+
+            OpenLabelDialog oldlg = new OpenLabelDialog(this, true);
+            oldlg.setVisible(true);
+            if (oldlg.proceedToOpenLabel()) {
+                reld = getLabel(currentLabelID);
+
+                labelDataDialog = new LabelDataDialog(this);
+
+                labelPanel = new LabelPanel(this);
+                labelPanel.showContents(chkContents);
+                labelPanel.showGreenBackground(chkGreenBackground);
+                labelPanel.showYellowBackground(chkYellowBackground);
+
+                // Remove all existing tabs and
+                jTabbedPane.removeAll();
+                jTabbedPane.add("Label Data", labelDataDialog);
+                //jTabbedPane.add("Label Data", labelDataScrollPane);
+                jTabbedPane.add("Label View", labelPanel);
+                jTabbedPane.setSelectedIndex(1);
+
+                // Set new label title
+                this.setTitle("LabelPrint - " + reld.getLabelName());
+                enableMenuItems(true);
+                FileDirty = false;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "You cannot open labels because you\n"
+                    + "do not have a database connection.\n"
+                    + "Activate this option and try again.",
+                    "Label Open Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public String getPDFFileAbsolutePath(String action) {
+        JFileChooser chooser = new JFileChooser();
+        LabelPrintFileFilter labelPrintFileFilter = new LabelPrintFileFilter();
+        labelPrintFileFilter.addExtension("pdf");
+        labelPrintFileFilter.setDescription("PDF files");
+        chooser.setFileFilter(labelPrintFileFilter);
+        chooser.setCurrentDirectory(new File("."));
+        int retVal = chooser.showDialog(this, action);
+
+        File file = chooser.getSelectedFile();
+        if ((file != null) && (retVal != JFileChooser.CANCEL_OPTION)) {
+            return file.getAbsolutePath();
+        }
+
+        return null;
+    }
+
+    private void saveLabelAsPDFFile() {
+//        statusBar.setText(" Saving label. Please wait...");
+        String fileName = getPDFFileAbsolutePath("Save");
+        if (fileName != null) {
+            labelPanel.exportLabelToPDF(fileName);
+        }
+        setFileDirty(false);
+//        statusBar.setText(" Ready...");
+    }
+
+    private void saveLabel() {
+        if (sysOptions.isConnectToDatabase()) {
+            try {
+                if (emf != null) {
+                    em.getTransaction().begin();
+
+                    if (reld.getEnergyLabelDataId() == null) {
+                        System.out.println("Saving label");
+                        em.persist(reld);
+                        em.getTransaction().commit();
+                        // Retrieve saved label for future updates. NB: May not be
+                        //  necessary
+                        reld = getStoredLabel(reld.getLabelName());
+                    } else {
+                        // Get label from dbase then save
+                        // Retrieve saved label and update
+                        reld = getLabel(reld.getEnergyLabelDataId());
+                        System.out.println("Updating label");
+                        labelDataDialog.getLabelData();
+                        em.merge(reld);
+                        em.getTransaction().commit();
+                    }
+
+                    setFileDirty(false);
+                    //this.validate();
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "You do not have a database connection.\n"
+                            + "Consult your database administrator",
+                            "Database Connection Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                        "An error occured while saving the current label.\n"
+                        + "This could occur because you do not have a database connection.\n"
+                        + "Try to connect to a database in the options dialog and try again.",
+                        "Search Error",
+                        JOptionPane.ERROR_MESSAGE);
+                System.out.println(e);
+            }
+        } else {
+            // offer option to save as pdf if database connection option not set
+            int choice = JOptionPane.showConfirmDialog(this,
+                    "You cannot save to the labels database at this time\n"
+                    + "because you do not have a database connection.\n"
+                    + "Do you want to save the label as a PDF file instead?",
+                    "Save as PDF file",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (choice == JOptionPane.YES_OPTION) {
+                saveLabelAsPDFFile();
+            }
+
+        }
+    }
+    private void jMenuFileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileSaveActionPerformed
+        saveLabel();
+    }//GEN-LAST:event_jMenuFileSaveActionPerformed
+
+    private EnergyLabelData getStoredLabel(String labelName) {
+        return (EnergyLabelData) em.createNamedQuery("EnergyLabelData.findByLabelName").setParameter("labelName", labelName).getSingleResult();
+    }
+
+    private void doExit() {
+        if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+
+        try {
+            if ((emf != null) && (emf.isOpen())) {
+                em.close();
+                emf.close();
+                System.exit(0);
+            } else {
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            System.out.println("doExit() error occured");
+            System.exit(0);
+        }
+    }
+
+    private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
+        doExit();
+    }//GEN-LAST:event_jMenuFileExitActionPerformed
+
+    private void jMenuFileCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileCloseActionPerformed
+
+        if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+        // Remove all existing tabs and
+        jTabbedPane.removeAll();
+        reld = null;
+        this.setTitle("LabelPrint");
+        enableMenuItems(false);
+        FileDirty = false;
+    }//GEN-LAST:event_jMenuFileCloseActionPerformed
+
+    private int saveFileIfDirty() {
+        int choice = 0;
+
+        if (FileDirty) {
+            choice = JOptionPane.showConfirmDialog(this,
+                    "Label has been changed. Do you want to save it?",
+                    "Save",
+                    JOptionPane.YES_NO_CANCEL_OPTION);
+
+            if (choice == JOptionPane.YES_OPTION) {
+                saveLabel();
+
+            }
+            if (choice == JOptionPane.CANCEL_OPTION) {
+                return choice;
+            }
+        }
+
+        return choice;
+    }
+
+    private void newLabel() {
+
+        if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+
+//        NewLabelDialog nld = new NewLabelDialog(this, true);
+//        nld.setVisible(true);
+//        if (nld.proceedToCreateLabel()) {
+        reld = new EnergyLabelData();
+        //reld.setLabelName("");
+//            reld.setLabelName(nld.getLabelName());
+//            reld.setJobNumber(nld.getJobNumber());
+        reld.setStandard(sysOptions.getStandard());
+        reld.setType("Refrigerator"); // tk get from options
+
+        labelDataDialog = new LabelDataDialog(this);
+        labelPanel = new LabelPanel(this);
+        labelPanel.showContents(chkContents);
+        labelPanel.showGreenBackground(chkGreenBackground);
+
+        // Remove all existing tabs and
+        jTabbedPane.removeAll();
+        jTabbedPane.add("Label Data", labelDataDialog);
+        jTabbedPane.add("Label View", labelPanel);
+
+        // Set new label title
+        this.setTitle("LabelPrint - " + reld.getLabelName());
+        enableMenuItems(true);
+        FileDirty = false;
+//        }
+
+    }
+
+    private void jMenuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileNewActionPerformed
+        newLabel();
+    }//GEN-LAST:event_jMenuFileNewActionPerformed
+
+    private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
+        if (jTabbedPane.getSelectedIndex() == 0) {
+            labelDataDialog.copyRefrigeratorData();
+        }
+    }//GEN-LAST:event_jTabbedPaneStateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        doExit();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jCheckBoxMenuViewYellowBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
+        chkYellowBackground = jCheckBoxMenuViewYellowBackground.isSelected();
+        labelPanel.showYellowBackground(chkYellowBackground);
+        jTabbedPane.setSelectedIndex(1);
+        labelPanel.repaint();
+    }//GEN-LAST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
+
+    public JTabbedPane getTabbedPane() {
+        return jTabbedPane;
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new LabelPrintFrame().setVisible(true);
+            }
+        });
+    }
+
+    public EntityManager getEntityManager() {
+        return em;
+    }
+
+    public EnergyLabelData getEnergyLabelData() {
+        return reld;
+    }
+
+    public boolean setupDatabaseConnection() {
+        // Close any existing connections
+        if (emf != null) {
+            if (em != null) {
+                if (em.isOpen()) {
+                    em.close();
+                }
+                em = null;
+            }
+            emf.close();
+            emf = null;
+        }
+
+        try {
+            HashMap prop = new HashMap();
+
+            prop.put("javax.persistence.jdbc.user", sysOptions.getConnectionUserName());
+            prop.put("javax.persistence.jdbc.password", sysOptions.getConnectionPassword());
+            prop.put("javax.persistence.jdbc.url", sysOptions.getConnectionURL());
+            prop.put("javax.persistence.jdbc.driver", sysOptions.getConnectionDriverName());
+
+            emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);
+            em = emf.createEntityManager();
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public void run() {
+        // Setup persistence/connect to database        
+        if (sysOptions.isConnectToDatabase()) {
+            System.out.println("Reconnecting");
+            if (!setupDatabaseConnection()) {
+                //sysOptions.setConnectToDatabase(false);
+                JOptionPane.showMessageDialog(this,
+                        "A database connection error occurred.\n"
+                        + "Check that the database options are valid",
+                        "Database Error",
+                        JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+        // Setup fonts mapper for pdf exports
+        if (!setupFontDefaultFontMapper()) {
+            JOptionPane.showMessageDialog(this,
+                    "A font initialization error occurred.\n"
+                    + "Consult your system administrator",
+                    "Font Initialization Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton NewLabel;
+    private javax.swing.JButton OpenLabel;
+    private javax.swing.JButton SaveLabel;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewContent;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewGreenBackground;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewYellowBackground;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuEdit;
+    private javax.swing.JMenuItem jMenuEditLabel;
+    private javax.swing.JMenuItem jMenuEditOptions;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenuItem jMenuFileClose;
+    private javax.swing.JMenuItem jMenuFileExit;
+    private javax.swing.JMenuItem jMenuFileExport;
+    private javax.swing.JMenuItem jMenuFileNew;
+    private javax.swing.JMenuItem jMenuFileOpen;
+    private javax.swing.JMenuItem jMenuFilePrint;
+    private javax.swing.JMenuItem jMenuFileSave;
+    private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenuItem jMenuHelpAbout;
+    private javax.swing.JMenu jMenuView;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JToolBar jToolBar;
+    // End of variables declaration//GEN-END:variables
+}
