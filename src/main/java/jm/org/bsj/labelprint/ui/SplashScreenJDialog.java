@@ -85,6 +85,7 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
         
         // Setup persistence/connect to database
         // Display error message only if option to store database set
+        jProgressBar1.setValue(50);
         if (!labelPrintFrame.setupDatabaseConnection() && sysOptions.isConnectToDatabase()) {
             JOptionPane.showMessageDialog(this,
                     "A database connection error occurred.\n" +
@@ -93,17 +94,23 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
                     JOptionPane.ERROR_MESSAGE);
             
         }
-        jProgressBar1.setValue(50);        
-        // Setup font mapper for pdf exportation
-        jLabel1.setText("Initializing fonts. Please wait...");
-        if (!labelPrintFrame.setupFontDefaultFontMapper()) {
-            JOptionPane.showMessageDialog(this,
-                    "A font initialization error occurred.\n" +
-                    "Consult your system administrator",
-                    "Font Initialization Error",
-                    JOptionPane.ERROR_MESSAGE);
-            
-        }
+//        if (labelPrintFrame.setupFontDefaultFontMapper()) {
+//            System.out.println("Font setup Failure!");
+//        }
+//        else {
+//            System.out.println("Font setup success!");
+//        }
+//        jProgressBar1.setValue(50);        
+//        // Setup font mapper for pdf exportation
+//        jLabel1.setText("Initializing fonts. Please wait...");
+//        if (!labelPrintFrame.setupFontDefaultFontMapper()) {
+//            JOptionPane.showMessageDialog(this,
+//                    "A font initialization error occurred.\n" +
+//                    "Consult your system administrator",
+//                    "Font Initialization Error",
+//                    JOptionPane.ERROR_MESSAGE);
+//            
+//        }
         jProgressBar1.setValue(100);
         dispose();
     }

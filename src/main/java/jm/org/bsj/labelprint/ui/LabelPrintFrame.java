@@ -107,15 +107,19 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     public boolean setupFontDefaultFontMapper() {
 
+        System.out.println("Begin setting up fonts");
+        
         try {
             // Setup font mapper for pdf image export
             defaultFontMapper = new DefaultFontMapper();
             FontFactory.registerDirectories();
             defaultFontMapper.insertDirectory(sysOptions.getFontsDirectory());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
             return false;
         }
+        
+        System.out.println("End setting up fonts");
 
         return true;
     }

@@ -523,7 +523,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setConnectionURL(jDatabaseURLTextField.getText().trim());
         sysOptions.writeSystemData();
 
-        // test the databas connection
+        // test the database connection
         if (sysOptions.isConnectToDatabase()) {
             System.out.println("will try to setup db with user:" + sysOptions.getConnectionUserName());
             if (labelPrintFrame.setupDatabaseConnection()) {

@@ -6,46 +6,65 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 package jm.org.bsj.labelprint.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.HashMap;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 
 /**
  * Entity class EnergyLabelData
- * 
+ *
  * @author dbennett
  */
 @Entity
 @Table(name = "refrigerator_energy_label_data")
-@NamedQueries( {
-        @NamedQuery(name = "EnergyLabelData.findByEnergyLabelDataId", query = "SELECT r FROM EnergyLabelData r WHERE r.refrigeratorEnergyLabelDataId = :refrigeratorEnergyLabelDataId"),
-        @NamedQuery(name = "EnergyLabelData.findByAnnualConsumption", query = "SELECT r FROM EnergyLabelData r WHERE r.annualConsumption = :annualConsumption"),
-        @NamedQuery(name = "EnergyLabelData.findByBrand", query = "SELECT r FROM EnergyLabelData r WHERE r.brand = :brand"),
-        @NamedQuery(name = "EnergyLabelData.findByCapacity", query = "SELECT r FROM EnergyLabelData r WHERE r.capacity = :capacity"),
-        @NamedQuery(name = "EnergyLabelData.findByCostPerKwh", query = "SELECT r FROM EnergyLabelData r WHERE r.costPerKwh = :costPerKwh"),
-        @NamedQuery(name = "EnergyLabelData.findByCountry", query = "SELECT r FROM EnergyLabelData r WHERE r.country = :country"),
-        @NamedQuery(name = "EnergyLabelData.findByDefrost", query = "SELECT r FROM EnergyLabelData r WHERE r.defrost = :defrost"),
-        @NamedQuery(name = "EnergyLabelData.findByDistributor", query = "SELECT r FROM EnergyLabelData r WHERE r.distributor = :distributor"),
-        @NamedQuery(name = "EnergyLabelData.findById", query = "SELECT r FROM EnergyLabelData r WHERE r.id = :id"),
-        @NamedQuery(name = "EnergyLabelData.findByJobNumber", query = "SELECT r FROM EnergyLabelData r WHERE r.jobNumber = :jobNumber"),
-        @NamedQuery(name = "EnergyLabelData.findByLabelName", query = "SELECT r FROM EnergyLabelData r WHERE r.labelName = :labelName"),
-        @NamedQuery(name = "EnergyLabelData.findByManufacturer", query = "SELECT r FROM EnergyLabelData r WHERE r.manufacturer = :manufacturer"),
-        @NamedQuery(name = "EnergyLabelData.findByModel", query = "SELECT r FROM EnergyLabelData r WHERE r.model = :model"),
-        @NamedQuery(name = "EnergyLabelData.findByOperatingCost", query = "SELECT r FROM EnergyLabelData r WHERE r.operatingCost = :operatingCost"),
-        @NamedQuery(name = "EnergyLabelData.findByStandard", query = "SELECT r FROM EnergyLabelData r WHERE r.standard = :standard"),
-        @NamedQuery(name = "EnergyLabelData.findByType", query = "SELECT r FROM EnergyLabelData r WHERE r.type = :type"),
+@NamedQueries({
+    @NamedQuery(name = "EnergyLabelData.findByEnergyLabelDataId", query = "SELECT r FROM EnergyLabelData r WHERE r.refrigeratorEnergyLabelDataId = :refrigeratorEnergyLabelDataId")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByAnnualConsumption", query = "SELECT r FROM EnergyLabelData r WHERE r.annualConsumption = :annualConsumption")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByBrand", query = "SELECT r FROM EnergyLabelData r WHERE r.brand = :brand")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByCapacity", query = "SELECT r FROM EnergyLabelData r WHERE r.capacity = :capacity")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByCostPerKwh", query = "SELECT r FROM EnergyLabelData r WHERE r.costPerKwh = :costPerKwh")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByCountry", query = "SELECT r FROM EnergyLabelData r WHERE r.country = :country")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByDefrost", query = "SELECT r FROM EnergyLabelData r WHERE r.defrost = :defrost")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByDistributor", query = "SELECT r FROM EnergyLabelData r WHERE r.distributor = :distributor")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findById", query = "SELECT r FROM EnergyLabelData r WHERE r.id = :id")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByJobNumber", query = "SELECT r FROM EnergyLabelData r WHERE r.jobNumber = :jobNumber")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByLabelName", query = "SELECT r FROM EnergyLabelData r WHERE r.labelName = :labelName")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByManufacturer", query = "SELECT r FROM EnergyLabelData r WHERE r.manufacturer = :manufacturer")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByModel", query = "SELECT r FROM EnergyLabelData r WHERE r.model = :model")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByOperatingCost", query = "SELECT r FROM EnergyLabelData r WHERE r.operatingCost = :operatingCost")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByStandard", query = "SELECT r FROM EnergyLabelData r WHERE r.standard = :standard")
+    ,
+        @NamedQuery(name = "EnergyLabelData.findByType", query = "SELECT r FROM EnergyLabelData r WHERE r.type = :type")
+    ,
         @NamedQuery(name = "EnergyLabelData.findByValidity", query = "SELECT r FROM EnergyLabelData r WHERE r.validity = :validity")
-    })
+})
 public class EnergyLabelData implements Serializable {
 
     @Id
@@ -66,13 +85,13 @@ public class EnergyLabelData implements Serializable {
     private String costPerKwh = "";
 
     @Column(name = "COUNTRY")
-    private String country= "";
+    private String country = "";
 
     @Column(name = "DEFROST")
-    private String defrost= "";
+    private String defrost = "";
 
     @Column(name = "DISTRIBUTOR")
-    private String distributor= "";
+    private String distributor = "";
 
     @Column(name = "ID", nullable = false)
     private long id;
@@ -100,14 +119,18 @@ public class EnergyLabelData implements Serializable {
 
     @Column(name = "VALIDITY")
     private String validity = "";
-    
-    /** Creates a new instance of EnergyLabelData */
+
+    /**
+     * Creates a new instance of EnergyLabelData
+     */
     public EnergyLabelData() {
     }
 
     /**
      * Creates a new instance of EnergyLabelData with the specified values.
-     * @param refrigeratorEnergyLabelDataId the refrigeratorEnergyLabelDataId of the EnergyLabelData
+     *
+     * @param refrigeratorEnergyLabelDataId the refrigeratorEnergyLabelDataId of
+     * the EnergyLabelData
      */
     public EnergyLabelData(BigInteger refrigeratorEnergyLabelDataId) {
         this.refrigeratorEnergyLabelDataId = refrigeratorEnergyLabelDataId;
@@ -115,7 +138,9 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Creates a new instance of EnergyLabelData with the specified values.
-     * @param refrigeratorEnergyLabelDataId the refrigeratorEnergyLabelDataId of the EnergyLabelData
+     *
+     * @param refrigeratorEnergyLabelDataId the refrigeratorEnergyLabelDataId of
+     * the EnergyLabelData
      * @param id the id of the EnergyLabelData
      */
     public EnergyLabelData(BigInteger refrigeratorEnergyLabelDataId, long id) {
@@ -125,6 +150,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the refrigeratorEnergyLabelDataId of this EnergyLabelData.
+     *
      * @return the refrigeratorEnergyLabelDataId
      */
     public BigInteger getEnergyLabelDataId() {
@@ -132,8 +158,11 @@ public class EnergyLabelData implements Serializable {
     }
 
     /**
-     * Sets the refrigeratorEnergyLabelDataId of this EnergyLabelData to the specified value.
-     * @param refrigeratorEnergyLabelDataId the new refrigeratorEnergyLabelDataId
+     * Sets the refrigeratorEnergyLabelDataId of this EnergyLabelData to the
+     * specified value.
+     *
+     * @param refrigeratorEnergyLabelDataId the new
+     * refrigeratorEnergyLabelDataId
      */
     public void setEnergyLabelDataId(BigInteger refrigeratorEnergyLabelDataId) {
         this.refrigeratorEnergyLabelDataId = refrigeratorEnergyLabelDataId;
@@ -141,6 +170,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the annualConsumption of this EnergyLabelData.
+     *
      * @return the annualConsumption
      */
     public String getAnnualConsumption() {
@@ -148,7 +178,9 @@ public class EnergyLabelData implements Serializable {
     }
 
     /**
-     * Sets the annualConsumption of this EnergyLabelData to the specified value.
+     * Sets the annualConsumption of this EnergyLabelData to the specified
+     * value.
+     *
      * @param annualConsumption the new annualConsumption
      */
     public void setAnnualConsumption(String annualConsumption) {
@@ -157,6 +189,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the brand of this EnergyLabelData.
+     *
      * @return the brand
      */
     public String getBrand() {
@@ -165,6 +198,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the brand of this EnergyLabelData to the specified value.
+     *
      * @param brand the new brand
      */
     public void setBrand(String brand) {
@@ -173,6 +207,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the capacity of this EnergyLabelData.
+     *
      * @return the capacity
      */
     public String getCapacity() {
@@ -181,6 +216,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the capacity of this EnergyLabelData to the specified value.
+     *
      * @param capacity the new capacity
      */
     public void setCapacity(String capacity) {
@@ -189,6 +225,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the costPerKwh of this EnergyLabelData.
+     *
      * @return the costPerKwh
      */
     public String getCostPerKwh() {
@@ -197,6 +234,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the costPerKwh of this EnergyLabelData to the specified value.
+     *
      * @param costPerKwh the new costPerKwh
      */
     public void setCostPerKwh(String costPerKwh) {
@@ -205,6 +243,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the country of this EnergyLabelData.
+     *
      * @return the country
      */
     public String getCountry() {
@@ -213,6 +252,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the country of this EnergyLabelData to the specified value.
+     *
      * @param country the new country
      */
     public void setCountry(String country) {
@@ -221,6 +261,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the defrost of this EnergyLabelData.
+     *
      * @return the defrost
      */
     public String getDefrost() {
@@ -229,6 +270,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the defrost of this EnergyLabelData to the specified value.
+     *
      * @param defrost the new defrost
      */
     public void setDefrost(String defrost) {
@@ -237,6 +279,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the distributor of this EnergyLabelData.
+     *
      * @return the distributor
      */
     public String getDistributor() {
@@ -245,6 +288,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the distributor of this EnergyLabelData to the specified value.
+     *
      * @param distributor the new distributor
      */
     public void setDistributor(String distributor) {
@@ -253,6 +297,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the id of this EnergyLabelData.
+     *
      * @return the id
      */
     public long getId() {
@@ -261,6 +306,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the id of this EnergyLabelData to the specified value.
+     *
      * @param id the new id
      */
     public void setId(long id) {
@@ -269,6 +315,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the jobNumber of this EnergyLabelData.
+     *
      * @return the jobNumber
      */
     public String getJobNumber() {
@@ -277,6 +324,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the jobNumber of this EnergyLabelData to the specified value.
+     *
      * @param jobNumber the new jobNumber
      */
     public void setJobNumber(String jobNumber) {
@@ -285,6 +333,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the labelName of this EnergyLabelData.
+     *
      * @return the labelName
      */
     public String getLabelName() {
@@ -293,6 +342,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the labelName of this EnergyLabelData to the specified value.
+     *
      * @param labelName the new labelName
      */
     public void setLabelName(String labelName) {
@@ -301,6 +351,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the manufacturer of this EnergyLabelData.
+     *
      * @return the manufacturer
      */
     public String getManufacturer() {
@@ -309,6 +360,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the manufacturer of this EnergyLabelData to the specified value.
+     *
      * @param manufacturer the new manufacturer
      */
     public void setManufacturer(String manufacturer) {
@@ -317,6 +369,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the model of this EnergyLabelData.
+     *
      * @return the model
      */
     public String getModel() {
@@ -325,6 +378,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the model of this EnergyLabelData to the specified value.
+     *
      * @param model the new model
      */
     public void setModel(String model) {
@@ -333,6 +387,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the operatingCost of this EnergyLabelData.
+     *
      * @return the operatingCost
      */
     public String getOperatingCost() {
@@ -341,6 +396,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the operatingCost of this EnergyLabelData to the specified value.
+     *
      * @param operatingCost the new operatingCost
      */
     public void setOperatingCost(String operatingCost) {
@@ -349,6 +405,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the standard of this EnergyLabelData.
+     *
      * @return the standard
      */
     public String getStandard() {
@@ -357,6 +414,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the standard of this EnergyLabelData to the specified value.
+     *
      * @param standard the new standard
      */
     public void setStandard(String standard) {
@@ -365,6 +423,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the type of this EnergyLabelData.
+     *
      * @return the type
      */
     public String getType() {
@@ -373,6 +432,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the type of this EnergyLabelData to the specified value.
+     *
      * @param type the new type
      */
     public void setType(String type) {
@@ -381,6 +441,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Gets the validity of this EnergyLabelData.
+     *
      * @return the validity
      */
     public String getValidity() {
@@ -389,6 +450,7 @@ public class EnergyLabelData implements Serializable {
 
     /**
      * Sets the validity of this EnergyLabelData to the specified value.
+     *
      * @param validity the new validity
      */
     public void setValidity(String validity) {
@@ -396,8 +458,9 @@ public class EnergyLabelData implements Serializable {
     }
 
     /**
-     * Returns a hash code value for the object.  This implementation computes 
-     * a hash code value based on the id fields in this object.
+     * Returns a hash code value for the object. This implementation computes a
+     * hash code value based on the id fields in this object.
+     *
      * @return a hash code value for this object.
      */
     @Override
@@ -408,9 +471,11 @@ public class EnergyLabelData implements Serializable {
     }
 
     /**
-     * Determines whether another object is equal to this EnergyLabelData.  The result is 
-     * <code>true</code> if and only if the argument is not null and is a EnergyLabelData object that 
- has the same id field values as this object.
+     * Determines whether another object is equal to this EnergyLabelData. The
+     * result is <code>true</code> if and only if the argument is not null and
+     * is a EnergyLabelData object that has the same id field values as this
+     * object.
+     *
      * @param object the reference object with which to compare
      * @return <code>true</code> if this object is the same as the argument;
      * <code>false</code> otherwise.
@@ -421,19 +486,36 @@ public class EnergyLabelData implements Serializable {
         if (!(object instanceof EnergyLabelData)) {
             return false;
         }
-        EnergyLabelData other = (EnergyLabelData)object;
-        if (this.refrigeratorEnergyLabelDataId != other.refrigeratorEnergyLabelDataId && (this.refrigeratorEnergyLabelDataId == null || !this.refrigeratorEnergyLabelDataId.equals(other.refrigeratorEnergyLabelDataId))) return false;
+        EnergyLabelData other = (EnergyLabelData) object;
+        if (this.refrigeratorEnergyLabelDataId != other.refrigeratorEnergyLabelDataId && (this.refrigeratorEnergyLabelDataId == null || !this.refrigeratorEnergyLabelDataId.equals(other.refrigeratorEnergyLabelDataId))) {
+            return false;
+        }
         return true;
     }
 
     /**
-     * Returns a string representation of the object.  This implementation constructs 
-     * that representation based on the id fields.
+     * Returns a string representation of the object. This implementation
+     * constructs that representation based on the id fields.
+     *
      * @return a string representation of the object.
      */
     @Override
     public String toString() {
         return "jm.org.bsj.labelprint.model.EnergyLabelData[refrigeratorEnergyLabelDataId=" + refrigeratorEnergyLabelDataId + "]";
     }
-    
+
+    public static void main(String[] args) {
+        HashMap prop = new HashMap();
+        EntityManagerFactory emf;
+        EntityManager em;
+
+        prop.put("javax.persistence.jdbc.user", "root");
+        prop.put("javax.persistence.jdbc.password", "?des12300!");
+        prop.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost:3306/mysql");
+        prop.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
+
+        emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);
+        em = emf.createEntityManager();
+    }
+
 }
