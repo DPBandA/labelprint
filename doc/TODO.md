@@ -1,5 +1,6 @@
 
 # General
+- Change package names.
 - Put license info on top of all files as is done with business entity.
 - Put the svg label in the images resource folder name it EnergyLabel.svg
 - Impl SVGLabel class that loads EnergyLabel.svg and set the text elements
@@ -7,5 +8,5 @@
 - Create the EnergyLabel.svg in Inkscape.
 - Load images from resource. (org folder jm.org.bsj.labelprint)
 - Put all images in resources/images
-- Load System.properties file from resource.
+- Load LabelPrint.properties file from resource.
 - Remove export to pdf feature if the fonts mapper issue is not solved.

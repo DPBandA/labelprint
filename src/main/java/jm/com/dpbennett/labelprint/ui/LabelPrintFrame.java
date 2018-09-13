@@ -1,9 +1,23 @@
 /*
- * LabelPrintFrame.java
- *
- * Created on July 6, 2007, 4:39 PM
+Business Entity Library (BEL) - A foundational library for JSF web applications 
+Copyright (C) 2018  D P Bennett & Associates Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Email: info@dpbennett.com.jm
  */
-package jm.org.bsj.labelprint.ui;
+package jm.com.dpbennett.labelprint.ui;
 
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.pdf.DefaultFontMapper;
@@ -25,9 +39,9 @@ import javax.persistence.Persistence;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
-import jm.org.bsj.labelprint.LabelPrintFileFilter;
-import jm.org.bsj.labelprint.SystemOptions;
-import jm.org.bsj.labelprint.model.EnergyLabelData;
+import jm.com.dpbennett.labelprint.LabelPrintFileFilter;
+import jm.com.dpbennett.labelprint.SystemOptions;
+import jm.com.dpbennett.labelprint.model.EnergyLabelData;
 
 /**
  *
@@ -57,7 +71,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         initComponents();
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage("images\\LabelPrintIcon.png"));
-        sysOptions = new SystemOptions("System.properties");
+        sysOptions = new SystemOptions("LabelPrint.properties");
         enableMenuItems(false);
 
         // Centre frame

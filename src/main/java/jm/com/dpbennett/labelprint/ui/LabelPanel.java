@@ -1,9 +1,23 @@
 /*
- * LabelPanel.java
- *
- * Created on July 6, 2007, 6:29 PM
+Business Entity Library (BEL) - A foundational library for JSF web applications 
+Copyright (C) 2018  D P Bennett & Associates Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Email: info@dpbennett.com.jm
  */
-package jm.org.bsj.labelprint.ui;
+package jm.com.dpbennett.labelprint.ui;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfContentByte;
@@ -24,7 +38,7 @@ import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
-import jm.org.bsj.labelprint.SystemOptions;
+import jm.com.dpbennett.labelprint.SystemOptions;
 
 /**
  *
@@ -58,13 +72,13 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
      * Creates new form LabelPanel
      * @param labelPrintFrame
      */
-    public LabelPanel(jm.org.bsj.labelprint.ui.LabelPrintFrame labelPrintFrame) {
+    public LabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
         this.labelPrintFrame = labelPrintFrame;
         initComponents();
 
         Toolkit toolKit = Toolkit.getDefaultToolkit();
 
-        SystemOptions sysOptions = new SystemOptions("System.properties");
+        SystemOptions sysOptions = new SystemOptions("LabelPrint.properties");
 
         //img = toolKit.createImage(sysOptions.getLabelLogoFile());
         // getClass().getResource("/system/" + systemFile)
