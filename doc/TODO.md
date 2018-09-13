@@ -1,7 +1,5 @@
 
 # General
-- Change package names.
-- Put license info on top of all files as is done with business entity.
 - Put the svg label in the images resource folder name it EnergyLabel.svg
 - Impl SVGLabel class that loads EnergyLabel.svg and set the text elements
   based on energy label data.

@@ -27,6 +27,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -50,19 +51,20 @@ import org.w3c.dom.Document;
  * @author desbenn
  */
 public class SVGApplication {
-    
+
     private Document document;
-    
+
     public static void main(String[] args) {
         // Create a new JFrame.
         JFrame f = new JFrame("Batik");
         SVGApplication app = new SVGApplication(f);
-        
+
         // Add components to the frame.
         f.getContentPane().add(app.createComponents());
 
         // Display the frame.
         f.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
@@ -94,28 +96,35 @@ public class SVGApplication {
         JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT));
         p.add(button);
         p.add(label);
-        
+
         // tk my addition
         svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
-        svgCanvas.addSVGLoadEventDispatcherListener
-            (new SVGLoadEventDispatcherAdapter() {
-                    @Override
-                    public void svgLoadEventDispatchStarted
-                        (SVGLoadEventDispatcherEvent e) {
-                        // At this time the document is available...
-                        document = svgCanvas.getSVGDocument();
-                        System.out.println("Got doc after call to canvas.setURI()");
-                        // ...and the window object too.
-                        //window = canvas.getUpdateManager().
-                        //    getScriptingEnvironment().createWindow();
-                        // Registers the listeners on the document
-                        // just before the SVGLoad event is
-                        // dispatched.
-                        //registerListeners();
-                        // It is time to pack the frame.
-                        //frame.pack();
-                    }
-                });
+        URL url = getClass().getClassLoader().
+                getResource("images/EnergyLabel.svg");
+        svgCanvas.setURI(url.toString());
+        svgCanvas.addSVGLoadEventDispatcherListener(new SVGLoadEventDispatcherAdapter() {
+            @Override
+            public void svgLoadEventDispatchStarted(SVGLoadEventDispatcherEvent e) {
+                // At this time the document is available...
+                document = svgCanvas.getSVGDocument();
+                System.out.println("Got doc after call to canvas.setURI()");
+//                        System.out.println("Setting doc");
+//                        getClass().getClassLoader().
+//                                getResource("/images/LabelPrint.svg").getFile();
+//                        URL url = getClass().getClassLoader().
+//                                getResource("/images/LabelPrint.svg");
+//                        svgCanvas.setURI(url.toString());
+                // ...and the window object too.
+                //window = canvas.getUpdateManager().
+                //    getScriptingEnvironment().createWindow();
+                // Registers the listeners on the document
+                // just before the SVGLoad event is
+                // dispatched.
+                //registerListeners();
+                // It is time to pack the frame.
+                //frame.pack();
+            }
+        });
 
         panel.add("North", p);
         panel.add("Center", svgCanvas);
@@ -123,16 +132,19 @@ public class SVGApplication {
         // Set the button action.
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                JFileChooser fc = new JFileChooser(".");
-                int choice = fc.showOpenDialog(panel);
-                if (choice == JFileChooser.APPROVE_OPTION) {
-                    File f = fc.getSelectedFile();
-                    try {
-                        svgCanvas.setURI(f.toURL().toString());
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+//                URL url = getClass().getClassLoader().
+//                        getResource("images/EnergyLabel.svg");
+//                svgCanvas.setURI(url.toString());
+//                JFileChooser fc = new JFileChooser(".");
+//                int choice = fc.showOpenDialog(panel);
+//                if (choice == JFileChooser.APPROVE_OPTION) {
+//                    File f = fc.getSelectedFile();
+//                    try {
+//                        svgCanvas.setURI(f.toURL().toString());
+//                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+//                    }
+//                }
             }
         });
 
@@ -141,6 +153,7 @@ public class SVGApplication {
             public void documentLoadingStarted(SVGDocumentLoaderEvent e) {
                 label.setText("Document Loading...");
             }
+
             public void documentLoadingCompleted(SVGDocumentLoaderEvent e) {
                 label.setText("Document Loaded.");
             }
@@ -150,6 +163,7 @@ public class SVGApplication {
             public void gvtBuildStarted(GVTTreeBuilderEvent e) {
                 label.setText("Build Started...");
             }
+
             public void gvtBuildCompleted(GVTTreeBuilderEvent e) {
                 label.setText("Build Done.");
                 frame.pack();
@@ -160,6 +174,7 @@ public class SVGApplication {
             public void gvtRenderingPrepare(GVTTreeRendererEvent e) {
                 label.setText("Rendering Started...");
             }
+
             public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
                 label.setText("");
             }
