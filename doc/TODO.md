@@ -8,3 +8,5 @@
 - Put all images in resources/images
 - Load LabelPrint.properties file from resource.
 - Remove export to pdf feature if the fonts mapper issue is not solved.
+- Get rid of progress bar dialog for datbase connection and font loading
+  and use status text at bottom of main window instead.
