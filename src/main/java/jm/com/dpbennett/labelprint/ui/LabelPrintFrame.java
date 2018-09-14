@@ -69,7 +69,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     public LabelPrintFrame() {
         initComponents();
         Toolkit toolKit = Toolkit.getDefaultToolkit();
-        setIconImage(toolKit.createImage("images\\LabelPrintIcon.png"));
+        setIconImage(toolKit.createImage(getClass().getResource("/images/LabelPrintIcon.png")));
         sysOptions = new SystemOptions("LabelPrint.properties");
         enableMenuItems(false);
 
