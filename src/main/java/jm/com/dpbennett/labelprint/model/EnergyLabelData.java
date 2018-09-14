@@ -1,5 +1,5 @@
 /*
-Business Entity Library (BEL) - A foundational library for JSF web applications 
+LabelPrint - A general purpose energy label printing application 
 Copyright (C) 2018  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
@@ -498,10 +498,11 @@ public class EnergyLabelData implements Serializable {
             return false;
         }
         EnergyLabelData other = (EnergyLabelData) object;
-        if (this.refrigeratorEnergyLabelDataId != other.refrigeratorEnergyLabelDataId && (this.refrigeratorEnergyLabelDataId == null || !this.refrigeratorEnergyLabelDataId.equals(other.refrigeratorEnergyLabelDataId))) {
-            return false;
-        }
-        return true;
+        
+        return !(this.refrigeratorEnergyLabelDataId 
+                != other.refrigeratorEnergyLabelDataId 
+                && (this.refrigeratorEnergyLabelDataId == null 
+                || !this.refrigeratorEnergyLabelDataId.equals(other.refrigeratorEnergyLabelDataId)));
     }
 
     /**
@@ -521,8 +522,8 @@ public class EnergyLabelData implements Serializable {
         EntityManager em;
 
         prop.put("javax.persistence.jdbc.user", "root");
-        prop.put("javax.persistence.jdbc.password", "?des12300!");
-        prop.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost:3306/mysql");
+        prop.put("javax.persistence.jdbc.password", "");
+        prop.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost:3306/test");
         prop.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
 
         emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);

@@ -1,5 +1,6 @@
 
 # General
+- Get images\\LabelPrintIcon.png from resource.
 - Put the svg label in the images resource folder name it EnergyLabel.svg
 - Impl SVGLabel class that loads EnergyLabel.svg and set the text elements
   based on energy label data.
@@ -10,3 +11,6 @@
 - Remove export to pdf feature if the fonts mapper issue is not solved.
 - Get rid of progress bar dialog for datbase connection and font loading
   and use status text at bottom of main window instead.
+- Impl reading system properties file from the resources folder only if the 
+  file does not already exist in the "user's directory". Impl saving the file
+  to this directory.

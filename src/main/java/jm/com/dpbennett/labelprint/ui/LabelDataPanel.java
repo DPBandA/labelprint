@@ -1,5 +1,5 @@
 /*
-Business Entity Library (BEL) - A foundational library for JSF web applications 
+LabelPrint - A general purpose energy label printing application 
 Copyright (C) 2018  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ import jm.com.dpbennett.labelprint.model.EnergyLabelData;
  *
  * @author dbennett
  */
-public class LabelDataDialog extends javax.swing.JPanel {
+public class LabelDataPanel extends javax.swing.JPanel {
 
     private LabelPrintFrame labelPrintFrame;
     private EnergyLabelData reldCopy;
@@ -35,14 +35,14 @@ public class LabelDataDialog extends javax.swing.JPanel {
     /**
      * Creates new form LabelDataDialog
      */
-    public LabelDataDialog() {
+    public LabelDataPanel() {
         initComponents();
     }
 
     /**
      * Creates new form LabelDataDialog
      */
-    public LabelDataDialog(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
+    public LabelDataPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
         this.labelPrintFrame = labelPrintFrame;
         initComponents();
     }
@@ -510,7 +510,6 @@ public class LabelDataDialog extends javax.swing.JPanel {
     }//GEN-LAST:event_jOkActionPerformed
 
     private void jLabelNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jLabelNameCaretUpdate
-        System.out.println("label name caret update");
         if (!isLoading) {
             if (!jLabelName.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getLabelName().trim())) {
                 labelPrintFrame.getEnergyLabelData().setLabelName(jLabelName.getText().trim());
@@ -530,7 +529,7 @@ public class LabelDataDialog extends javax.swing.JPanel {
 
     private void jProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeActionPerformed
         labelPrintFrame.getEnergyLabelData().setType((String) jProductType.getSelectedItem());
-        labelPrintFrame.setFileDirty(true);        
+        labelPrintFrame.setFileDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,5 @@
 /*
-Business Entity Library (BEL) - A foundational library for JSF web applications 
+LabelPrint - A general purpose energy label printing application 
 Copyright (C) 2018  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
@@ -37,6 +37,7 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import jm.com.dpbennett.labelprint.SystemOptions;
 
@@ -147,7 +148,7 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
             // Save image in the given format, jpeg,gif,png
             File file = new File(fileName + "." + formatName);
             ImageIO.write(bufferedImage, formatName, file);
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
             return false;
         }

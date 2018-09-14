@@ -1,5 +1,5 @@
 /*
-Business Entity Library (BEL) - A foundational library for JSF web applications 
+LabelPrint - A general purpose energy label printing application 
 Copyright (C) 2018  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ package jm.com.dpbennett.labelprint.ui;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.pdf.DefaultFontMapper;
 import java.awt.Cursor;
-import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
@@ -61,7 +60,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private boolean chkYellowBackground;
     private boolean chkContents = true;
     // Data views/editors
-    private LabelDataDialog labelDataDialog;
+    private LabelDataPanel labelDataDialog;
     private LabelPanel labelPanel;
 
     /**
@@ -571,7 +570,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             if (oldlg.proceedToOpenLabel()) {
                 reld = getLabel(currentLabelID);
 
-                labelDataDialog = new LabelDataDialog(this);
+                labelDataDialog = new LabelDataPanel(this);
 
                 labelPanel = new LabelPanel(this);
                 labelPanel.showContents(chkContents);
@@ -764,7 +763,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         reld.setStandard(sysOptions.getStandard());
         reld.setType("Refrigerator"); // tk get from options
 
-        labelDataDialog = new LabelDataDialog(this);
+        labelDataDialog = new LabelDataPanel(this);
         labelPanel = new LabelPanel(this);
         labelPanel.showContents(chkContents);
         labelPanel.showGreenBackground(chkGreenBackground);
