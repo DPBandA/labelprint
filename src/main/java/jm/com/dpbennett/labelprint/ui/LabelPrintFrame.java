@@ -61,7 +61,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private boolean chkContents = true;
     // Data views/editors
     private LabelDataPanel labelDataDialog;
-    private LabelPanel labelPanel;
+    private SVGLabelPanel labelPanel;
 
     /**
      * Creates new form LabelPrintFrame
@@ -551,7 +551,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     }
 
-    public LabelPanel getLabelPanel() {
+    public SVGLabelPanel getLabelPanel() {
         return labelPanel;
     }
 
@@ -572,7 +572,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
                 labelDataDialog = new LabelDataPanel(this);
 
-                labelPanel = new LabelPanel(this);
+                labelPanel = new SVGLabelPanel(this);
                 labelPanel.showContents(chkContents);
                 labelPanel.showGreenBackground(chkGreenBackground);
                 labelPanel.showYellowBackground(chkYellowBackground);
@@ -616,15 +616,15 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         return null;
     }
 
-    private void saveLabelAsPDFFile() {
-//        statusBar.setText(" Saving label. Please wait...");
-        String fileName = getPDFFileAbsolutePath("Save");
-        if (fileName != null) {
-            labelPanel.exportLabelToPDF(fileName);
-        }
-        setFileDirty(false);
-//        statusBar.setText(" Ready...");
-    }
+//    private void saveLabelAsPDFFile() {
+////        statusBar.setText(" Saving label. Please wait...");
+//        String fileName = getPDFFileAbsolutePath("Save");
+//        if (fileName != null) {
+//            labelPanel.exportLabelToPDF(fileName);
+//        }
+//        setFileDirty(false);
+////        statusBar.setText(" Ready...");
+//    }
 
     private void saveLabel() {
         if (sysOptions.isConnectToDatabase()) {
@@ -677,7 +677,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     JOptionPane.YES_NO_OPTION);
 
             if (choice == JOptionPane.YES_OPTION) {
-                saveLabelAsPDFFile();
+//                saveLabelAsPDFFile();
             }
 
         }
@@ -764,7 +764,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         reld.setType("Refrigerator"); // tk get from options
 
         labelDataDialog = new LabelDataPanel(this);
-        labelPanel = new LabelPanel(this);
+        labelPanel = new SVGLabelPanel(this);
         labelPanel.showContents(chkContents);
         labelPanel.showGreenBackground(chkGreenBackground);
 

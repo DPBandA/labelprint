@@ -108,10 +108,10 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
                 labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "png");
                 jProgressBar1.setValue(70);
             }
-            if (labelPrintFrame.getSystemOptions().isExportPDF()) {
-                labelPrintFrame.getLabelPanel().exportLabelToPDF(fileName);
-                jProgressBar1.setValue(90);
-            }
+//            if (labelPrintFrame.getSystemOptions().isExportPDF()) {
+//                labelPrintFrame.getLabelPanel().exportLabelToPDF(fileName);
+//                jProgressBar1.setValue(90);
+//            }
             // Finish up
             jProgressBar1.setValue(100);
             try {

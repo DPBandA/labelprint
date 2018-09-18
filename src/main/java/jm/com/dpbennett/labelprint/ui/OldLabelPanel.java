@@ -45,7 +45,7 @@ import jm.com.dpbennett.labelprint.SystemOptions;
  *
  * @author dbennett
  */
-public class LabelPanel extends javax.swing.JPanel implements Printable {
+public class OldLabelPanel extends javax.swing.JPanel implements Printable {
 
     //private static EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("LabelPrintPU");
     private boolean chkGreenBackground;
@@ -65,7 +65,7 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
     /**
      * Creates new form LabelPanel
      */
-    public LabelPanel() {
+    public OldLabelPanel() {
         initComponents();
     }
 
@@ -73,7 +73,7 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
      * Creates new form LabelPanel
      * @param labelPrintFrame
      */
-    public LabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
+    public OldLabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
         this.labelPrintFrame = labelPrintFrame;
         initComponents();
 

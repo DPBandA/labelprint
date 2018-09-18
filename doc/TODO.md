@@ -1,9 +1,10 @@
 
 # General
-- Put the svg label in the images resource folder name it EnergyLabel.svg
-- Impl SVGLabel class that loads EnergyLabel.svg and set the text elements
-  based on energy label data.
-- Create the EnergyLabel.svg in Inkscape.
+- Comment out printContentOfLabel and impl loading EnergyLabel.svg and set the 
+  text elements based on energy label data.
+- Create the EnergyLabel.svg in Inkscape. 
+   * Size 1636 × 1280 pixels
+   * Top green background: height- 352
 - Load images from resource. (org folder jm.org.bsj.labelprint)
 - Put all images in resources/images
 - Load LabelPrint.properties file from resource.
@@ -17,3 +18,5 @@
 - Learn izpack installer (http://izpack.org/) and setup installer on Win 7
 - Using the save toolbar button results in the label data apparently getting 
   blanked. This happens when the labels opened then saved immediately. Fix!!
+- Impl exporting to image with Batik Transcoder API.
+- Remove "Cancel" button from LabelDataPanel
