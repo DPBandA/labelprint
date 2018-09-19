@@ -1,10 +1,8 @@
 
 # General
-- Comment out printContentOfLabel and impl loading EnergyLabel.svg and set the 
-  text elements based on energy label data.
-- Create the EnergyLabel.svg in Inkscape. 
-   * Size 1636 × 1280 pixels
-   * Top green background: height- 352
+- Impl setting the text elements based on element id and energy label data.
+- Impl label update when data is updated.
+- Remove edit cancel button and data backup feature.
 - Load images from resource. (org folder jm.org.bsj.labelprint)
 - Put all images in resources/images
 - Load LabelPrint.properties file from resource.
@@ -20,3 +18,5 @@
   blanked. This happens when the labels opened then saved immediately. Fix!!
 - Impl exporting to image with Batik Transcoder API.
 - Remove "Cancel" button from LabelDataPanel
+- Do not set label data as dirty until the data is actually edited.
+- Use text to create header instead of importing an image.

@@ -25,6 +25,10 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.net.URL;
 import org.apache.batik.swing.JSVGCanvas;
+import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
+import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -35,9 +39,10 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
     private boolean chkGreenBackground;
     private boolean chkYellowBackground;
     private boolean chkContents = true;
-    private LabelPrintFrame labelPrintFrame;   
+    private LabelPrintFrame labelPrintFrame;
     private int m_maxNumPage = 1;
     private JSVGCanvas svgCanvas;
+    private Document svgDocument;
 
     /**
      * Creates new form LabelPanel
@@ -56,17 +61,30 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
         this.labelPrintFrame = labelPrintFrame;
         initComponents();
         initLabel();
-       
+
     }
-    
+
     private void initLabel() {
         svgCanvas = new JSVGCanvas();
         svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
-        URL url = getClass().getClassLoader().
-                getResource("images/EnergyLabel.svg");
-        svgCanvas.setURI(url.toString());        
-        
+        URL url = getClass().getClassLoader().getResource("images/EnergyLabel.svg");
+        svgCanvas.setURI(url.toString());
+        svgCanvas.addSVGLoadEventDispatcherListener(new SVGLoadEventDispatcherAdapter() {
+            @Override
+            public void svgLoadEventDispatchStarted(SVGLoadEventDispatcherEvent e) {
+                // At this time the document is available so get it.
+                svgDocument = svgCanvas.getSVGDocument();
+            }
+        });
+
         add("Center", svgCanvas);
+    }
+
+    private void setElementText(String elementId, String content) {
+        if (svgDocument != null) {
+            Element element = svgDocument.getElementById(elementId);
+            element.setTextContent(content);
+        }
     }
 
     public void showGreenBackground(boolean flag) {
@@ -79,14 +97,13 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
 
     public void showContents(boolean flag) {
         chkContents = flag;
-    }  
+    }
 
     public boolean exportLabelToRasterGraphic(String fileName, String formatName) {
-        
+
         return true;
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,15 +112,52 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonPanel = new javax.swing.JPanel();
+        jSaveButton = new javax.swing.JButton();
+        jExportButton = new javax.swing.JButton();
+
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(550, 500));
         setPreferredSize(new java.awt.Dimension(550, 500));
         setLayout(new java.awt.BorderLayout());
+
+        jButtonPanel.setLayout(new java.awt.GridLayout(1, 2, 2, 5));
+
+        jSaveButton.setText("Save");
+        jSaveButton.setActionCommand("Save");
+        jSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSaveButtonActionPerformed(evt);
+            }
+        });
+        jButtonPanel.add(jSaveButton);
+
+        jExportButton.setText("Export");
+        jExportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jExportButtonActionPerformed(evt);
+            }
+        });
+        jButtonPanel.add(jExportButton);
+
+        add(jButtonPanel, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveButtonActionPerformed
+        // tk use to test setting label data
+        System.out.println("Impl saving label from SVG Label Panel");
+    }//GEN-LAST:event_jSaveButtonActionPerformed
+
+    private void jExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExportButtonActionPerformed
+        System.out.println("Impl exporting label from SVG Label Panel");
+    }//GEN-LAST:event_jExportButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jButtonPanel;
+    private javax.swing.JButton jExportButton;
+    private javax.swing.JButton jSaveButton;
     // End of variables declaration//GEN-END:variables
-    
+
     @Override
     public int print(Graphics pg, PageFormat pageFormat,
             int pageIndex) throws PrinterException {

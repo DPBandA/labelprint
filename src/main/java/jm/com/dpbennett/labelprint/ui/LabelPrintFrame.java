@@ -255,6 +255,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         setTitle("LabelPrint");
         setBackground(new java.awt.Color(153, 255, 255));
         setMinimumSize(new java.awt.Dimension(550, 500));
+        setPreferredSize(new java.awt.Dimension(200, 650));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -458,9 +459,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpAboutActionPerformed
         JOptionPane.showMessageDialog(this,
-                "LabelPrint, Version 2.1\n"
-                + "Copyright 2012 Bureau of Standards, Jamaica\n"
-                + "Developer: D P Bennett & Associates Ltd.\n"
+                "LabelPrint, Version 3.1\n"
+                + "Copyright 2018 D P Bennett & Associates\n"
                 + "email: info@dpbennett.com.jm",
                 "About",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -478,7 +478,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         OptionsJDialog odlg = new OptionsJDialog(this, true);
         odlg.setVisible(true);
         if (odlg.hasDatabaseConnectionOptionsChanged()) {
-            odlg = null;
             new Thread(this).start();
         }
     }//GEN-LAST:event_jMenuEditOptionsActionPerformed
@@ -508,6 +507,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private void jMenuFilePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilePrintActionPerformed
         Thread printThread = new Thread() {
 
+            @Override
             public void run() {
                 printLabel();
             }

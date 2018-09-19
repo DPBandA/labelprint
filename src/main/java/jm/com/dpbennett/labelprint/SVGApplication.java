@@ -45,6 +45,7 @@ import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -107,6 +108,8 @@ public class SVGApplication {
             public void svgLoadEventDispatchStarted(SVGLoadEventDispatcherEvent e) {
                 // At this time the document is available...
                 document = svgCanvas.getSVGDocument();
+                //Element elem = document.getElementById("testId");
+                //elem.
                 System.out.println("Got doc after call to canvas.setURI()");
 //                        System.out.println("Setting doc");
 //                        getClass().getClassLoader().
