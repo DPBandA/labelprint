@@ -26,8 +26,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.6393643"
-     inkscape:cx="560.71319"
+     inkscape:zoom="0.45599022"
+     inkscape:cx="818"
      inkscape:cy="640"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -316,8 +316,9 @@
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222214px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="7.121376"
        y="216.06308"
-       id="text4189"
-       sodipodi:linespacing="125%"><tspan
+       id="note1"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4189"><tspan
          sodipodi:role="line"
          id="tspan4191"
          x="7.121376"
@@ -327,8 +328,9 @@
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="8.2554502"
        y="228.59769"
-       id="text4193"
-       sodipodi:linespacing="125%"><tspan
+       id="note2"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4193"><tspan
          sodipodi:role="line"
          id="tspan4195"
          x="8.2554502"
@@ -373,16 +375,13 @@
        style="font-style:normal;font-weight:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="145.30322"
        y="253.28831"
-       id="text4287"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4289"
-         x="145.30322"
-         y="253.28831">This model has been tested</tspan><tspan
+       id="note3"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4287"><tspan
          sodipodi:role="line"
          x="145.30322"
-         y="267.39941"
-         id="tspan4291">in accordance with JS 000</tspan></text>
+         y="253.28831"
+         id="tspan4291">This model has been tested</tspan></text>
     <rect
        style="opacity:1;fill:#008000;fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect4293"
@@ -414,8 +413,9 @@
        style="font-style:normal;font-weight:normal;font-size:7.76111126px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="321.86951"
        y="257.9425"
-       id="text4204"
-       sodipodi:linespacing="125%"><tspan
+       id="note4"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4204"><tspan
          sodipodi:role="line"
          id="tspan4206"
          x="321.86951"
@@ -428,5 +428,28 @@
          x="321.86951"
          y="277.34528"
          id="tspan4210">under the Standards Act.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="144.2063"
+       y="266.50943"
+       id="text4205"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4207"
+         x="144.2063"
+         y="266.50943">in accordance with JS </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="268.59222"
+       y="266.311"
+       id="standard"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4209"><tspan
+         sodipodi:role="line"
+         id="tspan4211"
+         x="268.59222"
+         y="266.311">000</tspan></text>
   </g>
 </svg>

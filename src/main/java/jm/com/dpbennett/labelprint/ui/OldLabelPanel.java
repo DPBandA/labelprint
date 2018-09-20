@@ -79,7 +79,7 @@ public class OldLabelPanel extends javax.swing.JPanel implements Printable {
 
         Toolkit toolKit = Toolkit.getDefaultToolkit();
 
-        SystemOptions sysOptions = new SystemOptions("LabelPrint.properties");
+        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
 
         //img = toolKit.createImage(sysOptions.getLabelLogoFile());
         // getClass().getResource("/system/" + systemFile)

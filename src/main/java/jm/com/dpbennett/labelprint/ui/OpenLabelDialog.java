@@ -35,10 +35,8 @@ import jm.com.dpbennett.labelprint.model.EnergyLabelData;
  */
 public class OpenLabelDialog extends java.awt.Dialog {
     private LabelPrintFrame labelPrintFrame;
-    private SystemOptions sysOptions;
     private int numberOfLabelsFound;
     private boolean bLoadLabel;
-    //private BigInteger labelID;
     private Vector labels, labelIDs;
     private String[] mostRecentSearchStrings;
     private String mostRecentSearchString;
@@ -57,7 +55,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
         setLocationRelativeTo(null);
         
         // Get system options
-        sysOptions = new SystemOptions("LabelPrint.properties");
+        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
         fieldsToSearch = sysOptions.getFieldsToSearch();
         mostRecentSearchStrings = sysOptions.getMostRecentSearchStrings();
         mostRecentSearchString = sysOptions.getMostRecentSearchString();
@@ -457,6 +455,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
     
     private void jSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchButtonActionPerformed
         
+        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
         
         // Clear list by setting empty vector as list data
         LabelsFoundList.setListData(new Vector());

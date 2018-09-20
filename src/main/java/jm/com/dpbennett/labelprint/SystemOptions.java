@@ -23,7 +23,6 @@ import java.io.*;
 import javax.swing.*;
 import java.util.Properties;
 import java.io.FileInputStream;
-import java.net.URL;
 
 /**
  * <p>
@@ -86,7 +85,7 @@ public class SystemOptions {
         }
     }
 
-    private boolean readSystemData() {
+    public boolean readSystemData() {
 
         noError = true;
         FileInputStream fis;
@@ -94,7 +93,7 @@ public class SystemOptions {
         try {
 
             try {
-                fis = new FileInputStream("LabelPrint.properties");
+                fis = new FileInputStream(systemFile);
             } catch (FileNotFoundException e) {
                 System.out.println("Properties file not found. Loading default...");
                 fis = new FileInputStream(getClass().
@@ -287,8 +286,39 @@ public class SystemOptions {
     public void setConnectToDatabase(boolean b) {
         props.setProperty("ConnectToDatabase", Boolean.toString(b));
     }
+
+    // Note properties
+    public String getNote1() {
+        return props.getProperty("Note1");
+    }
+
+    public void setNote1(String s) {
+        props.setProperty("Note1", s);
+    }
+
+    public String getNote2() {
+        return props.getProperty("Note2");
+    }
+
+    public void setNote2(String s) {
+        props.setProperty("Note2", s);
+    }
+
+    public String getNote3() {
+        return props.getProperty("Note3");
+    }
+
+    public void setNote3(String s) {
+        props.setProperty("Note3", s);
+    }
     
-    
+    public String getNote4() {
+        return props.getProperty("Note4");
+    }
+
+    public void setNote4(String s) {
+        props.setProperty("Note4", s);
+    }
 
     @Override
     protected void finalize() throws Throwable {

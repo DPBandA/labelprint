@@ -24,8 +24,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.net.URL;
-import javax.swing.SwingUtilities;
-import org.apache.batik.bridge.UpdateManager;
+import jm.com.dpbennett.labelprint.SystemOptions;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
@@ -98,7 +97,7 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                     // Set location of the capacity unit power based on width of capacity
                     Element svgElement = svgDocument.getElementById("capacity");
                     SVGLocatable locatable = (SVGLocatable) svgElement;
-                    SVGRect rect = locatable.getBBox();                    
+                    SVGRect rect = locatable.getBBox();
                     Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
                     unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                     // Defrost
@@ -114,11 +113,16 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                     // Operating cost
                     setElementText("operatingCost", "$" + labelPrintFrame.getEnergyLabelData().getOperatingCost());
                     // Energy notes
-
+                    setElementText("note1", labelPrintFrame.getSystemOptions().getNote1()
+                            .replace("[AnnualConsumption]", 
+                                    labelPrintFrame.getEnergyLabelData().getAnnualConsumption())
+                            .replace("[CostPerKwh]", 
+                                    labelPrintFrame.getEnergyLabelData().getCostPerKwh()));
+                    setElementText("note2", labelPrintFrame.getSystemOptions().getNote2());                    
                     // Validity
                     setElementText("validity", labelPrintFrame.getEnergyLabelData().getValidity());
                     // Standard
-                    // setElementText("standard", labelPrintFrame.getEnergyLabelData().getStandard());
+                    setElementText("standard", labelPrintFrame.getEnergyLabelData().getStandard());
 
                 }
             });

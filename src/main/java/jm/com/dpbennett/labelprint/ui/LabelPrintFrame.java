@@ -47,8 +47,7 @@ import jm.com.dpbennett.labelprint.model.EnergyLabelData;
  * @author dbennett
  */
 public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
-    // Data management
-
+    
     private SystemOptions sysOptions;
     private boolean FileDirty;
     private EntityManagerFactory emf;
@@ -571,7 +570,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                 reld = getLabel(currentLabelID);
 
                 labelDataDialog = new LabelDataPanel(this);
-
                 labelPanel = new SVGLabelPanel(this);
                 labelPanel.showContents(chkContents);
                 labelPanel.showGreenBackground(chkGreenBackground);
