@@ -1,11 +1,11 @@
 
 # General
-- Impl setting the text elements based on element id and energy label data.
-- Impl label update when data is updated.
+- Impl label update when data is updated. Impl shifting m3 based on width of
+  capacity.
+- Add system properties for label notes and subnotes. Use {var} for placeholders
+  eg "standard no".
+- Add system option for "refrigerator" and may be "ac" label file.
 - Remove edit cancel button and data backup feature.
-- Load images from resource. (org folder jm.org.bsj.labelprint)
-- Put all images in resources/images
-- Load LabelPrint.properties file from resource.
 - Remove export to pdf feature if the fonts mapper issue is not solved.
 - Get rid of progress bar dialog for datbase connection and font loading
   and use status text at bottom of main window instead.
@@ -20,3 +20,8 @@
 - Remove "Cancel" button from LabelDataPanel
 - Do not set label data as dirty until the data is actually edited.
 - Use text to create header instead of importing an image.
+- Make label data scrollable
+- Add capacityUnit to field and use it to append to the capacity instead of 
+  using if statements.
+- Create and use enerbase as the default database.
+- Impl testing database connection in options dialog.

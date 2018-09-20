@@ -787,8 +787,12 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
         if (jTabbedPane.getSelectedIndex() == 0) {
-            labelDataDialog.copyRefrigeratorData();
+            labelDataDialog.copyRefrigeratorData(); // tk remove this method and data backup feature            
         }
+         if (jTabbedPane.getSelectedIndex() == 1) {
+            labelPanel.updateLabel();
+        }
+        
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

@@ -287,6 +287,8 @@ public class SystemOptions {
     public void setConnectToDatabase(boolean b) {
         props.setProperty("ConnectToDatabase", Boolean.toString(b));
     }
+    
+    
 
     @Override
     protected void finalize() throws Throwable {

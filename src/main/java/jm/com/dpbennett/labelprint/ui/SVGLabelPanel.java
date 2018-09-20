@@ -24,11 +24,15 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.net.URL;
+import javax.swing.SwingUtilities;
+import org.apache.batik.bridge.UpdateManager;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.svg.SVGLocatable;
+import org.w3c.dom.svg.SVGRect;
 
 /**
  *
@@ -74,10 +78,52 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
             public void svgLoadEventDispatchStarted(SVGLoadEventDispatcherEvent e) {
                 // At this time the document is available so get it.
                 svgDocument = svgCanvas.getSVGDocument();
+                updateLabel();
             }
         });
 
         add("Center", svgCanvas);
+    }
+
+    public void updateLabel() {
+
+        if (svgCanvas != null && svgDocument != null) {
+            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Type
+                    setElementText("type", labelPrintFrame.getEnergyLabelData().getType());
+                    // Capacity tk impl capacity unit instead of hard code
+                    setElementText("capacity", labelPrintFrame.getEnergyLabelData().getCapacity() + "m");
+                    // Set location of the capacity unit power based on width of capacity
+                    Element svgElement = svgDocument.getElementById("capacity");
+                    SVGLocatable locatable = (SVGLocatable) svgElement;
+                    SVGRect rect = locatable.getBBox();                    
+                    Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
+                    unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
+                    // Defrost
+                    setElementText("defrost", labelPrintFrame.getEnergyLabelData().getDefrost());
+                    // Distributor
+                    setElementText("distributor", labelPrintFrame.getEnergyLabelData().getDistributor());
+                    // Manufacturer
+                    setElementText("manufacturer", labelPrintFrame.getEnergyLabelData().getManufacturer());
+                    // Model
+                    setElementText("model", labelPrintFrame.getEnergyLabelData().getModel());
+                    // Country
+                    setElementText("country", labelPrintFrame.getEnergyLabelData().getCountry());
+                    // Operating cost
+                    setElementText("operatingCost", "$" + labelPrintFrame.getEnergyLabelData().getOperatingCost());
+                    // Energy notes
+
+                    // Validity
+                    setElementText("validity", labelPrintFrame.getEnergyLabelData().getValidity());
+                    // Standard
+                    // setElementText("standard", labelPrintFrame.getEnergyLabelData().getStandard());
+
+                }
+            });
+        }
+
     }
 
     private void setElementText(String elementId, String content) {
@@ -146,6 +192,9 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
     private void jSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveButtonActionPerformed
         // tk use to test setting label data
         System.out.println("Impl saving label from SVG Label Panel");
+        updateLabel();
+
+
     }//GEN-LAST:event_jSaveButtonActionPerformed
 
     private void jExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExportButtonActionPerformed

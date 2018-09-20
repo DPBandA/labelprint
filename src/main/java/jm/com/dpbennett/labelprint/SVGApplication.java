@@ -135,6 +135,8 @@ public class SVGApplication {
         // Set the button action.
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
+                Element element = document.getElementById("capacity");
+            element.setTextContent("yesssss");
 //                URL url = getClass().getClassLoader().
 //                        getResource("images/EnergyLabel.svg");
 //                svgCanvas.setURI(url.toString());

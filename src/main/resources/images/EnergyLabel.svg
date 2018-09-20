@@ -26,8 +26,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.50550122"
-     inkscape:cx="818"
+     inkscape:zoom="0.6393643"
+     inkscape:cx="560.71319"
      inkscape:cy="640"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -163,10 +163,11 @@
        style="font-style:normal;font-weight:normal;font-size:8.46666622px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="115.45625"
        y="64.540154"
-       id="text4156"
-       sodipodi:linespacing="125%"><tspan
+       id="capacityUnitPowerText"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4156"><tspan
          sodipodi:role="line"
-         id="tspan4158"
+         id="capacityUnitPowerTextSpan"
          x="115.45625"
          y="64.540154">3</tspan></text>
     <text
@@ -183,7 +184,7 @@
          y="85.585213">Automatic</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333324px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="75.630966"
        y="100.68681"
        id="distributor"
@@ -192,7 +193,7 @@
          sodipodi:role="line"
          id="tspan4166"
          x="75.630966"
-         y="100.68681">A Company Limited</tspan></text>
+         y="100.68681">D P Bennett &amp; Assoc.</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.77975845px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -426,6 +427,6 @@
          sodipodi:role="line"
          x="321.86951"
          y="277.34528"
-         id="tspan4210">under the Standards Act</tspan></text>
+         id="tspan4210">under the Standards Act.</tspan></text>
   </g>
 </svg>

@@ -505,7 +505,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jValidityCaretUpdate
 
     private void jOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOkActionPerformed
-        // Set label view panel
+        // Update label and set label view panel     
+        labelPrintFrame.getLabelPanel().updateLabel();
         labelPrintFrame.getTabbedPane().setSelectedIndex(1);
     }//GEN-LAST:event_jOkActionPerformed
 
