@@ -24,20 +24,6 @@ import javax.swing.*;
 import java.util.Properties;
 import java.io.FileInputStream;
 
-/**
- * <p>
- * Title: Refrigerator Energy Label Print</p>
- * <p>
- * Description: Generates energy consumption labels for refrigerators tested by
- * the Bureau of Standards (Jamaica).</p>
- * <p>
- * Copyright: Copyright (c) 2001</p>
- * <p>
- * Company: Bureau of Standards (Jamaica)</p>
- *
- * @author Desmond Bennett
- * @version 1.0
- */
 public class SystemOptions {
 
     private String systemFile;

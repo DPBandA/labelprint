@@ -47,7 +47,7 @@ import jm.com.dpbennett.labelprint.model.EnergyLabelData;
  * @author dbennett
  */
 public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
-    
+
     private SystemOptions sysOptions;
     private boolean FileDirty;
     private EntityManagerFactory emf;
@@ -120,7 +120,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     public boolean setupFontDefaultFontMapper() {
 
         System.out.println("Begin setting up fonts");
-        
+
         try {
             // Setup font mapper for pdf image export
             defaultFontMapper = new DefaultFontMapper();
@@ -130,7 +130,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             System.out.println(e);
             return false;
         }
-        
+
         System.out.println("End setting up fonts");
 
         return true;
@@ -551,6 +551,10 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public SVGLabelPanel getLabelPanel() {
+        if (labelPanel == null) {
+            labelPanel = new SVGLabelPanel(this);
+        }
+
         return labelPanel;
     }
 
@@ -623,7 +627,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 //        setFileDirty(false);
 ////        statusBar.setText(" Ready...");
 //    }
-
     private void saveLabel() {
         if (sysOptions.isConnectToDatabase()) {
             try {
@@ -787,10 +790,10 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         if (jTabbedPane.getSelectedIndex() == 0) {
             labelDataDialog.copyRefrigeratorData(); // tk remove this method and data backup feature            
         }
-         if (jTabbedPane.getSelectedIndex() == 1) {
+        if (jTabbedPane.getSelectedIndex() == 1) {
             labelPanel.updateLabel();
         }
-        
+
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

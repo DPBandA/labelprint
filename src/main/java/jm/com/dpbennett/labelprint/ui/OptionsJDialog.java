@@ -660,7 +660,17 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setConnectionUserName(jUsernameTextField.getText().trim());
         sysOptions.setConnectionURL(jDatabaseURLTextField.getText().trim());
         sysOptions.writeSystemData();
+        
+        // Update relevant views that are dependent on system options
+        java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
+            public void run() {
+                labelPrintFrame.getLabelPanel().updateLabel();
+            }
+            
+        });
+        
         // test the database connection
         if (sysOptions.isConnectToDatabase()) {
             System.out.println("will try to setup db with user:" + sysOptions.getConnectionUserName());
@@ -712,6 +722,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new OptionsJDialog(new javax.swing.JFrame(), true).setVisible(true);
             }

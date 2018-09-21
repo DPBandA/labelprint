@@ -1,6 +1,8 @@
 
 # General
-- Update SVG label when option dialog closes
+- Look for all references to BSJ and Bureau and remove.
+- Remove standard number and other system options that are not used.
+- Remove the setup of fonts from option dialog and elsewhere.
 - Add system option for "refrigerator" and may be "ac" label file.
 - Remove edit cancel button and data backup feature.
 - Remove export to pdf feature if the fonts mapper issue is not solved.
