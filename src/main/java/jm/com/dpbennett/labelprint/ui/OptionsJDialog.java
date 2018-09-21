@@ -55,24 +55,27 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jPNGCheckBox.setSelected(sysOptions.isExportPNG());
         jPDFCheckBox.setSelected(sysOptions.isExportPDF());        
         // Init Database Options tab
-        jDatabaseURLTextField.setText(sysOptions.getConnectionURL());
-        jUsernameTextField.setText(sysOptions.getConnectionUserName());
-        jPasswordField.setText(sysOptions.getConnectionPassword());
+        jDatabaseURLTextField.setText(sysOptions.getProperty("ConnectionURL"));
+        jUsernameTextField.setText(sysOptions.getProperty("ConnectionUserName"));
+        jPasswordField.setText(sysOptions.getProperty("ConnectionPassword"));
         // Init field to search combobox
         bLoadingComboBox = true;
         for (int i = 0; i < fieldsToSearch.length; ++i) {
             jDefaultSearchFieldComboBox.addItem(fieldsToSearch[i][0]);
         }
-        jDefaultSearchFieldComboBox.setSelectedItem(sysOptions.getDefaultFieldToSearch());
+        jDefaultSearchFieldComboBox.setSelectedItem(sysOptions.getProperty("DefaultFieldToSearch"));
         // Store in database
         jConnectToDatabaseCheckBox.setSelected(sysOptions.isConnectToDatabase());
         bLoadingComboBox = false;
         
-        // Label Content tab
-        jNote1_1_TextArea.setText(sysOptions.getNote1_1());
-        jNote1_2_TextArea.setText(sysOptions.getNote2());
-        jNote2_1_TextArea.setText(sysOptions.getNote3());
-        jNote3_1_TextArea.setText(sysOptions.getNote4());
+        // Label Notes tab
+        jNote1_1_TextArea.setText(sysOptions.getProperty("Note1_1"));
+        jNote1_2_TextArea.setText(sysOptions.getProperty("Note1_2"));
+        jNote2_1_TextArea.setText(sysOptions.getProperty("Note2_1"));
+        jNote2_2_TextArea.setText(sysOptions.getProperty("Note2_2"));
+        jNote3_1_TextArea.setText(sysOptions.getProperty("Note3_1"));
+        jNote3_2_TextArea.setText(sysOptions.getProperty("Note3_2"));
+        jNote3_3_TextArea.setText(sysOptions.getProperty("Note3_3"));
 
         databaseConnectionOptionsChanged = false;
 
@@ -90,7 +93,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jLabelNotesPanel = new javax.swing.JTabbedPane();
         jLabelContentPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jNote1_1_TextArea = new javax.swing.JTextArea();
@@ -262,7 +265,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Label Content", jLabelContentPanel);
+        jLabelNotesPanel.addTab("Label Notes", jLabelContentPanel);
 
         jDatabaseOptionsPanel.setLayout(new java.awt.GridLayout(5, 2, 2, 25));
 
@@ -347,7 +350,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addContainerGap(108, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Database", jDatabasePanel);
+        jLabelNotesPanel.addTab("Database", jDatabasePanel);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "File/image export format", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
 
@@ -410,7 +413,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addContainerGap(179, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Export", jExportPanel);
+        jLabelNotesPanel.addTab("Export", jExportPanel);
 
         jOkButton.setText("Ok");
         jOkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -430,7 +433,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jLabelNotesPanel)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jOkButton)
@@ -444,7 +447,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
+                .addComponent(jLabelNotesPanel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jOkButton)
@@ -501,10 +504,13 @@ public class OptionsJDialog extends javax.swing.JDialog {
         SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
         
         // Notes
-        sysOptions.setNote1(jNote1_1_TextArea.getText());
-        sysOptions.setNote2(jNote1_2_TextArea.getText());
-        sysOptions.setNote3(jNote2_1_TextArea.getText());
-        sysOptions.setNote4(jNote3_1_TextArea.getText());
+        sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
+        sysOptions.setProperty("Note1_2", jNote1_2_TextArea.getText());
+        sysOptions.setProperty("Note2_1", jNote2_1_TextArea.getText());
+        sysOptions.setProperty("Note2_2", jNote2_2_TextArea.getText());
+        sysOptions.setProperty("Note3_1", jNote3_1_TextArea.getText());
+        sysOptions.setProperty("Note3_2", jNote3_2_TextArea.getText());
+        sysOptions.setProperty("Note3_3", jNote3_3_TextArea.getText());
 
         // Update export checkboxes
         sysOptions.setExportPDF(jPDFCheckBox.isSelected());
@@ -516,15 +522,14 @@ public class OptionsJDialog extends javax.swing.JDialog {
 
         // Default field to search
         String selectedField = jDefaultSearchFieldComboBox.getSelectedItem().toString().trim();
-        sysOptions.setDefaultFieldToSearch(selectedField);
+        sysOptions.setProperty("DefaultFieldToSearch", selectedField);
 
         // Update password
         char[] password = jPasswordField.getPassword();
         String passwordString = new String(password).trim();
-        sysOptions.setConnectionPassword(passwordString);
-
-        sysOptions.setConnectionUserName(jUsernameTextField.getText().trim());
-        sysOptions.setConnectionURL(jDatabaseURLTextField.getText().trim());
+        sysOptions.setProperty("ConnectionPassword", passwordString);
+        sysOptions.setProperty("ConnectionUserName", jUsernameTextField.getText().trim());
+        sysOptions.setProperty("ConnectionURL", jDatabaseURLTextField.getText().trim());
         sysOptions.writeSystemData();
         
         // Update relevant views that are dependent on system options
@@ -539,12 +544,12 @@ public class OptionsJDialog extends javax.swing.JDialog {
         
         // test the database connection
         if (sysOptions.isConnectToDatabase()) {
-            System.out.println("will try to setup db with user:" + sysOptions.getConnectionUserName());
+            System.out.println("will try to setup db with user:" + 
+                    sysOptions.getProperty("ConnectionUserName"));
             if (labelPrintFrame.setupDatabaseConnection()) {
-                System.out.println("db setup!");
+                System.out.println("Database setup!");
                 dispose();
             } else {
-                //sysOptions.setConnectToDatabase(false);
                 JOptionPane.showMessageDialog(this,
                         "A database connection error occurred.\n"
                         + "Check that the database options are valid",
@@ -625,6 +630,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jLabelContentPanel;
+    private javax.swing.JTabbedPane jLabelNotesPanel;
     private javax.swing.JTextArea jNote1_1_TextArea;
     private javax.swing.JTextArea jNote1_2_TextArea;
     private javax.swing.JTextArea jNote2_1_TextArea;
@@ -644,7 +650,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jUsernameTextField;
     // End of variables declaration//GEN-END:variables
 }

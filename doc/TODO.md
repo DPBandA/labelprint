@@ -1,6 +1,7 @@
 
 # General
-- Remove standard number and other system options that are not used.
+- Add default standard number option.
+  Make svg violation note 3 lines.
   Update option dialog to get/set new notes/lines.
   Impl the sytem option methods to get the note lines.
   Update updateLabel() to update the new notes
@@ -8,7 +9,7 @@
 - Add system option for "refrigerator" and may be "ac" label file.
 - Remove edit cancel button and data backup feature.
 - Remove export to pdf feature if the fonts mapper issue is not solved.
-- Get rid of progress bar dialog for datbase connection and font loading
+- Get rid of progress bar dialog for database connection and font loading
   and use status text at bottom of main window instead.
 - Impl reading system properties file from the resources folder only if the 
   file does not already exist in the "user's directory". Impl saving the file

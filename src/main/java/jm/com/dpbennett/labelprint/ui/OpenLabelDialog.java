@@ -39,7 +39,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
     private boolean bLoadLabel;
     private Vector labels, labelIDs;
     private String[] mostRecentSearchStrings;
-    private String mostRecentSearchString;
+    private String searchString;
     private String defaultFieldToSearch;
     private String defaultFieldToDisplay;
     private String[][] fieldsToSearch;
@@ -57,16 +57,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         // Get system options
         SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
         fieldsToSearch = sysOptions.getFieldsToSearch();
-        mostRecentSearchStrings = sysOptions.getMostRecentSearchStrings();
-        mostRecentSearchString = sysOptions.getMostRecentSearchString();
-        defaultFieldToSearch = sysOptions.getDefaultFieldToSearch();
-        defaultFieldToDisplay = sysOptions.getDefaultFieldToDisplay();
-        
-        // Init search string combo box
-        for (int i = 0; i < mostRecentSearchStrings.length; ++i) {
-            jTextToFindComboBox.addItem(mostRecentSearchStrings[i]);
-        }
-        jTextToFindComboBox.setSelectedItem(mostRecentSearchString);
+        defaultFieldToSearch = sysOptions.getProperty("DefaultFieldToSearch");
+        defaultFieldToDisplay = sysOptions.getProperty("DefaultFieldToDisplay");
         
         // Init field to search combo box
         for (int i = 0; i < fieldsToSearch.length; ++i) {
@@ -92,12 +84,12 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jPanel1 = new javax.swing.JPanel();
         jSearchButton = new javax.swing.JButton();
         jHelpButton = new javax.swing.JButton();
-        jTextToFindComboBox = new javax.swing.JComboBox();
         jFieldToSearchComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jFieldToDisplayComboBox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+        jTextToFindTextField = new javax.swing.JTextField();
         FoundRecordsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         LabelsFoundList = new javax.swing.JList();
@@ -150,9 +142,6 @@ public class OpenLabelDialog extends java.awt.Dialog {
             }
         });
 
-        jTextToFindComboBox.setEditable(true);
-        jTextToFindComboBox.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
         jFieldToSearchComboBox.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -169,6 +158,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Field to display:");
 
+        jTextToFindTextField.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,10 +174,10 @@ public class OpenLabelDialog extends java.awt.Dialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFieldToDisplayComboBox, 0, 253, Short.MAX_VALUE)
                     .addComponent(jFieldToSearchComboBox, 0, 253, Short.MAX_VALUE)
-                    .addComponent(jTextToFindComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextToFindTextField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jHelpButton, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                    .addComponent(jHelpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(48, 48, 48))
         );
@@ -195,8 +186,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextToFindComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSearchButton))
+                    .addComponent(jSearchButton)
+                    .addComponent(jTextToFindTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -230,13 +221,13 @@ public class OpenLabelDialog extends java.awt.Dialog {
             FoundRecordsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FoundRecordsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         FoundRecordsPanelLayout.setVerticalGroup(
             FoundRecordsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FoundRecordsPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -373,9 +364,9 @@ public class OpenLabelDialog extends java.awt.Dialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(FoundRecordsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
+                        .addComponent(FoundRecordsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -471,22 +462,15 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jCapacityTextField.setText("");
         jOperatingCostTextField.setText("");
         
-        mostRecentSearchString =
-                jTextToFindComboBox.getSelectedItem().toString().trim();
-        mostRecentSearchStrings =
-                updateMostRecentSearchStringsComboBox(jTextToFindComboBox,
-                mostRecentSearchStrings,
-                jTextToFindComboBox.
-                getSelectedItem().toString().trim());
-        sysOptions.setMostRecentSearchStrings(mostRecentSearchStrings);
-        sysOptions.setMostRecentSearchString(mostRecentSearchString);
+        searchString =
+                jTextToFindTextField.getText().trim();
         
         // Search for labels and list them
         int index = jFieldToSearchComboBox.getSelectedIndex();
         int index2 = jFieldToDisplayComboBox.getSelectedIndex();
         loadFoundLabelsList(fieldsToSearch[index][1], // search field
                 fieldsToSearch[index2][1], // display field
-                mostRecentSearchString);
+                searchString);
         
     }//GEN-LAST:event_jSearchButtonActionPerformed
     
@@ -629,7 +613,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jSearchButton;
-    private javax.swing.JComboBox jTextToFindComboBox;
+    private javax.swing.JTextField jTextToFindTextField;
     // End of variables declaration//GEN-END:variables
     
 }

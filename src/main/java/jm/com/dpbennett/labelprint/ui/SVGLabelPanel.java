@@ -112,17 +112,31 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                     setElementText("country", labelPrintFrame.getEnergyLabelData().getCountry());
                     // Operating cost
                     setElementText("operatingCost", "$" + labelPrintFrame.getEnergyLabelData().getOperatingCost());
-                    // Energy notes
-                    setElementText("note1.1", labelPrintFrame.getSystemOptions().getNote1_1()
+                    // Energy note
+                    setElementText("note1.1", labelPrintFrame
+                            .getSystemOptions().getProperty("Note1_1")
                             .replace("[AnnualConsumption]", 
                                     labelPrintFrame.getEnergyLabelData().getAnnualConsumption())
                             .replace("[CostPerKwh]", 
                                     labelPrintFrame.getEnergyLabelData().getCostPerKwh()));
-                    setElementText("note1.2", labelPrintFrame.getSystemOptions().getNote2());                    
+                    setElementText("note1.2", labelPrintFrame.
+                            getSystemOptions().getProperty("Note1_2"));                    
                     // Validity
                     setElementText("validity", labelPrintFrame.getEnergyLabelData().getValidity());
-                    // Standard
-                    setElementText("standard", labelPrintFrame.getEnergyLabelData().getStandard());
+                    // Standard note
+                    setElementText("note2.1", labelPrintFrame
+                            .getSystemOptions().getProperty("Note2_1"));
+                    setElementText("note2.2", labelPrintFrame
+                            .getSystemOptions().getProperty("Note2_2")
+                            .replace("[Standard]", 
+                                    labelPrintFrame.getEnergyLabelData().getStandard()));
+                    // Violation note
+                    setElementText("note3.1", labelPrintFrame
+                            .getSystemOptions().getProperty("Note3_1"));
+                    setElementText("note3.2", labelPrintFrame
+                            .getSystemOptions().getProperty("Note3_2"));
+                    setElementText("note3.3", labelPrintFrame
+                            .getSystemOptions().getProperty("Note3_3"));
 
                 }
             });

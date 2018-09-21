@@ -125,7 +125,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             // Setup font mapper for pdf image export
             defaultFontMapper = new DefaultFontMapper();
             FontFactory.registerDirectories();
-            defaultFontMapper.insertDirectory(sysOptions.getFontsDirectory());
+//            defaultFontMapper.insertDirectory(sysOptions.getFontsDirectory());
         } catch (Exception e) {
             System.out.println(e);
             return false;
@@ -754,14 +754,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             return;
         }
 
-//        NewLabelDialog nld = new NewLabelDialog(this, true);
-//        nld.setVisible(true);
-//        if (nld.proceedToCreateLabel()) {
         reld = new EnergyLabelData();
-        //reld.setLabelName("");
-//            reld.setLabelName(nld.getLabelName());
-//            reld.setJobNumber(nld.getJobNumber());
-        reld.setStandard(sysOptions.getStandard());
         reld.setType("Refrigerator"); // tk get from options
 
         labelDataDialog = new LabelDataPanel(this);
@@ -778,7 +771,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         this.setTitle("LabelPrint - " + reld.getLabelName());
         enableMenuItems(true);
         FileDirty = false;
-//        }
 
     }
 
@@ -847,10 +839,14 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         try {
             HashMap prop = new HashMap();
 
-            prop.put("javax.persistence.jdbc.user", sysOptions.getConnectionUserName());
-            prop.put("javax.persistence.jdbc.password", sysOptions.getConnectionPassword());
-            prop.put("javax.persistence.jdbc.url", sysOptions.getConnectionURL());
-            prop.put("javax.persistence.jdbc.driver", sysOptions.getConnectionDriverName());
+            prop.put("javax.persistence.jdbc.user",
+                    sysOptions.getProperty("ConnectionUserName"));
+            prop.put("javax.persistence.jdbc.password",
+                    sysOptions.getProperty("ConnectionPassword"));
+            prop.put("javax.persistence.jdbc.url",
+                    sysOptions.getProperty("ConnectionURL"));
+            prop.put("javax.persistence.jdbc.driver",
+                    sysOptions.getProperty("ConnectionDriverName"));
 
             emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);
             em = emf.createEntityManager();
@@ -863,6 +859,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    @Override
     public void run() {
         // Setup persistence/connect to database        
         if (sysOptions.isConnectToDatabase()) {
