@@ -20,6 +20,7 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfTemplate;
 import com.lowagie.text.pdf.PdfWriter;
@@ -36,6 +37,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -120,12 +122,12 @@ public class OldLabelPanel extends javax.swing.JPanel implements Printable {
             cb = writer.getDirectContent();
             tp = cb.createTemplate(pdfTemplateWidth, pdfTemplateHeight);
 
-            g2 = tp.createGraphics(pdfTemplateWidth, pdfTemplateHeight, labelPrintFrame.getDefaultFontMapper());
-            printContentOfLabel(g2, imageScaleX, imageScaleY, 0, 0);
-            g2.dispose();
+            //g2 = tp.createGraphics(pdfTemplateWidth, pdfTemplateHeight, labelPrintFrame.getDefaultFontMapper());
+            //printContentOfLabel(g2, imageScaleX, imageScaleY, 0, 0);
+            //g2.dispose();
             cb.addTemplate(tp, 20, 340);
 //            cb.addTemplate(tp, 10, 170);
-        } catch (Exception e) {
+        } catch (DocumentException | FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
         document.close();

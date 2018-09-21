@@ -1,14 +1,8 @@
 
 # General
-- Add default standard number option.
-  Make svg violation note 3 lines.
-  Update option dialog to get/set new notes/lines.
-  Impl the sytem option methods to get the note lines.
-  Update updateLabel() to update the new notes
-- Remove the setup of fonts from option dialog and elsewhere.
-- Add system option for "refrigerator" and may be "ac" label file.
 - Remove edit cancel button and data backup feature.
-- Remove export to pdf feature if the fonts mapper issue is not solved.
+  On Label Data tab change buttons to "View" and "Save"
+  On Label View tab change buttons to "Edit" and "Save"
 - Get rid of progress bar dialog for database connection and font loading
   and use status text at bottom of main window instead.
 - Impl reading system properties file from the resources folder only if the 
@@ -20,7 +14,6 @@
 - Using the save toolbar button results in the label data apparently getting 
   blanked. This happens when the labels opened then saved immediately. Fix!!
 - Impl exporting to image with Batik Transcoder API.
-- Remove "Cancel" button from LabelDataPanel
 - Do not set label data as dirty until the data is actually edited.
 - Use text to create header instead of importing an image.
 - Make label data scrollable
@@ -28,9 +21,4 @@
   using if statements.
 - Create and use enerbase as the default database.
 - Impl testing database connection in options dialog.
-- Remove pwd from properties file
 - Impl hide/show label background colors and content.
-- In all places get and use system option file opened by LabelPrintFrame.
-  Reload the data where necessary.
-- Change "Save" to "Edit" in svg panel and change them around.
-- Impl notes 3 and 4 as 3 line notes with each line id referred to as "notex.y"

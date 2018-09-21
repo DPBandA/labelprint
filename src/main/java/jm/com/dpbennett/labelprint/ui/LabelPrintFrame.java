@@ -19,7 +19,6 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
-import com.lowagie.text.FontFactory;
 import com.lowagie.text.pdf.DefaultFontMapper;
 import java.awt.Cursor;
 import java.awt.Toolkit;
@@ -53,12 +52,10 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private EntityManagerFactory emf;
     private EntityManager em;
     private BigInteger currentLabelID;
-    private EnergyLabelData reld;
-    private DefaultFontMapper defaultFontMapper;
+    private EnergyLabelData energyLabelData;
     private boolean chkGreenBackground;
     private boolean chkYellowBackground;
     private boolean chkContents = true;
-    // Data views/editors
     private LabelDataPanel labelDataDialog;
     private SVGLabelPanel labelPanel;
 
@@ -99,7 +96,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     + "Try to connect to a database in the options dialog and try again.",
                     "Search Error",
                     JOptionPane.ERROR_MESSAGE);
-            labelsFound = new ArrayList<EnergyLabelData>();
+            labelsFound = new ArrayList<>();
         }
 
         return labelsFound;
@@ -115,29 +112,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         currentLabelID = labelData.getEnergyLabelDataId();
 
         return labelData;
-    }
-
-    public boolean setupFontDefaultFontMapper() {
-
-        System.out.println("Begin setting up fonts");
-
-        try {
-            // Setup font mapper for pdf image export
-            defaultFontMapper = new DefaultFontMapper();
-            FontFactory.registerDirectories();
-//            defaultFontMapper.insertDirectory(sysOptions.getFontsDirectory());
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
-        }
-
-        System.out.println("End setting up fonts");
-
-        return true;
-    }
-
-    public DefaultFontMapper getDefaultFontMapper() {
-        return defaultFontMapper;
     }
 
     public boolean isLabelNameUsed(String labelName) {
@@ -162,9 +136,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         //labelDataDialog.getLabelData();        
         FileDirty = flag;
         if (FileDirty == true) {
-            this.setTitle("LabelPrint - " + reld.getLabelName() + " - MODIFIED");
+            this.setTitle("LabelPrint - " + energyLabelData.getLabelName() + " - MODIFIED");
         } else {
-            this.setTitle("LabelPrint - " + reld.getLabelName());
+            this.setTitle("LabelPrint - " + energyLabelData.getLabelName());
         }
     }
 
@@ -458,11 +432,12 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpAboutActionPerformed
         JOptionPane.showMessageDialog(this,
-                "LabelPrint, Version 3.1\n"
-                + "Copyright 2018 D P Bennett & Associates\n"
-                + "email: info@dpbennett.com.jm",
+                new CustomEditorPane("LabelPrint, Version 3.0<br>"
+                + "&copy; 2018 D P Bennett & Associates<br>"
+                + "Website: <a href=\"http://dpbennett.com.jm\">http://dpbennett.com.jm</a>"),
                 "About",
                 JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, new CustomEditorPane("Here is a link on <a href=\"http://www.google.com\">http://www.google.com</a>"));
     }//GEN-LAST:event_jMenuHelpAboutActionPerformed
 
     private void jMenuEditLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditLabelActionPerformed
@@ -571,7 +546,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             OpenLabelDialog oldlg = new OpenLabelDialog(this, true);
             oldlg.setVisible(true);
             if (oldlg.proceedToOpenLabel()) {
-                reld = getLabel(currentLabelID);
+                energyLabelData = getLabel(currentLabelID);
 
                 labelDataDialog = new LabelDataPanel(this);
                 labelPanel = new SVGLabelPanel(this);
@@ -587,7 +562,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                 jTabbedPane.setSelectedIndex(1);
 
                 // Set new label title
-                this.setTitle("LabelPrint - " + reld.getLabelName());
+                this.setTitle("LabelPrint - " + energyLabelData.getLabelName());
                 enableMenuItems(true);
                 FileDirty = false;
             }
@@ -618,40 +593,31 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         return null;
     }
 
-//    private void saveLabelAsPDFFile() {
-////        statusBar.setText(" Saving label. Please wait...");
-//        String fileName = getPDFFileAbsolutePath("Save");
-//        if (fileName != null) {
-//            labelPanel.exportLabelToPDF(fileName);
-//        }
-//        setFileDirty(false);
-////        statusBar.setText(" Ready...");
-//    }
     private void saveLabel() {
         if (sysOptions.isConnectToDatabase()) {
             try {
                 if (emf != null) {
                     em.getTransaction().begin();
 
-                    if (reld.getEnergyLabelDataId() == null) {
+                    if (energyLabelData.getEnergyLabelDataId() == null) {
                         System.out.println("Saving label");
-                        em.persist(reld);
+                        em.persist(energyLabelData);
                         em.getTransaction().commit();
                         // Retrieve saved label for future updates. NB: May not be
                         //  necessary
-                        reld = getStoredLabel(reld.getLabelName());
+                        energyLabelData = getStoredLabel(energyLabelData.getLabelName());
                     } else {
                         // Get label from dbase then save
                         // Retrieve saved label and update
-                        reld = getLabel(reld.getEnergyLabelDataId());
+                        energyLabelData = getLabel(energyLabelData.getEnergyLabelDataId());
                         System.out.println("Updating label");
                         labelDataDialog.getLabelData();
-                        em.merge(reld);
+                        em.merge(energyLabelData);
                         em.getTransaction().commit();
                     }
 
                     setFileDirty(false);
-                    //this.validate();
+
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "You do not have a database connection.\n"
@@ -721,7 +687,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         }
         // Remove all existing tabs and
         jTabbedPane.removeAll();
-        reld = null;
+        energyLabelData = null;
         this.setTitle("LabelPrint");
         enableMenuItems(false);
         FileDirty = false;
@@ -754,8 +720,10 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             return;
         }
 
-        reld = new EnergyLabelData();
-        reld.setType("Refrigerator"); // tk get from options
+        energyLabelData = new EnergyLabelData();
+        energyLabelData.setType(getSystemOptions().getProperty("ProductType"));
+        energyLabelData.setStandard(getSystemOptions().getProperty("Standard"));
+        energyLabelData.setValidity(getSystemOptions().getProperty("Validity"));
 
         labelDataDialog = new LabelDataPanel(this);
         labelPanel = new SVGLabelPanel(this);
@@ -768,7 +736,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         jTabbedPane.add("Label View", labelPanel);
 
         // Set new label title
-        this.setTitle("LabelPrint - " + reld.getLabelName());
+        this.setTitle("LabelPrint - " + energyLabelData.getLabelName());
         enableMenuItems(true);
         FileDirty = false;
 
@@ -820,7 +788,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public EnergyLabelData getEnergyLabelData() {
-        return reld;
+        return energyLabelData;
     }
 
     public boolean setupDatabaseConnection() {
@@ -865,7 +833,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         if (sysOptions.isConnectToDatabase()) {
             System.out.println("Reconnecting");
             if (!setupDatabaseConnection()) {
-                //sysOptions.setConnectToDatabase(false);
                 JOptionPane.showMessageDialog(this,
                         "A database connection error occurred.\n"
                         + "Check that the database options are valid",
@@ -873,15 +840,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                         JOptionPane.ERROR_MESSAGE);
 
             }
-        }
-        // Setup fonts mapper for pdf exports
-        if (!setupFontDefaultFontMapper()) {
-            JOptionPane.showMessageDialog(this,
-                    "A font initialization error occurred.\n"
-                    + "Consult your system administrator",
-                    "Font Initialization Error",
-                    JOptionPane.ERROR_MESSAGE);
-
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

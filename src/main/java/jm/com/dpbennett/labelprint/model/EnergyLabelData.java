@@ -438,6 +438,9 @@ public class EnergyLabelData implements Serializable {
      * @return the type
      */
     public String getType() {
+        if (type == null) {
+            type = "";
+        }
         return this.type;
     }
 
@@ -498,10 +501,10 @@ public class EnergyLabelData implements Serializable {
             return false;
         }
         EnergyLabelData other = (EnergyLabelData) object;
-        
-        return !(this.refrigeratorEnergyLabelDataId 
-                != other.refrigeratorEnergyLabelDataId 
-                && (this.refrigeratorEnergyLabelDataId == null 
+
+        return !(this.refrigeratorEnergyLabelDataId
+                != other.refrigeratorEnergyLabelDataId
+                && (this.refrigeratorEnergyLabelDataId == null
                 || !this.refrigeratorEnergyLabelDataId.equals(other.refrigeratorEnergyLabelDataId)));
     }
 
