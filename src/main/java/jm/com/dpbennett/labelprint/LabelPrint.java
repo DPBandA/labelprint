@@ -24,14 +24,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import jm.com.dpbennett.labelprint.ui.LabelPrintFrame;
 
-/**
- * Title:        Refrigerator Energy Label Print
- * Description:  Generates energy consumption labels for refrigerators tested by the Bureau of Standards (Jamaica).
- * Copyright:    Copyright (c) 2001
- * Company:      Bureau of Standards (Jamaica)
- * @author Desmond Bennett
- * @version 1.0
- */
 public class LabelPrint {
 
     boolean packFrame = false;

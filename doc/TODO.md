@@ -1,7 +1,9 @@
 
 # General
-- Look for all references to BSJ and Bureau and remove.
 - Remove standard number and other system options that are not used.
+  Update option dialog to get/set new notes/lines.
+  Impl the sytem option methods to get the note lines.
+  Update updateLabel() to update the new notes
 - Remove the setup of fonts from option dialog and elsewhere.
 - Add system option for "refrigerator" and may be "ac" label file.
 - Remove edit cancel button and data backup feature.

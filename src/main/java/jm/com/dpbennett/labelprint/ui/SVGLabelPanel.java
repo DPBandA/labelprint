@@ -113,12 +113,12 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                     // Operating cost
                     setElementText("operatingCost", "$" + labelPrintFrame.getEnergyLabelData().getOperatingCost());
                     // Energy notes
-                    setElementText("note1", labelPrintFrame.getSystemOptions().getNote1()
+                    setElementText("note1.1", labelPrintFrame.getSystemOptions().getNote1_1()
                             .replace("[AnnualConsumption]", 
                                     labelPrintFrame.getEnergyLabelData().getAnnualConsumption())
                             .replace("[CostPerKwh]", 
                                     labelPrintFrame.getEnergyLabelData().getCostPerKwh()));
-                    setElementText("note2", labelPrintFrame.getSystemOptions().getNote2());                    
+                    setElementText("note1.2", labelPrintFrame.getSystemOptions().getNote2());                    
                     // Validity
                     setElementText("validity", labelPrintFrame.getEnergyLabelData().getValidity());
                     // Standard

@@ -2,7 +2,7 @@
 LabelPrint - A general purpose energy label printing application 
 Copyright (C) 2018  D P Bennett & Associates Limited
 
-This program is free software: you can redistribute it and/or modify
+This program is free software: you can  redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
@@ -27,7 +27,6 @@ import java.io.FileInputStream;
 public class SystemOptions {
 
     private String systemFile;
-    //SystemData sd;
     private Properties props;
     private boolean noError;
     private String[][] fieldsToSearch = {
@@ -274,7 +273,7 @@ public class SystemOptions {
     }
 
     // Note properties
-    public String getNote1() {
+    public String getNote1_1() {
         return props.getProperty("Note1");
     }
 
