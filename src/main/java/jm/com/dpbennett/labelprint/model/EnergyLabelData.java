@@ -58,8 +58,6 @@ import javax.persistence.Table;
     ,
         @NamedQuery(name = "EnergyLabelData.findByDistributor", query = "SELECT r FROM EnergyLabelData r WHERE r.distributor = :distributor")
     ,
-        @NamedQuery(name = "EnergyLabelData.findById", query = "SELECT r FROM EnergyLabelData r WHERE r.id = :id")
-    ,
         @NamedQuery(name = "EnergyLabelData.findByJobNumber", query = "SELECT r FROM EnergyLabelData r WHERE r.jobNumber = :jobNumber")
     ,
         @NamedQuery(name = "EnergyLabelData.findByLabelName", query = "SELECT r FROM EnergyLabelData r WHERE r.labelName = :labelName")
@@ -104,8 +102,8 @@ public class EnergyLabelData implements Serializable {
     @Column(name = "DISTRIBUTOR")
     private String distributor = "";
 
-    @Column(name = "ID", nullable = false)
-    private long id;
+//    @Column(name = "ID", nullable = false)
+//    private Long id;
 
     @Column(name = "JOB_NUMBER")
     private String jobNumber = "";
@@ -145,18 +143,6 @@ public class EnergyLabelData implements Serializable {
      */
     public EnergyLabelData(BigInteger refrigeratorEnergyLabelDataId) {
         this.refrigeratorEnergyLabelDataId = refrigeratorEnergyLabelDataId;
-    }
-
-    /**
-     * Creates a new instance of EnergyLabelData with the specified values.
-     *
-     * @param refrigeratorEnergyLabelDataId the refrigeratorEnergyLabelDataId of
-     * the EnergyLabelData
-     * @param id the id of the EnergyLabelData
-     */
-    public EnergyLabelData(BigInteger refrigeratorEnergyLabelDataId, long id) {
-        this.refrigeratorEnergyLabelDataId = refrigeratorEnergyLabelDataId;
-        this.id = id;
     }
 
     /**
@@ -304,24 +290,6 @@ public class EnergyLabelData implements Serializable {
      */
     public void setDistributor(String distributor) {
         this.distributor = distributor;
-    }
-
-    /**
-     * Gets the id of this EnergyLabelData.
-     *
-     * @return the id
-     */
-    public long getId() {
-        return this.id;
-    }
-
-    /**
-     * Sets the id of this EnergyLabelData to the specified value.
-     *
-     * @param id the new id
-     */
-    public void setId(long id) {
-        this.id = id;
     }
 
     /**
@@ -517,6 +485,39 @@ public class EnergyLabelData implements Serializable {
     @Override
     public String toString() {
         return "jm.org.bsj.labelprint.model.EnergyLabelData[refrigeratorEnergyLabelDataId=" + refrigeratorEnergyLabelDataId + "]";
+    }
+    
+    private BigInteger doSave(EntityManager em) {
+
+        try {
+            if (refrigeratorEnergyLabelDataId != null) {
+                em.merge(this);
+            } else {
+                em.persist(this);
+            }
+
+            return refrigeratorEnergyLabelDataId;
+        } catch (Exception e) {
+            System.out.println(e);
+
+            return null;
+        }
+
+    }
+    
+     public Boolean save(EntityManager em) {
+        try {
+            em.getTransaction().begin();
+            doSave(em);
+            em.getTransaction().commit();
+
+            return true
+                    ;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
     }
 
     public static void main(String[] args) {

@@ -19,8 +19,8 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
-import com.lowagie.text.pdf.DefaultFontMapper;
 import java.awt.Cursor;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
@@ -48,15 +48,10 @@ import jm.com.dpbennett.labelprint.model.EnergyLabelData;
 public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     private SystemOptions sysOptions;
-    private boolean FileDirty;
+    private boolean isDirty;
     private EntityManagerFactory emf;
-    private EntityManager em;
-    private BigInteger currentLabelID;
     private EnergyLabelData energyLabelData;
-    private boolean chkGreenBackground;
-    private boolean chkYellowBackground;
-    private boolean chkContents = true;
-    private LabelDataPanel labelDataDialog;
+    private LabelDataPanel labelDataPanel;
     private SVGLabelPanel labelPanel;
 
     /**
@@ -67,13 +62,16 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/LabelPrintIcon.png")));
         sysOptions = new SystemOptions("LabelPrint.properties");
+        energyLabelData = new EnergyLabelData();
         enableMenuItems(false);
-
         // Centre frame
         setLocationRelativeTo(null);
         doSetup();
+        isDirty = false;
 
     }
+    
+    
 
     public SystemOptions getSystemOptions() {
         return sysOptions;
@@ -88,8 +86,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         // return empty list of frige data if the return list is null
         // possibly due to a database error
         try {
-            labelsFound = (List<EnergyLabelData>) em.createQuery(query).getResultList();
+            labelsFound = (List<EnergyLabelData>) getEntityManager().createQuery(query).getResultList();
         } catch (Exception e) {
+            System.out.println(e);
             JOptionPane.showMessageDialog(this,
                     "An error occured while searching for labels.\n"
                     + "This could occur because you do not have a database connection.\n"
@@ -107,18 +106,17 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         ssd.setVisible(true);
     }
 
-    public EnergyLabelData getLabel(BigInteger id) {
-        EnergyLabelData labelData = em.find(EnergyLabelData.class, id);
-        currentLabelID = labelData.getEnergyLabelDataId();
+    public EnergyLabelData findLabel(BigInteger id) {
+        energyLabelData = getEntityManager().find(EnergyLabelData.class, id);
 
-        return labelData;
+        return energyLabelData;
     }
 
     public boolean isLabelNameUsed(String labelName) {
         try {
 
             EnergyLabelData labelData
-                    = (EnergyLabelData) em.createNamedQuery("EnergyLabelData.findByLabelName").setParameter("labelName", labelName).getSingleResult();
+                    = (EnergyLabelData) getEntityManager().createNamedQuery("EnergyLabelData.findByLabelName").setParameter("labelName", labelName).getSingleResult();
             if (labelData != null) {
                 return true;
             } else {
@@ -132,18 +130,17 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     }
 
-    public void setFileDirty(boolean flag) {
-        //labelDataDialog.getLabelData();        
-        FileDirty = flag;
-        if (FileDirty == true) {
+    public void setDirty(boolean flag) {
+        isDirty = flag;
+        if (isDirty == true) {
             this.setTitle("LabelPrint - " + energyLabelData.getLabelName() + " - MODIFIED");
         } else {
             this.setTitle("LabelPrint - " + energyLabelData.getLabelName());
         }
     }
 
-    public boolean isFileDirty() {
-        return FileDirty;
+    public boolean isDirty() {
+        return isDirty;
     }
 
     // print label
@@ -251,7 +248,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         OpenLabel.setToolTipText("Open label");
         OpenLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OpenLabelActionPerformed(evt);
+                openLabelActionPerformed(evt);
             }
         });
         jToolBar.add(OpenLabel);
@@ -433,8 +430,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpAboutActionPerformed
         JOptionPane.showMessageDialog(this,
                 new CustomEditorPane("LabelPrint, Version 3.0<br>"
-                + "&copy; 2018 D P Bennett & Associates<br>"
-                + "Website: <a href=\"http://dpbennett.com.jm\">http://dpbennett.com.jm</a>"),
+                        + "&copy; 2018 D P Bennett & Associates<br>"
+                        + "Website: <a href=\"http://dpbennett.com.jm\">http://dpbennett.com.jm</a>"),
                 "About",
                 JOptionPane.INFORMATION_MESSAGE);
 //        JOptionPane.showMessageDialog(null, new CustomEditorPane("Here is a link on <a href=\"http://www.google.com\">http://www.google.com</a>"));
@@ -457,22 +454,20 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuEditOptionsActionPerformed
 
     private void jCheckBoxMenuViewContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewContentActionPerformed
-        chkContents = jCheckBoxMenuViewContent.isSelected();
-        labelPanel.showContents(chkContents);
+        labelPanel.showContents(jCheckBoxMenuViewContent.isSelected());
         jTabbedPane.setSelectedIndex(1);
         labelPanel.repaint();
     }//GEN-LAST:event_jCheckBoxMenuViewContentActionPerformed
 
     private void jCheckBoxMenuViewGreenBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
-        chkGreenBackground = jCheckBoxMenuViewGreenBackground.isSelected();
-        labelPanel.showGreenBackground(chkGreenBackground);
+        labelPanel.showGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
         jTabbedPane.setSelectedIndex(1);
         labelPanel.repaint();
     }//GEN-LAST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
 
-    private void OpenLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenLabelActionPerformed
+    private void openLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openLabelActionPerformed
         openLabel();
-    }//GEN-LAST:event_OpenLabelActionPerformed
+    }//GEN-LAST:event_openLabelActionPerformed
 
     private void jMenuFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileOpenActionPerformed
         openLabel();
@@ -533,6 +528,14 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         return labelPanel;
     }
 
+    public LabelDataPanel getLabelDataPanel() {
+        if (labelDataPanel == null) {
+            labelDataPanel = new LabelDataPanel(this);
+        }
+        return labelDataPanel;
+    }
+
+
     private void SaveLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLabelActionPerformed
         saveLabel();
     }//GEN-LAST:event_SaveLabelActionPerformed
@@ -546,17 +549,16 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             OpenLabelDialog oldlg = new OpenLabelDialog(this, true);
             oldlg.setVisible(true);
             if (oldlg.proceedToOpenLabel()) {
-                energyLabelData = getLabel(currentLabelID);
-
-                labelDataDialog = new LabelDataPanel(this);
+                
+                // tk change the proceeding code to get the existing 
+                // panels and update the data instead of creating new panels 
+                // everytime a label is opened
+                labelDataPanel = new LabelDataPanel(this);
                 labelPanel = new SVGLabelPanel(this);
-                labelPanel.showContents(chkContents);
-                labelPanel.showGreenBackground(chkGreenBackground);
-                labelPanel.showYellowBackground(chkYellowBackground);
 
                 // Remove all existing tabs and
                 jTabbedPane.removeAll();
-                jTabbedPane.add("Label Data", labelDataDialog);
+                jTabbedPane.add("Label Data", labelDataPanel);
                 //jTabbedPane.add("Label Data", labelDataScrollPane);
                 jTabbedPane.add("Label View", labelPanel);
                 jTabbedPane.setSelectedIndex(1);
@@ -564,7 +566,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                 // Set new label title
                 this.setTitle("LabelPrint - " + energyLabelData.getLabelName());
                 enableMenuItems(true);
-                FileDirty = false;
+                isDirty = false;
             }
         } else {
             JOptionPane.showMessageDialog(this,
@@ -594,90 +596,98 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     private void saveLabel() {
-        if (sysOptions.isConnectToDatabase()) {
-            try {
-                if (emf != null) {
-                    em.getTransaction().begin();
 
-                    if (energyLabelData.getEnergyLabelDataId() == null) {
-                        System.out.println("Saving label");
-                        em.persist(energyLabelData);
-                        em.getTransaction().commit();
-                        // Retrieve saved label for future updates. NB: May not be
-                        //  necessary
-                        energyLabelData = getStoredLabel(energyLabelData.getLabelName());
-                    } else {
-                        // Get label from dbase then save
-                        // Retrieve saved label and update
-                        energyLabelData = getLabel(energyLabelData.getEnergyLabelDataId());
-                        System.out.println("Updating label");
-                        labelDataDialog.getLabelData();
-                        em.merge(energyLabelData);
-                        em.getTransaction().commit();
-                    }
-
-                    setFileDirty(false);
-
-                } else {
-                    JOptionPane.showMessageDialog(this,
-                            "You do not have a database connection.\n"
-                            + "Consult your database administrator",
-                            "Database Connection Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (Exception e) {
+        try {
+            if (!getEnergyLabelData().save(getEntityManager())) {
                 JOptionPane.showMessageDialog(this,
                         "An error occured while saving the current label.\n"
                         + "This could occur because you do not have a database connection.\n"
                         + "Try to connect to a database in the options dialog and try again.",
                         "Search Error",
                         JOptionPane.ERROR_MESSAGE);
-                System.out.println(e);
-            }
-        } else {
-            // offer option to save as pdf if database connection option not set
-            int choice = JOptionPane.showConfirmDialog(this,
-                    "You cannot save to the labels database at this time\n"
-                    + "because you do not have a database connection.\n"
-                    + "Do you want to save the label as a PDF file instead?",
-                    "Save as PDF file",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (choice == JOptionPane.YES_OPTION) {
-//                saveLabelAsPDFFile();
             }
 
+            setDirty(false);
+        } catch (HeadlessException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this,
+                    "An error occured while saving the current label.\n"
+                    + "This could occur because you do not have a database connection.\n"
+                    + "Try to connect to a database in the options dialog and try again.",
+                    "Search Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
+
+//        if (sysOptions.isConnectToDatabase()) {
+//            try {
+//                if (emf != null) {
+//                    getEntityManager().getTransaction().begin();
+//
+//                    if (getEnergyLabelData().getEnergyLabelDataId() == null) {
+//                        System.out.println("Saving label");
+//                        em.persist(energyLabelData);
+//                        em.getTransaction().commit();
+//                        // Retrieve saved label for future updates. NB: May not be
+//                        //  necessary
+//                        energyLabelData = getStoredLabel(energyLabelData.getLabelName());
+//                    } else {
+//                        // Get label from dbase then save
+//                        // Retrieve saved label and update
+//                        energyLabelData = findLabel(energyLabelData.getEnergyLabelDataId());
+//                        System.out.println("Updating label");
+//                        labelDataPanel.getLabelData();
+//                        em.merge(energyLabelData);
+//                        em.getTransaction().commit();
+//                    }
+//
+//                    setFileDirty(false);
+//
+//                } else {
+//                    JOptionPane.showMessageDialog(this,
+//                            "You do not have a database connection.\n"
+//                            + "Consult your database administrator",
+//                            "Database Connection Error",
+//                            JOptionPane.ERROR_MESSAGE);
+//                }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(this,
+//                        "An error occured while saving the current label.\n"
+//                        + "This could occur because you do not have a database connection.\n"
+//                        + "Try to connect to a database in the options dialog and try again.",
+//                        "Search Error",
+//                        JOptionPane.ERROR_MESSAGE);
+//                System.out.println(e);
+//            }
+//        } else {
+//            // offer option to save as pdf if database connection option not set
+//            int choice = JOptionPane.showConfirmDialog(this,
+//                    "You cannot save to the labels database at this time\n"
+//                    + "because you do not have a database connection.\n"
+//                    + "Do you want to save the label as a PDF file instead?",
+//                    "Save as PDF file",
+//                    JOptionPane.YES_NO_OPTION);
+//
+//            if (choice == JOptionPane.YES_OPTION) {
+////                saveLabelAsPDFFile();
+//            }
+//
+//        }
     }
+
     private void jMenuFileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileSaveActionPerformed
         saveLabel();
     }//GEN-LAST:event_jMenuFileSaveActionPerformed
 
-    private EnergyLabelData getStoredLabel(String labelName) {
-        return (EnergyLabelData) em.createNamedQuery("EnergyLabelData.findByLabelName").setParameter("labelName", labelName).getSingleResult();
-    }
-
-    private void doExit() {
-        if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
-            return;
-        }
-
-        try {
-            if ((emf != null) && (emf.isOpen())) {
-                em.close();
-                emf.close();
-                System.exit(0);
-            } else {
-                System.exit(0);
-            }
-        } catch (Exception e) {
-            System.out.println("doExit() error occured");
+    private void exit() {
+                     
+        if (saveFileIfDirty() != JOptionPane.CANCEL_OPTION) {
             System.exit(0);
         }
+       
     }
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
-        doExit();
+        exit();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuFileCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileCloseActionPerformed
@@ -690,13 +700,13 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         energyLabelData = null;
         this.setTitle("LabelPrint");
         enableMenuItems(false);
-        FileDirty = false;
+        isDirty = false;
     }//GEN-LAST:event_jMenuFileCloseActionPerformed
 
     private int saveFileIfDirty() {
-        int choice = 0;
+        int choice = JOptionPane.YES_OPTION;
 
-        if (FileDirty) {
+        if (isDirty) {
             choice = JOptionPane.showConfirmDialog(this,
                     "Label has been changed. Do you want to save it?",
                     "Save",
@@ -704,8 +714,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
             if (choice == JOptionPane.YES_OPTION) {
                 saveLabel();
-
             }
+            
             if (choice == JOptionPane.CANCEL_OPTION) {
                 return choice;
             }
@@ -725,20 +735,19 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         energyLabelData.setStandard(getSystemOptions().getProperty("Standard"));
         energyLabelData.setValidity(getSystemOptions().getProperty("Validity"));
 
-        labelDataDialog = new LabelDataPanel(this);
+        // tk update panels...do not create new ones
+        labelDataPanel = new LabelDataPanel(this);
         labelPanel = new SVGLabelPanel(this);
-        labelPanel.showContents(chkContents);
-        labelPanel.showGreenBackground(chkGreenBackground);
 
         // Remove all existing tabs and
         jTabbedPane.removeAll();
-        jTabbedPane.add("Label Data", labelDataDialog);
+        jTabbedPane.add("Label Data", labelDataPanel);
         jTabbedPane.add("Label View", labelPanel);
 
         // Set new label title
         this.setTitle("LabelPrint - " + energyLabelData.getLabelName());
         enableMenuItems(true);
-        FileDirty = false;
+        isDirty = false;
 
     }
 
@@ -747,9 +756,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuFileNewActionPerformed
 
     private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
-        if (jTabbedPane.getSelectedIndex() == 0) {
-            labelDataDialog.copyRefrigeratorData(); // tk remove this method and data backup feature            
-        }
+
         if (jTabbedPane.getSelectedIndex() == 1) {
             labelPanel.updateLabel();
         }
@@ -757,12 +764,11 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        doExit();
+        exit();
     }//GEN-LAST:event_formWindowClosing
 
     private void jCheckBoxMenuViewYellowBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
-        chkYellowBackground = jCheckBoxMenuViewYellowBackground.isSelected();
-        labelPanel.showYellowBackground(chkYellowBackground);
+        labelPanel.showYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
         jTabbedPane.setSelectedIndex(1);
         labelPanel.repaint();
     }//GEN-LAST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
@@ -777,6 +783,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new LabelPrintFrame().setVisible(true);
             }
@@ -784,7 +791,13 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public EntityManager getEntityManager() {
-        return em;
+        if (emf != null) {
+            return emf.createEntityManager();
+        } else if (setupDatabaseConnection()) {
+            return emf.createEntityManager();
+        } else {
+            return null;
+        }
     }
 
     public EnergyLabelData getEnergyLabelData() {
@@ -792,20 +805,15 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public boolean setupDatabaseConnection() {
-        // Close any existing connections
-        if (emf != null) {
-            if (em != null) {
-                if (em.isOpen()) {
-                    em.close();
-                }
-                em = null;
-            }
-            emf.close();
-            emf = null;
-        }
 
         try {
             HashMap prop = new HashMap();
+
+            // Close any existing connection if any
+            if (emf != null) {
+                emf.close();
+                emf = null;
+            }
 
             prop.put("javax.persistence.jdbc.user",
                     sysOptions.getProperty("ConnectionUserName"));
@@ -817,7 +825,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     sysOptions.getProperty("ConnectionDriverName"));
 
             emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);
-            em = emf.createEntityManager();
 
             return true;
 

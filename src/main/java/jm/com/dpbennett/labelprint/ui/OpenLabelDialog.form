@@ -311,6 +311,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jManufacturerTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
@@ -330,10 +331,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jDistributorTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
@@ -350,10 +351,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jCountryOfOriginTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
@@ -370,10 +371,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jBrandTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
@@ -390,10 +391,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jModelTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
@@ -410,10 +411,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jDefrostTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
@@ -430,10 +431,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jCapacityTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
@@ -450,10 +451,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jOperatingCostTextField">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d8" green="e9" id="Control" palette="2" red="ec" type="palette"/>
             </Property>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="0"/>
             </Property>

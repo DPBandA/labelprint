@@ -325,22 +325,22 @@
         <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jStandardNoCaretUpdate"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jOk">
+    <Component class="javax.swing.JButton" name="jViewLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ok"/>
-        <Property name="toolTipText" type="java.lang.String" value="Accept label data changes and view label"/>
+        <Property name="text" type="java.lang.String" value="View"/>
+        <Property name="toolTipText" type="java.lang.String" value="View label with current data"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jOkActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jViewLabelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jCancel">
+    <Component class="javax.swing.JButton" name="jSaveLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancel"/>
-        <Property name="toolTipText" type="java.lang.String" value="Cancel label edit"/>
+        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="toolTipText" type="java.lang.String" value="Save the label data"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCancelActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSaveLabelActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

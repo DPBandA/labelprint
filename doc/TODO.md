@@ -1,5 +1,7 @@
 
 # General
+- Impl updating label panels when opened or new one is created instead of
+  creating new panels each time.
 - Remove edit cancel button and data backup feature.
   On Label Data tab change buttons to "View" and "Save"
   On Label View tab change buttons to "Edit" and "Save"
@@ -22,3 +24,4 @@
 - Create and use enerbase as the default database.
 - Impl testing database connection in options dialog.
 - Impl hide/show label background colors and content.
+- Use enerbase as the default database and not test.

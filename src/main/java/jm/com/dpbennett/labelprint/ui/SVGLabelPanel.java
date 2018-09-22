@@ -24,7 +24,6 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.net.URL;
-import jm.com.dpbennett.labelprint.SystemOptions;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
@@ -41,7 +40,7 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
 
     private boolean chkGreenBackground;
     private boolean chkYellowBackground;
-    private boolean chkContents = true;
+    private boolean chkContents;
     private LabelPrintFrame labelPrintFrame;
     private int m_maxNumPage = 1;
     private JSVGCanvas svgCanvas;
@@ -80,6 +79,10 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                 updateLabel();
             }
         });
+        
+        chkGreenBackground = false;
+        chkYellowBackground = false;
+        chkContents = true;
 
         add("Center", svgCanvas);
     }
@@ -115,12 +118,12 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                     // Energy note
                     setElementText("note1.1", labelPrintFrame
                             .getSystemOptions().getProperty("Note1_1")
-                            .replace("[AnnualConsumption]", 
+                            .replace("[AnnualConsumption]",
                                     labelPrintFrame.getEnergyLabelData().getAnnualConsumption())
-                            .replace("[CostPerKwh]", 
+                            .replace("[CostPerKwh]",
                                     labelPrintFrame.getEnergyLabelData().getCostPerKwh()));
                     setElementText("note1.2", labelPrintFrame.
-                            getSystemOptions().getProperty("Note1_2"));                    
+                            getSystemOptions().getProperty("Note1_2"));
                     // Validity
                     setElementText("validity", labelPrintFrame.getEnergyLabelData().getValidity());
                     // Standard note
@@ -128,7 +131,7 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                             .getSystemOptions().getProperty("Note2_1"));
                     setElementText("note2.2", labelPrintFrame
                             .getSystemOptions().getProperty("Note2_2")
-                            .replace("[Standard]", 
+                            .replace("[Standard]",
                                     labelPrintFrame.getEnergyLabelData().getStandard()));
                     // Violation note
                     setElementText("note3.1", labelPrintFrame
@@ -177,8 +180,8 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
     private void initComponents() {
 
         jButtonPanel = new javax.swing.JPanel();
-        jSaveButton = new javax.swing.JButton();
-        jExportButton = new javax.swing.JButton();
+        jEditLabelData = new javax.swing.JButton();
+        jSaveLabelData = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(550, 500));
@@ -187,42 +190,43 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
 
         jButtonPanel.setLayout(new java.awt.GridLayout(1, 2, 2, 5));
 
-        jSaveButton.setText("Save");
-        jSaveButton.setActionCommand("Save");
-        jSaveButton.addActionListener(new java.awt.event.ActionListener() {
+        jEditLabelData.setText("Edit");
+        jEditLabelData.setToolTipText("Edit the label data");
+        jEditLabelData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSaveButtonActionPerformed(evt);
+                jEditLabelDataActionPerformed(evt);
             }
         });
-        jButtonPanel.add(jSaveButton);
+        jButtonPanel.add(jEditLabelData);
 
-        jExportButton.setText("Export");
-        jExportButton.addActionListener(new java.awt.event.ActionListener() {
+        jSaveLabelData.setText("Save");
+        jSaveLabelData.setToolTipText("Save the label data");
+        jSaveLabelData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jExportButtonActionPerformed(evt);
+                jSaveLabelDataActionPerformed(evt);
             }
         });
-        jButtonPanel.add(jExportButton);
+        jButtonPanel.add(jSaveLabelData);
 
         add(jButtonPanel, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveButtonActionPerformed
+    private void jEditLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditLabelDataActionPerformed
         // tk use to test setting label data
         System.out.println("Impl saving label from SVG Label Panel");
         updateLabel();
 
 
-    }//GEN-LAST:event_jSaveButtonActionPerformed
+    }//GEN-LAST:event_jEditLabelDataActionPerformed
 
-    private void jExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExportButtonActionPerformed
+    private void jSaveLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelDataActionPerformed
         System.out.println("Impl exporting label from SVG Label Panel");
-    }//GEN-LAST:event_jExportButtonActionPerformed
+    }//GEN-LAST:event_jSaveLabelDataActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jButtonPanel;
-    private javax.swing.JButton jExportButton;
-    private javax.swing.JButton jSaveButton;
+    private javax.swing.JButton jEditLabelData;
+    private javax.swing.JButton jSaveLabelData;
     // End of variables declaration//GEN-END:variables
 
     @Override

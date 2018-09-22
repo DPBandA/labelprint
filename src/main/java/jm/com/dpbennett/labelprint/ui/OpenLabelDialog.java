@@ -38,7 +38,6 @@ public class OpenLabelDialog extends java.awt.Dialog {
     private int numberOfLabelsFound;
     private boolean bLoadLabel;
     private Vector labels, labelIDs;
-    private String[] mostRecentSearchStrings;
     private String searchString;
     private String defaultFieldToSearch;
     private String defaultFieldToDisplay;
@@ -240,6 +239,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel4.setText("Manufacturer:");
         jPanel3.add(jLabel4);
 
+        jManufacturerTextField.setEditable(false);
         jManufacturerTextField.setBackground(java.awt.SystemColor.control);
         jManufacturerTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jManufacturerTextField);
@@ -249,8 +249,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel5.setText("Distributor:");
         jPanel3.add(jLabel5);
 
-        jDistributorTextField.setBackground(java.awt.SystemColor.control);
         jDistributorTextField.setEditable(false);
+        jDistributorTextField.setBackground(java.awt.SystemColor.control);
         jDistributorTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jDistributorTextField);
 
@@ -259,8 +259,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel6.setText("Country:");
         jPanel3.add(jLabel6);
 
-        jCountryOfOriginTextField.setBackground(java.awt.SystemColor.control);
         jCountryOfOriginTextField.setEditable(false);
+        jCountryOfOriginTextField.setBackground(java.awt.SystemColor.control);
         jCountryOfOriginTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jCountryOfOriginTextField);
 
@@ -269,8 +269,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel7.setText("Brand:");
         jPanel3.add(jLabel7);
 
-        jBrandTextField.setBackground(java.awt.SystemColor.control);
         jBrandTextField.setEditable(false);
+        jBrandTextField.setBackground(java.awt.SystemColor.control);
         jBrandTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jBrandTextField);
 
@@ -279,8 +279,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel8.setText("Model:");
         jPanel3.add(jLabel8);
 
-        jModelTextField.setBackground(java.awt.SystemColor.control);
         jModelTextField.setEditable(false);
+        jModelTextField.setBackground(java.awt.SystemColor.control);
         jModelTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jModelTextField);
 
@@ -289,8 +289,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel9.setText("Defrost:");
         jPanel3.add(jLabel9);
 
-        jDefrostTextField.setBackground(java.awt.SystemColor.control);
         jDefrostTextField.setEditable(false);
+        jDefrostTextField.setBackground(java.awt.SystemColor.control);
         jDefrostTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jDefrostTextField);
 
@@ -299,8 +299,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel10.setText("Cap. (cu. m):");
         jPanel3.add(jLabel10);
 
-        jCapacityTextField.setBackground(java.awt.SystemColor.control);
         jCapacityTextField.setEditable(false);
+        jCapacityTextField.setBackground(java.awt.SystemColor.control);
         jCapacityTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jCapacityTextField);
 
@@ -309,8 +309,8 @@ public class OpenLabelDialog extends java.awt.Dialog {
         jLabel11.setText("Oper. cost ($/yr):");
         jPanel3.add(jLabel11);
 
-        jOperatingCostTextField.setBackground(java.awt.SystemColor.control);
         jOperatingCostTextField.setEditable(false);
+        jOperatingCostTextField.setBackground(java.awt.SystemColor.control);
         jOperatingCostTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(jOperatingCostTextField);
 
@@ -419,13 +419,12 @@ public class OpenLabelDialog extends java.awt.Dialog {
     }
     
     private void LabelsFoundListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LabelsFoundListValueChanged
-        //System.out.println((Long)labelIDs.get(LabelsFoundList.getSelectedIndex()));
         int selectedLabelIndex = LabelsFoundList.getSelectedIndex();
         
         if (selectedLabelIndex != -1) {
             BigInteger index = (BigInteger)labelIDs.get(selectedLabelIndex);
             
-            EnergyLabelData reld = labelPrintFrame.getLabel(index);
+            EnergyLabelData reld = labelPrintFrame.findLabel(index);
             // Display label record
             jManufacturerTextField.setText(reld.getManufacturer());
             jDistributorTextField.setText(reld.getDistributor());
@@ -445,8 +444,6 @@ public class OpenLabelDialog extends java.awt.Dialog {
     }//GEN-LAST:event_jHelpButtonActionPerformed
     
     private void jSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchButtonActionPerformed
-        
-        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
         
         // Clear list by setting empty vector as list data
         LabelsFoundList.setListData(new Vector());
@@ -574,6 +571,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new OpenLabelDialog(new java.awt.Frame(), true).setVisible(true);
             }
