@@ -94,9 +94,9 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                 @Override
                 public void run() {
                     // Type
-                    setElementText("type", labelPrintFrame.getEnergyLabelData().getType());
+                    setElementText("type", labelPrintFrame.getEnergyLabel().getType());
                     // Capacity tk impl capacity unit instead of hard code
-                    setElementText("capacity", labelPrintFrame.getEnergyLabelData().getCapacity() + "m");
+                    setElementText("capacity", labelPrintFrame.getEnergyLabel().getCapacity() + "m");
                     // Set location of the capacity unit power based on width of capacity
                     Element svgElement = svgDocument.getElementById("capacity");
                     SVGLocatable locatable = (SVGLocatable) svgElement;
@@ -104,35 +104,35 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                     Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
                     unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                     // Defrost
-                    setElementText("defrost", labelPrintFrame.getEnergyLabelData().getDefrost());
+                    setElementText("defrost", labelPrintFrame.getEnergyLabel().getDefrost());
                     // Distributor
-                    setElementText("distributor", labelPrintFrame.getEnergyLabelData().getDistributor());
+                    setElementText("distributor", labelPrintFrame.getEnergyLabel().getDistributor());
                     // Manufacturer
-                    setElementText("manufacturer", labelPrintFrame.getEnergyLabelData().getManufacturer());
+                    setElementText("manufacturer", labelPrintFrame.getEnergyLabel().getManufacturer());
                     // Model
-                    setElementText("model", labelPrintFrame.getEnergyLabelData().getModel());
+                    setElementText("model", labelPrintFrame.getEnergyLabel().getModel());
                     // Country
-                    setElementText("country", labelPrintFrame.getEnergyLabelData().getCountry());
+                    setElementText("country", labelPrintFrame.getEnergyLabel().getCountry());
                     // Operating cost
-                    setElementText("operatingCost", "$" + labelPrintFrame.getEnergyLabelData().getOperatingCost());
+                    setElementText("operatingCost", "$" + labelPrintFrame.getEnergyLabel().getOperatingCost());
                     // Energy note
                     setElementText("note1.1", labelPrintFrame
                             .getSystemOptions().getProperty("Note1_1")
                             .replace("[AnnualConsumption]",
-                                    labelPrintFrame.getEnergyLabelData().getAnnualConsumption())
+                                    labelPrintFrame.getEnergyLabel().getAnnualConsumption())
                             .replace("[CostPerKwh]",
-                                    labelPrintFrame.getEnergyLabelData().getCostPerKwh()));
+                                    labelPrintFrame.getEnergyLabel().getCostPerKwh()));
                     setElementText("note1.2", labelPrintFrame.
                             getSystemOptions().getProperty("Note1_2"));
                     // Validity
-                    setElementText("validity", labelPrintFrame.getEnergyLabelData().getValidity());
+                    setElementText("validity", labelPrintFrame.getEnergyLabel().getValidity());
                     // Standard note
                     setElementText("note2.1", labelPrintFrame
                             .getSystemOptions().getProperty("Note2_1"));
                     setElementText("note2.2", labelPrintFrame
                             .getSystemOptions().getProperty("Note2_2")
                             .replace("[Standard]",
-                                    labelPrintFrame.getEnergyLabelData().getStandard()));
+                                    labelPrintFrame.getEnergyLabel().getStandard()));
                     // Violation note
                     setElementText("note3.1", labelPrintFrame
                             .getSystemOptions().getProperty("Note3_1"));

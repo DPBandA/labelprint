@@ -12,16 +12,16 @@
   to this directory.
 - Edit LabelPrintIcon.png to create a different image. Try a using letter e
   in green on a yellow background.
-- Learn izpack installer (http://izpack.org/) and setup installer on Win 7
 - Using the save toolbar button results in the label data apparently getting 
   blanked. This happens when the labels opened then saved immediately. Fix!!
 - Impl exporting to image with Batik Transcoder API.
 - Do not set label data as dirty until the data is actually edited.
 - Use text to create header instead of importing an image.
 - Make label data scrollable
-- Add capacityUnit to field and use it to append to the capacity instead of 
+- Add capacityLabel, capacityUnit to field and use it to append to the capacity instead of 
   using if statements.
 - Create and use enerbase as the default database.
 - Impl testing database connection in options dialog.
 - Impl hide/show label background colors and content.
 - Use enerbase as the default database and not test.
+- Learn izpack installer (http://izpack.org/) and setup installer on Win 7

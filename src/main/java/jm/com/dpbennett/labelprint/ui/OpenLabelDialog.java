@@ -20,14 +20,13 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 import java.awt.Point;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import jm.com.dpbennett.labelprint.SystemOptions;
-import jm.com.dpbennett.labelprint.model.EnergyLabelData;
+import jm.com.dpbennett.business.entity.EnergyLabel;
 
 /**
  *
@@ -422,9 +421,9 @@ public class OpenLabelDialog extends java.awt.Dialog {
         int selectedLabelIndex = LabelsFoundList.getSelectedIndex();
         
         if (selectedLabelIndex != -1) {
-            BigInteger index = (BigInteger)labelIDs.get(selectedLabelIndex);
+            Long index = (Long)labelIDs.get(selectedLabelIndex);
             
-            EnergyLabelData reld = labelPrintFrame.findLabel(index);
+            EnergyLabel reld = labelPrintFrame.findLabel(index);
             // Display label record
             jManufacturerTextField.setText(reld.getManufacturer());
             jDistributorTextField.setText(reld.getDistributor());
@@ -479,14 +478,14 @@ public class OpenLabelDialog extends java.awt.Dialog {
         labels = new Vector();
         numberOfLabelsFound = 0;
         
-        List<EnergyLabelData> labelsFound = labelPrintFrame.findLabels(searchField, searchPattern);
+        List<EnergyLabel> labelsFound = labelPrintFrame.findLabels(searchField, searchPattern);
         
         if (labelsFound != null) {
-            ListIterator<EnergyLabelData> iter = labelsFound.listIterator();
+            ListIterator<EnergyLabel> iter = labelsFound.listIterator();
             while (iter.hasNext()) {
-                EnergyLabelData reld = iter.next();
+                EnergyLabel reld = iter.next();
                 displayFieldValue = getFieldValueToDisplay(reld, displayField);
-                labelIDs.add(reld.getEnergyLabelDataId());
+                labelIDs.add(reld.getId());
                 labels.add(displayFieldValue);
                 ++numberOfLabelsFound;
                 
@@ -499,7 +498,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
         }
     }
     
-    public String getFieldValueToDisplay(EnergyLabelData reld, String displayField) {
+    public String getFieldValueToDisplay(EnergyLabel reld, String displayField) {
         if (displayField.equals("brand"))
             return reld.getBrand();
         

@@ -52,21 +52,21 @@ public class LabelDataPanel extends javax.swing.JPanel {
      */
     public void getLabelData() {
 
-        labelPrintFrame.getEnergyLabelData().setDistributor(jDistributor.getText());
-        labelPrintFrame.getEnergyLabelData().setDefrost(jDefrost.getText());
-        labelPrintFrame.getEnergyLabelData().setCostPerKwh(jElectricityRate.getText());
-        labelPrintFrame.getEnergyLabelData().setBrand(jBrand.getText());
-        labelPrintFrame.getEnergyLabelData().setModel(jModelNo.getText());
-        labelPrintFrame.getEnergyLabelData().setValidity(jValidity.getText());
-        labelPrintFrame.getEnergyLabelData().setCapacity(jCapacity.getText());
-        labelPrintFrame.getEnergyLabelData().setStandard(jStandardNo.getText());
-        labelPrintFrame.getEnergyLabelData().setOperatingCost(jOperatingCost.getText());
-        labelPrintFrame.getEnergyLabelData().setManufacturer(jManufacturer.getText());
-        labelPrintFrame.getEnergyLabelData().setCountry(jCountryOfOrigin.getText());
-        labelPrintFrame.getEnergyLabelData().setAnnualConsumption(jAnnualConsumption.getText());
-        labelPrintFrame.getEnergyLabelData().setType(jProductType.getSelectedItem().toString());
-        labelPrintFrame.getEnergyLabelData().setJobNumber(jJobNumber.getText());
-        labelPrintFrame.getEnergyLabelData().setLabelName(jLabelName.getText());
+        labelPrintFrame.getEnergyLabel().setDistributor(jDistributor.getText());
+        labelPrintFrame.getEnergyLabel().setDefrost(jDefrost.getText());
+        labelPrintFrame.getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
+        labelPrintFrame.getEnergyLabel().setBrand(jBrand.getText());
+        labelPrintFrame.getEnergyLabel().setModel(jModelNo.getText());
+        labelPrintFrame.getEnergyLabel().setValidity(jValidity.getText());
+        labelPrintFrame.getEnergyLabel().setCapacity(jCapacity.getText());
+        labelPrintFrame.getEnergyLabel().setStandard(jStandardNo.getText());
+        labelPrintFrame.getEnergyLabel().setOperatingCost(jOperatingCost.getText());
+        labelPrintFrame.getEnergyLabel().setManufacturer(jManufacturer.getText());
+        labelPrintFrame.getEnergyLabel().setCountry(jCountryOfOrigin.getText());
+        labelPrintFrame.getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
+        labelPrintFrame.getEnergyLabel().setType(jProductType.getSelectedItem().toString());
+        labelPrintFrame.getEnergyLabel().setJobNumber(jJobNumber.getText());
+        labelPrintFrame.getEnergyLabel().setLabelName(jLabelName.getText());
 
     }
 
@@ -78,21 +78,21 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void loadLabelData() {
         isLoading = true;
-        jDistributor.setText(labelPrintFrame.getEnergyLabelData().getDistributor());
-        jDefrost.setText(labelPrintFrame.getEnergyLabelData().getDefrost());
-        jElectricityRate.setText(labelPrintFrame.getEnergyLabelData().getCostPerKwh());
-        jBrand.setText(labelPrintFrame.getEnergyLabelData().getBrand());
-        jModelNo.setText(labelPrintFrame.getEnergyLabelData().getModel());
-        jValidity.setText(labelPrintFrame.getEnergyLabelData().getValidity());
-        jCapacity.setText(labelPrintFrame.getEnergyLabelData().getCapacity());
-        jStandardNo.setText(labelPrintFrame.getEnergyLabelData().getStandard());
-        jOperatingCost.setText(labelPrintFrame.getEnergyLabelData().getOperatingCost());
-        jManufacturer.setText(labelPrintFrame.getEnergyLabelData().getManufacturer());
-        jCountryOfOrigin.setText(labelPrintFrame.getEnergyLabelData().getCountry());
-        jAnnualConsumption.setText(labelPrintFrame.getEnergyLabelData().getAnnualConsumption());
-        jProductType.setSelectedItem(labelPrintFrame.getEnergyLabelData().getType());
-        jJobNumber.setText(labelPrintFrame.getEnergyLabelData().getJobNumber());
-        jLabelName.setText(labelPrintFrame.getEnergyLabelData().getLabelName());
+        jDistributor.setText(labelPrintFrame.getEnergyLabel().getDistributor());
+        jDefrost.setText(labelPrintFrame.getEnergyLabel().getDefrost());
+        jElectricityRate.setText(labelPrintFrame.getEnergyLabel().getCostPerKwh());
+        jBrand.setText(labelPrintFrame.getEnergyLabel().getBrand());
+        jModelNo.setText(labelPrintFrame.getEnergyLabel().getModel());
+        jValidity.setText(labelPrintFrame.getEnergyLabel().getValidity());
+        jCapacity.setText(labelPrintFrame.getEnergyLabel().getCapacity());
+        jStandardNo.setText(labelPrintFrame.getEnergyLabel().getStandard());
+        jOperatingCost.setText(labelPrintFrame.getEnergyLabel().getOperatingCost());
+        jManufacturer.setText(labelPrintFrame.getEnergyLabel().getManufacturer());
+        jCountryOfOrigin.setText(labelPrintFrame.getEnergyLabel().getCountry());
+        jAnnualConsumption.setText(labelPrintFrame.getEnergyLabel().getAnnualConsumption());
+        jProductType.setSelectedItem(labelPrintFrame.getEnergyLabel().getType());
+        jJobNumber.setText(labelPrintFrame.getEnergyLabel().getJobNumber());
+        jLabelName.setText(labelPrintFrame.getEnergyLabel().getLabelName());
         isLoading = false;        
     }
     
@@ -376,8 +376,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jStandardNoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jStandardNoCaretUpdate
         if (!isLoading) {
-            if (!jStandardNo.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getStandard().trim())) {
-                labelPrintFrame.getEnergyLabelData().setStandard(jStandardNo.getText().trim());
+            if (!jStandardNo.getText().trim().equals(labelPrintFrame.getEnergyLabel().getStandard().trim())) {
+                labelPrintFrame.getEnergyLabel().setStandard(jStandardNo.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -385,8 +385,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jElectricityRateCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jElectricityRateCaretUpdate
         if (!isLoading) {
-            if (!jElectricityRate.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getCostPerKwh().trim())) {
-                labelPrintFrame.getEnergyLabelData().setCostPerKwh(jElectricityRate.getText().trim());
+            if (!jElectricityRate.getText().trim().equals(labelPrintFrame.getEnergyLabel().getCostPerKwh().trim())) {
+                labelPrintFrame.getEnergyLabel().setCostPerKwh(jElectricityRate.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -394,8 +394,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jAnnualConsumptionCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jAnnualConsumptionCaretUpdate
         if (!isLoading) {
-            if (!jAnnualConsumption.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getAnnualConsumption().trim())) {
-                labelPrintFrame.getEnergyLabelData().setAnnualConsumption(jAnnualConsumption.getText().trim());
+            if (!jAnnualConsumption.getText().trim().equals(labelPrintFrame.getEnergyLabel().getAnnualConsumption().trim())) {
+                labelPrintFrame.getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -403,8 +403,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jOperatingCostCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jOperatingCostCaretUpdate
         if (!isLoading) {
-            if (!jOperatingCost.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getOperatingCost().trim())) {
-                labelPrintFrame.getEnergyLabelData().setOperatingCost(jOperatingCost.getText().trim());
+            if (!jOperatingCost.getText().trim().equals(labelPrintFrame.getEnergyLabel().getOperatingCost().trim())) {
+                labelPrintFrame.getEnergyLabel().setOperatingCost(jOperatingCost.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -412,8 +412,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jCountryOfOriginCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jCountryOfOriginCaretUpdate
         if (!isLoading) {
-            if (!jCountryOfOrigin.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getCountry().trim())) {
-                labelPrintFrame.getEnergyLabelData().setCountry(jCountryOfOrigin.getText().trim());
+            if (!jCountryOfOrigin.getText().trim().equals(labelPrintFrame.getEnergyLabel().getCountry().trim())) {
+                labelPrintFrame.getEnergyLabel().setCountry(jCountryOfOrigin.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -421,8 +421,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jModelNoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jModelNoCaretUpdate
         if (!isLoading) {
-            if (!jModelNo.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getModel().trim())) {
-                labelPrintFrame.getEnergyLabelData().setModel(jModelNo.getText().trim());
+            if (!jModelNo.getText().trim().equals(labelPrintFrame.getEnergyLabel().getModel().trim())) {
+                labelPrintFrame.getEnergyLabel().setModel(jModelNo.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -430,8 +430,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jBrandCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jBrandCaretUpdate
         if (!isLoading) {
-            if (!jBrand.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getBrand().trim())) {
-                labelPrintFrame.getEnergyLabelData().setBrand(jBrand.getText().trim());
+            if (!jBrand.getText().trim().equals(labelPrintFrame.getEnergyLabel().getBrand().trim())) {
+                labelPrintFrame.getEnergyLabel().setBrand(jBrand.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -439,8 +439,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jManufacturerCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jManufacturerCaretUpdate
         if (!isLoading) {
-            if (!jManufacturer.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getManufacturer().trim())) {
-                labelPrintFrame.getEnergyLabelData().setManufacturer(jManufacturer.getText().trim());
+            if (!jManufacturer.getText().trim().equals(labelPrintFrame.getEnergyLabel().getManufacturer().trim())) {
+                labelPrintFrame.getEnergyLabel().setManufacturer(jManufacturer.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -448,8 +448,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jDistributorCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jDistributorCaretUpdate
         if (!isLoading) {
-            if (!jDistributor.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getDistributor().trim())) {
-                labelPrintFrame.getEnergyLabelData().setDistributor(jDistributor.getText().trim());
+            if (!jDistributor.getText().trim().equals(labelPrintFrame.getEnergyLabel().getDistributor().trim())) {
+                labelPrintFrame.getEnergyLabel().setDistributor(jDistributor.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -457,8 +457,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jDefrostCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jDefrostCaretUpdate
         if (!isLoading) {
-            if (!jDefrost.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getDefrost().trim())) {
-                labelPrintFrame.getEnergyLabelData().setDefrost(jDefrost.getText().trim());
+            if (!jDefrost.getText().trim().equals(labelPrintFrame.getEnergyLabel().getDefrost().trim())) {
+                labelPrintFrame.getEnergyLabel().setDefrost(jDefrost.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -466,8 +466,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jCapacityCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jCapacityCaretUpdate
         if (!isLoading) {
-            if (!jCapacity.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getCapacity().trim())) {
-                labelPrintFrame.getEnergyLabelData().setCapacity(jCapacity.getText().trim());
+            if (!jCapacity.getText().trim().equals(labelPrintFrame.getEnergyLabel().getCapacity().trim())) {
+                labelPrintFrame.getEnergyLabel().setCapacity(jCapacity.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -475,8 +475,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jValidityCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jValidityCaretUpdate
         if (!isLoading) {
-            if (!jValidity.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getValidity().trim())) {
-                labelPrintFrame.getEnergyLabelData().setValidity(jValidity.getText().trim());
+            if (!jValidity.getText().trim().equals(labelPrintFrame.getEnergyLabel().getValidity().trim())) {
+                labelPrintFrame.getEnergyLabel().setValidity(jValidity.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -490,8 +490,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jLabelNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jLabelNameCaretUpdate
         if (!isLoading) {
-            if (!jLabelName.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getLabelName().trim())) {
-                labelPrintFrame.getEnergyLabelData().setLabelName(jLabelName.getText().trim());
+            if (!jLabelName.getText().trim().equals(labelPrintFrame.getEnergyLabel().getLabelName().trim())) {
+                labelPrintFrame.getEnergyLabel().setLabelName(jLabelName.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
@@ -499,15 +499,15 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jJobNumberCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jJobNumberCaretUpdate
         if (!isLoading) {
-            if (!jJobNumber.getText().trim().equals(labelPrintFrame.getEnergyLabelData().getJobNumber().trim())) {
-                labelPrintFrame.getEnergyLabelData().setJobNumber(jJobNumber.getText().trim());
+            if (!jJobNumber.getText().trim().equals(labelPrintFrame.getEnergyLabel().getJobNumber().trim())) {
+                labelPrintFrame.getEnergyLabel().setJobNumber(jJobNumber.getText().trim());
                 labelPrintFrame.setDirty(true);
             }
         }
     }//GEN-LAST:event_jJobNumberCaretUpdate
 
     private void jProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeActionPerformed
-        labelPrintFrame.getEnergyLabelData().setType((String) jProductType.getSelectedItem());
+        labelPrintFrame.getEnergyLabel().setType((String) jProductType.getSelectedItem());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 
