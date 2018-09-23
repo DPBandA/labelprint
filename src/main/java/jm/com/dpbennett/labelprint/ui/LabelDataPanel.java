@@ -22,7 +22,7 @@ package jm.com.dpbennett.labelprint.ui;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 
 public class LabelDataPanel extends javax.swing.JPanel {
-    
+
     private LabelPrintFrame labelPrintFrame;
     private EnergyLabel energyLabel;
 
@@ -44,11 +44,11 @@ public class LabelDataPanel extends javax.swing.JPanel {
         initComponents();
         energyLabel = new EnergyLabel();
     }
-    
+
     public EnergyLabel getEnergyLabel() {
         return energyLabel;
     }
-    
+
     public void setEnergyLabel(EnergyLabel energyLabel) {
         this.energyLabel = energyLabel;
     }
@@ -57,7 +57,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
      * Get label data from dialog
      */
     public void getLabelData() {
-        
+
         getEnergyLabel().setDistributor(jDistributor.getText());
         getEnergyLabel().setDefrost(jDefrost.getText());
         getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
@@ -73,9 +73,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setType(jProductType.getSelectedItem().toString());
         getEnergyLabel().setJobNumber(jJobNumber.getText());
         getEnergyLabel().setLabelName(jLabelName.getText());
-        
+
     }
-    
+
     private void loadLabelData() {
         jDistributor.setText(getEnergyLabel().getDistributor());
         jDefrost.setText(getEnergyLabel().getDefrost());
@@ -92,9 +92,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jProductType.setSelectedItem(getEnergyLabel().getType());
         jJobNumber.setText(getEnergyLabel().getJobNumber());
         jLabelName.setText(getEnergyLabel().getLabelName());
-        
+
     }
-    
+
     public void updateLabelData() {
         loadLabelData();
     }
@@ -151,7 +151,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jLabelName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabelName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 jLabelNameKeyReleased(evt);
             }
         });
@@ -165,8 +165,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jJobNumber.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jJobNumber.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jJobNumberKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jJobNumberKeyReleased(evt);
             }
         });
         add(jJobNumber);
@@ -193,8 +193,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jCapacity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCapacity.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jCapacityKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCapacityKeyReleased(evt);
             }
         });
         add(jCapacity);
@@ -206,8 +206,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jDefrost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDefrost.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jDefrostKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDefrostKeyReleased(evt);
             }
         });
         add(jDefrost);
@@ -219,8 +219,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jDistributor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDistributor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jDistributorKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDistributorKeyReleased(evt);
             }
         });
         add(jDistributor);
@@ -232,8 +232,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jManufacturer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jManufacturer.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jManufacturerKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jManufacturerKeyReleased(evt);
             }
         });
         add(jManufacturer);
@@ -245,8 +245,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jBrand.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBrand.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jBrandKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jBrandKeyReleased(evt);
             }
         });
         add(jBrand);
@@ -258,8 +258,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jModelNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jModelNo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jModelNoKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jModelNoKeyReleased(evt);
             }
         });
         add(jModelNo);
@@ -271,8 +271,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jCountryOfOrigin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCountryOfOrigin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jCountryOfOriginKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCountryOfOriginKeyReleased(evt);
             }
         });
         add(jCountryOfOrigin);
@@ -284,8 +284,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jOperatingCost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jOperatingCost.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jOperatingCostKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jOperatingCostKeyReleased(evt);
             }
         });
         add(jOperatingCost);
@@ -297,8 +297,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jAnnualConsumption.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAnnualConsumption.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jAnnualConsumptionKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jAnnualConsumptionKeyReleased(evt);
             }
         });
         add(jAnnualConsumption);
@@ -310,8 +310,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jElectricityRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jElectricityRate.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jElectricityRateKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jElectricityRateKeyReleased(evt);
             }
         });
         add(jElectricityRate);
@@ -323,8 +323,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jValidity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jValidity.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jValidityKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jValidityKeyReleased(evt);
             }
         });
         add(jValidity);
@@ -336,8 +336,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jStandardNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jStandardNo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jStandardNoKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jStandardNoKeyReleased(evt);
             }
         });
         add(jStandardNo);
@@ -377,75 +377,75 @@ public class LabelDataPanel extends javax.swing.JPanel {
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 
-    private void jJobNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jJobNumberKeyTyped
-        getEnergyLabel().setJobNumber(jJobNumber.getText());
-        labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jJobNumberKeyTyped
-
     private void jLabelNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelNameKeyReleased
         getEnergyLabel().setLabelName(jLabelName.getText());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jLabelNameKeyReleased
 
-    private void jCapacityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCapacityKeyTyped
+    private void jJobNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jJobNumberKeyReleased
+        getEnergyLabel().setJobNumber(jJobNumber.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jJobNumberKeyReleased
+
+    private void jCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCapacityKeyReleased
         getEnergyLabel().setCapacity(jCapacity.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jCapacityKeyTyped
+    }//GEN-LAST:event_jCapacityKeyReleased
 
-    private void jDefrostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDefrostKeyTyped
+    private void jDefrostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDefrostKeyReleased
         getEnergyLabel().setDefrost(jDefrost.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jDefrostKeyTyped
+    }//GEN-LAST:event_jDefrostKeyReleased
 
-    private void jDistributorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDistributorKeyTyped
+    private void jDistributorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDistributorKeyReleased
         getEnergyLabel().setDistributor(jDistributor.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jDistributorKeyTyped
+    }//GEN-LAST:event_jDistributorKeyReleased
 
-    private void jManufacturerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jManufacturerKeyTyped
+    private void jManufacturerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jManufacturerKeyReleased
         getEnergyLabel().setManufacturer(jManufacturer.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jManufacturerKeyTyped
+    }//GEN-LAST:event_jManufacturerKeyReleased
 
-    private void jBrandKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBrandKeyTyped
+    private void jBrandKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBrandKeyReleased
         getEnergyLabel().setBrand(jBrand.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jBrandKeyTyped
+    }//GEN-LAST:event_jBrandKeyReleased
 
-    private void jModelNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jModelNoKeyTyped
+    private void jModelNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jModelNoKeyReleased
         getEnergyLabel().setModel(jModelNo.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jModelNoKeyTyped
+    }//GEN-LAST:event_jModelNoKeyReleased
 
-    private void jCountryOfOriginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCountryOfOriginKeyTyped
+    private void jCountryOfOriginKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCountryOfOriginKeyReleased
         getEnergyLabel().setCountry(jCountryOfOrigin.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jCountryOfOriginKeyTyped
+    }//GEN-LAST:event_jCountryOfOriginKeyReleased
 
-    private void jOperatingCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jOperatingCostKeyTyped
+    private void jOperatingCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jOperatingCostKeyReleased
         getEnergyLabel().setOperatingCost(jOperatingCost.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jOperatingCostKeyTyped
+    }//GEN-LAST:event_jOperatingCostKeyReleased
 
-    private void jAnnualConsumptionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAnnualConsumptionKeyTyped
+    private void jAnnualConsumptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAnnualConsumptionKeyReleased
         getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jAnnualConsumptionKeyTyped
+    }//GEN-LAST:event_jAnnualConsumptionKeyReleased
 
-    private void jElectricityRateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jElectricityRateKeyTyped
+    private void jElectricityRateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jElectricityRateKeyReleased
         getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jElectricityRateKeyTyped
+    }//GEN-LAST:event_jElectricityRateKeyReleased
 
-    private void jValidityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jValidityKeyTyped
+    private void jValidityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jValidityKeyReleased
         getEnergyLabel().setValidity(jValidity.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jValidityKeyTyped
+    }//GEN-LAST:event_jValidityKeyReleased
 
-    private void jStandardNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jStandardNoKeyTyped
+    private void jStandardNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jStandardNoKeyReleased
         getEnergyLabel().setStandard(jStandardNo.getText());
         labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jStandardNoKeyTyped
+    }//GEN-LAST:event_jStandardNoKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAnnualConsumption;

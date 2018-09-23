@@ -1,10 +1,7 @@
 
 # General
-- Handle key released instead of key typed for label data panel.
-- Modified is not removed from title when label is saved from label data tab.
-- Make proper use of isDirty in EnergyLabel and remove "dirty" from everywhere else.
-- Get rid of progress bar dialog for database connection and font loading
-  and use status text at bottom of main window instead.
+- Display status in status bar when saving etc.
+- It's still prompting to save when closing for label that is not edited. Fix!
 - Impl reading system properties file from the resources folder only if the 
   file does not already exist in the "user's directory". Impl saving the file
   to this directory.
@@ -21,7 +18,6 @@
 - Create and use enerbase as the default database.
 - Impl testing database connection in options dialog.
 - Impl hide/show label background colors and content.
-- Use enerbase as the default database and not test.
 
 # Packaging
 - Learn izpack installer (http://izpack.org/) and setup installer on Win 7

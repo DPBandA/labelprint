@@ -84,18 +84,6 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new SplashScreenJDialog(new javax.swing.JFrame(), true).setVisible(true);
-            }
-        });
-    }
-    
     @Override
     public void run() {
         
@@ -112,23 +100,7 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
                     JOptionPane.ERROR_MESSAGE);
             
         }
-//        if (labelPrintFrame.setupFontDefaultFontMapper()) {
-//            System.out.println("Font setup Failure!");
-//        }
-//        else {
-//            System.out.println("Font setup success!");
-//        }
-//        jProgressBar1.setValue(50);        
-//        // Setup font mapper for pdf exportation
-//        jLabel1.setText("Initializing fonts. Please wait...");
-//        if (!labelPrintFrame.setupFontDefaultFontMapper()) {
-//            JOptionPane.showMessageDialog(this,
-//                    "A font initialization error occurred.\n" +
-//                    "Consult your system administrator",
-//                    "Font Initialization Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//            
-//        }
+
         jProgressBar1.setValue(100);
         dispose();
     }

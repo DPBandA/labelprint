@@ -92,8 +92,22 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public final void doSetup() {
-        SplashScreenJDialog ssd = new SplashScreenJDialog(this, false);
-        ssd.setVisible(true);
+       
+        Thread printThread = new Thread() {
+
+            @Override
+            public void run() {
+                jStatusLabel.setText("Setting up database connection...");
+                if (!setupDatabaseConnection()
+                        && getSystemOptions().isConnectToDatabase()) {
+                    jStatusLabel.setText("A database connection error occurred!");
+                }
+                else {
+                    jStatusLabel.setText("Ready...");
+                }
+            }
+        };
+        printThread.start();
     }
 
     public EnergyLabel findLabel(Long id) {
@@ -108,7 +122,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             EnergyLabel labelData
                     = (EnergyLabel) getEntityManager().createNamedQuery("EnergyLabel.findByLabelName").setParameter("labelName", labelName).getSingleResult();
             return labelData != null;
-        
+
         } catch (Exception e) {
             System.out.println(e.toString());
         }
@@ -119,13 +133,13 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     public void setDirty(boolean flag) {
         getLabelDataPanel().getEnergyLabel().setIsDirty(flag);
-        
+
         if (getLabelDataPanel().getEnergyLabel().getIsDirty()) {
-            this.setTitle("LabelPrint - " + 
-                    getLabelDataPanel().getEnergyLabel().getLabelName() + " - MODIFIED");
+            this.setTitle("LabelPrint - "
+                    + getLabelDataPanel().getEnergyLabel().getLabelName() + " - MODIFIED");
         } else {
-            this.setTitle("LabelPrint - " + 
-                    getLabelDataPanel().getEnergyLabel().getLabelName());
+            this.setTitle("LabelPrint - "
+                    + getLabelDataPanel().getEnergyLabel().getLabelName());
         }
     }
 
@@ -133,7 +147,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         return getLabelDataPanel().getEnergyLabel().getIsDirty();
     }
 
-   
     private void printLabel() {
         try {
             PrinterJob prnJob = PrinterJob.getPrinterJob();
@@ -161,7 +174,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         }
     }
 
-    
     public final void enableMenuItems(boolean flag) {
         jMenuFileSave.setEnabled(flag);
         SaveLabel.setEnabled(flag);
@@ -187,6 +199,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         OpenLabel = new javax.swing.JButton();
         SaveLabel = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
+        jStatusLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileNew = new javax.swing.JMenuItem();
@@ -213,7 +226,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("LabelPrint");
-        setBackground(new java.awt.Color(153, 255, 255));
         setMinimumSize(new java.awt.Dimension(550, 500));
         setPreferredSize(new java.awt.Dimension(200, 650));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -253,6 +265,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         });
         jToolBar.add(SaveLabel);
 
+        getContentPane().add(jToolBar, java.awt.BorderLayout.NORTH);
+
+        jTabbedPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTabbedPane.setMinimumSize(new java.awt.Dimension(400, 447));
         jTabbedPane.setPreferredSize(new java.awt.Dimension(400, 447));
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -260,6 +275,13 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                 jTabbedPaneStateChanged(evt);
             }
         });
+        getContentPane().add(jTabbedPane, java.awt.BorderLayout.CENTER);
+
+        jStatusLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jStatusLabel.setText("Ready...");
+        jStatusLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jStatusLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        getContentPane().add(jStatusLabel, java.awt.BorderLayout.SOUTH);
 
         jMenuFile.setMnemonic('F');
         jMenuFile.setText("File");
@@ -399,21 +421,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -486,7 +493,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         chooser.setFileFilter(labelPrintFileFilter);
         chooser.setCurrentDirectory(new File("."));
         int retVal = chooser.showDialog(this, action);
-       
+
         File file = chooser.getSelectedFile();
         if ((file != null) && (retVal != JFileChooser.CANCEL_OPTION)) {
             return file.getAbsolutePath();
@@ -496,7 +503,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     private void jMenuFileExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExportActionPerformed
-        
+
         jTabbedPane.setSelectedIndex(1);
         doLabelImageExport();
     }//GEN-LAST:event_jMenuFileExportActionPerformed
@@ -540,7 +547,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             OpenLabelDialog oldlg = new OpenLabelDialog(this, true);
             oldlg.setVisible(true);
             if (oldlg.proceedToOpenLabel()) {
-            
+
                 jTabbedPane.removeAll();
                 jTabbedPane.add("Label Data", getLabelDataPanel());
                 getLabelDataPanel().updateLabelData();
@@ -608,11 +615,11 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuFileSaveActionPerformed
 
     private void exit() {
-                     
+
         if (saveFileIfDirty() != JOptionPane.CANCEL_OPTION) {
             System.exit(0);
         }
-       
+
     }
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
@@ -624,7 +631,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
             return;
         }
-        
+
         jTabbedPane.removeAll();
         this.setTitle("LabelPrint");
         enableMenuItems(false);
@@ -642,7 +649,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             if (choice == JOptionPane.YES_OPTION) {
                 saveLabel();
             }
-            
+
             if (choice == JOptionPane.CANCEL_OPTION) {
                 return choice;
             }
@@ -792,6 +799,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JLabel jStatusLabel;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JToolBar jToolBar;
     // End of variables declaration//GEN-END:variables
