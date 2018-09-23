@@ -79,7 +79,7 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                 updateLabel();
             }
         });
-        
+
         chkGreenBackground = false;
         chkYellowBackground = false;
         chkContents = true;
@@ -94,9 +94,9 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                 @Override
                 public void run() {
                     // Type
-                    setElementText("type", labelPrintFrame.getEnergyLabel().getType());
+                    setElementText("type", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getType());
                     // Capacity tk impl capacity unit instead of hard code
-                    setElementText("capacity", labelPrintFrame.getEnergyLabel().getCapacity() + "m");
+                    setElementText("capacity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCapacity() + "m");
                     // Set location of the capacity unit power based on width of capacity
                     Element svgElement = svgDocument.getElementById("capacity");
                     SVGLocatable locatable = (SVGLocatable) svgElement;
@@ -104,35 +104,35 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                     Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
                     unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                     // Defrost
-                    setElementText("defrost", labelPrintFrame.getEnergyLabel().getDefrost());
+                    setElementText("defrost", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDefrost());
                     // Distributor
-                    setElementText("distributor", labelPrintFrame.getEnergyLabel().getDistributor());
+                    setElementText("distributor", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDistributor());
                     // Manufacturer
-                    setElementText("manufacturer", labelPrintFrame.getEnergyLabel().getManufacturer());
+                    setElementText("manufacturer", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getManufacturer());
                     // Model
-                    setElementText("model", labelPrintFrame.getEnergyLabel().getModel());
+                    setElementText("model", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getModel());
                     // Country
-                    setElementText("country", labelPrintFrame.getEnergyLabel().getCountry());
+                    setElementText("country", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCountry());
                     // Operating cost
-                    setElementText("operatingCost", "$" + labelPrintFrame.getEnergyLabel().getOperatingCost());
+                    setElementText("operatingCost", "$" + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getOperatingCost());
                     // Energy note
                     setElementText("note1.1", labelPrintFrame
                             .getSystemOptions().getProperty("Note1_1")
                             .replace("[AnnualConsumption]",
-                                    labelPrintFrame.getEnergyLabel().getAnnualConsumption())
+                                    labelPrintFrame.getLabelDataPanel().getEnergyLabel().getAnnualConsumption())
                             .replace("[CostPerKwh]",
-                                    labelPrintFrame.getEnergyLabel().getCostPerKwh()));
+                                    labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCostPerKwh()));
                     setElementText("note1.2", labelPrintFrame.
                             getSystemOptions().getProperty("Note1_2"));
                     // Validity
-                    setElementText("validity", labelPrintFrame.getEnergyLabel().getValidity());
+                    setElementText("validity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getValidity());
                     // Standard note
                     setElementText("note2.1", labelPrintFrame
                             .getSystemOptions().getProperty("Note2_1"));
                     setElementText("note2.2", labelPrintFrame
                             .getSystemOptions().getProperty("Note2_2")
                             .replace("[Standard]",
-                                    labelPrintFrame.getEnergyLabel().getStandard()));
+                                    labelPrintFrame.getLabelDataPanel().getEnergyLabel().getStandard()));
                     // Violation note
                     setElementText("note3.1", labelPrintFrame
                             .getSystemOptions().getProperty("Note3_1"));
@@ -212,15 +212,11 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jEditLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditLabelDataActionPerformed
-        // tk use to test setting label data
-        System.out.println("Impl saving label from SVG Label Panel");
-        updateLabel();
-
-
+        labelPrintFrame.getTabbedPane().setSelectedIndex(0);
     }//GEN-LAST:event_jEditLabelDataActionPerformed
 
     private void jSaveLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelDataActionPerformed
-        System.out.println("Impl exporting label from SVG Label Panel");
+        labelPrintFrame.saveLabel();
     }//GEN-LAST:event_jSaveLabelDataActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

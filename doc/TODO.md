@@ -1,10 +1,8 @@
 
 # General
-- Impl updating label panels when opened or new one is created instead of
-  creating new panels each time.
-- Remove edit cancel button and data backup feature.
-  On Label Data tab change buttons to "View" and "Save"
-  On Label View tab change buttons to "Edit" and "Save"
+- Handle key released instead of key typed for label data panel.
+- Modified is not removed from title when label is saved from label data tab.
+- Make proper use of isDirty in EnergyLabel and remove "dirty" from everywhere else.
 - Get rid of progress bar dialog for database connection and font loading
   and use status text at bottom of main window instead.
 - Impl reading system properties file from the resources folder only if the 
@@ -24,4 +22,6 @@
 - Impl testing database connection in options dialog.
 - Impl hide/show label background colors and content.
 - Use enerbase as the default database and not test.
+
+# Packaging
 - Learn izpack installer (http://izpack.org/) and setup installer on Win 7

@@ -19,22 +19,19 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
-import java.awt.Graphics;
+import jm.com.dpbennett.business.entity.EnergyLabel;
 
-/**
- *
- * @author dbennett
- */
 public class LabelDataPanel extends javax.swing.JPanel {
-
+    
     private LabelPrintFrame labelPrintFrame;
-    private Boolean isLoading;
+    private EnergyLabel energyLabel;
 
     /**
      * Creates new form LabelDataDialog
      */
     public LabelDataPanel() {
         initComponents();
+        energyLabel = new EnergyLabel();
     }
 
     /**
@@ -45,61 +42,61 @@ public class LabelDataPanel extends javax.swing.JPanel {
     public LabelDataPanel(LabelPrintFrame labelPrintFrame) {
         this.labelPrintFrame = labelPrintFrame;
         initComponents();
+        energyLabel = new EnergyLabel();
+    }
+    
+    public EnergyLabel getEnergyLabel() {
+        return energyLabel;
+    }
+    
+    public void setEnergyLabel(EnergyLabel energyLabel) {
+        this.energyLabel = energyLabel;
     }
 
     /**
      * Get label data from dialog
      */
     public void getLabelData() {
-
-        labelPrintFrame.getEnergyLabel().setDistributor(jDistributor.getText());
-        labelPrintFrame.getEnergyLabel().setDefrost(jDefrost.getText());
-        labelPrintFrame.getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
-        labelPrintFrame.getEnergyLabel().setBrand(jBrand.getText());
-        labelPrintFrame.getEnergyLabel().setModel(jModelNo.getText());
-        labelPrintFrame.getEnergyLabel().setValidity(jValidity.getText());
-        labelPrintFrame.getEnergyLabel().setCapacity(jCapacity.getText());
-        labelPrintFrame.getEnergyLabel().setStandard(jStandardNo.getText());
-        labelPrintFrame.getEnergyLabel().setOperatingCost(jOperatingCost.getText());
-        labelPrintFrame.getEnergyLabel().setManufacturer(jManufacturer.getText());
-        labelPrintFrame.getEnergyLabel().setCountry(jCountryOfOrigin.getText());
-        labelPrintFrame.getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
-        labelPrintFrame.getEnergyLabel().setType(jProductType.getSelectedItem().toString());
-        labelPrintFrame.getEnergyLabel().setJobNumber(jJobNumber.getText());
-        labelPrintFrame.getEnergyLabel().setLabelName(jLabelName.getText());
-
+        
+        getEnergyLabel().setDistributor(jDistributor.getText());
+        getEnergyLabel().setDefrost(jDefrost.getText());
+        getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
+        getEnergyLabel().setBrand(jBrand.getText());
+        getEnergyLabel().setModel(jModelNo.getText());
+        getEnergyLabel().setValidity(jValidity.getText());
+        getEnergyLabel().setCapacity(jCapacity.getText());
+        getEnergyLabel().setStandard(jStandardNo.getText());
+        getEnergyLabel().setOperatingCost(jOperatingCost.getText());
+        getEnergyLabel().setManufacturer(jManufacturer.getText());
+        getEnergyLabel().setCountry(jCountryOfOrigin.getText());
+        getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
+        getEnergyLabel().setType(jProductType.getSelectedItem().toString());
+        getEnergyLabel().setJobNumber(jJobNumber.getText());
+        getEnergyLabel().setLabelName(jLabelName.getText());
+        
     }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        loadLabelData();
-    }
-
+    
     private void loadLabelData() {
-        isLoading = true;
-        jDistributor.setText(labelPrintFrame.getEnergyLabel().getDistributor());
-        jDefrost.setText(labelPrintFrame.getEnergyLabel().getDefrost());
-        jElectricityRate.setText(labelPrintFrame.getEnergyLabel().getCostPerKwh());
-        jBrand.setText(labelPrintFrame.getEnergyLabel().getBrand());
-        jModelNo.setText(labelPrintFrame.getEnergyLabel().getModel());
-        jValidity.setText(labelPrintFrame.getEnergyLabel().getValidity());
-        jCapacity.setText(labelPrintFrame.getEnergyLabel().getCapacity());
-        jStandardNo.setText(labelPrintFrame.getEnergyLabel().getStandard());
-        jOperatingCost.setText(labelPrintFrame.getEnergyLabel().getOperatingCost());
-        jManufacturer.setText(labelPrintFrame.getEnergyLabel().getManufacturer());
-        jCountryOfOrigin.setText(labelPrintFrame.getEnergyLabel().getCountry());
-        jAnnualConsumption.setText(labelPrintFrame.getEnergyLabel().getAnnualConsumption());
-        jProductType.setSelectedItem(labelPrintFrame.getEnergyLabel().getType());
-        jJobNumber.setText(labelPrintFrame.getEnergyLabel().getJobNumber());
-        jLabelName.setText(labelPrintFrame.getEnergyLabel().getLabelName());
-        isLoading = false;        
+        jDistributor.setText(getEnergyLabel().getDistributor());
+        jDefrost.setText(getEnergyLabel().getDefrost());
+        jElectricityRate.setText(getEnergyLabel().getCostPerKwh());
+        jBrand.setText(getEnergyLabel().getBrand());
+        jModelNo.setText(getEnergyLabel().getModel());
+        jValidity.setText(getEnergyLabel().getValidity());
+        jCapacity.setText(getEnergyLabel().getCapacity());
+        jStandardNo.setText(getEnergyLabel().getStandard());
+        jOperatingCost.setText(getEnergyLabel().getOperatingCost());
+        jManufacturer.setText(getEnergyLabel().getManufacturer());
+        jCountryOfOrigin.setText(getEnergyLabel().getCountry());
+        jAnnualConsumption.setText(getEnergyLabel().getAnnualConsumption());
+        jProductType.setSelectedItem(getEnergyLabel().getType());
+        jJobNumber.setText(getEnergyLabel().getJobNumber());
+        jLabelName.setText(getEnergyLabel().getLabelName());
+        
     }
     
     public void updateLabelData() {
         loadLabelData();
-        
-        repaint();
     }
 
     /**
@@ -153,9 +150,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel14);
 
         jLabelName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelName.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jLabelNameCaretUpdate(evt);
+        jLabelName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jLabelNameKeyReleased(evt);
             }
         });
         add(jLabelName);
@@ -167,9 +164,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel15);
 
         jJobNumber.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jJobNumber.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jJobNumberCaretUpdate(evt);
+        jJobNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jJobNumberKeyTyped(evt);
             }
         });
         add(jJobNumber);
@@ -195,9 +192,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel2);
 
         jCapacity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCapacity.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jCapacityCaretUpdate(evt);
+        jCapacity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jCapacityKeyTyped(evt);
             }
         });
         add(jCapacity);
@@ -208,9 +205,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel3);
 
         jDefrost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDefrost.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jDefrostCaretUpdate(evt);
+        jDefrost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jDefrostKeyTyped(evt);
             }
         });
         add(jDefrost);
@@ -221,9 +218,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel4);
 
         jDistributor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDistributor.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jDistributorCaretUpdate(evt);
+        jDistributor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jDistributorKeyTyped(evt);
             }
         });
         add(jDistributor);
@@ -234,9 +231,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel5);
 
         jManufacturer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jManufacturer.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jManufacturerCaretUpdate(evt);
+        jManufacturer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jManufacturerKeyTyped(evt);
             }
         });
         add(jManufacturer);
@@ -247,9 +244,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel6);
 
         jBrand.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jBrand.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jBrandCaretUpdate(evt);
+        jBrand.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jBrandKeyTyped(evt);
             }
         });
         add(jBrand);
@@ -260,9 +257,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel7);
 
         jModelNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jModelNo.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jModelNoCaretUpdate(evt);
+        jModelNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jModelNoKeyTyped(evt);
             }
         });
         add(jModelNo);
@@ -273,9 +270,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel8);
 
         jCountryOfOrigin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCountryOfOrigin.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jCountryOfOriginCaretUpdate(evt);
+        jCountryOfOrigin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jCountryOfOriginKeyTyped(evt);
             }
         });
         add(jCountryOfOrigin);
@@ -286,9 +283,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel9);
 
         jOperatingCost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jOperatingCost.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jOperatingCostCaretUpdate(evt);
+        jOperatingCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jOperatingCostKeyTyped(evt);
             }
         });
         add(jOperatingCost);
@@ -299,9 +296,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel10);
 
         jAnnualConsumption.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnnualConsumption.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jAnnualConsumptionCaretUpdate(evt);
+        jAnnualConsumption.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jAnnualConsumptionKeyTyped(evt);
             }
         });
         add(jAnnualConsumption);
@@ -312,9 +309,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel11);
 
         jElectricityRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jElectricityRate.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jElectricityRateCaretUpdate(evt);
+        jElectricityRate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jElectricityRateKeyTyped(evt);
             }
         });
         add(jElectricityRate);
@@ -325,9 +322,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel12);
 
         jValidity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jValidity.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jValidityCaretUpdate(evt);
+        jValidity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jValidityKeyTyped(evt);
             }
         });
         add(jValidity);
@@ -338,9 +335,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         add(jLabel13);
 
         jStandardNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jStandardNo.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jStandardNoCaretUpdate(evt);
+        jStandardNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jStandardNoKeyTyped(evt);
             }
         });
         add(jStandardNo);
@@ -366,121 +363,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
 
     private void jSaveLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelActionPerformed
-        // tk
-        System.out.println("Impl label save...use labelprintframe class and business-entity method for saving entities");
-        //restoreRefrigeratorData();
-        //labelPrintFrame.setFileDirty(false);
-        // Set label view panel
-        //labelPrintFrame.getTabbedPane().setSelectedIndex(1);
+        labelPrintFrame.saveLabel();
     }//GEN-LAST:event_jSaveLabelActionPerformed
-
-    private void jStandardNoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jStandardNoCaretUpdate
-        if (!isLoading) {
-            if (!jStandardNo.getText().trim().equals(labelPrintFrame.getEnergyLabel().getStandard().trim())) {
-                labelPrintFrame.getEnergyLabel().setStandard(jStandardNo.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jStandardNoCaretUpdate
-
-    private void jElectricityRateCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jElectricityRateCaretUpdate
-        if (!isLoading) {
-            if (!jElectricityRate.getText().trim().equals(labelPrintFrame.getEnergyLabel().getCostPerKwh().trim())) {
-                labelPrintFrame.getEnergyLabel().setCostPerKwh(jElectricityRate.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jElectricityRateCaretUpdate
-
-    private void jAnnualConsumptionCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jAnnualConsumptionCaretUpdate
-        if (!isLoading) {
-            if (!jAnnualConsumption.getText().trim().equals(labelPrintFrame.getEnergyLabel().getAnnualConsumption().trim())) {
-                labelPrintFrame.getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jAnnualConsumptionCaretUpdate
-
-    private void jOperatingCostCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jOperatingCostCaretUpdate
-        if (!isLoading) {
-            if (!jOperatingCost.getText().trim().equals(labelPrintFrame.getEnergyLabel().getOperatingCost().trim())) {
-                labelPrintFrame.getEnergyLabel().setOperatingCost(jOperatingCost.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jOperatingCostCaretUpdate
-
-    private void jCountryOfOriginCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jCountryOfOriginCaretUpdate
-        if (!isLoading) {
-            if (!jCountryOfOrigin.getText().trim().equals(labelPrintFrame.getEnergyLabel().getCountry().trim())) {
-                labelPrintFrame.getEnergyLabel().setCountry(jCountryOfOrigin.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jCountryOfOriginCaretUpdate
-
-    private void jModelNoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jModelNoCaretUpdate
-        if (!isLoading) {
-            if (!jModelNo.getText().trim().equals(labelPrintFrame.getEnergyLabel().getModel().trim())) {
-                labelPrintFrame.getEnergyLabel().setModel(jModelNo.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jModelNoCaretUpdate
-
-    private void jBrandCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jBrandCaretUpdate
-        if (!isLoading) {
-            if (!jBrand.getText().trim().equals(labelPrintFrame.getEnergyLabel().getBrand().trim())) {
-                labelPrintFrame.getEnergyLabel().setBrand(jBrand.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jBrandCaretUpdate
-
-    private void jManufacturerCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jManufacturerCaretUpdate
-        if (!isLoading) {
-            if (!jManufacturer.getText().trim().equals(labelPrintFrame.getEnergyLabel().getManufacturer().trim())) {
-                labelPrintFrame.getEnergyLabel().setManufacturer(jManufacturer.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jManufacturerCaretUpdate
-
-    private void jDistributorCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jDistributorCaretUpdate
-        if (!isLoading) {
-            if (!jDistributor.getText().trim().equals(labelPrintFrame.getEnergyLabel().getDistributor().trim())) {
-                labelPrintFrame.getEnergyLabel().setDistributor(jDistributor.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jDistributorCaretUpdate
-
-    private void jDefrostCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jDefrostCaretUpdate
-        if (!isLoading) {
-            if (!jDefrost.getText().trim().equals(labelPrintFrame.getEnergyLabel().getDefrost().trim())) {
-                labelPrintFrame.getEnergyLabel().setDefrost(jDefrost.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jDefrostCaretUpdate
-
-    private void jCapacityCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jCapacityCaretUpdate
-        if (!isLoading) {
-            if (!jCapacity.getText().trim().equals(labelPrintFrame.getEnergyLabel().getCapacity().trim())) {
-                labelPrintFrame.getEnergyLabel().setCapacity(jCapacity.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jCapacityCaretUpdate
-
-    private void jValidityCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jValidityCaretUpdate
-        if (!isLoading) {
-            if (!jValidity.getText().trim().equals(labelPrintFrame.getEnergyLabel().getValidity().trim())) {
-                labelPrintFrame.getEnergyLabel().setValidity(jValidity.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jValidityCaretUpdate
 
     private void jViewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewLabelActionPerformed
         // Update label and set label view panel     
@@ -488,28 +372,80 @@ public class LabelDataPanel extends javax.swing.JPanel {
         labelPrintFrame.getTabbedPane().setSelectedIndex(1);
     }//GEN-LAST:event_jViewLabelActionPerformed
 
-    private void jLabelNameCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jLabelNameCaretUpdate
-        if (!isLoading) {
-            if (!jLabelName.getText().trim().equals(labelPrintFrame.getEnergyLabel().getLabelName().trim())) {
-                labelPrintFrame.getEnergyLabel().setLabelName(jLabelName.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jLabelNameCaretUpdate
-
-    private void jJobNumberCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jJobNumberCaretUpdate
-        if (!isLoading) {
-            if (!jJobNumber.getText().trim().equals(labelPrintFrame.getEnergyLabel().getJobNumber().trim())) {
-                labelPrintFrame.getEnergyLabel().setJobNumber(jJobNumber.getText().trim());
-                labelPrintFrame.setDirty(true);
-            }
-        }
-    }//GEN-LAST:event_jJobNumberCaretUpdate
-
     private void jProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeActionPerformed
-        labelPrintFrame.getEnergyLabel().setType((String) jProductType.getSelectedItem());
+        getEnergyLabel().setType((String) jProductType.getSelectedItem());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
+
+    private void jJobNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jJobNumberKeyTyped
+        getEnergyLabel().setJobNumber(jJobNumber.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jJobNumberKeyTyped
+
+    private void jLabelNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelNameKeyReleased
+        getEnergyLabel().setLabelName(jLabelName.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jLabelNameKeyReleased
+
+    private void jCapacityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCapacityKeyTyped
+        getEnergyLabel().setCapacity(jCapacity.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jCapacityKeyTyped
+
+    private void jDefrostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDefrostKeyTyped
+        getEnergyLabel().setDefrost(jDefrost.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jDefrostKeyTyped
+
+    private void jDistributorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDistributorKeyTyped
+        getEnergyLabel().setDistributor(jDistributor.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jDistributorKeyTyped
+
+    private void jManufacturerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jManufacturerKeyTyped
+        getEnergyLabel().setManufacturer(jManufacturer.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jManufacturerKeyTyped
+
+    private void jBrandKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBrandKeyTyped
+        getEnergyLabel().setBrand(jBrand.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jBrandKeyTyped
+
+    private void jModelNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jModelNoKeyTyped
+        getEnergyLabel().setModel(jModelNo.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jModelNoKeyTyped
+
+    private void jCountryOfOriginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCountryOfOriginKeyTyped
+        getEnergyLabel().setCountry(jCountryOfOrigin.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jCountryOfOriginKeyTyped
+
+    private void jOperatingCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jOperatingCostKeyTyped
+        getEnergyLabel().setOperatingCost(jOperatingCost.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jOperatingCostKeyTyped
+
+    private void jAnnualConsumptionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAnnualConsumptionKeyTyped
+        getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jAnnualConsumptionKeyTyped
+
+    private void jElectricityRateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jElectricityRateKeyTyped
+        getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jElectricityRateKeyTyped
+
+    private void jValidityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jValidityKeyTyped
+        getEnergyLabel().setValidity(jValidity.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jValidityKeyTyped
+
+    private void jStandardNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jStandardNoKeyTyped
+        getEnergyLabel().setStandard(jStandardNo.getText());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jStandardNoKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAnnualConsumption;
