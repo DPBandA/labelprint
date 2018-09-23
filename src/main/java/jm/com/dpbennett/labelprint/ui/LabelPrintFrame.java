@@ -97,17 +97,21 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
             @Override
             public void run() {
-                jStatusLabel.setText("Setting up database connection...");
+                setStatus("Setting up database connection...");
                 if (!setupDatabaseConnection()
                         && getSystemOptions().isConnectToDatabase()) {
-                    jStatusLabel.setText("A database connection error occurred!");
+                    setStatus("A database connection error occurred!");
                 }
                 else {
-                    jStatusLabel.setText("Ready...");
+                    setStatus("Ready...");
                 }
             }
         };
         printThread.start();
+    }
+    
+    public void setStatus(String status) {
+        jStatusLabel.setText(status);
     }
 
     public EnergyLabel findLabel(Long id) {

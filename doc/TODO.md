@@ -10,14 +10,13 @@
 - Using the save toolbar button results in the label data apparently getting 
   blanked. This happens when the labels opened then saved immediately. Fix!!
 - Impl exporting to image with Batik Transcoder API.
-- Do not set label data as dirty until the data is actually edited.
 - Use text to create header instead of importing an image.
 - Make label data scrollable
 - Add capacityLabel, capacityUnit to field and use it to append to the capacity instead of 
   using if statements.
-- Create and use enerbase as the default database.
 - Impl testing database connection in options dialog.
 - Impl hide/show label background colors and content.
 
 # Packaging
+- Impl splashscreen using existing dialog.
 - Learn izpack installer (http://izpack.org/) and setup installer on Win 7
