@@ -188,7 +188,7 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
         setPreferredSize(new java.awt.Dimension(550, 500));
         setLayout(new java.awt.BorderLayout());
 
-        jButtonPanel.setLayout(new java.awt.GridLayout(1, 2, 2, 5));
+        jButtonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 10, 1));
 
         jEditLabelData.setText("Edit");
         jEditLabelData.setToolTipText("Edit the label data");
@@ -197,7 +197,6 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                 jEditLabelDataActionPerformed(evt);
             }
         });
-        jButtonPanel.add(jEditLabelData);
 
         jSaveLabelData.setText("Save");
         jSaveLabelData.setToolTipText("Save the label data");
@@ -206,7 +205,21 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
                 jSaveLabelDataActionPerformed(evt);
             }
         });
-        jButtonPanel.add(jSaveLabelData);
+
+        javax.swing.GroupLayout jButtonPanelLayout = new javax.swing.GroupLayout(jButtonPanel);
+        jButtonPanel.setLayout(jButtonPanelLayout);
+        jButtonPanelLayout.setHorizontalGroup(
+            jButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jButtonPanelLayout.createSequentialGroup()
+                .addComponent(jEditLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jSaveLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jButtonPanelLayout.setVerticalGroup(
+            jButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jEditLabelData)
+            .addComponent(jSaveLabelData)
+        );
 
         add(jButtonPanel, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents

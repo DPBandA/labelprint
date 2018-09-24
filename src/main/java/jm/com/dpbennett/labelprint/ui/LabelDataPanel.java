@@ -54,12 +54,12 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }
 
     /**
-     * Get label data from dialog
+     * Get label data from the data panel
      */
     public void getLabelData() {
 
         getEnergyLabel().setDistributor(jDistributor.getText());
-        getEnergyLabel().setDefrost(jDefrost.getText());
+        getEnergyLabel().setDefrost(jDefrost.getSelectedItem().toString());
         getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
         getEnergyLabel().setBrand(jBrand.getText());
         getEnergyLabel().setModel(jModelNo.getText());
@@ -76,9 +76,12 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Load data into the data panel
+     */
     private void loadLabelData() {
         jDistributor.setText(getEnergyLabel().getDistributor());
-        jDefrost.setText(getEnergyLabel().getDefrost());
+        jDefrost.setSelectedItem(getEnergyLabel().getDefrost());
         jElectricityRate.setText(getEnergyLabel().getCostPerKwh());
         jBrand.setText(getEnergyLabel().getBrand());
         jModelNo.setText(getEnergyLabel().getModel());
@@ -92,7 +95,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jProductType.setSelectedItem(getEnergyLabel().getType());
         jJobNumber.setText(getEnergyLabel().getJobNumber());
         jLabelName.setText(getEnergyLabel().getLabelName());
-
+        
+        getEnergyLabel().setIsDirty(false);
     }
 
     public void updateLabelData() {
@@ -116,7 +120,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jCapacity = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jDefrost = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jDistributor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -139,44 +142,41 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jStandardNo = new javax.swing.JTextField();
         jViewLabel = new javax.swing.JButton();
         jSaveLabel = new javax.swing.JButton();
+        jDefrost = new javax.swing.JComboBox();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         setName(""); // NOI18N
-        setLayout(new java.awt.GridLayout(16, 2, 2, 5));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setLabelFor(jProductType);
         jLabel14.setText("Label Name:");
-        add(jLabel14);
 
-        jLabelName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabelName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jLabelNameKeyReleased(evt);
             }
         });
-        add(jLabelName);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setLabelFor(jJobNumber);
         jLabel15.setText("Job Number:");
-        add(jLabel15);
 
-        jJobNumber.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jJobNumber.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jJobNumber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jJobNumberKeyReleased(evt);
             }
         });
-        add(jJobNumber);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setLabelFor(jProductType);
         jLabel1.setText("Product Type:");
-        add(jLabel1);
 
+        jProductType.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jProductType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basic Refrigerator", "Freezer", "Refrigerator", "Room Air-conditioner", " " }));
         jProductType.setSelectedIndex(2);
         jProductType.addActionListener(new java.awt.event.ActionListener() {
@@ -184,163 +184,131 @@ public class LabelDataPanel extends javax.swing.JPanel {
                 jProductTypeActionPerformed(evt);
             }
         });
-        add(jProductType);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Capacity (cu. m):");
-        add(jLabel2);
 
-        jCapacity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCapacity.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jCapacity.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jCapacityKeyReleased(evt);
             }
         });
-        add(jCapacity);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Defrost (Manual/Automatic):");
-        add(jLabel3);
-
-        jDefrost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDefrost.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jDefrostKeyReleased(evt);
-            }
-        });
-        add(jDefrost);
+        jLabel3.setText("Defrost:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Distributor:");
-        add(jLabel4);
 
-        jDistributor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jDistributor.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jDistributor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jDistributorKeyReleased(evt);
             }
         });
-        add(jDistributor);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Manufacturer:");
-        add(jLabel5);
 
-        jManufacturer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jManufacturer.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jManufacturer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jManufacturerKeyReleased(evt);
             }
         });
-        add(jManufacturer);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Brand:");
-        add(jLabel6);
 
-        jBrand.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jBrand.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jBrand.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jBrandKeyReleased(evt);
             }
         });
-        add(jBrand);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Model No.:");
-        add(jLabel7);
 
-        jModelNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jModelNo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jModelNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jModelNoKeyReleased(evt);
             }
         });
-        add(jModelNo);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Country of Origin:");
-        add(jLabel8);
 
-        jCountryOfOrigin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCountryOfOrigin.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jCountryOfOrigin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jCountryOfOriginKeyReleased(evt);
             }
         });
-        add(jCountryOfOrigin);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Operating Cost ($/yr):");
-        add(jLabel9);
 
-        jOperatingCost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jOperatingCost.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jOperatingCost.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jOperatingCostKeyReleased(evt);
             }
         });
-        add(jOperatingCost);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Anual Consumption (kwh/yr):");
-        add(jLabel10);
 
-        jAnnualConsumption.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAnnualConsumption.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jAnnualConsumption.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jAnnualConsumptionKeyReleased(evt);
             }
         });
-        add(jAnnualConsumption);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Electricity Rate ($/kwh):");
-        add(jLabel11);
 
-        jElectricityRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jElectricityRate.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jElectricityRate.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jElectricityRateKeyReleased(evt);
             }
         });
-        add(jElectricityRate);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Validity (year):");
-        add(jLabel12);
 
-        jValidity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jValidity.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jValidity.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jValidityKeyReleased(evt);
             }
         });
-        add(jValidity);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Standard No.:");
-        add(jLabel13);
 
-        jStandardNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jStandardNo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jStandardNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jStandardNoKeyReleased(evt);
             }
         });
-        add(jStandardNo);
 
         jViewLabel.setText("View");
         jViewLabel.setToolTipText("View label with current data");
@@ -349,7 +317,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
                 jViewLabelActionPerformed(evt);
             }
         });
-        add(jViewLabel);
 
         jSaveLabel.setText("Save");
         jSaveLabel.setToolTipText("Save the label data");
@@ -358,7 +325,157 @@ public class LabelDataPanel extends javax.swing.JPanel {
                 jSaveLabelActionPerformed(evt);
             }
         });
-        add(jSaveLabel);
+
+        jDefrost.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jDefrost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Automatic", "Manual", " " }));
+        jDefrost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDefrostActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabelName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jJobNumber))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jCapacity))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jManufacturer))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jBrand))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jModelNo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jCountryOfOrigin))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jOperatingCost))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jAnnualConsumption))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jElectricityRate))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jValidity))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jStandardNo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jViewLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jSaveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 24, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDistributor)
+                            .addComponent(jDefrost, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jJobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProductType, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDefrost, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDistributor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jModelNo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCountryOfOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jOperatingCost, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAnnualConsumption, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jElectricityRate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jValidity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jStandardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jViewLabel)
+                    .addComponent(jSaveLabel))
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -391,11 +508,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setCapacity(jCapacity.getText());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jCapacityKeyReleased
-
-    private void jDefrostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDefrostKeyReleased
-        getEnergyLabel().setDefrost(jDefrost.getText());
-        labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jDefrostKeyReleased
 
     private void jDistributorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDistributorKeyReleased
         getEnergyLabel().setDistributor(jDistributor.getText());
@@ -447,12 +559,17 @@ public class LabelDataPanel extends javax.swing.JPanel {
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jStandardNoKeyReleased
 
+    private void jDefrostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDefrostActionPerformed
+        getEnergyLabel().setDefrost((String)jDefrost.getSelectedItem());
+        labelPrintFrame.setDirty(true);
+    }//GEN-LAST:event_jDefrostActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAnnualConsumption;
     private javax.swing.JTextField jBrand;
     private javax.swing.JTextField jCapacity;
     private javax.swing.JTextField jCountryOfOrigin;
-    private javax.swing.JTextField jDefrost;
+    private javax.swing.JComboBox jDefrost;
     private javax.swing.JTextField jDistributor;
     private javax.swing.JTextField jElectricityRate;
     private javax.swing.JTextField jJobNumber;

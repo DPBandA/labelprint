@@ -745,7 +745,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             prop.put("javax.persistence.jdbc.user",
                     sysOptions.getProperty("ConnectionUserName"));
             prop.put("javax.persistence.jdbc.password",
-                    sysOptions.getProperty("ConnectionPassword"));
+                    sysOptions.getConnectionPassword());
             prop.put("javax.persistence.jdbc.url",
                     sysOptions.getProperty("ConnectionURL"));
             prop.put("javax.persistence.jdbc.driver",

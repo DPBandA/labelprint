@@ -23,8 +23,9 @@ import java.io.*;
 import javax.swing.*;
 import java.util.Properties;
 import java.io.FileInputStream;
+import jm.com.dpbennett.business.entity.utils.Security;
 
-public class SystemOptions {
+public final class SystemOptions {
 
     private String systemFile;
     private Properties props;
@@ -163,6 +164,14 @@ public class SystemOptions {
 
     public void setConnectToDatabase(boolean b) {
         props.setProperty("ConnectToDatabase", Boolean.toString(b));
+    }
+    
+    public String getConnectionPassword() {
+        return (Security.decrypt(props.getProperty("ConnectionPassword")));
+    }
+    
+    public void setConnectionPassword(String connectionPassword) {
+        props.setProperty("ConnectionPassword", Security.encrypt(connectionPassword));
     }
 
     @Override

@@ -60,7 +60,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         // Init Database Options tab
         jDatabaseURLTextField.setText(sysOptions.getProperty("ConnectionURL"));
         jUsernameTextField.setText(sysOptions.getProperty("ConnectionUserName"));
-        jPasswordField.setText(sysOptions.getProperty("ConnectionPassword"));
+        jPasswordField.setText(sysOptions.getConnectionPassword());
         // Init field to search combobox
         bLoadingComboBox = true;
         for (int i = 0; i < fieldsToSearch.length; ++i) {
@@ -612,7 +612,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         // Update password
         char[] password = jPasswordField.getPassword();
         String passwordString = new String(password).trim();
-        sysOptions.setProperty("ConnectionPassword", passwordString);
+        sysOptions.setConnectionPassword(passwordString);
         sysOptions.setProperty("ConnectionUserName", jUsernameTextField.getText().trim());
         sysOptions.setProperty("ConnectionURL", jDatabaseURLTextField.getText().trim());
 
@@ -635,9 +635,11 @@ public class OptionsJDialog extends javax.swing.JDialog {
             System.out.println("will try to setup db with user:"
                     + sysOptions.getProperty("ConnectionUserName"));
             if (labelPrintFrame.setupDatabaseConnection()) {
-                System.out.println("Database setup!");
+                
+                labelPrintFrame.setStatus("Ready...");
                 dispose();
             } else {
+                labelPrintFrame.setStatus("A database connection error occurred!");
                 JOptionPane.showMessageDialog(this,
                         "A database connection error occurred.\n"
                         + "Check that the database options are valid",
