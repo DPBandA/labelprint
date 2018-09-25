@@ -39,6 +39,7 @@ import javax.swing.JTabbedPane;
 import jm.com.dpbennett.labelprint.LabelPrintFileFilter;
 import jm.com.dpbennett.labelprint.SystemOptions;
 import jm.com.dpbennett.business.entity.EnergyLabel;
+import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
 
 /**
  *
@@ -92,7 +93,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public final void doSetup() {
-       
+
         Thread printThread = new Thread() {
 
             @Override
@@ -101,15 +102,14 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                 if (!setupDatabaseConnection()
                         && getSystemOptions().isConnectToDatabase()) {
                     setStatus("A database connection error occurred!");
-                }
-                else {
+                } else {
                     setStatus("Ready...");
                 }
             }
         };
         printThread.start();
     }
-    
+
     public void setStatus(String status) {
         jStatusLabel.setText(status);
     }
@@ -187,7 +187,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         jMenuFileClose.setEnabled(flag);
         jCheckBoxMenuViewGreenBackground.setEnabled(flag);
         jCheckBoxMenuViewYellowBackground.setEnabled(flag);
-        jCheckBoxMenuViewContent.setEnabled(flag);
     }
 
     /**
@@ -202,7 +201,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         NewLabel = new javax.swing.JButton();
         OpenLabel = new javax.swing.JButton();
         SaveLabel = new javax.swing.JButton();
-        jTabbedPane = new javax.swing.JTabbedPane();
+        jEnergyLabelPane = new javax.swing.JTabbedPane();
         jStatusLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -224,7 +223,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         jMenuView = new javax.swing.JMenu();
         jCheckBoxMenuViewGreenBackground = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuViewYellowBackground = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuViewContent = new javax.swing.JCheckBoxMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuHelpAbout = new javax.swing.JMenuItem();
 
@@ -271,15 +269,15 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         getContentPane().add(jToolBar, java.awt.BorderLayout.NORTH);
 
-        jTabbedPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jTabbedPane.setMinimumSize(new java.awt.Dimension(400, 447));
-        jTabbedPane.setPreferredSize(new java.awt.Dimension(400, 447));
-        jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+        jEnergyLabelPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jEnergyLabelPane.setMinimumSize(new java.awt.Dimension(400, 447));
+        jEnergyLabelPane.setPreferredSize(new java.awt.Dimension(400, 447));
+        jEnergyLabelPane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPaneStateChanged(evt);
+                jEnergyLabelPaneStateChanged(evt);
             }
         });
-        getContentPane().add(jTabbedPane, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jEnergyLabelPane, java.awt.BorderLayout.CENTER);
 
         jStatusLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jStatusLabel.setText("Ready...");
@@ -383,6 +381,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         jMenuView.setText("View");
 
+        jCheckBoxMenuViewGreenBackground.setSelected(true);
         jCheckBoxMenuViewGreenBackground.setText("Green background");
         jCheckBoxMenuViewGreenBackground.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,6 +390,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         });
         jMenuView.add(jCheckBoxMenuViewGreenBackground);
 
+        jCheckBoxMenuViewYellowBackground.setSelected(true);
         jCheckBoxMenuViewYellowBackground.setText("Yellow background");
         jCheckBoxMenuViewYellowBackground.setToolTipText("");
         jCheckBoxMenuViewYellowBackground.addActionListener(new java.awt.event.ActionListener() {
@@ -399,15 +399,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             }
         });
         jMenuView.add(jCheckBoxMenuViewYellowBackground);
-
-        jCheckBoxMenuViewContent.setSelected(true);
-        jCheckBoxMenuViewContent.setText("Content");
-        jCheckBoxMenuViewContent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuViewContentActionPerformed(evt);
-            }
-        });
-        jMenuView.add(jCheckBoxMenuViewContent);
 
         jMenuBar1.add(jMenuView);
 
@@ -440,7 +431,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuHelpAboutActionPerformed
 
     private void jMenuEditLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditLabelActionPerformed
-        jTabbedPane.setSelectedIndex(0);
+        jEnergyLabelPane.setSelectedIndex(0);
     }//GEN-LAST:event_jMenuEditLabelActionPerformed
 
     private void NewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewLabelActionPerformed
@@ -455,16 +446,16 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jMenuEditOptionsActionPerformed
 
-    private void jCheckBoxMenuViewContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewContentActionPerformed
-        labelPanel.showContents(jCheckBoxMenuViewContent.isSelected());
-        jTabbedPane.setSelectedIndex(1);
-        labelPanel.repaint();
-    }//GEN-LAST:event_jCheckBoxMenuViewContentActionPerformed
-
     private void jCheckBoxMenuViewGreenBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
-        labelPanel.showGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
-        jTabbedPane.setSelectedIndex(1);
-        labelPanel.repaint();
+        getLabelPanel().setShowGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
+        jEnergyLabelPane.setSelectedIndex(1);
+        if (getLabelPanel().isShowGreenBackground()) {
+            labelPanel.setElementFill("headerBackground", "#008000");
+            labelPanel.setElementFill("violationNoteBackground", "#008000");
+        } else {
+            labelPanel.setElementFill("headerBackground", "none");
+            labelPanel.setElementFill("violationNoteBackground", "none");
+        }
     }//GEN-LAST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
 
     private void openLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openLabelActionPerformed
@@ -508,7 +499,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     private void jMenuFileExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExportActionPerformed
 
-        jTabbedPane.setSelectedIndex(1);
+        jEnergyLabelPane.setSelectedIndex(1);
         doLabelImageExport();
     }//GEN-LAST:event_jMenuFileExportActionPerformed
 
@@ -541,6 +532,19 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private void SaveLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLabelActionPerformed
         saveLabel();
     }//GEN-LAST:event_SaveLabelActionPerformed
+
+    public JTabbedPane getjEnergyLabelPane() {
+        return jEnergyLabelPane;
+    }
+   
+    public void loadPanels() {
+        jEnergyLabelPane.removeAll();
+        jEnergyLabelPane.add("Label Data", getLabelDataPanel());
+        getLabelDataPanel().updateLabelData();
+        jEnergyLabelPane.add("Label View", getLabelPanel());
+        jEnergyLabelPane.setSelectedIndex(1);
+    }
+
     private void openLabel() {
 
         if (sysOptions.isConnectToDatabase()) {
@@ -552,12 +556,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             oldlg.setVisible(true);
             if (oldlg.proceedToOpenLabel()) {
 
-                jTabbedPane.removeAll();
-                jTabbedPane.add("Label Data", getLabelDataPanel());
-                getLabelDataPanel().updateLabelData();
-                //jTabbedPane.add("Label Data", labelDataScrollPane);
-                jTabbedPane.add("Label View", getLabelPanel());
-                jTabbedPane.setSelectedIndex(1);
+                loadPanels();
 
                 setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());
                 enableMenuItems(true);
@@ -597,7 +596,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                         "An error occured while saving the current label.\n"
                         + "This could occur because you do not have a database connection.\n"
                         + "Try to connect to a database in the options dialog and try again.",
-                        "Search Error",
+                        "Save Error",
                         JOptionPane.ERROR_MESSAGE);
             }
 
@@ -608,7 +607,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     "An error occured while saving the current label.\n"
                     + "This could occur because you do not have a database connection.\n"
                     + "Try to connect to a database in the options dialog and try again.",
-                    "Search Error",
+                    "Save Error",
                     JOptionPane.ERROR_MESSAGE);
         }
 
@@ -636,7 +635,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             return;
         }
 
-        jTabbedPane.removeAll();
+        jEnergyLabelPane.removeAll();
         this.setTitle("LabelPrint");
         enableMenuItems(false);
     }//GEN-LAST:event_jMenuFileCloseActionPerformed
@@ -671,12 +670,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         getLabelDataPanel().setEnergyLabel(new EnergyLabel());
         getLabelDataPanel().getEnergyLabel().setType(getSystemOptions().getProperty("ProductType"));
         getLabelDataPanel().getEnergyLabel().setStandard(getSystemOptions().getProperty("Standard"));
-        getLabelDataPanel().getEnergyLabel().setValidity(getSystemOptions().getProperty("Validity"));
+        getLabelDataPanel().getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
 
-        jTabbedPane.removeAll();
-        jTabbedPane.add("Label Data", getLabelDataPanel());
-        getLabelDataPanel().updateLabelData();
-        jTabbedPane.add("Label View", getLabelPanel());
+        loadPanels();
 
         this.setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());
         enableMenuItems(true);
@@ -686,38 +682,38 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         newLabel();
     }//GEN-LAST:event_jMenuFileNewActionPerformed
 
-    private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
+    private void jEnergyLabelPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jEnergyLabelPaneStateChanged
 
-        if (jTabbedPane.getSelectedIndex() == 1) {
+        if (jEnergyLabelPane.getSelectedIndex() == 1) {
             labelPanel.updateLabel();
         }
 
-    }//GEN-LAST:event_jTabbedPaneStateChanged
+    }//GEN-LAST:event_jEnergyLabelPaneStateChanged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         exit();
     }//GEN-LAST:event_formWindowClosing
 
     private void jCheckBoxMenuViewYellowBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
-        labelPanel.showYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
-        jTabbedPane.setSelectedIndex(1);
-        labelPanel.repaint();
+        getLabelPanel().setShowYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
+        jEnergyLabelPane.setSelectedIndex(1);
+        if (getLabelPanel().isShowYellowBackground()) {
+            labelPanel.setElementFill("mainBackground", "#ffff00");
+        } else {
+            labelPanel.setElementFill("mainBackground", "none");
+        }
     }//GEN-LAST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
 
     public JTabbedPane getTabbedPane() {
-        return jTabbedPane;
+        return jEnergyLabelPane;
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                new LabelPrintFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new LabelPrintFrame().setVisible(true);
         });
     }
 
@@ -780,9 +776,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton NewLabel;
     private javax.swing.JButton OpenLabel;
     private javax.swing.JButton SaveLabel;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewContent;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewGreenBackground;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewYellowBackground;
+    private javax.swing.JTabbedPane jEnergyLabelPane;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuEdit;
     private javax.swing.JMenuItem jMenuEditLabel;
@@ -804,7 +800,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel jStatusLabel;
-    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JToolBar jToolBar;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,7 +28,9 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
     private boolean bExportSuccessful;
     private String fileName;
     
-    /** Creates new form ExportJDialog */
+    /** Creates new form ExportJDialog
+     * @param parent
+     * @param modal */
     public ExportJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -86,20 +88,22 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ExportJDialog(new javax.swing.JFrame(), true).setVisible(true);
             }
         });
     }
     
+    @Override
     public void run() {
         
         if (fileName != null) {
             // Check to see which format to export
-            if (labelPrintFrame.getSystemOptions().isExportGIF()) {
-                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "gif");
-                jProgressBar1.setValue(25);
-            }
+//            if (labelPrintFrame.getSystemOptions().isExportGIF()) {
+//                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "gif");
+//                jProgressBar1.setValue(25);
+//            }
             if (labelPrintFrame.getSystemOptions().isExportJPEG()) {
                 labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
                 jProgressBar1.setValue(50);
@@ -118,7 +122,7 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
                 Thread.sleep(2000);
                 dispose();
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                System.out.println(ex);
             }
         }
         else

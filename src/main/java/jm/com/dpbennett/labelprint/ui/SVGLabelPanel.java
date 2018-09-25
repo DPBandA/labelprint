@@ -19,6 +19,7 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
+import java.io.*;
 import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
@@ -27,10 +28,16 @@ import java.net.URL;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
+import org.apache.batik.transcoder.TranscoderException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGLocatable;
 import org.w3c.dom.svg.SVGRect;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.apache.batik.transcoder.image.JPEGTranscoder;
+import org.apache.batik.transcoder.print.PrintTranscoder;
 
 /**
  *
@@ -38,9 +45,9 @@ import org.w3c.dom.svg.SVGRect;
  */
 public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
 
-    private boolean chkGreenBackground;
-    private boolean chkYellowBackground;
-    private boolean chkContents;
+    private boolean showGreenBackground;
+    private boolean showYellowBackground;
+    private boolean showContents;
     private LabelPrintFrame labelPrintFrame;
     private int m_maxNumPage = 1;
     private JSVGCanvas svgCanvas;
@@ -66,7 +73,43 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
 
     }
 
+    public boolean isShowGreenBackground() {
+        return showGreenBackground;
+    }
+
+    public void setShowGreenBackground(boolean showGreenBackground) {
+        this.showGreenBackground = showGreenBackground;
+    }
+
+    public boolean isShowYellowBackground() {
+        return showYellowBackground;
+    }
+
+    public void setShowYellowBackground(boolean showYellowBackground) {
+        this.showYellowBackground = showYellowBackground;
+    }
+
+    public boolean isShowContents() {
+        return showContents;
+    }
+
+    public void setShowContents(boolean showContents) {
+        this.showContents = showContents;
+    }
+
     private void initLabel() {
+        loadSVGLabel();
+
+        showGreenBackground = true;
+        showYellowBackground = true;
+        showContents = true;
+    }
+
+    private void loadSVGLabel() {
+        if (svgCanvas != null) {
+            remove(svgCanvas);
+        }
+
         svgCanvas = new JSVGCanvas();
         svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
         URL url = getClass().getClassLoader().getResource("images/EnergyLabel.svg");
@@ -74,17 +117,14 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
         svgCanvas.addSVGLoadEventDispatcherListener(new SVGLoadEventDispatcherAdapter() {
             @Override
             public void svgLoadEventDispatchStarted(SVGLoadEventDispatcherEvent e) {
-                // At this time the document is available so get it.
                 svgDocument = svgCanvas.getSVGDocument();
                 updateLabel();
             }
         });
 
-        chkGreenBackground = false;
-        chkYellowBackground = false;
-        chkContents = true;
+        add(svgCanvas, java.awt.BorderLayout.CENTER);
 
-        add("Center", svgCanvas);
+        labelPrintFrame.getjEnergyLabelPane().repaint();
     }
 
     public void updateLabel() {
@@ -154,21 +194,63 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
         }
     }
 
-    public void showGreenBackground(boolean flag) {
-        chkGreenBackground = flag;
-    }
-
-    public void showYellowBackground(boolean flag) {
-        chkYellowBackground = flag;
-    }
-
-    public void showContents(boolean flag) {
-        chkContents = flag;
+    public void setElementFill(String elementId, String fill) {
+        if (svgCanvas != null && svgDocument != null) {
+            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    Element element = svgDocument.getElementById(elementId);
+                    element.setAttribute("style", "fill:" + fill);
+                }
+            });
+        }
     }
 
     public boolean exportLabelToRasterGraphic(String fileName, String formatName) {
 
-        return true;
+        try {
+
+            TranscoderInput input = new TranscoderInput(svgDocument);
+            OutputStream ostream;
+            TranscoderOutput output;
+
+            switch (formatName) {
+                case "jpg":
+                    ostream = new FileOutputStream(fileName + ".jpg");
+                    output = new TranscoderOutput(ostream);
+                    JPEGTranscoder t = new JPEGTranscoder();
+
+                    t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
+                            new Float(.8));
+                    t.transcode(input, output);
+
+                    ostream.flush();
+                    ostream.close();
+
+                    break;
+                case "png":
+                    ostream = new FileOutputStream(fileName + ".png");
+                    output = new TranscoderOutput(ostream);
+                    PNGTranscoder t2 = new PNGTranscoder();
+
+                    t2.transcode(input, output);
+
+                    ostream.flush();
+                    ostream.close();
+                    break;
+                default:
+                    return false;
+            }
+
+            loadSVGLabel();
+
+            return true;
+        } catch (IOException | TranscoderException e) {
+            System.out.println(e);
+        } finally {
+            return false;
+        }
+
     }
 
     /**
@@ -249,11 +331,13 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
         pg.translate((int) pageFormat.getImageableX(),
                 (int) pageFormat.getImageableY());
 
-        // not used
+        // Not used
         int wPage = (int) pageFormat.getImageableWidth();
         int hPage = (int) pageFormat.getImageableHeight();
 
         //printContentOfLabel((Graphics2D) pg, imageScaleX, imageScaleY, 0, 0);
+        repaint(); //tk
+        
         System.gc();
 
         return PAGE_EXISTS;

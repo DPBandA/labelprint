@@ -55,7 +55,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jPDFCheckBox.setSelected(sysOptions.isExportPDF());
         // Label defaults
         jStandardTextField.setText(sysOptions.getProperty("Standard"));
-        jValidityTextField.setText(sysOptions.getProperty("Validity"));
         jProductTypeTextField.setText(sysOptions.getProperty("ProductType"));
         // Init Database Options tab
         jDatabaseURLTextField.setText(sysOptions.getProperty("ConnectionURL"));
@@ -136,8 +135,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jStandardTextField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jValidityTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jProductTypeTextField = new javax.swing.JTextField();
         jOkButton = new javax.swing.JButton();
@@ -277,12 +274,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelContentPanel);
 
-        jDatabaseOptionsPanel.setLayout(new java.awt.GridLayout(5, 2, 2, 25));
-
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Database URL:");
-        jDatabaseOptionsPanel.add(jLabel1);
 
         jDatabaseURLTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDatabaseURLTextField.addCaretListener(new javax.swing.event.CaretListener() {
@@ -290,12 +284,10 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 jDatabaseURLTextFieldCaretUpdate(evt);
             }
         });
-        jDatabaseOptionsPanel.add(jDatabaseURLTextField);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Username:");
-        jDatabaseOptionsPanel.add(jLabel2);
 
         jUsernameTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jUsernameTextField.addCaretListener(new javax.swing.event.CaretListener() {
@@ -303,24 +295,20 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 jUsernameTextFieldCaretUpdate(evt);
             }
         });
-        jDatabaseOptionsPanel.add(jUsernameTextField);
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Password:");
-        jDatabaseOptionsPanel.add(jLabel5);
 
         jPasswordField.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jPasswordFieldCaretUpdate(evt);
             }
         });
-        jDatabaseOptionsPanel.add(jPasswordField);
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Default search field:");
-        jDatabaseOptionsPanel.add(jLabel3);
 
         jDefaultSearchFieldComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDefaultSearchFieldComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -328,12 +316,10 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 jDefaultSearchFieldComboBoxActionPerformed(evt);
             }
         });
-        jDatabaseOptionsPanel.add(jDefaultSearchFieldComboBox);
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Connect to database:");
-        jDatabaseOptionsPanel.add(jLabel4);
 
         jConnectToDatabaseCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jConnectToDatabaseCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -341,7 +327,58 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 jConnectToDatabaseCheckBoxActionPerformed(evt);
             }
         });
-        jDatabaseOptionsPanel.add(jConnectToDatabaseCheckBox);
+
+        javax.swing.GroupLayout jDatabaseOptionsPanelLayout = new javax.swing.GroupLayout(jDatabaseOptionsPanel);
+        jDatabaseOptionsPanel.setLayout(jDatabaseOptionsPanelLayout);
+        jDatabaseOptionsPanelLayout.setHorizontalGroup(
+            jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDatabaseOptionsPanelLayout.createSequentialGroup()
+                .addGroup(jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jDatabaseOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jDatabaseURLTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDatabaseOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jUsernameTextField))
+                    .addGroup(jDatabaseOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jPasswordField))
+                    .addGroup(jDatabaseOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jDefaultSearchFieldComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jDatabaseOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jConnectToDatabaseCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        jDatabaseOptionsPanelLayout.setVerticalGroup(
+            jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDatabaseOptionsPanelLayout.createSequentialGroup()
+                .addGroup(jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDatabaseURLTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDefaultSearchFieldComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jConnectToDatabaseCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout jDatabasePanelLayout = new javax.swing.GroupLayout(jDatabasePanel);
         jDatabasePanel.setLayout(jDatabasePanelLayout);
@@ -349,8 +386,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
             jDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDatabasePanelLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jDatabaseOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addComponent(jDatabaseOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jDatabasePanelLayout.setVerticalGroup(
             jDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,7 +444,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jGIFCheckBox)
                     .addComponent(jPDFCheckBox))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Label Defaults", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
@@ -419,16 +456,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jStandardTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jStandardTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel7.setText("Year of validity:");
-
-        jValidityTextField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jValidityTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jValidityTextFieldActionPerformed(evt);
             }
         });
 
@@ -447,15 +474,13 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jStandardTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(jValidityTextField)
                     .addComponent(jProductTypeTextField))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -468,13 +493,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
                     .addComponent(jStandardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jValidityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jProductTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                    .addComponent(jProductTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jMiscellaneousPanelLayout = new javax.swing.GroupLayout(jMiscellaneousPanel);
@@ -604,7 +625,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setExportJPEG(jJPEGCheckBox.isSelected());
         // Update label defaults
         sysOptions.setProperty("Standard", jStandardTextField.getText());
-        sysOptions.setProperty("Validity", jValidityTextField.getText());
         sysOptions.setProperty("ProductType", jProductTypeTextField.getText());
         // Default field to search
         String selectedField = jDefaultSearchFieldComboBox.getSelectedItem().toString().trim();
@@ -693,10 +713,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
         databaseConnectionOptionsChanged = true;
     }//GEN-LAST:event_jStandardTextFieldActionPerformed
 
-    private void jValidityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jValidityTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jValidityTextFieldActionPerformed
-
     private void jProductTypeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jProductTypeTextFieldActionPerformed
@@ -731,7 +747,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jLabelContentPanel;
     private javax.swing.JPanel jMiscellaneousPanel;
@@ -759,6 +774,5 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextField jStandardTextField;
     private javax.swing.JTextField jUsernameTextField;
-    private javax.swing.JTextField jValidityTextField;
     // End of variables declaration//GEN-END:variables
 }
