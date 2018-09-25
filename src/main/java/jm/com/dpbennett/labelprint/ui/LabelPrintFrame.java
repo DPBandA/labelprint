@@ -19,13 +19,8 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
-import java.awt.Cursor;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-import java.awt.print.PageFormat;
-import java.awt.print.Paper;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -149,33 +144,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     public boolean isDirty() {
         return getLabelDataPanel().getEnergyLabel().getIsDirty();
-    }
-
-    private void printLabel() {
-        try {
-            PrinterJob prnJob = PrinterJob.getPrinterJob();
-            PageFormat pf = prnJob.defaultPage();
-            Paper p = pf.getPaper();
-            p.setImageableArea(18.0, 18.0, 600.0, 600.0);
-            pf.setPaper(p);
-            prnJob.setPrintable(labelPanel, pf);
-            if (!prnJob.printDialog()) {
-                return;
-            }
-            setCursor(Cursor.getPredefinedCursor(
-                    Cursor.WAIT_CURSOR));
-            prnJob.print();
-            setCursor(Cursor.getPredefinedCursor(
-                    Cursor.DEFAULT_CURSOR));
-        } catch (PrinterException e) {
-            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-            System.out.println(e);
-            System.err.println("Printing error: " + e.toString());
-            JOptionPane.showMessageDialog(this,
-                    "Error occured while printing",
-                    "Label Print",
-                    JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public final void enableMenuItems(boolean flag) {
@@ -467,14 +435,14 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
 
     private void jMenuFilePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilePrintActionPerformed
-        Thread printThread = new Thread() {
 
+        java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                printLabel();
+                getLabelPanel().printLabel();
             }
-        };
-        printThread.start();
+        });
+        
     }//GEN-LAST:event_jMenuFilePrintActionPerformed
 
     public String getFileAbsolutePath(String action) {
@@ -536,7 +504,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     public JTabbedPane getjEnergyLabelPane() {
         return jEnergyLabelPane;
     }
-   
+
     public void loadPanels() {
         jEnergyLabelPane.removeAll();
         jEnergyLabelPane.add("Label Data", getLabelDataPanel());

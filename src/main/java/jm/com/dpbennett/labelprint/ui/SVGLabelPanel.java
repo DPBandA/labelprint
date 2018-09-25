@@ -43,7 +43,7 @@ import org.apache.batik.transcoder.print.PrintTranscoder;
  *
  * @author dbennett
  */
-public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
+public class SVGLabelPanel extends javax.swing.JPanel {
 
     private boolean showGreenBackground;
     private boolean showYellowBackground;
@@ -253,6 +253,24 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
 
     }
 
+    public void printLabel() {
+        PrintTranscoder pt = new PrintTranscoder();
+        pt.addTranscodingHint(PrintTranscoder.KEY_MARGIN_TOP, new Float(18.0));
+        pt.addTranscodingHint(PrintTranscoder.KEY_MARGIN_LEFT, new Float(18.0));
+        pt.addTranscodingHint(PrintTranscoder.KEY_MARGIN_BOTTOM, new Float(18.0));
+        pt.addTranscodingHint(PrintTranscoder.KEY_MARGIN_RIGHT, new Float(18.0));
+        pt.addTranscodingHint(PrintTranscoder.KEY_SHOW_PRINTER_DIALOG, Boolean.TRUE);
+
+        try {
+            pt.transcode(new TranscoderInput(svgDocument), null);
+            pt.print();
+
+            loadSVGLabel();
+        } catch (PrinterException e) {
+            System.out.println(e);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -319,28 +337,5 @@ public class SVGLabelPanel extends javax.swing.JPanel implements Printable {
     private javax.swing.JButton jEditLabelData;
     private javax.swing.JButton jSaveLabelData;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public int print(Graphics pg, PageFormat pageFormat,
-            int pageIndex) throws PrinterException {
-
-        if (pageIndex >= m_maxNumPage) {
-            return NO_SUCH_PAGE;
-        }
-
-        pg.translate((int) pageFormat.getImageableX(),
-                (int) pageFormat.getImageableY());
-
-        // Not used
-        int wPage = (int) pageFormat.getImageableWidth();
-        int hPage = (int) pageFormat.getImageableHeight();
-
-        //printContentOfLabel((Graphics2D) pg, imageScaleX, imageScaleY, 0, 0);
-        repaint(); //tk
-        
-        System.gc();
-
-        return PAGE_EXISTS;
-    }
 
 }
