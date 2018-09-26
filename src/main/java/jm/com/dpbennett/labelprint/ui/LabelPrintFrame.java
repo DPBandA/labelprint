@@ -110,9 +110,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public EnergyLabel findLabel(Long id) {
-        getLabelDataPanel().setEnergyLabel(getEntityManager().find(EnergyLabel.class, id));
-
-        return getLabelDataPanel().getEnergyLabel();
+        return getEntityManager().find(EnergyLabel.class, id);
     }
 
     public boolean isLabelNameUsed(String labelName) {
@@ -442,7 +440,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                 getLabelPanel().printLabel();
             }
         });
-        
+
     }//GEN-LAST:event_jMenuFilePrintActionPerformed
 
     public String getFileAbsolutePath(String action) {
@@ -482,17 +480,12 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public SVGLabelPanel getLabelPanel() {
-        if (labelPanel == null) {
-            labelPanel = new SVGLabelPanel(this);
-        }
 
         return labelPanel;
     }
 
     public LabelDataPanel getLabelDataPanel() {
-        if (labelDataPanel == null) {
-            labelDataPanel = new LabelDataPanel(this);
-        }
+        
         return labelDataPanel;
     }
 
@@ -505,12 +498,12 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         return jEnergyLabelPane;
     }
 
-    public void loadPanels() {
-        jEnergyLabelPane.removeAll();
-        jEnergyLabelPane.add("Label Data", getLabelDataPanel());
+    public void loadLabelPanels() {
+
         getLabelDataPanel().updateLabelData();
-        jEnergyLabelPane.add("Label View", getLabelPanel());
-        jEnergyLabelPane.setSelectedIndex(1);
+        getLabelPanel().updateLabel();
+        
+        getjEnergyLabelPane().repaint();
     }
 
     private void openLabel() {
@@ -523,8 +516,14 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             OpenLabelDialog oldlg = new OpenLabelDialog(this, true);
             oldlg.setVisible(true);
             if (oldlg.proceedToOpenLabel()) {
-
-                loadPanels();
+                
+                createLabelPanels();
+                
+                getLabelDataPanel().setEnergyLabel(findLabel(oldlg.getLabelId()));
+                
+                loadLabelPanels();
+                
+                getjEnergyLabelPane().setSelectedIndex(1);
 
                 setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());
                 enableMenuItems(true);
@@ -603,30 +602,53 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             return;
         }
 
-        jEnergyLabelPane.removeAll();
-        this.setTitle("LabelPrint");
+        getjEnergyLabelPane().removeAll();
+        labelDataPanel = null;
+        labelPanel = null;
+
+        setTitle("LabelPrint");
         enableMenuItems(false);
     }//GEN-LAST:event_jMenuFileCloseActionPerformed
 
     private int saveFileIfDirty() {
         int choice = JOptionPane.YES_OPTION;
 
-        if (getLabelDataPanel().getEnergyLabel().getIsDirty()) {
-            choice = JOptionPane.showConfirmDialog(this,
-                    "Label has been changed. Do you want to save it?",
-                    "Save",
-                    JOptionPane.YES_NO_CANCEL_OPTION);
+        if (getLabelDataPanel() != null) {
+            if (getLabelDataPanel().getEnergyLabel().getIsDirty()) {
+                choice = JOptionPane.showConfirmDialog(this,
+                        "Label has been changed. Do you want to save it?",
+                        "Save",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
 
-            if (choice == JOptionPane.YES_OPTION) {
-                saveLabel();
-            }
+                if (choice == JOptionPane.YES_OPTION) {
+                    saveLabel();
+                }
 
-            if (choice == JOptionPane.CANCEL_OPTION) {
-                return choice;
+                if (choice == JOptionPane.CANCEL_OPTION) {
+                    return choice;
+                }
             }
         }
 
         return choice;
+    }
+
+    /**
+     * Create and add panels if they do not exist.
+     */
+    private void createLabelPanels() {
+        
+        if (labelDataPanel == null) {
+            labelDataPanel = new LabelDataPanel(this);
+            getjEnergyLabelPane().add("Label Data", labelDataPanel);
+        }
+        if (labelPanel == null) {
+            labelPanel = new SVGLabelPanel(this);
+            getjEnergyLabelPane().add("Label View", labelPanel);
+        }
+        
+        // Select the data panel
+        getjEnergyLabelPane().setSelectedIndex(0);
     }
 
     private void newLabel() {
@@ -635,12 +657,16 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             return;
         }
 
+        createLabelPanels();
+
         getLabelDataPanel().setEnergyLabel(new EnergyLabel());
         getLabelDataPanel().getEnergyLabel().setType(getSystemOptions().getProperty("ProductType"));
         getLabelDataPanel().getEnergyLabel().setStandard(getSystemOptions().getProperty("Standard"));
         getLabelDataPanel().getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
 
-        loadPanels();
+        loadLabelPanels();
+        
+        getjEnergyLabelPane().setSelectedIndex(0);
 
         this.setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());
         enableMenuItems(true);

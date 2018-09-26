@@ -1,10 +1,4 @@
 
-# General
-- Impl printing with Batik Transcoder API. See if the print quality can be 
-  changed with hints.
-- Add capacityLabel, capacityUnit to field and use it to append to the capacity instead of 
-  using if statements.
-
 # Updated standard implementation
 - Read standards and take notes.
 

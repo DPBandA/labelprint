@@ -412,6 +412,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jGIFCheckBox.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jGIFCheckBox.setText("GIF");
         jGIFCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jGIFCheckBox.setEnabled(false);
 
         jPDFCheckBox.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jPDFCheckBox.setText("PDF");
@@ -444,7 +445,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jGIFCheckBox)
                     .addComponent(jPDFCheckBox))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Label Defaults", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
@@ -514,9 +515,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jMiscellaneousPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jMiscellaneousPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(155, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Miscellaneous", jMiscellaneousPanel);
