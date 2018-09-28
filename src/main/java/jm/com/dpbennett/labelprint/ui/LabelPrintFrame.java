@@ -692,7 +692,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         getLabelPanel().setShowYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
         jEnergyLabelPane.setSelectedIndex(1);
         if (getLabelPanel().isShowYellowBackground()) {
-            labelPanel.setElementFill("mainBackground", "#ffff00");
+            labelPanel.setElementFill("mainBackground", "#FFDF00");
         } else {
             labelPanel.setElementFill("mainBackground", "none");
         }

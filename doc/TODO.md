@@ -7,6 +7,8 @@
 - Change label "Type", "Capacity" and "Defrost" based on the product type.
 - Impl splitting stars in two halves so that the color of each half can be
   displayed in different colors.
+- Make background colors system options: mainBackground: #FFDF00
+  headerBackground: #008000, violationBackground: #008000
 - Should the outer semicircle be displayed even if there are no starts.
 - Accommodate displaying capcity and/or size?
 - Impl display energy efficiency ratio in the case of room air conditioners? 

@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="EnergyLabel.svg">
+   sodipodi:docname="ExtendedEnergyLabel.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,11 +26,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.6393643"
-     inkscape:cx="584.95602"
+     inkscape:zoom="0.43704156"
+     inkscape:cx="818"
      inkscape:cy="640"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="svg8"
      showgrid="false"
      inkscape:window-width="1215"
      inkscape:window-height="1000"
@@ -54,7 +54,7 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1"
+     id="bottomSection"
      transform="translate(0,64.244458)">
     <text
        xml:space="preserve"
@@ -65,7 +65,7 @@
        inkscape:label="#text28"
        transform="scale(0.78444661,1.274784)" />
     <rect
-       style="fill:#ffff00"
+       style="fill:#ffdf00"
        id="mainBackground"
        width="461.71555"
        height="361.24445"
