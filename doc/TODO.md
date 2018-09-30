@@ -15,11 +15,13 @@
 - For label top section specs see "Details of top section.png".                 
 
 # Packaging
+- Setup izpack installer 
+  * Create LabelPrintInstaller project using maven.
+  * Ensure installer works on all Windows.
 - Edit LabelPrintIcon.png to create a different image. Try a using letter e
   in green on a yellow background.
 - Impl splashscreen using existing dialog.
 - Impl option to load label file from external source in addition to the resources folder.
-- Learn izpack installer (http://izpack.org/) and setup installer on Win 7
 
 # Documentation
 - Edit user manual

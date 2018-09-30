@@ -23,6 +23,8 @@ import java.io.*;
 import javax.swing.*;
 import java.util.Properties;
 import java.io.FileInputStream;
+import java.nio.file.Paths;
+import jm.com.dpbennett.business.entity.utils.FileUtils;
 import jm.com.dpbennett.business.entity.utils.Security;
 
 public final class SystemOptions {
@@ -52,7 +54,7 @@ public final class SystemOptions {
         {
             "Operating cost", "operatingCost"}
     };
-   
+
     public SystemOptions() {
     }
 
@@ -60,6 +62,7 @@ public final class SystemOptions {
         this.systemFile = systemFile;
         props = new Properties();
         if (!readSystemData()) {
+
             JOptionPane.showMessageDialog(null,
                     "Error occured while loading system options",
                     "LabelPrint",
@@ -67,7 +70,7 @@ public final class SystemOptions {
 
         }
     }
-    
+
     public void setProperty(String name, String value) {
         props.setProperty(name, value);
     }
@@ -84,7 +87,7 @@ public final class SystemOptions {
         try {
 
             try {
-                fis = new FileInputStream(systemFile);
+                fis = new FileInputStream(FileUtils.getAbsoluteFilePath(systemFile, getClass()));
             } catch (FileNotFoundException e) {
                 System.out.println("Properties file not found. Loading default...");
                 fis = new FileInputStream(getClass().
@@ -107,7 +110,8 @@ public final class SystemOptions {
 
         try {
 
-            props.store(new FileOutputStream(systemFile), "LabelPrint System Options");
+            props.store(new FileOutputStream(FileUtils.getAbsoluteFilePath(systemFile, getClass())), 
+                    "LabelPrint System Options");
 
         } catch (IOException ex) {
             System.out.println(ex);
@@ -165,11 +169,11 @@ public final class SystemOptions {
     public void setConnectToDatabase(boolean b) {
         props.setProperty("ConnectToDatabase", Boolean.toString(b));
     }
-    
+
     public String getConnectionPassword() {
         return (Security.decrypt(props.getProperty("ConnectionPassword")));
     }
-    
+
     public void setConnectionPassword(String connectionPassword) {
         props.setProperty("ConnectionPassword", Security.encrypt(connectionPassword));
     }
@@ -181,7 +185,7 @@ public final class SystemOptions {
 
     public static void main(String[] args) {
         SystemOptions systemOptions1 = new SystemOptions("LabelPrint.properties");
-        System.out.print(systemOptions1.getProperty("DefaultFieldToSearch") + "\n");      
+        System.out.print(systemOptions1.getProperty("DefaultFieldToSearch") + "\n");
     }
 
 }
