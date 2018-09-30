@@ -109,7 +109,7 @@ public class SVGLabelPanel extends javax.swing.JPanel {
 
         svgCanvas = new JSVGCanvas();
         svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
-        URL url = getClass().getClassLoader().getResource("images/EnergyLabel.svg");
+        URL url = getClass().getClassLoader().getResource("images/ExtendedEnergyLabel.svg");
         svgCanvas.setURI(url.toString());
         svgCanvas.addSVGLoadEventDispatcherListener(new SVGLoadEventDispatcherAdapter() {
             @Override

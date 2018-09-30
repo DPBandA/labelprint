@@ -390,7 +390,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         JOptionPane.showMessageDialog(this,
                 new CustomEditorPane("LabelPrint<br>"
                         + "&copy; 2018 D P Bennett & Associates<br>"
-                        + "Website: <a href=\"http://dpbennett.com.jm\">http://dpbennett.com.jm</a>"),
+                        + "Website: <a href=\"http://lp.dpbennett.com.jm\">http://lp.dpbennett.com.jm</a>"),
                 "About",
                 JOptionPane.INFORMATION_MESSAGE);
 
