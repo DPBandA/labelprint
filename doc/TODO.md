@@ -16,6 +16,7 @@
 
 # Packaging
 - Setup izpack installer 
+  * Fork from desbeen repo
   * Create LabelPrintInstaller project using maven.
   * Ensure installer works on all Windows.
 - Edit LabelPrintIcon.png to create a different image. Try a using letter e
