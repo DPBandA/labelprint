@@ -539,6 +539,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     "Label Open Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+        
+        setStatus("Ready...");
     }
 
     public String getPDFFileAbsolutePath(String action) {

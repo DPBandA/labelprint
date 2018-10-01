@@ -52,13 +52,32 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
+                        <id>copy-executables</id>
                         <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target</outputDirectory>
+                            <outputDirectory>${basedir}/target/system</outputDirectory>
+                            <resources>          
+                                <resource>                                    
+                                    <directory>${basedir}/target</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>*.jar</include>
+                                    </includes>
+                                </resource>
+                            </resources>              
+                        </configuration>            
+                    </execution>
+                    <execution>
+                        <id>copy-system-files</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/system</outputDirectory>
                             <resources>          
                                 <resource>
                                     <directory>${basedir}/src/main/resources/system</directory>
@@ -67,7 +86,7 @@
                         </configuration>            
                     </execution>
                     <execution>
-                        <id>copy-resources-2</id>
+                        <id>copy-images</id>
                         <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>

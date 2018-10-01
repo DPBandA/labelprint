@@ -126,7 +126,7 @@ public class SVGLabelPanel extends javax.swing.JPanel {
 
     public void updateLabel() {
 
-        if (svgCanvas != null && svgDocument != null) {
+        if (labelPrintFrame != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(new Runnable() {
                 @Override
                 public void run() {

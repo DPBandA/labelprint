@@ -646,7 +646,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                labelPrintFrame.getLabelPanel().updateLabel();
+                if (labelPrintFrame.getLabelPanel() != null) {
+                    labelPrintFrame.getLabelPanel().updateLabel();
+                }
             }
 
         });
@@ -656,7 +658,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
             System.out.println("will try to setup db with user:"
                     + sysOptions.getProperty("ConnectionUserName"));
             if (labelPrintFrame.setupDatabaseConnection()) {
-                
+
                 labelPrintFrame.setStatus("Ready...");
                 dispose();
             } else {
