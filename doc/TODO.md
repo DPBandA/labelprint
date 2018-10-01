@@ -16,7 +16,8 @@
 
 # Packaging
 - Setup izpack installer 
-  * Fork from desbeen repo
+  * Use "maven copy resources" to copy the "LP.jar" and "LabelProperties" to staging
+  * Fork from desbenn repo
   * Ensure installer works on all Windows.
 - Edit LabelPrintIcon.png to create a different image. Try a using letter e
   in green on a yellow background.
