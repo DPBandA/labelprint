@@ -50,26 +50,7 @@
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-executables</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/system</outputDirectory>
-                            <resources>          
-                                <resource>                                    
-                                    <directory>${basedir}/target</directory>
-                                    <filtering>true</filtering>
-                                    <includes>
-                                        <include>*.jar</include>
-                                    </includes>
-                                </resource>
-                            </resources>              
-                        </configuration>            
-                    </execution>
+                <executions>                    
                     <execution>
                         <id>copy-system-files</id>
                         <phase>install</phase>
@@ -99,9 +80,30 @@
                                 </resource>
                             </resources>              
                         </configuration>            
-                    </execution>
+                    </execution>              
                 </executions>
             </plugin> 
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-jars</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${basedir}/target/system">
+                                    <fileset dir="${basedir}/target">
+                                        <include name="*.jar" />
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
                          
         </plugins>
     </build>
