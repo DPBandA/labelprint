@@ -1,10 +1,16 @@
+# General
+
+
+# Label Design
+- Add extended label section to ExtendedEnergyLabel
+* Lock the layer containing the main section of the label.  
+* Add circles on a new layer and hide the lower sections of the circles to
+    semi-circles.
 
 # Updated standard implementation
-- Use capacityLabel and capacityUnit to field and change their values based on 
-  the type of product.
 - At Capacity, replace with Heating Capacity for AC.
-- Defrost type to be deleted and replace with Cooling Capacity fpr AC.
-- Change label "Type", "Capacity" and "Defrost" based on the product type.
+- Defrost type to be replace with Cooling Capacity for AC.
+- Change labels "Capacity" and "Defrost" based on the product type.
 - Impl splitting stars in two halves so that the color of each half can be
   displayed in different colors.
 - Make background colors system options: mainBackground: #FFDF00

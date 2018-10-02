@@ -7,3 +7,4 @@
 - Obtain energy operating cost by multiplying annual consumption by cost per kwh
   and make the operating cost field read only?
 - Impl validation of label data fields.
+- Let "ok" button be the default action button when enter is pressed.

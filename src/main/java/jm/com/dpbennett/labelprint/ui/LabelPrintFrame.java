@@ -404,7 +404,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuEditLabelActionPerformed
 
     private void NewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewLabelActionPerformed
-        newLabel();
+        createNewLabel();
     }//GEN-LAST:event_NewLabelActionPerformed
 
     private void jMenuEditOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditOptionsActionPerformed
@@ -656,7 +656,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         getjEnergyLabelPane().setSelectedIndex(0);
     }
 
-    private void newLabel() {
+    private void createNewLabel() {
 
         if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
             return;
@@ -666,6 +666,10 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         getLabelDataPanel().setEnergyLabel(new EnergyLabel());
         getLabelDataPanel().getEnergyLabel().setType(getSystemOptions().getProperty("ProductType"));
+        if (getLabelDataPanel().getEnergyLabel().getType().equals("Refrigerator") || 
+                getLabelDataPanel().getEnergyLabel().getType().equals("Basic Refrigerator")) {
+            getLabelDataPanel().getEnergyLabel().setDefrost("Automatic");
+        }
         getLabelDataPanel().getEnergyLabel().setStandard(getSystemOptions().getProperty("Standard"));
         getLabelDataPanel().getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
 
@@ -678,7 +682,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     private void jMenuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileNewActionPerformed
-        newLabel();
+        createNewLabel();
     }//GEN-LAST:event_jMenuFileNewActionPerformed
 
     private void jEnergyLabelPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jEnergyLabelPaneStateChanged
