@@ -2,7 +2,7 @@
 LabelPrint - A general purpose energy label printing application 
 Copyright (C) 2018  D P Bennett & Associates Limited
 
-This program is free software: you can redistribute it and/or modify
+This program is free software: you can  redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
@@ -23,26 +23,13 @@ import java.io.*;
 import javax.swing.*;
 import java.util.Properties;
 import java.io.FileInputStream;
-import java.net.URL;
+import java.nio.file.Paths;
+import jm.com.dpbennett.business.entity.utils.FileUtils;
+import jm.com.dpbennett.business.entity.utils.Security;
 
-/**
- * <p>
- * Title: Refrigerator Energy Label Print</p>
- * <p>
- * Description: Generates energy consumption labels for refrigerators tested by
- * the Bureau of Standards (Jamaica).</p>
- * <p>
- * Copyright: Copyright (c) 2001</p>
- * <p>
- * Company: Bureau of Standards (Jamaica)</p>
- *
- * @author Desmond Bennett
- * @version 1.0
- */
-public class SystemOptions {
+public final class SystemOptions {
 
     private String systemFile;
-    //SystemData sd;
     private Properties props;
     private boolean noError;
     private String[][] fieldsToSearch = {
@@ -67,9 +54,6 @@ public class SystemOptions {
         {
             "Operating cost", "operatingCost"}
     };
-    public String[] mostRecentSearchStrings = {
-        "", "", "", "", "",
-        "", "", "", "", ""};
 
     public SystemOptions() {
     }
@@ -78,6 +62,7 @@ public class SystemOptions {
         this.systemFile = systemFile;
         props = new Properties();
         if (!readSystemData()) {
+
             JOptionPane.showMessageDialog(null,
                     "Error occured while loading system options",
                     "LabelPrint",
@@ -86,7 +71,15 @@ public class SystemOptions {
         }
     }
 
-    private boolean readSystemData() {
+    public void setProperty(String name, String value) {
+        props.setProperty(name, value);
+    }
+
+    public String getProperty(String name) {
+        return props.getProperty(name);
+    }
+
+    public boolean readSystemData() {
 
         noError = true;
         FileInputStream fis;
@@ -94,7 +87,7 @@ public class SystemOptions {
         try {
 
             try {
-                fis = new FileInputStream("LabelPrint.properties");
+                fis = new FileInputStream(FileUtils.getAbsoluteFilePath(systemFile, getClass()));
             } catch (FileNotFoundException e) {
                 System.out.println("Properties file not found. Loading default...");
                 fis = new FileInputStream(getClass().
@@ -117,7 +110,8 @@ public class SystemOptions {
 
         try {
 
-            props.store(new FileOutputStream(systemFile), "LabelPrint System Options");
+            props.store(new FileOutputStream(FileUtils.getAbsoluteFilePath(systemFile, getClass())), 
+                    "LabelPrint System Options");
 
         } catch (IOException ex) {
             System.out.println(ex);
@@ -126,94 +120,6 @@ public class SystemOptions {
 
         return noError;
 
-    }
-
-    public String getPersistenceManagerFactoryClass() {
-        return props.getProperty("PersistenceManagerFactoryClass");
-    }
-
-    public void setPersistenceManagerFactoryClass(String pmfc) {
-        props.setProperty("PersistenceManagerFactoryClass", pmfc);
-    }
-
-    public String getConnectionDriverName() {
-        return props.getProperty("ConnectionDriverName");
-    }
-
-    public void setConnectionDriverName(String cdn) {
-        props.setProperty("ConnectionDriverName", cdn);
-    }
-
-    public String getConnectionURL() {
-        return props.getProperty("ConnectionURL");
-    }
-
-    public void setConnectionURL(String cu) {
-        props.setProperty("ConnectionURL", cu);
-    }
-
-    public String getDatabaseTable() {
-        return props.getProperty("DatabaseTable");
-    }
-
-    public void setDatabaseTable(String dt) {
-        props.setProperty("DatabaseTable", dt);
-    }
-
-    public String getConnectionUserName() {
-        return props.getProperty("ConnectionUserName");
-    }
-
-    public void setConnectionUserName(String cun) {
-        props.setProperty("ConnectionUserName", cun);
-    }
-
-    public String getConnectionPassword() {
-        return props.getProperty("ConnectionPassword");
-    }
-
-    public void setConnectionPassword(String cp) {
-        props.setProperty("ConnectionPassword", cp);
-    }
-
-    public String getDefaultFieldToSearch() {
-        return props.getProperty("DefaultFieldToSearch");
-    }
-
-    public void setDefaultFieldToSearch(String dfts) {
-        props.setProperty("DefaultFieldToSearch", dfts);
-    }
-
-    public String getDefaultFieldToDisplay() {
-        return props.getProperty("DefaultFieldToDisplay");
-    }
-
-    public void setDefaultFieldToDisplay(String dftd) {
-        props.setProperty("DefaultFieldToDisplay", dftd);
-    }
-
-    public String getLabelLogoFile() {
-        return props.getProperty("LabelLogoFile");
-    }
-
-    public void setLabelLogoFile(String file) {
-        props.setProperty("LabelLogoFile", file);
-    }
-
-    public String getMostRecentSearchString() {
-        return props.getProperty("MostRecentSearchString");
-    }
-
-    public void setMostRecentSearchString(String mrss) {
-        props.setProperty("MostRecentSearchString", mrss);
-    }
-
-    public String[] getMostRecentSearchStrings() {
-        return mostRecentSearchStrings;
-    }
-
-    public void setMostRecentSearchStrings(String[] mrss) {
-        mostRecentSearchStrings = mrss;
     }
 
     public String[][] getFieldsToSearch() {
@@ -256,36 +162,20 @@ public class SystemOptions {
         props.setProperty("ExportPDF", Boolean.toString(b));
     }
 
-    public String getFontsDirectory() {
-        return props.getProperty("FontsDirectory");
-    }
-
-    public void setFontsDirectory(String s) {
-        props.setProperty("FontsDirectory", s);
-    }
-
-    public String getHeadingImage() {
-        return props.getProperty("HeadingImage");
-    }
-
-    public void setHeadingImage(String s) {
-        props.setProperty("HeadingImage", s);
-    }
-
-    public String getStandard() {
-        return props.getProperty("Standard");
-    }
-
-    public void setStandard(String s) {
-        props.setProperty("Standard", s);
-    }
-
     public boolean isConnectToDatabase() {
         return Boolean.parseBoolean(props.getProperty("ConnectToDatabase"));
     }
 
     public void setConnectToDatabase(boolean b) {
         props.setProperty("ConnectToDatabase", Boolean.toString(b));
+    }
+
+    public String getConnectionPassword() {
+        return (Security.decrypt(props.getProperty("ConnectionPassword")));
+    }
+
+    public void setConnectionPassword(String connectionPassword) {
+        props.setProperty("ConnectionPassword", Security.encrypt(connectionPassword));
     }
 
     @Override
@@ -295,9 +185,7 @@ public class SystemOptions {
 
     public static void main(String[] args) {
         SystemOptions systemOptions1 = new SystemOptions("LabelPrint.properties");
-        System.out.print(systemOptions1.getDefaultFieldToSearch() + "\n");
-        //System.out.print(systemOptions1.getConnectionDriverName() + "\n");
-        //System.out.print(systemOptions1.getLabelLogoFile() + "\n");
+        System.out.print(systemOptions1.getProperty("DefaultFieldToSearch") + "\n");
     }
 
 }

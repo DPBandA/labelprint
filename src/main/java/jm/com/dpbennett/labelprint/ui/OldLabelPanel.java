@@ -20,6 +20,7 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfTemplate;
 import com.lowagie.text.pdf.PdfWriter;
@@ -36,6 +37,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -45,7 +47,7 @@ import jm.com.dpbennett.labelprint.SystemOptions;
  *
  * @author dbennett
  */
-public class LabelPanel extends javax.swing.JPanel implements Printable {
+public class OldLabelPanel extends javax.swing.JPanel implements Printable {
 
     //private static EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("LabelPrintPU");
     private boolean chkGreenBackground;
@@ -65,7 +67,7 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
     /**
      * Creates new form LabelPanel
      */
-    public LabelPanel() {
+    public OldLabelPanel() {
         initComponents();
     }
 
@@ -73,19 +75,19 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
      * Creates new form LabelPanel
      * @param labelPrintFrame
      */
-    public LabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
+    public OldLabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
         this.labelPrintFrame = labelPrintFrame;
         initComponents();
 
         Toolkit toolKit = Toolkit.getDefaultToolkit();
 
-        SystemOptions sysOptions = new SystemOptions("LabelPrint.properties");
+        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
 
         //img = toolKit.createImage(sysOptions.getLabelLogoFile());
         // getClass().getResource("/system/" + systemFile)
         // tk
-        img = toolKit.createImage(getClass().getResource(sysOptions.getLabelLogoFile()));
-        labelHeadingImg = toolKit.createImage(getClass().getResource(sysOptions.getHeadingImage()));
+        //img = toolKit.createImage(getClass().getResource(sysOptions.getLabelLogoFile()));
+        //labelHeadingImg = toolKit.createImage(getClass().getResource(sysOptions.getHeadingImage()));
     }
 
     public void showGreenBackground(boolean flag) {
@@ -120,12 +122,12 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
             cb = writer.getDirectContent();
             tp = cb.createTemplate(pdfTemplateWidth, pdfTemplateHeight);
 
-            g2 = tp.createGraphics(pdfTemplateWidth, pdfTemplateHeight, labelPrintFrame.getDefaultFontMapper());
-            printContentOfLabel(g2, imageScaleX, imageScaleY, 0, 0);
-            g2.dispose();
+            //g2 = tp.createGraphics(pdfTemplateWidth, pdfTemplateHeight, labelPrintFrame.getDefaultFontMapper());
+            //printContentOfLabel(g2, imageScaleX, imageScaleY, 0, 0);
+            //g2.dispose();
             cb.addTemplate(tp, 20, 340);
 //            cb.addTemplate(tp, 10, 170);
-        } catch (Exception e) {
+        } catch (DocumentException | FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
         document.close();
@@ -203,22 +205,22 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
             g.setFont(f);
 //            int RequiredSpace = g.getFontMetrics().stringWidth("aaaaaaaa");  
             int RequiredSpace = g.getFontMetrics().stringWidth("aaaaaaaaaaaaaa"); //tk
-            g.drawString(labelPrintFrame.getEnergyLabelData().getType(), 20, 110);
+            g.drawString(labelPrintFrame.getLabelDataPanel().getEnergyLabel().getType(), 20, 110);
             g.drawString("Heating Capacity", 20, 125); // tk
-            g.drawString(": " + labelPrintFrame.getEnergyLabelData().getCapacity() + "m",
+            g.drawString(": " + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCapacity() + "m",
                     25 + g.getFontMetrics().stringWidth("Heating Capacity")
                     + (RequiredSpace - g.getFontMetrics().stringWidth("Heating Capacity")), 125);
             g.drawString(" 3", 24 + g.getFontMetrics().stringWidth("Heating Capacity")
                     + (RequiredSpace - g.getFontMetrics().stringWidth("Heating Capacity"))
                     + g.getFontMetrics().stringWidth(":"
-                            + labelPrintFrame.getEnergyLabelData().getCapacity() + "m"), 122);
+                            + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCapacity() + "m"), 122);
             RequiredSpace = g.getFontMetrics().stringWidth("aaaaaaaaaaaaaa"); //tk
             g.drawString("Defrost", 20, 140);
-            g.drawString(": " + labelPrintFrame.getEnergyLabelData().getDefrost(),
+            g.drawString(": " + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDefrost(),
                     25 + g.getFontMetrics().stringWidth("Defrost")
                     + (RequiredSpace - g.getFontMetrics().stringWidth("Defrost")), 140);
             g.drawString("Distributor", 20, 155);
-            g.drawString(": " + labelPrintFrame.getEnergyLabelData().getDistributor(),
+            g.drawString(": " + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDistributor(),
                     25 + g.getFontMetrics().stringWidth("Distributor")
                     + (RequiredSpace
                     - g.getFontMetrics().stringWidth("Distributor")), 155);
@@ -226,16 +228,16 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
             // general info??
             RequiredSpace = g.getFontMetrics().stringWidth("aaaaaaaaaaaaaa");
             g.drawString("Manufacturer", 190, 125);
-            g.drawString(": " + labelPrintFrame.getEnergyLabelData().getManufacturer(),
+            g.drawString(": " + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getManufacturer(),
                     190 + g.getFontMetrics().stringWidth("Manufacturer")
                     + (RequiredSpace
                     - g.getFontMetrics().stringWidth("Manufacturer")), 125);
             g.drawString("Model No.", 190, 140);
-            g.drawString(": " + labelPrintFrame.getEnergyLabelData().getModel(),
+            g.drawString(": " + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getModel(),
                     190 + g.getFontMetrics().stringWidth("Model No.")
                     + (RequiredSpace - g.getFontMetrics().stringWidth("Model No.")), 140);
             g.drawString("Country of Origin", 190, 155);
-            g.drawString(": " + labelPrintFrame.getEnergyLabelData().getCountry(),
+            g.drawString(": " + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCountry(),
                     190 + g.getFontMetrics().stringWidth("Country of Origin")
                     + (RequiredSpace
                     - g.getFontMetrics().stringWidth("Country of Origin")), 155);
@@ -249,17 +251,17 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
             // cost
             f = new Font("Impact", Font.BOLD, 44);
             g.setFont(f);
-            g.drawString("$" + labelPrintFrame.getEnergyLabelData().getOperatingCost(),
+            g.drawString("$" + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getOperatingCost(),
                     195
-                    - g.getFontMetrics().stringWidth(labelPrintFrame.getEnergyLabelData().getOperatingCost()) / 2,
+                    - g.getFontMetrics().stringWidth(labelPrintFrame.getLabelDataPanel().getEnergyLabel().getOperatingCost()) / 2,
                     220);
 
             // costing display
             f = new Font("Arial", Font.PLAIN, 8); // org font size 10
             g.setFont(f);
             String CostingDisplayLine1 = "Based on a total consumption of "
-                    + labelPrintFrame.getEnergyLabelData().getAnnualConsumption()
-                    + " kWh per year at an *estimated average rate of $" + labelPrintFrame.getEnergyLabelData().getCostPerKwh()
+                    + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getAnnualConsumption()
+                    + " kWh per year at an *estimated average rate of $" + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCostPerKwh()
                     + "/kWh.";
             g.drawString(CostingDisplayLine1, 20, 250);
 
@@ -276,13 +278,13 @@ public class LabelPanel extends javax.swing.JPanel implements Printable {
             g.drawString("for:", 20, 300);
             f = new Font("Arial", Font.BOLD, 10);
             g.setFont(f);
-            g.drawString(labelPrintFrame.getEnergyLabelData().getValidity(), 20, 310);
+            g.drawString(labelPrintFrame.getLabelDataPanel().getEnergyLabel().getValidity(), 20, 310);
 
             // display standard info
             f = new Font("Arial", Font.PLAIN, 10);
             g.setFont(f);
             g.drawString("This model has been tested", 115, 290);
-            g.drawString("in accordance with JS " + labelPrintFrame.getEnergyLabelData().getStandard(), 115, 300);
+            g.drawString("in accordance with JS " + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getStandard(), 115, 300);
 
             // display logo
             g.drawImage(img, 65, 275, 45, 45, this);

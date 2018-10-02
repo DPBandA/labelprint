@@ -29,7 +29,6 @@ import jm.com.dpbennett.labelprint.SystemOptions;
 public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable {
     private LabelPrintFrame labelPrintFrame;
     private boolean bSetupSuccessful;
-    private SystemOptions sysOptions;
     
     /** Creates new form SplashScreenJDialog */
     public SplashScreenJDialog(java.awt.Frame parent, boolean modal) {
@@ -37,8 +36,7 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
         initComponents();
         
         labelPrintFrame = (LabelPrintFrame)parent;
-        sysOptions = labelPrintFrame.getSystemOptions();
-        
+                
         // Centre
         this.setLocationRelativeTo(null);
         new Thread(this).start();
@@ -86,23 +84,15 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SplashScreenJDialog(new javax.swing.JFrame(), true).setVisible(true);
-            }
-        });
-    }
-    
+    @Override
     public void run() {
         
+                
         // Setup persistence/connect to database
         // Display error message only if option to store database set
         jProgressBar1.setValue(50);
-        if (!labelPrintFrame.setupDatabaseConnection() && sysOptions.isConnectToDatabase()) {
+        if (!labelPrintFrame.setupDatabaseConnection() && 
+                labelPrintFrame.getSystemOptions().isConnectToDatabase()) {
             JOptionPane.showMessageDialog(this,
                     "A database connection error occurred.\n" +
                     "Consult your database administrator",
@@ -110,23 +100,7 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
                     JOptionPane.ERROR_MESSAGE);
             
         }
-//        if (labelPrintFrame.setupFontDefaultFontMapper()) {
-//            System.out.println("Font setup Failure!");
-//        }
-//        else {
-//            System.out.println("Font setup success!");
-//        }
-//        jProgressBar1.setValue(50);        
-//        // Setup font mapper for pdf exportation
-//        jLabel1.setText("Initializing fonts. Please wait...");
-//        if (!labelPrintFrame.setupFontDefaultFontMapper()) {
-//            JOptionPane.showMessageDialog(this,
-//                    "A font initialization error occurred.\n" +
-//                    "Consult your system administrator",
-//                    "Font Initialization Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//            
-//        }
+
         jProgressBar1.setValue(100);
         dispose();
     }

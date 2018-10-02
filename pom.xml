@@ -6,10 +6,19 @@
     <version>3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
+    <name>LabelPrint</name>
+    <description>A software for generating and printing energy efficiency labels</description>
+    
+    <properties>        
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    
     <build>
         <plugins>
-            <plugin>
-                <!-- Build an executable JAR -->
+            <!-- Build an executable JAR with its dependencies-->
+            <plugin>                
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
@@ -22,7 +31,7 @@
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin> 
+            </plugin>             
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -36,26 +45,71 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>                   
+            </plugin>       
+            <!-- Copy resources -->       
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>                    
+                    <execution>
+                        <id>copy-system-files</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/system</outputDirectory>
+                            <resources>          
+                                <resource>
+                                    <directory>${basedir}/src/main/resources/system</directory>
+                                </resource>
+                            </resources>              
+                        </configuration>            
+                    </execution>
+                    <execution>
+                        <id>copy-images</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/images</outputDirectory>
+                            <resources>          
+                                <resource>
+                                    <directory>${basedir}/src/main/resources/images</directory>
+                                </resource>
+                            </resources>              
+                        </configuration>            
+                    </execution>              
+                </executions>
+            </plugin> 
+            <!-- Copy the executable jar the target system directory -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-jars</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${basedir}/target/system">
+                                    <fileset dir="${basedir}/target">
+                                        <include name="*.jar" />
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+                         
         </plugins>
     </build>
-    
-    
-    <name>LabelPrint</name>
-    <description>A software for generating and printing energy efficiency labels</description>
-    
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    
-    <dependencies> 
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.5.2</version>
-        </dependency>
+       
+    <dependencies>      
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -71,7 +125,12 @@
             <artifactId>batik-all</artifactId>
             <version>1.10</version>
             <type>pom</type>
-        </dependency>
+        </dependency> 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>business-entity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>     
     </dependencies>
     
 </project>
