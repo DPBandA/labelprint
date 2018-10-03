@@ -1,5 +1,7 @@
 # General
-
+- Line up the circles so they don't overlap in the sg file.
+- Remove text from path and convert the relevant circles to path before adding
+  the text to the path.
 
 # Label Design
 - Add extended label section to ExtendedEnergyLabel
