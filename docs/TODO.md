@@ -2,6 +2,8 @@
 - Line up the circles so they don't overlap in the sg file.
 - Remove text from path and convert the relevant circles to path before adding
   the text to the path.
+- Create label data and SVG panels but do not add them to the tab when the system
+  just starts.
 
 # Label Design
 - Add extended label section to ExtendedEnergyLabel
