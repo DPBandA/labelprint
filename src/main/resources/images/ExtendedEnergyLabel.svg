@@ -677,16 +677,22 @@
        id="tspan4237"
        x="196.28308"
        y="162.45399">more efficient</tspan></text>
-  <path
-     style="opacity:1;fill:#008000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="m 352.085,129.4149 -6.77063,-6.76215 9.43554,-2.11324 4.42813,-8.65235 4.77341,8.31303 9.50736,1.4147"
-     id="outer_star_1_1"
-     inkscape:connector-curvature="0"
-     inkscape:label="#path4437" />
-  <path
-     style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="m 373.45881,121.61489 -6.48541,7.25098 1.44774,9.52668 -8.78162,-3.83169 -8.6126,4.47312 1.05808,-9.61908"
-     id="outer_star_1_2"
-     inkscape:connector-curvature="0"
-     inkscape:label="#path4432" />
+  <g
+     id="outer_star_1"
+     inkscape:label="#g4862"
+     inkscape:transform-center-x="-7.3101911"
+     inkscape:transform-center-y="-3.9506817">
+    <path
+       inkscape:label="#path4437"
+       inkscape:connector-curvature="0"
+       id="outer_star_1_1"
+       d="m 352.085,129.4149 -6.77063,-6.76215 9.43554,-2.11324 4.42813,-8.65235 4.77341,8.31303 9.50736,1.4147"
+       style="opacity:1;fill:#008000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:label="#path4432"
+       inkscape:connector-curvature="0"
+       id="outer_star_1_2"
+       d="m 373.45881,121.61489 -6.48541,7.25098 1.44774,9.52668 -8.78162,-3.83169 -8.6126,4.47312 1.05808,-9.61908"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
 </svg>
