@@ -51,16 +51,19 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
      * Creates new form LabelPrintFrame
      */
     public LabelPrintFrame() {
+        
         initComponents();
+        init();
+    }
+
+    private void init() {
+
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/LabelPrintIcon.png")));
-        
-        // tk
-        // Paths.get(".").toAbsolutePath().normalize().toString()
+
         sysOptions = new SystemOptions("LabelPrint.properties");
         enableMenuItems(false);
-        // Centre frame
-        setLocationRelativeTo(null);
+
         doSetup();
     }
 
@@ -71,7 +74,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     public List<EnergyLabel> findLabels(String searchField,
             String searchPattern) {
 
-        List<EnergyLabel> labelsFound = null;
+        List<EnergyLabel> labelsFound;
+        
         String query = "SELECT r FROM EnergyLabel r WHERE r." + searchField + " LIKE '%" + searchPattern + "%'";
 
         try {
@@ -437,12 +441,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     private void jMenuFilePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilePrintActionPerformed
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                getLabelPanel().printLabel();
-            }
-        });
+        java.awt.EventQueue.invokeLater(getLabelPanel()::printLabel);
 
     }//GEN-LAST:event_jMenuFilePrintActionPerformed
 
@@ -488,7 +487,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     public LabelDataPanel getLabelDataPanel() {
-        
+
         return labelDataPanel;
     }
 
@@ -505,7 +504,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         getLabelDataPanel().updateLabelData();
         getLabelPanel().updateLabel();
-        
+
         getjEnergyLabelPane().repaint();
     }
 
@@ -519,13 +518,13 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             OpenLabelDialog oldlg = new OpenLabelDialog(this, true);
             oldlg.setVisible(true);
             if (oldlg.proceedToOpenLabel()) {
-                
+
                 createLabelPanels();
-                
+
                 getLabelDataPanel().setEnergyLabel(findLabel(oldlg.getLabelId()));
-                
+
                 loadLabelPanels();
-                
+
                 getjEnergyLabelPane().setSelectedIndex(1);
 
                 setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());
@@ -539,7 +538,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     "Label Open Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-        
+
         setStatus("Ready...");
     }
 
@@ -642,7 +641,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
      * Create and add panels if they do not exist.
      */
     private void createLabelPanels() {
-        
+
         if (labelDataPanel == null) {
             labelDataPanel = new LabelDataPanel(this);
             getjEnergyLabelPane().add("Label Data", labelDataPanel);
@@ -651,7 +650,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             labelPanel = new SVGLabelPanel(this);
             getjEnergyLabelPane().add("Label View", labelPanel);
         }
-        
+
         // Select the data panel
         getjEnergyLabelPane().setSelectedIndex(0);
     }
@@ -666,15 +665,15 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         getLabelDataPanel().setEnergyLabel(new EnergyLabel());
         getLabelDataPanel().getEnergyLabel().setType(getSystemOptions().getProperty("ProductType"));
-        if (getLabelDataPanel().getEnergyLabel().getType().equals("Refrigerator") || 
-                getLabelDataPanel().getEnergyLabel().getType().equals("Basic Refrigerator")) {
+        if (getLabelDataPanel().getEnergyLabel().getType().equals("Refrigerator")
+                || getLabelDataPanel().getEnergyLabel().getType().equals("Basic Refrigerator")) {
             getLabelDataPanel().getEnergyLabel().setDefrost("Automatic");
         }
         getLabelDataPanel().getEnergyLabel().setStandard(getSystemOptions().getProperty("Standard"));
         getLabelDataPanel().getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
 
         loadLabelPanels();
-        
+
         getjEnergyLabelPane().setSelectedIndex(0);
 
         this.setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());

@@ -1,9 +1,14 @@
 # General
+- Continue fix up and documentation of all classes. Continue with LabelPrintFileFilter.java
 - Line up the circles so they don't overlap in the sg file.
 - Remove text from path and convert the relevant circles to path before adding
   the text to the path.
 - Create label data and SVG panels but do not add them to the tab when the system
   just starts.
+- Add location of SVG label as sytem option with an open file dialog
+- Provide access to LabelPrintFrame from the LabelPrint class and replace access 
+  to the labelPrintFrame with it in all classes.
+- Do not allow black field when doing search.
 
 # Label Design
 - Add extended label section to ExtendedEnergyLabel

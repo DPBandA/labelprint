@@ -26,39 +26,51 @@ import java.net.URISyntaxException;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 
+/**
+ * This creates a custom editor pane that displays a hyperlink.
+ * @author Desmond Bennett
+ */
 public class CustomEditorPane extends JEditorPane {
 
     public CustomEditorPane(String htmlBody) {
         super("text/html", "<html><body style=\"" + getStyle() + "\">" + htmlBody + "</body></html>");
-        addHyperlinkListener(new HyperlinkListener() {
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
-                    try {                        
-                        java.awt.Desktop.getDesktop().browse(e.getURL().toURI());
-                    } catch (URISyntaxException | IOException ex) {
-                        System.out.println(ex);
-                    }
+        init();
+    }
+    
+    /**
+     * Helper method for initializing the class.
+     */
+    private void init() {
+        addHyperlinkListener((HyperlinkEvent e) -> {
+            if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
+                try {
+                    java.awt.Desktop.getDesktop().browse(e.getURL().toURI());
+                } catch (URISyntaxException | IOException ex) {
+                    System.out.println(ex);
                 }
             }
         });
         setEditable(false);
         setBorder(null);
     }
+    
 
-    static StringBuffer getStyle() {
+    /**
+     * This gets the style for the hyperlink by using a JLabel as the basis.
+     * @return 
+     */
+    static String getStyle() {
        
         JLabel label = new JLabel();
         Font font = label.getFont();
         Color color = label.getBackground();        
-        StringBuffer style = new StringBuffer("font-family:" + font.getFamily() + ";");
+        String style = "font-family:" + font.getFamily() + ";";
         
-        style.append("font-weight:" + (font.isBold() ? "bold" : "normal") + ";");
-        style.append("font-size:" + font.getSize() + "pt;");
-        style.append("background-color: rgb(" + color.getRed() + "," + 
-                color.getGreen() + "," + color.getBlue() + ");");
+        style = style + "font-weight:" + (font.isBold() ? "bold" : "normal") + ";";
+        style = style + "font-size:" + font.getSize() + "pt;";
+        style = style + "background-color: rgb(" + color.getRed() + "," + 
+                color.getGreen() + "," + color.getBlue() + ");";
         
         return style;
     }
