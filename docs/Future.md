@@ -8,4 +8,4 @@
   and make the operating cost field read only?
 - Impl validation of label data fields.
 - Let "ok" button be the default action button when enter is pressed.
-- Find replacement for Hashtable.
+- Add location of SVG label as sytem option with an open file dialog
