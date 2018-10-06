@@ -127,58 +127,54 @@ public class SVGLabelPanel extends javax.swing.JPanel {
     public void updateLabel() {
 
         if (labelPrintFrame != null && svgCanvas != null && svgDocument != null) {
-            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    // Type
-                    setElementText("type", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getType());
-                    // Capacity tk impl capacity unit instead of hard code
-                    setElementText("capacity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCapacity() + "m");
-                    // Set location of the capacity unit power based on width of capacity
-                    Element svgElement = svgDocument.getElementById("capacity");
-                    SVGLocatable locatable = (SVGLocatable) svgElement;
-                    SVGRect rect = locatable.getBBox();
-                    Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
-                    unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
-                    // Defrost
-                    setElementText("defrost", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDefrost());
-                    // Distributor
-                    setElementText("distributor", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDistributor());
-                    // Manufacturer
-                    setElementText("manufacturer", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getManufacturer());
-                    // Model
-                    setElementText("model", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getModel());
-                    // Country
-                    setElementText("country", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCountry());
-                    // Operating cost
-                    setElementText("operatingCost", "$" + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getOperatingCost());
-                    // Energy note
-                    setElementText("note1.1", labelPrintFrame
-                            .getSystemOptions().getProperty("Note1_1")
-                            .replace("[AnnualConsumption]",
-                                    labelPrintFrame.getLabelDataPanel().getEnergyLabel().getAnnualConsumption())
-                            .replace("[CostPerKwh]",
-                                    labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCostPerKwh()));
-                    setElementText("note1.2", labelPrintFrame.
-                            getSystemOptions().getProperty("Note1_2"));
-                    // Validity
-                    setElementText("validity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getValidity());
-                    // Standard note
-                    setElementText("note2.1", labelPrintFrame
-                            .getSystemOptions().getProperty("Note2_1"));
-                    setElementText("note2.2", labelPrintFrame
-                            .getSystemOptions().getProperty("Note2_2")
-                            .replace("[Standard]",
-                                    labelPrintFrame.getLabelDataPanel().getEnergyLabel().getStandard()));
-                    // Violation note
-                    setElementText("note3.1", labelPrintFrame
-                            .getSystemOptions().getProperty("Note3_1"));
-                    setElementText("note3.2", labelPrintFrame
-                            .getSystemOptions().getProperty("Note3_2"));
-                    setElementText("note3.3", labelPrintFrame
-                            .getSystemOptions().getProperty("Note3_3"));
-
-                }
+            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
+                // Type
+                setElementText("type", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getType());
+                // Capacity tk impl capacity unit instead of hard code
+                setElementText("capacity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCapacity() + "m");
+                // Set location of the capacity unit power based on width of capacity
+                Element svgElement = svgDocument.getElementById("capacity");
+                SVGLocatable locatable = (SVGLocatable) svgElement;
+                SVGRect rect = locatable.getBBox();
+                Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
+                unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
+                // Defrost
+                setElementText("defrost", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDefrost());
+                // Distributor
+                setElementText("distributor", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDistributor());
+                // Manufacturer
+                setElementText("manufacturer", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getManufacturer());
+                // Model
+                setElementText("model", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getModel());
+                // Country
+                setElementText("country", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCountry());
+                // Operating cost
+                setElementText("operatingCost", "$" + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getOperatingCost());
+                // Energy note
+                setElementText("note1.1", labelPrintFrame
+                        .getSystemOptions().getProperty("Note1_1")
+                        .replace("[AnnualConsumption]",
+                                labelPrintFrame.getLabelDataPanel().getEnergyLabel().getAnnualConsumption())
+                        .replace("[CostPerKwh]",
+                                labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCostPerKwh()));
+                setElementText("note1.2", labelPrintFrame.
+                        getSystemOptions().getProperty("Note1_2"));
+                // Validity
+                setElementText("validity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getValidity());
+                // Standard note
+                setElementText("note2.1", labelPrintFrame
+                        .getSystemOptions().getProperty("Note2_1"));
+                setElementText("note2.2", labelPrintFrame
+                        .getSystemOptions().getProperty("Note2_2")
+                        .replace("[Standard]",
+                                labelPrintFrame.getLabelDataPanel().getEnergyLabel().getStandard()));
+                // Violation note
+                setElementText("note3.1", labelPrintFrame
+                        .getSystemOptions().getProperty("Note3_1"));
+                setElementText("note3.2", labelPrintFrame
+                        .getSystemOptions().getProperty("Note3_2"));
+                setElementText("note3.3", labelPrintFrame
+                        .getSystemOptions().getProperty("Note3_3"));
             });
         }
 
@@ -193,12 +189,9 @@ public class SVGLabelPanel extends javax.swing.JPanel {
 
     public void setElementFill(String elementId, String fill) {
         if (svgCanvas != null && svgDocument != null) {
-            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    Element element = svgDocument.getElementById(elementId);
-                    element.setAttribute("style", "fill:" + fill);
-                }
+            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
+                Element element = svgDocument.getElementById(elementId);
+                element.setAttribute("style", "fill:" + fill);
             });
         }
     }
@@ -245,8 +238,10 @@ public class SVGLabelPanel extends javax.swing.JPanel {
         } catch (IOException | TranscoderException e) {
             System.out.println(e);
         } finally {
-            return false;
+            
         }
+        
+        return false;
 
     }
 

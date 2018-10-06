@@ -27,20 +27,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.SystemOptions;
 
 /**
- *
+ * Uses the system properties file to edit system properties.
  * @author Desmond Bennett
  */
 public class OptionsJDialog extends javax.swing.JDialog {
 
     private boolean databaseConnectionOptionsChanged;
     private LabelPrintFrame labelPrintFrame;
-    private boolean bLoadingComboBox;
 
     public OptionsJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        String[][] fieldsToSearch;
-
+        
         initComponents();
+        
+        init(parent);
+        
+    }
+    
+    private void init(java.awt.Frame parent) {
+        String[][] fieldsToSearch;
         labelPrintFrame = (LabelPrintFrame) parent;
         setLocationRelativeTo(null);
 
@@ -61,14 +66,14 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jUsernameTextField.setText(sysOptions.getProperty("ConnectionUserName"));
         jPasswordField.setText(sysOptions.getConnectionPassword());
         // Init field to search combobox
-        bLoadingComboBox = true;
+        //bLoadingComboBox = true;
         for (int i = 0; i < fieldsToSearch.length; ++i) {
             jDefaultSearchFieldComboBox.addItem(fieldsToSearch[i][0]);
         }
         jDefaultSearchFieldComboBox.setSelectedItem(sysOptions.getProperty("DefaultFieldToSearch"));
         // Store in database
         jConnectToDatabaseCheckBox.setSelected(sysOptions.isConnectToDatabase());
-        bLoadingComboBox = false;
+        //bLoadingComboBox = false;
 
         // Label Notes tab
         jNote1_1_TextArea.setText(sysOptions.getProperty("Note1_1"));
@@ -80,7 +85,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote3_3_TextArea.setText(sysOptions.getProperty("Note3_3"));
 
         databaseConnectionOptionsChanged = false;
-
     }
 
     public boolean hasDatabaseConnectionOptionsChanged() {
@@ -640,15 +644,10 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.writeSystemData();
 
         // Update relevant views that are dependent on system options
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                if (labelPrintFrame.getLabelPanel() != null) {
-                    labelPrintFrame.getLabelPanel().updateLabel();
-                }
+        java.awt.EventQueue.invokeLater(() -> {
+            if (labelPrintFrame.getLabelPanel() != null) {
+                labelPrintFrame.getLabelPanel().updateLabel();
             }
-
         });
 
         // test the database connection
@@ -679,7 +678,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jCancelButtonActionPerformed
 
     private void jDefaultSearchFieldComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDefaultSearchFieldComboBoxActionPerformed
-        // TODO add your handling code here:        
+              
     }//GEN-LAST:event_jDefaultSearchFieldComboBoxActionPerformed
 
     private void jNote1_1_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote1_1_TextAreaCaretUpdate
@@ -715,19 +714,15 @@ public class OptionsJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jStandardTextFieldActionPerformed
 
     private void jProductTypeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeTextFieldActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jProductTypeTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                new OptionsJDialog(new javax.swing.JFrame(), true).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new OptionsJDialog(new javax.swing.JFrame(), true).setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -25,7 +25,6 @@ package jm.com.dpbennett.labelprint.ui;
  */
 public class ExportJDialog extends javax.swing.JDialog implements Runnable {
     private LabelPrintFrame labelPrintFrame;
-    //private boolean bExportSuccessful;
     private String fileName;
     
     /** Creates new form ExportJDialog
@@ -34,11 +33,17 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
     public ExportJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init(parent);
         
+    }
+    
+    private void init(java.awt.Frame parent) {
         labelPrintFrame = (LabelPrintFrame)parent;
         
         // Centre
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        
+        // Do export
         fileName = labelPrintFrame.getFileAbsolutePath("Export");
         new Thread(this).start();
     }
@@ -99,11 +104,7 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
     public void run() {
         
         if (fileName != null) {
-            // Check to see which format to export
-//            if (labelPrintFrame.getSystemOptions().isExportGIF()) {
-//                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "gif");
-//                jProgressBar1.setValue(25);
-//            }
+
             if (labelPrintFrame.getSystemOptions().isExportJPEG()) {
                 labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
                 jProgressBar1.setValue(50);
@@ -112,10 +113,7 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
                 labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "png");
                 jProgressBar1.setValue(70);
             }
-//            if (labelPrintFrame.getSystemOptions().isExportPDF()) {
-//                labelPrintFrame.getLabelPanel().exportLabelToPDF(fileName);
-//                jProgressBar1.setValue(90);
-//            }
+
             // Finish up
             jProgressBar1.setValue(100);
             try {

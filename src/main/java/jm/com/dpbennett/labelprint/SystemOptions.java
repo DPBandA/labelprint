@@ -181,11 +181,6 @@ public final class SystemOptions {
         props.setProperty("ConnectionPassword", Security.encrypt(connectionPassword));
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        writeSystemData();
-    }
-
     public static void main(String[] args) {
         SystemOptions systemOptions1 = new SystemOptions("LabelPrint.properties");
         System.out.print(systemOptions1.getProperty("DefaultFieldToSearch") + "\n");

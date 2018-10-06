@@ -27,7 +27,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
     private EnergyLabel energyLabel;
 
     /**
-     * Creates new form LabelDataDialog
+     * Creates new form LabelDataDialog.
      */
     public LabelDataPanel() {
         initComponents();
@@ -484,7 +484,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jSaveLabelActionPerformed
 
     private void jViewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewLabelActionPerformed
-        // Update label and set label view panel     
         labelPrintFrame.getLabelPanel().updateLabel();
         labelPrintFrame.getTabbedPane().setSelectedIndex(1);
     }//GEN-LAST:event_jViewLabelActionPerformed
