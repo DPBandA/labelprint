@@ -31,7 +31,7 @@ import javax.persistence.Persistence;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
-import jm.com.dpbennett.labelprint.LabelPrintFileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.SystemOptions;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
@@ -447,12 +447,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     public String getFileAbsolutePath(String action) {
         JFileChooser chooser = new JFileChooser();
-        LabelPrintFileFilter labelPrintFileFilter = new LabelPrintFileFilter();
-        labelPrintFileFilter.addExtension("gif");
-        labelPrintFileFilter.addExtension("jpg");
-        labelPrintFileFilter.addExtension("png");
-        labelPrintFileFilter.addExtension("pdf");
-        labelPrintFileFilter.setDescription("Gif, JPEG, PNG Images and PDF");
+        FileNameExtensionFilter labelPrintFileFilter = 
+                new FileNameExtensionFilter("Gif, JPEG and PNG Images", "gif", "jpg", "png");
+        
         chooser.setFileFilter(labelPrintFileFilter);
         chooser.setCurrentDirectory(new File("."));
         int retVal = chooser.showDialog(this, action);
@@ -544,9 +541,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     public String getPDFFileAbsolutePath(String action) {
         JFileChooser chooser = new JFileChooser();
-        LabelPrintFileFilter labelPrintFileFilter = new LabelPrintFileFilter();
-        labelPrintFileFilter.addExtension("pdf");
-        labelPrintFileFilter.setDescription("PDF files");
+        FileNameExtensionFilter labelPrintFileFilter = 
+                new FileNameExtensionFilter("PDF files", "pdf");
         chooser.setFileFilter(labelPrintFileFilter);
         chooser.setCurrentDirectory(new File("."));
         int retVal = chooser.showDialog(this, action);

@@ -23,10 +23,13 @@ import java.io.*;
 import javax.swing.*;
 import java.util.Properties;
 import java.io.FileInputStream;
-import java.nio.file.Paths;
-import jm.com.dpbennett.business.entity.utils.FileUtils;
+import jm.com.dpbennett.business.entity.fileutils.FileUtils;
 import jm.com.dpbennett.business.entity.utils.Security;
 
+/**
+ * This class manages the system properties file.
+ * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
+ */
 public final class SystemOptions {
 
     private String systemFile;

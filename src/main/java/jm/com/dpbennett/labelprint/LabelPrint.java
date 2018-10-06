@@ -27,7 +27,7 @@ import jm.com.dpbennett.labelprint.ui.LabelPrintFrame;
 /**
  * The is the main application class where it all begins.
  *
- * @author Desmond Bennett
+ * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
 public class LabelPrint {
 

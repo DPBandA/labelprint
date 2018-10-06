@@ -20,12 +20,12 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 /**
- *
- * @author  Desmond Bennett
+ * This dialog shows the progress when exporting labels to various file formats.
+ * @author  Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
 public class ExportJDialog extends javax.swing.JDialog implements Runnable {
     private LabelPrintFrame labelPrintFrame;
-    private boolean bExportSuccessful;
+    //private boolean bExportSuccessful;
     private String fileName;
     
     /** Creates new form ExportJDialog

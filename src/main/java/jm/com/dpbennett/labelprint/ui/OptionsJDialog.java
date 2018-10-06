@@ -23,7 +23,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import jm.com.dpbennett.labelprint.LabelPrintFileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.SystemOptions;
 
 /**
@@ -584,10 +584,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
 
     private String getImageFileAbsolutePath() {
         JFileChooser chooser = new JFileChooser();
-        LabelPrintFileFilter labelPrintFileFilter = new LabelPrintFileFilter();
-        labelPrintFileFilter.addExtension("gif");
-        labelPrintFileFilter.addExtension("jpg");
-        labelPrintFileFilter.setDescription("Gif and JPEG Images");
+        FileNameExtensionFilter labelPrintFileFilter
+                = new FileNameExtensionFilter("Gif, JPEG and PNG Images", "gif", "jpg", "png");
         chooser.setFileFilter(labelPrintFileFilter);
         chooser.setCurrentDirectory(new File(".\\images"));
         chooser.showDialog(this, "Choose");
