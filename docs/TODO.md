@@ -1,14 +1,12 @@
 # General
-- Line up the circles so they don't overlap in the svg file.
-- Finish adding and setting ids for all stars.
 - Create label data and SVG panels but do not add them to the tab when the system
   just starts.
-- Provide access to LabelPrintFrame from the LabelPrint class and replace access 
-  to the labelPrintFrame with it in all classes.
 - Do not allow blank field when doing search. Change this in the search help text if 
   needed.
 
 # Label Design
+- Check that all circles are aligned the svg file.
+- Finish adding and setting ids for all stars.
 - Add extended label section to ExtendedEnergyLabel
 * Lock the layer containing the main section of the label.  
 * Add circles on a new layer and hide the lower sections of the circles to

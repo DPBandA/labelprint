@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="ExtendedEnergyLabel - 2018-10-05.svg">
+   sodipodi:docname="ExtendedEnergyLabel - 2018-10-06.svg">
   <title
      id="title4241">Energy Label</title>
   <defs
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.43918851"
-     inkscape:cx="818.50394"
-     inkscape:cy="946.06299"
+     inkscape:zoom="1.2422127"
+     inkscape:cx="782.40528"
+     inkscape:cy="1437.4975"
      inkscape:document-units="mm"
      inkscape:current-layer="svg8"
      showgrid="true"
@@ -842,9 +842,9 @@
        inkscape:label="#path4432" />
   </g>
   <g
-     transform="matrix(0.29710488,-0.85329317,0.82214517,0.30907475,20.035388,361.56598)"
-     inkscape:transform-center-y="-8.3927343"
-     inkscape:transform-center-x="0.028687422"
+     transform="matrix(0.76569502,-0.47967868,0.44789233,0.75554112,-44.945848,193.48639)"
+     inkscape:transform-center-y="-4.4364431"
+     inkscape:transform-center-x="-4.1665066"
      inkscape:label="#g4862"
      id="g4278">
     <path
@@ -867,4 +867,61 @@
      cy="173.26028"
      r="92.694916"
      sodipodi:insensitive="true" />
+  <g
+     id="g4417"
+     inkscape:label="#g4862"
+     inkscape:transform-center-x="3.4898888"
+     inkscape:transform-center-y="-6.7139096"
+     transform="matrix(-0.00674904,-0.90351259,0.87819432,0.01498711,101.76393,419.70147)">
+    <path
+       inkscape:label="#path4437"
+       inkscape:connector-curvature="0"
+       id="path4419"
+       d="m 352.085,129.4149 -6.77063,-6.76215 9.43554,-2.11324 4.42813,-8.65235 4.77341,8.31303 9.50736,1.4147"
+       style="opacity:1;fill:#ffdf00;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:label="#path4432"
+       inkscape:connector-curvature="0"
+       id="path4421"
+       d="m 373.45881,121.61489 -6.48541,7.25098 1.44774,9.52668 -8.78162,-3.83169 -8.6126,4.47312 1.05808,-9.61908"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     id="g4423"
+     inkscape:label="#g4862"
+     inkscape:transform-center-x="-2.9870354"
+     inkscape:transform-center-y="-7.0857893"
+     transform="matrix(0.5135568,-0.74339756,0.71018696,0.51680206,-23.419299,298.24984)">
+    <path
+       inkscape:label="#path4437"
+       inkscape:connector-curvature="0"
+       id="path4425"
+       d="m 352.085,129.4149 -6.77063,-6.76215 9.43554,-2.11324 4.42813,-8.65235 4.77341,8.31303 9.50736,1.4147"
+       style="opacity:1;fill:#ffdf00;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:label="#path4432"
+       inkscape:connector-curvature="0"
+       id="path4427"
+       d="m 373.45881,121.61489 -6.48541,7.25098 1.44774,9.52668 -8.78162,-3.83169 -8.6126,4.47312 1.05808,-9.61908"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     transform="matrix(-0.38542192,-0.81720896,0.80335458,-0.35506522,212.39225,456.41338)"
+     inkscape:transform-center-y="-4.3101542"
+     inkscape:transform-center-x="4.3401171"
+     inkscape:label="#g4862"
+     id="g4429">
+    <path
+       style="opacity:1;fill:#ffdf00;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 352.085,129.4149 -6.77063,-6.76215 9.43554,-2.11324 4.42813,-8.65235 4.77341,8.31303 9.50736,1.4147"
+       id="path4431"
+       inkscape:connector-curvature="0"
+       inkscape:label="#path4437" />
+    <path
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 373.45881,121.61489 -6.48541,7.25098 1.44774,9.52668 -8.78162,-3.83169 -8.6126,4.47312 1.05808,-9.61908"
+       id="path4433"
+       inkscape:connector-curvature="0"
+       inkscape:label="#path4432" />
+  </g>
 </svg>
