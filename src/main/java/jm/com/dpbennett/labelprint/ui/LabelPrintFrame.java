@@ -51,7 +51,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
      * Creates new form LabelPrintFrame
      */
     public LabelPrintFrame() {
-        
+
         initComponents();
         init();
     }
@@ -75,7 +75,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             String searchPattern) {
 
         List<EnergyLabel> labelsFound;
-        
+
         String query = "SELECT r FROM EnergyLabel r WHERE r." + searchField + " LIKE '%" + searchPattern + "%'";
 
         try {
@@ -107,6 +107,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                 } else {
                     setStatus("Ready...");
                 }
+
+               createNewLabel();
             }
         };
         printThread.start();
@@ -447,9 +449,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     public String getFileAbsolutePath(String action) {
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter labelPrintFileFilter = 
-                new FileNameExtensionFilter("Gif, JPEG and PNG Images", "gif", "jpg", "png");
-        
+        FileNameExtensionFilter labelPrintFileFilter
+                = new FileNameExtensionFilter("Gif, JPEG and PNG Images", "gif", "jpg", "png");
+
         chooser.setFileFilter(labelPrintFileFilter);
         chooser.setCurrentDirectory(new File("."));
         int retVal = chooser.showDialog(this, action);
@@ -516,7 +518,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             oldlg.setVisible(true);
             if (oldlg.proceedToOpenLabel()) {
 
-                createLabelPanels();
+                initLabelPanels();
 
                 getLabelDataPanel().setEnergyLabel(findLabel(oldlg.getLabelId()));
 
@@ -541,8 +543,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     public String getPDFFileAbsolutePath(String action) {
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter labelPrintFileFilter = 
-                new FileNameExtensionFilter("PDF files", "pdf");
+        FileNameExtensionFilter labelPrintFileFilter
+                = new FileNameExtensionFilter("PDF files", "pdf");
         chooser.setFileFilter(labelPrintFileFilter);
         chooser.setCurrentDirectory(new File("."));
         int retVal = chooser.showDialog(this, action);
@@ -636,19 +638,22 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     /**
      * Create and add panels if they do not exist.
      */
-    private void createLabelPanels() {
+    private void initLabelPanels() {
 
         if (labelDataPanel == null) {
             labelDataPanel = new LabelDataPanel(this);
             getjEnergyLabelPane().add("Label Data", labelDataPanel);
         }
+
         if (labelPanel == null) {
             labelPanel = new SVGLabelPanel(this);
+
             getjEnergyLabelPane().add("Label View", labelPanel);
+
         }
 
-        // Select the data panel
         getjEnergyLabelPane().setSelectedIndex(0);
+
     }
 
     private void createNewLabel() {
@@ -657,7 +662,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
             return;
         }
 
-        createLabelPanels();
+        initLabelPanels();
 
         getLabelDataPanel().setEnergyLabel(new EnergyLabel());
         getLabelDataPanel().getEnergyLabel().setType(getSystemOptions().getProperty("ProductType"));

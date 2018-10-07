@@ -37,8 +37,9 @@ import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.print.PrintTranscoder;
 
 /**
+ * Displays and manage SVG type of labels.
  *
- * @author dbennett
+ * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
 public class SVGLabelPanel extends javax.swing.JPanel {
 
@@ -46,12 +47,38 @@ public class SVGLabelPanel extends javax.swing.JPanel {
     private boolean showYellowBackground;
     private boolean showContents;
     private LabelPrintFrame labelPrintFrame;
-    private int m_maxNumPage = 1;
     private JSVGCanvas svgCanvas;
     private Document svgDocument;
 
     /**
-     * Creates new form LabelPanel
+     * The possible states for all energy stars.
+     */
+    public enum STARSTATE {
+        NONE, HALF, FULL
+    }
+
+    /**
+     * The default style for all energy stars.
+     */
+    public static final String DEFAULTSTARSTYLE
+            = "opacity:1;fill-opacity:1;stroke:#000000;stroke-width:0;"
+            + "stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;";
+    public static final String MORESTARSTEXTSTYLE 
+            = "font-style:normal;font-weight:normal;font-size:9.8777771px;" + 
+            "line-height:125%;font-family:sans-serif;letter-spacing:0px;" + 
+            "word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;" + 
+            "stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
+    public static final String HEATINGORCOOLINGTEXTSTYLE 
+            = "font-style:normal;font-variant:normal;font-weight:bold;" + 
+            "font-stretch:normal;font-size:9.87777805px;line-height:125%;" + 
+            "font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';" + 
+            "text-align:start;letter-spacing:0px;word-spacing:0px;" + 
+            "writing-mode:lr-tb;text-anchor:start;opacity:0.98000004;fill:#000000;" + 
+            "fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;" + 
+            "stroke-linejoin:miter;stroke-opacity:1";
+
+    /**
+     * Creates new SVGLabelPanel
      */
     public SVGLabelPanel() {
         initComponents();
@@ -59,7 +86,7 @@ public class SVGLabelPanel extends javax.swing.JPanel {
     }
 
     /**
-     * Creates new form LabelPanel
+     * Creates new SVGLabelPanel
      *
      * @param labelPrintFrame
      */
@@ -68,6 +95,33 @@ public class SVGLabelPanel extends javax.swing.JPanel {
         initComponents();
         initLabel();
 
+    }
+
+    public void updateStarState(String starId, STARSTATE state, String fill) {
+
+        if (svgCanvas != null && svgDocument != null) {
+            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
+
+                Element starFirstHalf = svgDocument.getElementById(starId + ".1");
+                Element starSecondHalf = svgDocument.getElementById(starId + ".2");
+
+                switch (state) {
+                    case NONE:
+                        starFirstHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:none");
+                        starSecondHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:none");
+                        break;
+                    case HALF:
+                        starFirstHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:#" + fill);
+                        starSecondHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:none");
+                        break;
+                    case FULL:
+                        starFirstHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:#" + fill);
+                        starSecondHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:#" + fill);
+                        break;
+                }
+
+            });
+        }
     }
 
     public boolean isShowGreenBackground() {
@@ -139,7 +193,7 @@ public class SVGLabelPanel extends javax.swing.JPanel {
                 Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
                 unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                 // Defrost
-                setElementText("defrost", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDefrost());
+                setElementText("distributorOrDefrost", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDefrost());
                 // Distributor
                 setElementText("distributor", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDistributor());
                 // Manufacturer
@@ -175,9 +229,27 @@ public class SVGLabelPanel extends javax.swing.JPanel {
                         .getSystemOptions().getProperty("Note3_2"));
                 setElementText("note3.3", labelPrintFrame
                         .getSystemOptions().getProperty("Note3_3"));
+                // Energy stars
+                updateEnergyStars();
             });
         }
 
+    }
+    
+    private void eraseEnergyStars() {
+        for (int i = 1; i < 9; i++) {
+            updateStarState("outer.star." + i, STARSTATE.NONE, "008000");            
+        }
+        for (int i = 1; i < 7; i++) {
+            updateStarState("inner.star." + i, STARSTATE.NONE, "ffdf00");            
+        }
+    }
+    
+    /**
+     * Updates the energy stars based on energy efficiency rating.
+     */
+    private void updateEnergyStars() {
+       eraseEnergyStars();        
     }
 
     private void setElementText(String elementId, String content) {
@@ -238,9 +310,9 @@ public class SVGLabelPanel extends javax.swing.JPanel {
         } catch (IOException | TranscoderException e) {
             System.out.println(e);
         } finally {
-            
+
         }
-        
+
         return false;
 
     }
@@ -317,7 +389,10 @@ public class SVGLabelPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jEditLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditLabelDataActionPerformed
-        labelPrintFrame.getTabbedPane().setSelectedIndex(0);
+       // tk
+       System.out.println("Testing the updating stars. PUT BACK EDIT!!");
+       updateEnergyStars(); // tk
+       //labelPrintFrame.getTabbedPane().setSelectedIndex(0);
     }//GEN-LAST:event_jEditLabelDataActionPerformed
 
     private void jSaveLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelDataActionPerformed

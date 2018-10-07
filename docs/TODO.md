@@ -1,19 +1,9 @@
-# General
-- Create label data and SVG panels but do not add them to the tab when the system
-  just starts.
-- Do not allow blank field when doing search. Change this in the search help text if 
-  needed.
-
-# Label Design
-- Check that all circles are aligned the svg file.
-- Finish adding and setting ids for all stars.
-- Add extended label section to ExtendedEnergyLabel
-* Lock the layer containing the main section of the label.  
-* Add circles on a new layer and hide the lower sections of the circles to
-    semi-circles.
-
 # Updated standard implementation
-- At Capacity, replace with Heating Capacity for AC.
+- Update EnergyLabel class and LabelPanel with required fields (heatingCapicity etc)
+- Update text and font in centre yellow semi-circle based on refrigerator or AC
+  See the sample labels. Edit text to show heating/cooling and get the "normal"
+  text attribute to change it for refrigerator product type etc.
+- At Capacity, replace with Heating/Cooling Capacity for AC.
 - Defrost type to be replace with Cooling Capacity for AC.
 - Change labels "Capacity" and "Defrost" based on the product type.
 - Impl splitting stars in two halves so that the color of each half can be
@@ -21,9 +11,10 @@
 - Make background colors system options: mainBackground: #FFDF00
   headerBackground: #008000, violationBackground: #008000
 - Should the outer semicircle be displayed even if there are no starts.
-- Accommodate displaying capcity and/or size?
+- Accommodate displaying capacity and/or size?
 - Impl display energy efficiency ratio in the case of room air conditioners? 
-- For label top section specs see "Details of top section.png".                 
+- For label top section specs see "Details of top section.png".  
+- Read standard and see how to impl updateEnergyStars().                
 
 # Packaging
 - Setup izpack installer 
