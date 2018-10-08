@@ -3,17 +3,10 @@
 - Update text and font in centre yellow semi-circle based on refrigerator or AC
   See the sample labels. Edit text to show heating/cooling and get the "normal"
   text attribute to change it for refrigerator product type etc.
+- Disable and erase heating and cooling capacity fields when frige is selected.
 - At Capacity, replace with Heating/Cooling Capacity for AC.
 - Defrost type to be replace with Cooling Capacity for AC.
 - Change labels "Capacity" and "Defrost" based on the product type.
-- Impl splitting stars in two halves so that the color of each half can be
-  displayed in different colors.
-- Make background colors system options: mainBackground: #FFDF00
-  headerBackground: #008000, violationBackground: #008000
-- Should the outer semicircle be displayed even if there are no starts.
-- Accommodate displaying capacity and/or size?
-- Impl display energy efficiency ratio in the case of room air conditioners? 
-- For label top section specs see "Details of top section.png".  
 - Read standard and see how to impl updateEnergyStars().                
 
 # Packaging
