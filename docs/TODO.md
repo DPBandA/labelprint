@@ -4,7 +4,13 @@
   to none.
 
 # Updated standard implementation
-- Update EnergyLabel class to add frequency of operation (50, 60, 50/60Hz)
+- Update EnergyLabel class to add rated voltage/frequency (50, 60, 50/60Hz)
+- Add field for maximum energy efficiency and option to calculate or enter the value.
+- Impl setting default frequency and voltage in properties file.
+- Place stars on label:
+  * Appliances or other energy consuming products in the Super Energy Efficient 
+  category shall have an energy consumption that is at least 15 % less than the 
+  maximum energy efficiency quoted in Table 5A of JS 178 and Table 3B of JS 179.
 - Update text and font in centre yellow semi-circle based on refrigerator or AC
   See the sample labels. Edit text to show heating/cooling and get the "normal"
   text attribute to change it for refrigerator product type etc.
@@ -29,3 +35,6 @@
 
 # Training
 - Prepare training material
+
+# Deployment
+- Update the database tables in enerbase on all mysql servers.
