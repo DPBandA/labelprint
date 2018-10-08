@@ -4,7 +4,7 @@
   to none.
 
 # Updated standard implementation
-- Update EnergyLabel class and LabelPanel with required fields (heatingCapicity etc)
+- Update EnergyLabel class to add frequency of operation (50, 60, 50/60Hz)
 - Update text and font in centre yellow semi-circle based on refrigerator or AC
   See the sample labels. Edit text to show heating/cooling and get the "normal"
   text attribute to change it for refrigerator product type etc.
