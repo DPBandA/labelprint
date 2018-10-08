@@ -1,3 +1,8 @@
+# Label Design
+- Use text to create header instead of importing an image. Do a print and 
+  see if the light green background has been fix since setting the image background
+  to none.
+
 # Updated standard implementation
 - Update EnergyLabel class and LabelPanel with required fields (heatingCapicity etc)
 - Update text and font in centre yellow semi-circle based on refrigerator or AC
