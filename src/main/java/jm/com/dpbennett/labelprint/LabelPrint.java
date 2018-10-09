@@ -20,7 +20,8 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint;
 
 import java.awt.*;
-import java.util.Properties;
+import java.util.Enumeration;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import jm.com.dpbennett.labelprint.ui.LabelPrintFrame;
@@ -72,8 +73,8 @@ public class LabelPrint {
      */
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());  
-            
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());            
+
         } catch (ClassNotFoundException | IllegalAccessException
                 | InstantiationException | UnsupportedLookAndFeelException e) {
             System.out.println(e);

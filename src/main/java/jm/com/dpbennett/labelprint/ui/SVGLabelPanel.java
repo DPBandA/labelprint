@@ -389,10 +389,7 @@ public class SVGLabelPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jEditLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditLabelDataActionPerformed
-       // tk
-       System.out.println("Testing the updating stars. PUT BACK EDIT!!");
-       updateEnergyStars(); // tk
-       //labelPrintFrame.getTabbedPane().setSelectedIndex(0);
+       labelPrintFrame.getTabbedPane().setSelectedIndex(0);
     }//GEN-LAST:event_jEditLabelDataActionPerformed
 
     private void jSaveLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelDataActionPerformed
