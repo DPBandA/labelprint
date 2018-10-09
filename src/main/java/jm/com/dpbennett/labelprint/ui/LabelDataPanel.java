@@ -19,6 +19,7 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
+import java.awt.Color;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 
 public class LabelDataPanel extends javax.swing.JPanel {
