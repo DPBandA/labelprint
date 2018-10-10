@@ -22,6 +22,7 @@ package jm.com.dpbennett.labelprint.ui;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import jm.com.dpbennett.business.entity.BusinessEntity;
+import jm.com.dpbennett.business.entity.EnergyConsumptionAndEfficiency;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
 import jm.com.dpbennett.business.entity.utils.ReturnMessage;
@@ -55,11 +56,10 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         // tk
         ArrayList<BusinessEntity> data = new ArrayList<>();
-        data.add(new EnergyLabel(1L, "Iya!!2323 232ui32i i23u2i 3i2ui3u i2u3i2i3u2iui32iu3i2u iu2iu3i 2ui32i3i 2323 yyytt tioeori eorieoiro roeior oerioeir oeoreo iroeiroeiorioe iroeiorieo roe ??"));
-        data.add(new EnergyLabel(2L, "Seen!!"));
-        EnergyLabel yes = new EnergyLabel(3L, "Yes!!");
-        data.add(yes);
-
+        data.add(new EnergyConsumptionAndEfficiency(1L, "Iya!!2323 232ui32i i23u2i 3i2ui3u i2u3i2i3u2iui32iu3i2u iu2iu3i 2ui32i3i 2323 yyytt tioeori eorieoiro roeior oerioeir oeoreo iroeiroeiorioe iroeiorieo roe ??"));
+        data.add(new EnergyConsumptionAndEfficiency(2L, "Seen!!"));
+        data.add(new EnergyConsumptionAndEfficiency(3L, "Yes"));
+        
         jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
                 data, 4, 1, 5));
     }
@@ -617,11 +617,12 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jSaveLabelActionPerformed
 
     private void jViewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewLabelActionPerformed
-        if (getEnergyLabel().validate(labelPrintFrame.getEntityManager()).isSuccess()) {
+        ReturnMessage returnMessage = getEnergyLabel().validate(labelPrintFrame.getEntityManager());
+        if (returnMessage.isSuccess()) {
             labelPrintFrame.getLabelPanel().updateLabel();
             labelPrintFrame.getTabbedPane().setSelectedIndex(1);
         } else {
-            ReturnMessage returnMessage = getEnergyLabel().validate(labelPrintFrame.getEntityManager());
+            
             JOptionPane.showMessageDialog(this,
                             returnMessage.getMessage(),
                             returnMessage.getHeader(),
@@ -726,7 +727,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jRatedFrequencyActionPerformed
 
     private void jProductTypeDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeDetailActionPerformed
-        // TODO add your handling code here:
+        getEnergyLabel().setEnergyConsumptionAndEfficiency(
+                (EnergyConsumptionAndEfficiency) jProductTypeDetail.getSelectedItem());
+        labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jProductTypeDetailActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

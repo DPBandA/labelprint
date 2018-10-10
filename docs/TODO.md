@@ -4,6 +4,7 @@
   to none.
 
 # Updated standard implementation
+- Impl load and update product type detail object in labeldatapanel.
 - Impl validation of values that will be used in calculations (eg AV/capacity)
   before saving. Validate AEER, ACOP and other fields when added.
 - Add EnergyConsumptionAndEfficiency class as a field to EnergyLabel.
@@ -24,7 +25,9 @@
 - At Capacity, replace with Heating/Cooling Capacity for AC.
 - Defrost type to be replace with Cooling Capacity for AC.
 - Change labels "Capacity" and "Defrost" based on the product type.
-- Read standard and see how to impl updateEnergyStars().                
+- Read standard and see how to impl updateEnergyStars().    
+- Validate double that has comma or do not allow comma but format double with a 
+  before display on label.            
 
 # Packaging
 - Setup izpack installer 

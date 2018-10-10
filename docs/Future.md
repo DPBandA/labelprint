@@ -11,3 +11,6 @@
 - Add location of SVG label as sytem option with an open file dialog
 - Provide access to LabelPrintFrame from the LabelPrint class and replace access 
   to the labelPrintFrame with it in all classes.
+- Create dialog for adding/editing EnergyConsumptionAndEfficiency records.
+- Put a text area below the product type details to show all the details of the 
+  the selected item. Put item no. and other small info in the combo box instead.

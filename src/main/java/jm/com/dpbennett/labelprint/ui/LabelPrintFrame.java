@@ -561,8 +561,8 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     public void saveLabel() {
 
         try {
-
-            if (getLabelDataPanel().getEnergyLabel().validate(getEntityManager()).isSuccess()) {
+            ReturnMessage returnMessage = getLabelDataPanel().getEnergyLabel().validate(getEntityManager());
+            if (returnMessage.isSuccess()) {
                 if (!getLabelDataPanel().getEnergyLabel().save(getEntityManager()).isSuccess()) {
                     JOptionPane.showMessageDialog(this,
                             "An error occured while saving the current label.\n"
@@ -575,8 +575,6 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     setDirty(false);
                 }
             } else {
-                 ReturnMessage returnMessage = getLabelDataPanel().getEnergyLabel().validate(getEntityManager());
-                
                  JOptionPane.showMessageDialog(this,
                             returnMessage.getMessage(),
                             returnMessage.getHeader(),
