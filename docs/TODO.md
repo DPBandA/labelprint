@@ -4,12 +4,13 @@
   to none.
 
 # Updated standard implementation
-- Impl combo box model that takes as a collection of entities. Use to impl
-  selecting items for maximum consumption. Do in BEL.
-  * Put border around "product detail".
-  * Impl static method getBusinessEntityComboBoxModel(data, rows, columns)
-    in SwingUtils.
-- Update EnergyLabel class to add rated voltage/frequency (50, 60, 50/60Hz)
+- Impl validation of values that will be used in calculations (eg AV/capacity)
+  before saving. Validate AEER, ACOP and other fields when added.
+- Add EnergyConsumptionAndEfficiency class as a field to EnergyLabel.
+- Impl "dirty" setting for all new added label fields.
+- Impl changing the yellow and green background for the upper part of label.
+- Take AV as the capacity quoted for fridges for now. Seek clarity from Kathy.
+- Add EnergyConsumptionAndEfficiency to EnergyLabel.
 - Add field for maximum energy efficiency and option to calculate or enter the value.
 - Impl setting default frequency and voltage in properties file.
 - Place stars on label:

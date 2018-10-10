@@ -20,9 +20,11 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import jm.com.dpbennett.business.entity.BusinessEntity;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
+import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 
 public class LabelDataPanel extends javax.swing.JPanel {
 
@@ -34,7 +36,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
      */
     public LabelDataPanel() {
         initComponents();
-        energyLabel = new EnergyLabel();
+        init();
     }
 
     /**
@@ -47,10 +49,10 @@ public class LabelDataPanel extends javax.swing.JPanel {
         initComponents();
         init();
     }
-    
+
     private void init() {
         energyLabel = new EnergyLabel();
-        
+
         // tk
         ArrayList<BusinessEntity> data = new ArrayList<>();
         data.add(new EnergyLabel(1L, "Iya!!2323 232ui32i i23u2i 3i2ui3u i2u3i2i3u2iui32iu3i2u iu2iu3i 2ui32i3i 2323 yyytt tioeori eorieoiro roeior oerioeir oeoreo iroeiroeiorioe iroeiorieo roe ??"));
@@ -58,7 +60,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
         EnergyLabel yes = new EnergyLabel(3L, "Yes!!");
         data.add(yes);
 
-        jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail, 
+        jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
                 data, 4, 1, 5));
     }
 
@@ -116,7 +118,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jProductType.setSelectedItem(getEnergyLabel().getType());
         jJobNumber.setText(getEnergyLabel().getJobNumber());
         jLabelName.setText(getEnergyLabel().getLabelName());
-        
+
         getEnergyLabel().setIsDirty(false);
     }
 
@@ -300,7 +302,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Anual Consumption (kwh/yr):");
+        jLabel10.setText("Anual Consumpt'n (kwh/yr):");
 
         jAnnualConsumption.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jAnnualConsumption.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -533,7 +535,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
                         .addComponent(jProductType, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jProductTypeDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProductTypeDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -615,9 +617,17 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jSaveLabelActionPerformed
 
     private void jViewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewLabelActionPerformed
-        labelPrintFrame.getLabelPanel().updateLabel();
-        labelPrintFrame.getTabbedPane().setSelectedIndex(1);
-       
+        if (getEnergyLabel().validate(labelPrintFrame.getEntityManager()).isSuccess()) {
+            labelPrintFrame.getLabelPanel().updateLabel();
+            labelPrintFrame.getTabbedPane().setSelectedIndex(1);
+        } else {
+            ReturnMessage returnMessage = getEnergyLabel().validate(labelPrintFrame.getEntityManager());
+            JOptionPane.showMessageDialog(this,
+                            returnMessage.getMessage(),
+                            returnMessage.getHeader(),
+                            JOptionPane.ERROR_MESSAGE);   
+        }
+
     }//GEN-LAST:event_jViewLabelActionPerformed
 
     private void jProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeActionPerformed
@@ -691,27 +701,27 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jStandardNoKeyReleased
 
     private void jDefrostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDefrostActionPerformed
-        getEnergyLabel().setDefrost((String)jDefrost.getSelectedItem());
+        getEnergyLabel().setDefrost((String) jDefrost.getSelectedItem());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jDefrostActionPerformed
 
     private void jCoolingCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoolingCapacityKeyReleased
-        getEnergyLabel().setCoolingCapacity((String)jCoolingCapacity.getText());
+        getEnergyLabel().setCoolingCapacity((String) jCoolingCapacity.getText());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jCoolingCapacityKeyReleased
 
     private void jHeatingCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jHeatingCapacityKeyReleased
-        getEnergyLabel().setHeatingCapacity((String)jHeatingCapacity.getText());
+        getEnergyLabel().setHeatingCapacity((String) jHeatingCapacity.getText());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jHeatingCapacityKeyReleased
 
     private void jRatedVoltageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedVoltageActionPerformed
-        getEnergyLabel().setRatedFrequency((String)jRatedVoltage.getSelectedItem());
+        getEnergyLabel().setRatedFrequency((String) jRatedVoltage.getSelectedItem());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jRatedVoltageActionPerformed
 
     private void jRatedFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedFrequencyActionPerformed
-        getEnergyLabel().setRatedFrequency((String)jRatedFrequency.getSelectedItem());
+        getEnergyLabel().setRatedFrequency((String) jRatedFrequency.getSelectedItem());
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jRatedFrequencyActionPerformed
 

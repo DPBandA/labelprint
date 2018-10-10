@@ -35,6 +35,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.SystemOptions;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
+import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 
 /**
  *
@@ -108,7 +109,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     setStatus("Ready...");
                 }
 
-               createNewLabel();
+                createNewLabel();
             }
         };
         printThread.start();
@@ -560,16 +561,29 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     public void saveLabel() {
 
         try {
-            if (!getLabelDataPanel().getEnergyLabel().save(getEntityManager()).isSuccess()) {
-                JOptionPane.showMessageDialog(this,
-                        "An error occured while saving the current label.\n"
-                        + "This could occur because you do not have a database connection.\n"
-                        + "Try to connect to a database in the options dialog and try again.",
-                        "Save Error",
-                        JOptionPane.ERROR_MESSAGE);
+
+            if (getLabelDataPanel().getEnergyLabel().validate(getEntityManager()).isSuccess()) {
+                if (!getLabelDataPanel().getEnergyLabel().save(getEntityManager()).isSuccess()) {
+                    JOptionPane.showMessageDialog(this,
+                            "An error occured while saving the current label.\n"
+                            + "This could occur because you do not have a database connection.\n"
+                            + "Try to connect to a database in the options dialog and try again.",
+                            "Save Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    setDirty(false);
+                }
+            } else {
+                 ReturnMessage returnMessage = getLabelDataPanel().getEnergyLabel().validate(getEntityManager());
+                
+                 JOptionPane.showMessageDialog(this,
+                            returnMessage.getMessage(),
+                            returnMessage.getHeader(),
+                            JOptionPane.ERROR_MESSAGE);   
             }
 
-            setDirty(false);
+            
         } catch (HeadlessException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(this,
