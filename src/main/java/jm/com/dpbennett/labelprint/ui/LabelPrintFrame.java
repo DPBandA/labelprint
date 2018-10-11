@@ -109,7 +109,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                     setStatus("Ready...");
                 }
 
-                createNewLabel();
+                createLabel();
             }
         };
         printThread.start();
@@ -411,7 +411,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuEditLabelActionPerformed
 
     private void NewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewLabelActionPerformed
-        createNewLabel();
+        createLabel();
     }//GEN-LAST:event_NewLabelActionPerformed
 
     private void jMenuEditOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditOptionsActionPerformed
@@ -668,7 +668,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     }
 
-    private void createNewLabel() {
+    private void createLabel() {
 
         if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
             return;
@@ -676,14 +676,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
         initLabelPanels();
 
-        getLabelDataPanel().setEnergyLabel(new EnergyLabel());
-        getLabelDataPanel().getEnergyLabel().setType(getSystemOptions().getProperty("ProductType"));
-        if (getLabelDataPanel().getEnergyLabel().getType().equals("Refrigerator")
-                || getLabelDataPanel().getEnergyLabel().getType().equals("Basic Refrigerator")) {
-            getLabelDataPanel().getEnergyLabel().setDefrost("Automatic");
-        }
-        getLabelDataPanel().getEnergyLabel().setStandard(getSystemOptions().getProperty("Standard"));
-        getLabelDataPanel().getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
+        getLabelDataPanel().createLabel();
 
         loadLabelPanels();
 
@@ -694,7 +687,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     }
 
     private void jMenuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileNewActionPerformed
-        createNewLabel();
+        createLabel();
     }//GEN-LAST:event_jMenuFileNewActionPerformed
 
     private void jEnergyLabelPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jEnergyLabelPaneStateChanged

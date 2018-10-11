@@ -1,6 +1,7 @@
 
 # General
 
+- Impl getting the current year in the about dialog using BEL.
 - Make the label data panel scrollable.
 - Implement autocomplete for distributor, manufacturer etc.
 - Put width and height of image to export in system options
@@ -14,3 +15,4 @@
 - Create dialog for adding/editing EnergyConsumptionAndEfficiency records.
 - Put a text area below the product type details to show all the details of the 
   the selected item. Put item no. and other small info in the combo box instead.
+- Add a non-white background to the label view.

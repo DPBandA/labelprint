@@ -95,7 +95,7 @@
                       <Component id="jViewLabel" min="-2" pref="199" max="-2" attributes="0"/>
                       <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                       <Component id="jSaveLabel" min="-2" pref="199" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="131" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -116,6 +116,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel16" min="-2" pref="199" max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" pref="199" max="-2" attributes="0"/>
+                          <Component id="jLabel21" min="-2" pref="199" max="-2" attributes="0"/>
+                          <Component id="jLabel22" min="-2" pref="199" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
                   </Group>
@@ -126,6 +128,8 @@
                           <Component id="jCoolingCapacity" max="32767" attributes="0"/>
                           <Component id="jHeatingCapacity" max="32767" attributes="0"/>
                           <Component id="jProductTypeDetail" max="32767" attributes="0"/>
+                          <Component id="jAEER" max="32767" attributes="0"/>
+                          <Component id="jACOP" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -166,6 +170,10 @@
                       <Component id="jLabel16" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel17" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel21" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel22" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jCapacity" min="-2" pref="23" max="-2" attributes="0"/>
@@ -173,6 +181,10 @@
                       <Component id="jCoolingCapacity" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jHeatingCapacity" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jAEER" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jACOP" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
@@ -313,15 +325,13 @@
           <Font name="SansSerif" size="12" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="4">
             <StringItem index="0" value="Basic Refrigerator"/>
             <StringItem index="1" value="Freezer"/>
             <StringItem index="2" value="Refrigerator"/>
             <StringItem index="3" value="Room Air-conditioner"/>
-            <StringItem index="4" value=" "/>
           </StringArray>
         </Property>
-        <Property name="selectedIndex" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jProductTypeActionPerformed"/>
@@ -387,9 +397,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="12" style="0"/>
-        </Property>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="null"/>
         </Property>
       </Properties>
       <Events>
@@ -623,7 +630,6 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="jRatedVoltage">
       <Properties>
-        <Property name="editable" type="boolean" value="true"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="12" style="0"/>
         </Property>
@@ -657,16 +663,14 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="jRatedFrequency">
       <Properties>
-        <Property name="editable" type="boolean" value="true"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="12" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="3">
             <StringItem index="0" value="50"/>
             <StringItem index="1" value="60"/>
             <StringItem index="2" value="50/60"/>
-            <StringItem index="3" value=" "/>
           </StringArray>
         </Property>
       </Properties>
@@ -705,7 +709,45 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jProductType"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Product type detail:"/>
+        <Property name="text" type="java.lang.String" value="Product Type Detail:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jAEER">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="12" style="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jAEERKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel21">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Ann. Ener. Eff. Ratio (AEER):"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jACOP">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="12" style="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jACOPKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel22">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Ann. Coeff. of Perf. (ACOP):"/>
       </Properties>
     </Component>
   </SubComponents>

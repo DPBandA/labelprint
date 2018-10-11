@@ -1,12 +1,9 @@
-# Label Design
-- Use text to create header instead of importing an image. Do a print and 
-  see if the light green background has been fix since setting the image background
-  to none.
-
 # Updated standard implementation
-- Impl load and update product type detail object in labeldatapanel.
-- Impl validation of values that will be used in calculations (eg AV/capacity)
-  before saving. Validate AEER, ACOP and other fields when added.
+- Make sure all fields are loaded and saved when options dialog is opened and closed.
+- Impl default for other label values such as voltage. Allow edit in options dialog.
+- Use all label defaults when creating new labels (eg. rated voltage)
+- Update text fields to use keyrelease for marking dirty instead of caret update.
+- Impl loading product type detail combo from database based on product type.
 - Add EnergyConsumptionAndEfficiency class as a field to EnergyLabel.
 - Impl "dirty" setting for all new added label fields.
 - Impl changing the yellow and green background for the upper part of label.
@@ -28,6 +25,11 @@
 - Read standard and see how to impl updateEnergyStars().    
 - Validate double that has comma or do not allow comma but format double with a 
   before display on label.            
+
+# Label Design
+- Use text to create header instead of importing an image. Do a print and 
+  see if the light green background has been fix since setting the image background
+  to none.
 
 # Packaging
 - Setup izpack installer 

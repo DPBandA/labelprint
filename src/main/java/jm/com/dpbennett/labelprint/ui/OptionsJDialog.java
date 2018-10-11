@@ -28,22 +28,23 @@ import jm.com.dpbennett.labelprint.SystemOptions;
 
 /**
  * Uses the system properties file to edit system properties.
+ *
  * @author Desmond Bennett
  */
 public class OptionsJDialog extends javax.swing.JDialog {
 
-    private boolean databaseConnectionOptionsChanged;
+    private boolean isDirty;
     private LabelPrintFrame labelPrintFrame;
 
     public OptionsJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        
+
         initComponents();
-        
+
         init(parent);
-        
+
     }
-    
+
     private void init(java.awt.Frame parent) {
         String[][] fieldsToSearch;
         labelPrintFrame = (LabelPrintFrame) parent;
@@ -54,13 +55,13 @@ public class OptionsJDialog extends javax.swing.JDialog {
         fieldsToSearch = sysOptions.getFieldsToSearch();
         // Init General Options tab
         // Export formats
-        jJPEGCheckBox.setSelected(sysOptions.isExportJPEG());
-        jGIFCheckBox.setSelected(sysOptions.isExportGIF());
-        jPNGCheckBox.setSelected(sysOptions.isExportPNG());
-        jPDFCheckBox.setSelected(sysOptions.isExportPDF());
+        jJPEG.setSelected(sysOptions.isExportJPEG());
+        jGIF.setSelected(sysOptions.isExportGIF());
+        jPNG.setSelected(sysOptions.isExportPNG());
+        jPDF.setSelected(sysOptions.isExportPDF());
         // Label defaults
-        jStandardTextField.setText(sysOptions.getProperty("Standard"));
-        jProductTypeTextField.setText(sysOptions.getProperty("ProductType"));
+        jStandardNo.setText(sysOptions.getProperty("Standard"));
+        jProductType.setText(sysOptions.getProperty("ProductType"));
         // Init Database Options tab
         jDatabaseURLTextField.setText(sysOptions.getProperty("ConnectionURL"));
         jUsernameTextField.setText(sysOptions.getProperty("ConnectionUserName"));
@@ -84,11 +85,11 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote3_2_TextArea.setText(sysOptions.getProperty("Note3_2"));
         jNote3_3_TextArea.setText(sysOptions.getProperty("Note3_3"));
 
-        databaseConnectionOptionsChanged = false;
+        isDirty = false;
     }
 
     public boolean hasDatabaseConnectionOptionsChanged() {
-        return databaseConnectionOptionsChanged;
+        return isDirty;
     }
 
     /**
@@ -132,15 +133,19 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jConnectToDatabaseCheckBox = new javax.swing.JCheckBox();
         jMiscellaneousPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jJPEGCheckBox = new javax.swing.JCheckBox();
-        jPNGCheckBox = new javax.swing.JCheckBox();
-        jGIFCheckBox = new javax.swing.JCheckBox();
-        jPDFCheckBox = new javax.swing.JCheckBox();
+        jJPEG = new javax.swing.JCheckBox();
+        jPNG = new javax.swing.JCheckBox();
+        jGIF = new javax.swing.JCheckBox();
+        jPDF = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jStandardTextField = new javax.swing.JTextField();
+        jStandardNo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jProductTypeTextField = new javax.swing.JTextField();
+        jProductType = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jRatedVoltage = new javax.swing.JComboBox<>();
+        jRatedFrequency = new javax.swing.JComboBox<>();
         jOkButton = new javax.swing.JButton();
         jCancelButton = new javax.swing.JButton();
 
@@ -151,9 +156,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote1_1_TextArea.setColumns(20);
         jNote1_1_TextArea.setLineWrap(true);
         jNote1_1_TextArea.setRows(2);
-        jNote1_1_TextArea.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jNote1_1_TextAreaCaretUpdate(evt);
+        jNote1_1_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote1_1_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(jNote1_1_TextArea);
@@ -161,9 +166,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote1_2_TextArea.setColumns(20);
         jNote1_2_TextArea.setLineWrap(true);
         jNote1_2_TextArea.setRows(2);
-        jNote1_2_TextArea.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jNote1_2_TextAreaCaretUpdate(evt);
+        jNote1_2_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote1_2_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jNote1_2_TextArea);
@@ -174,9 +179,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote2_1_TextArea.setColumns(20);
         jNote2_1_TextArea.setLineWrap(true);
         jNote2_1_TextArea.setRows(1);
-        jNote2_1_TextArea.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jNote2_1_TextAreaCaretUpdate(evt);
+        jNote2_1_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote2_1_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(jNote2_1_TextArea);
@@ -187,9 +192,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote3_1_TextArea.setColumns(20);
         jNote3_1_TextArea.setLineWrap(true);
         jNote3_1_TextArea.setRows(1);
-        jNote3_1_TextArea.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jNote3_1_TextAreaCaretUpdate(evt);
+        jNote3_1_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote3_1_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane4.setViewportView(jNote3_1_TextArea);
@@ -200,9 +205,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote2_2_TextArea.setColumns(20);
         jNote2_2_TextArea.setLineWrap(true);
         jNote2_2_TextArea.setRows(1);
-        jNote2_2_TextArea.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jNote2_2_TextAreaCaretUpdate(evt);
+        jNote2_2_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote2_2_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane5.setViewportView(jNote2_2_TextArea);
@@ -210,9 +215,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote3_2_TextArea.setColumns(20);
         jNote3_2_TextArea.setLineWrap(true);
         jNote3_2_TextArea.setRows(1);
-        jNote3_2_TextArea.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jNote3_2_TextAreaCaretUpdate(evt);
+        jNote3_2_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote3_2_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane6.setViewportView(jNote3_2_TextArea);
@@ -220,9 +225,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote3_3_TextArea.setColumns(20);
         jNote3_3_TextArea.setLineWrap(true);
         jNote3_3_TextArea.setRows(1);
-        jNote3_3_TextArea.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jNote3_3_TextAreaCaretUpdate(evt);
+        jNote3_3_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote3_3_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane7.setViewportView(jNote3_3_TextArea);
@@ -283,9 +288,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel1.setText("Database URL:");
 
         jDatabaseURLTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDatabaseURLTextField.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jDatabaseURLTextFieldCaretUpdate(evt);
+        jDatabaseURLTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDatabaseURLTextFieldKeyReleased(evt);
             }
         });
 
@@ -294,9 +299,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel2.setText("Username:");
 
         jUsernameTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUsernameTextField.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jUsernameTextFieldCaretUpdate(evt);
+        jUsernameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jUsernameTextFieldKeyReleased(evt);
             }
         });
 
@@ -304,9 +309,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Password:");
 
-        jPasswordField.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                jPasswordFieldCaretUpdate(evt);
+        jPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordFieldKeyReleased(evt);
             }
         });
 
@@ -405,23 +410,43 @@ public class OptionsJDialog extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Image export formats", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
 
-        jJPEGCheckBox.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jJPEGCheckBox.setText("JPEG");
-        jJPEGCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jJPEG.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jJPEG.setText("JPEG");
+        jJPEG.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jJPEG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jJPEGActionPerformed(evt);
+            }
+        });
 
-        jPNGCheckBox.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jPNGCheckBox.setText("PNG");
-        jPNGCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jPNG.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jPNG.setText("PNG");
+        jPNG.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jPNG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPNGActionPerformed(evt);
+            }
+        });
 
-        jGIFCheckBox.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jGIFCheckBox.setText("GIF");
-        jGIFCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jGIFCheckBox.setEnabled(false);
+        jGIF.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jGIF.setText("GIF");
+        jGIF.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jGIF.setEnabled(false);
+        jGIF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jGIFActionPerformed(evt);
+            }
+        });
 
-        jPDFCheckBox.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jPDFCheckBox.setText("PDF");
-        jPDFCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jPDFCheckBox.setEnabled(false);
+        jPDF.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jPDF.setText("PDF");
+        jPDF.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jPDF.setEnabled(false);
+        jPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPDFActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -430,25 +455,23 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jJPEGCheckBox)
-                    .addComponent(jGIFCheckBox))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPNGCheckBox)
-                    .addComponent(jPDFCheckBox))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(jPDF)
+                    .addComponent(jPNG)
+                    .addComponent(jGIF)
+                    .addComponent(jJPEG))
+                .addGap(0, 111, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jJPEGCheckBox)
-                    .addComponent(jPNGCheckBox))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jGIFCheckBox)
-                    .addComponent(jPDFCheckBox))
+                .addComponent(jJPEG)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPNG)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jGIF)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPDF)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -457,20 +480,40 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel6.setText("Standard no.:");
 
-        jStandardTextField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jStandardTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jStandardTextFieldActionPerformed(evt);
+        jStandardNo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jStandardNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jStandardNoKeyReleased(evt);
             }
         });
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel8.setText("Product type:");
 
-        jProductTypeTextField.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jProductTypeTextField.addActionListener(new java.awt.event.ActionListener() {
+        jProductType.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jProductType.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jProductTypeKeyReleased(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel7.setText("Rated voltage:");
+
+        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel9.setText("Rated Frequency:");
+
+        jRatedVoltage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "110", "115", "120", "125", "220", "230", "240", "110/220", "115/230", "120/240" }));
+        jRatedVoltage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jProductTypeTextFieldActionPerformed(evt);
+                jRatedVoltageActionPerformed(evt);
+            }
+        });
+
+        jRatedFrequency.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50", "60", "50/60" }));
+        jRatedFrequency.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRatedFrequencyActionPerformed(evt);
             }
         });
 
@@ -479,26 +522,38 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGap(7, 7, 7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel6))
+                .addGap(3, 3, 3)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jStandardTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(jProductTypeTextField))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jStandardNo)
+                    .addComponent(jProductType)
+                    .addComponent(jRatedVoltage, 0, 210, Short.MAX_VALUE)
+                    .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jStandardTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel7)
+                    .addComponent(jRatedVoltage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jProductTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jRatedFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jStandardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jProductType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -510,7 +565,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jMiscellaneousPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -519,12 +574,12 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jMiscellaneousPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jMiscellaneousPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(241, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
-        jOptionsTabbedPane.addTab("Miscellaneous", jMiscellaneousPanel);
+        jOptionsTabbedPane.addTab("Label Content", jMiscellaneousPanel);
 
         jOkButton.setText("Ok");
         jOkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -546,11 +601,11 @@ public class OptionsJDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jOptionsTabbedPane)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jOkButton)
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addComponent(jCancelButton)
-                .addGap(254, 254, 254))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jCancelButton, jOkButton});
@@ -560,30 +615,18 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jOptionsTabbedPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jOkButton)
-                    .addComponent(jCancelButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCancelButton)
+                    .addComponent(jOkButton))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordFieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jPasswordFieldCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jPasswordFieldCaretUpdate
-
-    private void jUsernameTextFieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jUsernameTextFieldCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jUsernameTextFieldCaretUpdate
-
-    private void jDatabaseURLTextFieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jDatabaseURLTextFieldCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jDatabaseURLTextFieldCaretUpdate
-
     private void jConnectToDatabaseCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConnectToDatabaseCheckBoxActionPerformed
 
-        databaseConnectionOptionsChanged = true;
+        isDirty = true;
     }//GEN-LAST:event_jConnectToDatabaseCheckBoxActionPerformed
 
     private String getImageFileAbsolutePath() {
@@ -622,13 +665,13 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setProperty("Note3_3", jNote3_3_TextArea.getText());
 
         // Update export checkboxes
-        sysOptions.setExportPDF(jPDFCheckBox.isSelected());
-        sysOptions.setExportPNG(jPNGCheckBox.isSelected());
-        sysOptions.setExportGIF(jGIFCheckBox.isSelected());
-        sysOptions.setExportJPEG(jJPEGCheckBox.isSelected());
+        sysOptions.setExportPDF(jPDF.isSelected());
+        sysOptions.setExportPNG(jPNG.isSelected());
+        sysOptions.setExportGIF(jGIF.isSelected());
+        sysOptions.setExportJPEG(jJPEG.isSelected());
         // Update label defaults
-        sysOptions.setProperty("Standard", jStandardTextField.getText());
-        sysOptions.setProperty("ProductType", jProductTypeTextField.getText());
+        sysOptions.setProperty("Standard", jStandardNo.getText());
+        sysOptions.setProperty("ProductType", jProductType.getText());
         // Default field to search
         String selectedField = jDefaultSearchFieldComboBox.getSelectedItem().toString().trim();
         sysOptions.setProperty("DefaultFieldToSearch", selectedField);
@@ -673,49 +716,85 @@ public class OptionsJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jOkButtonActionPerformed
 
     private void jCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelButtonActionPerformed
-        databaseConnectionOptionsChanged = false;
+        isDirty = false;
         dispose();
     }//GEN-LAST:event_jCancelButtonActionPerformed
 
     private void jDefaultSearchFieldComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDefaultSearchFieldComboBoxActionPerformed
-              
+        isDirty = true;
     }//GEN-LAST:event_jDefaultSearchFieldComboBoxActionPerformed
 
-    private void jNote1_1_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote1_1_TextAreaCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jNote1_1_TextAreaCaretUpdate
+    private void jRatedVoltageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedVoltageActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jRatedVoltageActionPerformed
 
-    private void jNote1_2_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote1_2_TextAreaCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jNote1_2_TextAreaCaretUpdate
+    private void jRatedFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedFrequencyActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jRatedFrequencyActionPerformed
 
-    private void jNote2_1_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote2_1_TextAreaCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jNote2_1_TextAreaCaretUpdate
+    private void jNote1_1_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote1_1_TextAreaKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jNote1_1_TextAreaKeyReleased
 
-    private void jNote3_1_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote3_1_TextAreaCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jNote3_1_TextAreaCaretUpdate
+    private void jNote1_2_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote1_2_TextAreaKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jNote1_2_TextAreaKeyReleased
 
-    private void jNote2_2_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote2_2_TextAreaCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jNote2_2_TextAreaCaretUpdate
+    private void jNote2_1_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote2_1_TextAreaKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jNote2_1_TextAreaKeyReleased
 
-    private void jNote3_2_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote3_2_TextAreaCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jNote3_2_TextAreaCaretUpdate
+    private void jNote2_2_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote2_2_TextAreaKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jNote2_2_TextAreaKeyReleased
 
-    private void jNote3_3_TextAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jNote3_3_TextAreaCaretUpdate
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jNote3_3_TextAreaCaretUpdate
+    private void jNote3_1_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote3_1_TextAreaKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jNote3_1_TextAreaKeyReleased
 
-    private void jStandardTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStandardTextFieldActionPerformed
-        databaseConnectionOptionsChanged = true;
-    }//GEN-LAST:event_jStandardTextFieldActionPerformed
+    private void jNote3_2_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote3_2_TextAreaKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jNote3_2_TextAreaKeyReleased
 
-    private void jProductTypeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeTextFieldActionPerformed
-        
-    }//GEN-LAST:event_jProductTypeTextFieldActionPerformed
+    private void jNote3_3_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote3_3_TextAreaKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jNote3_3_TextAreaKeyReleased
+
+    private void jDatabaseURLTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDatabaseURLTextFieldKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jDatabaseURLTextFieldKeyReleased
+
+    private void jUsernameTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jUsernameTextFieldKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jUsernameTextFieldKeyReleased
+
+    private void jPasswordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jPasswordFieldKeyReleased
+
+    private void jJPEGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jJPEGActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jJPEGActionPerformed
+
+    private void jPNGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPNGActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jPNGActionPerformed
+
+    private void jGIFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGIFActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jGIFActionPerformed
+
+    private void jPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPDFActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jPDFActionPerformed
+
+    private void jStandardNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jStandardNoKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jStandardNoKeyReleased
+
+    private void jProductTypeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jProductTypeKeyReleased
+        isDirty = true;
+    }//GEN-LAST:event_jProductTypeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -732,8 +811,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jDatabasePanel;
     private javax.swing.JTextField jDatabaseURLTextField;
     private javax.swing.JComboBox jDefaultSearchFieldComboBox;
-    private javax.swing.JCheckBox jGIFCheckBox;
-    private javax.swing.JCheckBox jJPEGCheckBox;
+    private javax.swing.JCheckBox jGIF;
+    private javax.swing.JCheckBox jJPEG;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -743,7 +822,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jLabelContentPanel;
     private javax.swing.JPanel jMiscellaneousPanel;
     private javax.swing.JTextArea jNote1_1_TextArea;
@@ -755,12 +836,14 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JTextArea jNote3_3_TextArea;
     private javax.swing.JButton jOkButton;
     private javax.swing.JTabbedPane jOptionsTabbedPane;
-    private javax.swing.JCheckBox jPDFCheckBox;
-    private javax.swing.JCheckBox jPNGCheckBox;
+    private javax.swing.JCheckBox jPDF;
+    private javax.swing.JCheckBox jPNG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField;
-    private javax.swing.JTextField jProductTypeTextField;
+    private javax.swing.JTextField jProductType;
+    private javax.swing.JComboBox<String> jRatedFrequency;
+    private javax.swing.JComboBox<String> jRatedVoltage;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -768,7 +851,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextField jStandardTextField;
+    private javax.swing.JTextField jStandardNo;
     private javax.swing.JTextField jUsernameTextField;
     // End of variables declaration//GEN-END:variables
 }
