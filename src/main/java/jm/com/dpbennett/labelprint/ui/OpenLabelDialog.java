@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import jm.com.dpbennett.labelprint.SystemOptions;
+import jm.com.dpbennett.labelprint.Options;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 
 /**
@@ -64,7 +64,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
         setLocationRelativeTo(null);
 
         // Get system options
-        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
+        Options sysOptions = labelPrintFrame.getSystemOptions();
         fieldsToSearch = sysOptions.getFieldsToSearch();
         defaultFieldToSearch = sysOptions.getProperty("DefaultFieldToSearch");
         defaultFieldToDisplay = sysOptions.getProperty("DefaultFieldToDisplay");

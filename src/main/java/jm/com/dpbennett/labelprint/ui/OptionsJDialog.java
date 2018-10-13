@@ -24,7 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import jm.com.dpbennett.labelprint.SystemOptions;
+import jm.com.dpbennett.labelprint.Options;
 
 /**
  * Uses the system properties file to edit system properties.
@@ -51,32 +51,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
 
         // Load existing options
-        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
-        fieldsToSearch = sysOptions.getFieldsToSearch();
-        // Init General Options tab
-        // Export formats
-        jJPEG.setSelected(sysOptions.isExportJPEG());
-        jGIF.setSelected(sysOptions.isExportGIF());
-        jPNG.setSelected(sysOptions.isExportPNG());
-        jPDF.setSelected(sysOptions.isExportPDF());
-        // Label defaults
-        jStandardNo.setText(sysOptions.getProperty("Standard"));
-        jProductType.setText(sysOptions.getProperty("ProductType"));
-        // Init Database Options tab
-        jDatabaseURLTextField.setText(sysOptions.getProperty("ConnectionURL"));
-        jUsernameTextField.setText(sysOptions.getProperty("ConnectionUserName"));
-        jPasswordField.setText(sysOptions.getConnectionPassword());
-        // Init field to search combobox
-        //bLoadingComboBox = true;
-        for (int i = 0; i < fieldsToSearch.length; ++i) {
-            jDefaultSearchFieldComboBox.addItem(fieldsToSearch[i][0]);
-        }
-        jDefaultSearchFieldComboBox.setSelectedItem(sysOptions.getProperty("DefaultFieldToSearch"));
-        // Store in database
-        jConnectToDatabaseCheckBox.setSelected(sysOptions.isConnectToDatabase());
-        //bLoadingComboBox = false;
-
-        // Label Notes tab
+        Options sysOptions = labelPrintFrame.getSystemOptions();
+        // Notes tab
         jNote1_1_TextArea.setText(sysOptions.getProperty("Note1_1"));
         jNote1_2_TextArea.setText(sysOptions.getProperty("Note1_2"));
         jNote2_1_TextArea.setText(sysOptions.getProperty("Note2_1"));
@@ -84,6 +60,27 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jNote3_1_TextArea.setText(sysOptions.getProperty("Note3_1"));
         jNote3_2_TextArea.setText(sysOptions.getProperty("Note3_2"));
         jNote3_3_TextArea.setText(sysOptions.getProperty("Note3_3"));
+        // Database tab
+        jDatabaseURLTextField.setText(sysOptions.getProperty("ConnectionURL"));
+        jUsernameTextField.setText(sysOptions.getProperty("ConnectionUserName"));
+        jPasswordField.setText(sysOptions.getConnectionPassword());
+        fieldsToSearch = sysOptions.getFieldsToSearch();
+        for (int i = 0; i < fieldsToSearch.length; ++i) {
+            jDefaultSearchFieldComboBox.addItem(fieldsToSearch[i][0]);
+        }
+        jDefaultSearchFieldComboBox.setSelectedItem(sysOptions.getProperty("DefaultFieldToSearch"));
+        jConnectToDatabaseCheckBox.setSelected(sysOptions.isConnectToDatabase());
+        // Label Content tab  
+        // Image Export Formats
+        jJPEG.setSelected(sysOptions.isExportJPEG());
+        jGIF.setSelected(sysOptions.isExportGIF());
+        jPNG.setSelected(sysOptions.isExportPNG());
+        jPDF.setSelected(sysOptions.isExportPDF());
+        // Label defaults
+        jRatedVoltage.setSelectedItem(sysOptions.getProperty("DefaultRatedVoltage"));
+        jRatedFrequency.setSelectedItem(sysOptions.getProperty("DefaultRatedFrequency"));
+        jStandardNo.setText(sysOptions.getProperty("Standard"));
+        jProductType.setText(sysOptions.getProperty("ProductType"));
 
         isDirty = false;
     }
@@ -629,31 +626,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
         isDirty = true;
     }//GEN-LAST:event_jConnectToDatabaseCheckBoxActionPerformed
 
-    private String getImageFileAbsolutePath() {
-        JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter labelPrintFileFilter
-                = new FileNameExtensionFilter("Gif, JPEG and PNG Images", "gif", "jpg", "png");
-        chooser.setFileFilter(labelPrintFileFilter);
-        chooser.setCurrentDirectory(new File(".\\images"));
-        chooser.showDialog(this, "Choose");
-        File file = chooser.getSelectedFile();
-        if (file != null) {
-            return file.getAbsolutePath();
-        }
-
-        return null;
-    }
-
-    private void setImageFileAbsolutePath(JTextField textField) {
-        String fileName = getImageFileAbsolutePath();
-
-        if (fileName != null) {
-            textField.setText(fileName);
-        }
-    }
-
     private void jOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOkButtonActionPerformed
-        SystemOptions sysOptions = labelPrintFrame.getSystemOptions();
+        Options sysOptions = labelPrintFrame.getSystemOptions();
 
         // Notes
         sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());

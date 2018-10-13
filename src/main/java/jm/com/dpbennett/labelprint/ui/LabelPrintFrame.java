@@ -32,7 +32,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import jm.com.dpbennett.labelprint.SystemOptions;
+import jm.com.dpbennett.labelprint.Options;
 import jm.com.dpbennett.business.entity.EnergyLabel;
 import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
 import jm.com.dpbennett.business.entity.utils.ReturnMessage;
@@ -43,7 +43,7 @@ import jm.com.dpbennett.business.entity.utils.ReturnMessage;
  */
 public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
-    private SystemOptions sysOptions;
+    private Options sysOptions;
     private EntityManagerFactory emf;
     private LabelDataPanel labelDataPanel;
     private SVGLabelPanel labelPanel;
@@ -62,13 +62,13 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/LabelPrintIcon.png")));
 
-        sysOptions = new SystemOptions("LabelPrint.properties");
+        sysOptions = new Options("LabelPrint.properties");
         enableMenuItems(false);
 
         doSetup();
     }
 
-    public SystemOptions getSystemOptions() {
+    public Options getSystemOptions() {
         return sysOptions;
     }
 

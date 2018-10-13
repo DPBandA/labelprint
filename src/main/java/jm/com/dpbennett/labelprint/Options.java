@@ -30,7 +30,7 @@ import jm.com.dpbennett.business.entity.utils.Security;
  * This class manages the system properties file.
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public final class SystemOptions {
+public final class Options {
 
     private String systemFile;
     private Properties props;
@@ -58,10 +58,10 @@ public final class SystemOptions {
             "Operating cost", "operatingCost"}
     };
 
-    public SystemOptions() {
+    public Options() {
     }
 
-    public SystemOptions(String systemFile) {
+    public Options(String systemFile) {
         this.systemFile = systemFile;
         props = new Properties();
         if (!readSystemData()) {
@@ -182,7 +182,7 @@ public final class SystemOptions {
     }
 
     public static void main(String[] args) {
-        SystemOptions systemOptions1 = new SystemOptions("LabelPrint.properties");
+        Options systemOptions1 = new Options("LabelPrint.properties");
         System.out.print(systemOptions1.getProperty("DefaultFieldToSearch") + "\n");
     }
 

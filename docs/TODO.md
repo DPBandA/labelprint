@@ -1,5 +1,6 @@
 # Updated standard implementation
 - Make sure all fields are loaded and saved when options dialog is opened and closed.
+  Continue with jOkButtonActionPerformed().
 - Impl default for other label values such as voltage. Allow edit in options dialog.
 - Use all label defaults when creating new labels (eg. rated voltage)
 - Update text fields to use keyrelease for marking dirty instead of caret update.
