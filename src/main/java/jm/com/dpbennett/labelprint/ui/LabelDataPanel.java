@@ -73,7 +73,10 @@ public class LabelDataPanel extends javax.swing.JPanel {
                 || getEnergyLabel().getType().equals("Basic Refrigerator")) {
             getEnergyLabel().setDefrost("Automatic");
         }
+        getEnergyLabel().setRatedVoltage(labelPrintFrame.getSystemOptions().getProperty("DefaultRatedVoltage"));
+        getEnergyLabel().setRatedFrequency(labelPrintFrame.getSystemOptions().getProperty("DefaultRatedFrequency"));
         getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("Standard"));
+        // tk add product type detail
         getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
     }
 

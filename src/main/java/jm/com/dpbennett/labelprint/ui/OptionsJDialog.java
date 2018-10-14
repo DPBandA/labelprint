@@ -19,11 +19,7 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
-import java.io.File;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.Options;
 
 /**
@@ -143,8 +139,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jRatedVoltage = new javax.swing.JComboBox<>();
         jRatedFrequency = new javax.swing.JComboBox<>();
-        jOkButton = new javax.swing.JButton();
-        jCancelButton = new javax.swing.JButton();
+        jOk = new javax.swing.JButton();
+        jCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Options");
@@ -578,17 +574,17 @@ public class OptionsJDialog extends javax.swing.JDialog {
 
         jOptionsTabbedPane.addTab("Label Content", jMiscellaneousPanel);
 
-        jOkButton.setText("Ok");
-        jOkButton.addActionListener(new java.awt.event.ActionListener() {
+        jOk.setText("Ok");
+        jOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jOkButtonActionPerformed(evt);
+                jOkActionPerformed(evt);
             }
         });
 
-        jCancelButton.setText("Cancel");
-        jCancelButton.addActionListener(new java.awt.event.ActionListener() {
+        jCancel.setText("Cancel");
+        jCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCancelButtonActionPerformed(evt);
+                jCancelActionPerformed(evt);
             }
         });
 
@@ -599,13 +595,13 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addComponent(jOptionsTabbedPane)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jOkButton)
+                .addComponent(jOk)
                 .addGap(18, 18, 18)
-                .addComponent(jCancelButton)
+                .addComponent(jCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jCancelButton, jOkButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jCancel, jOk});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -613,8 +609,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addComponent(jOptionsTabbedPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCancelButton)
-                    .addComponent(jOkButton))
+                    .addComponent(jCancel)
+                    .addComponent(jOk))
                 .addContainerGap())
         );
 
@@ -626,10 +622,10 @@ public class OptionsJDialog extends javax.swing.JDialog {
         isDirty = true;
     }//GEN-LAST:event_jConnectToDatabaseCheckBoxActionPerformed
 
-    private void jOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOkButtonActionPerformed
+    private void jOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOkActionPerformed
         Options sysOptions = labelPrintFrame.getSystemOptions();
 
-        // Notes
+        // Label Notes
         sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
         sysOptions.setProperty("Note1_2", jNote1_2_TextArea.getText());
         sysOptions.setProperty("Note2_1", jNote2_1_TextArea.getText());
@@ -637,26 +633,29 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setProperty("Note3_1", jNote3_1_TextArea.getText());
         sysOptions.setProperty("Note3_2", jNote3_2_TextArea.getText());
         sysOptions.setProperty("Note3_3", jNote3_3_TextArea.getText());
-
-        // Update export checkboxes
-        sysOptions.setExportPDF(jPDF.isSelected());
-        sysOptions.setExportPNG(jPNG.isSelected());
-        sysOptions.setExportGIF(jGIF.isSelected());
-        sysOptions.setExportJPEG(jJPEG.isSelected());
-        // Update label defaults
-        sysOptions.setProperty("Standard", jStandardNo.getText());
-        sysOptions.setProperty("ProductType", jProductType.getText());
-        // Default field to search
-        String selectedField = jDefaultSearchFieldComboBox.getSelectedItem().toString().trim();
-        sysOptions.setProperty("DefaultFieldToSearch", selectedField);
-        // Update password
+        // Database
+        sysOptions.setProperty("DefaultFieldToSearch", 
+                jDefaultSearchFieldComboBox.getSelectedItem().toString());
         char[] password = jPasswordField.getPassword();
         String passwordString = new String(password).trim();
         sysOptions.setConnectionPassword(passwordString);
         sysOptions.setProperty("ConnectionUserName", jUsernameTextField.getText().trim());
         sysOptions.setProperty("ConnectionURL", jDatabaseURLTextField.getText().trim());
-
         sysOptions.setConnectToDatabase(jConnectToDatabaseCheckBox.isSelected());
+        // Label Content
+        // Image export formats
+        sysOptions.setExportPDF(jPDF.isSelected());
+        sysOptions.setExportPNG(jPNG.isSelected());
+        sysOptions.setExportGIF(jGIF.isSelected());
+        sysOptions.setExportJPEG(jJPEG.isSelected());
+        // Label defaults
+        sysOptions.setProperty("DefaultRatedVoltage", 
+                jRatedVoltage.getSelectedItem().toString());
+        sysOptions.setProperty("DefaultRatedFrequency", 
+                jRatedFrequency.getSelectedItem().toString());
+        sysOptions.setProperty("ProductType", jProductType.getText());    
+        sysOptions.setProperty("Standard", jStandardNo.getText());
+        sysOptions.setProperty("ProductType", jProductType.getText());        
 
         sysOptions.writeSystemData();
 
@@ -667,7 +666,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
             }
         });
 
-        // test the database connection
+        // Test the database connection
         if (sysOptions.isConnectToDatabase()) {
             System.out.println("will try to setup db with user:"
                     + sysOptions.getProperty("ConnectionUserName"));
@@ -687,12 +686,12 @@ public class OptionsJDialog extends javax.swing.JDialog {
             dispose();
         }
 
-    }//GEN-LAST:event_jOkButtonActionPerformed
+    }//GEN-LAST:event_jOkActionPerformed
 
-    private void jCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelButtonActionPerformed
+    private void jCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelActionPerformed
         isDirty = false;
         dispose();
-    }//GEN-LAST:event_jCancelButtonActionPerformed
+    }//GEN-LAST:event_jCancelActionPerformed
 
     private void jDefaultSearchFieldComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDefaultSearchFieldComboBoxActionPerformed
         isDirty = true;
@@ -779,7 +778,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jCancelButton;
+    private javax.swing.JButton jCancel;
     private javax.swing.JCheckBox jConnectToDatabaseCheckBox;
     private javax.swing.JPanel jDatabaseOptionsPanel;
     private javax.swing.JPanel jDatabasePanel;
@@ -808,7 +807,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JTextArea jNote3_1_TextArea;
     private javax.swing.JTextArea jNote3_2_TextArea;
     private javax.swing.JTextArea jNote3_3_TextArea;
-    private javax.swing.JButton jOkButton;
+    private javax.swing.JButton jOk;
     private javax.swing.JTabbedPane jOptionsTabbedPane;
     private javax.swing.JCheckBox jPDF;
     private javax.swing.JCheckBox jPNG;

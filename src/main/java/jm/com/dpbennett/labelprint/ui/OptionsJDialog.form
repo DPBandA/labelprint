@@ -28,9 +28,9 @@
           <Component id="jOptionsTabbedPane" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jOkButton" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <Component id="jOk" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jCancelButton" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <Component id="jCancel" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -41,8 +41,8 @@
               <Component id="jOptionsTabbedPane" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jOkButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jOk" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -789,20 +789,20 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jOkButton">
+    <Component class="javax.swing.JButton" name="jOk">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ok"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jOkButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jOkActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jCancelButton">
+    <Component class="javax.swing.JButton" name="jCancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCancelButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCancelActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

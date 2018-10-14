@@ -1,8 +1,7 @@
 # Updated standard implementation
-- Make sure all fields are loaded and saved when options dialog is opened and closed.
-  Continue with jOkButtonActionPerformed().
-- Impl default for other label values such as voltage. Allow edit in options dialog.
-- Use all label defaults when creating new labels (eg. rated voltage)
+- Impl finding EnergyConsumptionAndEfficiency based on productType.
+- Load product type detail combo based on product type.
+- Use all label defaults when creating new labels (eg. rated voltage, product type etc.)
 - Update text fields to use keyrelease for marking dirty instead of caret update.
 - Impl loading product type detail combo from database based on product type.
 - Add EnergyConsumptionAndEfficiency class as a field to EnergyLabel.
