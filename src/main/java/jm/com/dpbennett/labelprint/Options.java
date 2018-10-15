@@ -19,22 +19,16 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint;
 
-import java.io.*;
 import javax.swing.*;
-import java.util.Properties;
-import java.io.FileInputStream;
-import jm.com.dpbennett.business.entity.fileutils.FileUtils;
+import jm.com.dpbennett.business.entity.fileutils.PropertiesFile;
 import jm.com.dpbennett.business.entity.utils.Security;
 
 /**
  * This class manages the system properties file.
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public final class Options {
+public class Options extends PropertiesFile {
 
-    private String systemFile;
-    private Properties props;
-    private boolean noError;
     private String[][] fieldsToSearch = {
         {
             "Brand", "brand"},
@@ -58,13 +52,11 @@ public final class Options {
             "Operating cost", "operatingCost"}
     };
 
-    public Options() {
-    }
-
     public Options(String systemFile) {
-        this.systemFile = systemFile;
-        props = new Properties();
-        if (!readSystemData()) {
+        
+        super(systemFile);
+        
+        if (!read()) {
 
             JOptionPane.showMessageDialog(null,
                     "Error occured while loading system options",
@@ -74,55 +66,9 @@ public final class Options {
         }
     }
 
-    public void setProperty(String name, String value) {
-        props.setProperty(name, value);
-    }
-
-    public String getProperty(String name) {
-        return props.getProperty(name);
-    }
-
-    public boolean readSystemData() {
-
-        noError = true;
-        FileInputStream fis;
-
-        try {
-
-            try {
-                fis = new FileInputStream(FileUtils.getAbsoluteFilePath(systemFile, getClass()));
-            } catch (FileNotFoundException e) {
-                System.out.println("Properties file not found. Loading default...");
-                fis = new FileInputStream(getClass().
-                        getResource("/system/" + systemFile).getFile());
-            }
-
-            props.load(fis);
-
-        } catch (IOException ex) {
-            System.out.println(ex);
-            noError = false;
-        }
-
-        return noError;
-    }
-
-    public boolean writeSystemData() {
-
-        noError = true;
-
-        try {
-
-            props.store(new FileOutputStream(FileUtils.getAbsoluteFilePath(systemFile, getClass())), 
-                    "LabelPrint System Options");
-
-        } catch (IOException ex) {
-            System.out.println(ex);
-            noError = false;
-        }
-
-        return noError;
-
+    @Override
+    public boolean write() {
+        return super.writeSystemData("LabelPrint Properties");
     }
 
     public String[][] getFieldsToSearch() {
@@ -134,56 +80,51 @@ public final class Options {
     }
 
     public boolean isExportJPEG() {
-        return Boolean.parseBoolean(props.getProperty("ExportJPEG"));
+        return Boolean.parseBoolean(getProperty("ExportJPEG"));
     }
 
     public boolean isExportGIF() {
-        return Boolean.parseBoolean(props.getProperty("ExportGIF"));
+        return Boolean.parseBoolean(getProperty("ExportGIF"));
     }
 
     public boolean isExportPNG() {
-        return Boolean.parseBoolean(props.getProperty("ExportPNG"));
+        return Boolean.parseBoolean(getProperty("ExportPNG"));
     }
 
     public boolean isExportPDF() {
-        return Boolean.parseBoolean(props.getProperty("ExportPDF"));
+        return Boolean.parseBoolean(getProperty("ExportPDF"));
     }
 
     public void setExportJPEG(boolean b) {
-        props.setProperty("ExportJPEG", Boolean.toString(b));
+        setProperty("ExportJPEG", Boolean.toString(b));
     }
 
     public void setExportGIF(boolean b) {
-        props.setProperty("ExportGIF", Boolean.toString(b));
+        setProperty("ExportGIF", Boolean.toString(b));
     }
 
     public void setExportPNG(boolean b) {
-        props.setProperty("ExportPNG", Boolean.toString(b));
+        setProperty("ExportPNG", Boolean.toString(b));
     }
 
     public void setExportPDF(boolean b) {
-        props.setProperty("ExportPDF", Boolean.toString(b));
+        setProperty("ExportPDF", Boolean.toString(b));
     }
 
     public boolean isConnectToDatabase() {
-        return Boolean.parseBoolean(props.getProperty("ConnectToDatabase"));
+        return Boolean.parseBoolean(getProperty("ConnectToDatabase"));
     }
 
     public void setConnectToDatabase(boolean b) {
-        props.setProperty("ConnectToDatabase", Boolean.toString(b));
+        setProperty("ConnectToDatabase", Boolean.toString(b));
     }
 
     public String getConnectionPassword() {
-        return (Security.decrypt(props.getProperty("ConnectionPassword")));
+        return (Security.decrypt(getProperty("ConnectionPassword")));
     }
 
     public void setConnectionPassword(String connectionPassword) {
-        props.setProperty("ConnectionPassword", Security.encrypt(connectionPassword));
-    }
-
-    public static void main(String[] args) {
-        Options systemOptions1 = new Options("LabelPrint.properties");
-        System.out.print(systemOptions1.getProperty("DefaultFieldToSearch") + "\n");
+        setProperty("ConnectionPassword", Security.encrypt(connectionPassword));
     }
 
 }

@@ -1,4 +1,5 @@
 # Updated standard implementation
+- Let Options inherit from PropertiesFile in BEL.
 - Impl finding EnergyConsumptionAndEfficiency based on productType.
 - Load product type detail combo based on product type.
 - Use all label defaults when creating new labels (eg. rated voltage, product type etc.)
@@ -24,7 +25,8 @@
 - Change labels "Capacity" and "Defrost" based on the product type.
 - Read standard and see how to impl updateEnergyStars().    
 - Validate double that has comma or do not allow comma but format double with a 
-  before display on label.            
+  before display on label.       
+- Add table and dialog that allow the editing of EnergyConsumptionAndEfficiency objects.    
 
 # Label Design
 - Use text to create header instead of importing an image. Do a print and 

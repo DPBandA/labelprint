@@ -34,7 +34,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.Options;
 import jm.com.dpbennett.business.entity.EnergyLabel;
-import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
 import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 
 /**
@@ -62,7 +61,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/LabelPrintIcon.png")));
 
-        sysOptions = new Options("LabelPrint.properties");
+        sysOptions = new Options("/system/LabelPrint.properties");
         enableMenuItems(false);
 
         doSetup();

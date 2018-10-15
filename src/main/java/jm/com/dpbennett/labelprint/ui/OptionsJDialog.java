@@ -657,7 +657,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setProperty("Standard", jStandardNo.getText());
         sysOptions.setProperty("ProductType", jProductType.getText());        
 
-        sysOptions.writeSystemData();
+        sysOptions.write();
 
         // Update relevant views that are dependent on system options
         java.awt.EventQueue.invokeLater(() -> {
