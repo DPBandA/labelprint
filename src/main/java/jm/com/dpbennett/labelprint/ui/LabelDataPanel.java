@@ -20,6 +20,7 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import jm.com.dpbennett.business.entity.BusinessEntity;
 import jm.com.dpbennett.business.entity.EnergyConsumptionAndEfficiency;
@@ -53,22 +54,12 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }
 
     private void init() {
-        //energyLabel = new EnergyLabel();
         createLabel();
-
-        // tk
-        ArrayList<BusinessEntity> data = new ArrayList<>();
-        data.add(new EnergyConsumptionAndEfficiency(1L, "Iya!!2323 232ui32i i23u2i 3i2ui3u i2u3i2i3u2iui32iu3i2u iu2iu3i 2ui32i3i 2323 yyytt tioeori eorieoiro roeior oerioeir oeoreo iroeiroeiorioe iroeiorieo roe ??"));
-        data.add(new EnergyConsumptionAndEfficiency(2L, "Seen!!"));
-        data.add(new EnergyConsumptionAndEfficiency(3L, "Yes"));
-
-        jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
-                data, 4, 1, 5));
     }
 
     public void createLabel() {
         setEnergyLabel(new EnergyLabel());
-        getEnergyLabel().setType(labelPrintFrame.getSystemOptions().getProperty("ProductType"));
+        getEnergyLabel().setType(labelPrintFrame.getSystemOptions().getProperty("DefaultProductType"));
         if (getEnergyLabel().getType().equals("Refrigerator")
                 || getEnergyLabel().getType().equals("Basic Refrigerator")) {
             getEnergyLabel().setDefrost("Automatic");
@@ -76,8 +67,33 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setRatedVoltage(labelPrintFrame.getSystemOptions().getProperty("DefaultRatedVoltage"));
         getEnergyLabel().setRatedFrequency(labelPrintFrame.getSystemOptions().getProperty("DefaultRatedFrequency"));
         getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("Standard"));
-        // tk add product type detail
+
+        // tk add product type/class detail from options
+        updateProductTypeDetailModel();
+
         getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
+    }
+
+    private void updateProductTypeDetailModel() {
+        List<BusinessEntity> data = new ArrayList<>();
+
+        if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                            labelPrintFrame.getEntityManager(),
+                            "Room Air-conditioner"));
+        } else {
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                            labelPrintFrame.getEntityManager(),
+                            "Refrigerator"));
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                            labelPrintFrame.getEntityManager(),
+                            "Basic Refrigerator"));
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                            labelPrintFrame.getEntityManager(),
+                            "Freezer"));
+        }
+        jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
+                (List<BusinessEntity>) data, 4, 1, 5));
     }
 
     public EnergyLabel getEnergyLabel() {
@@ -113,7 +129,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
         getEnergyLabel().setType(jProductType.getSelectedItem().toString());
         getEnergyLabel().setEnergyConsumptionAndEfficiency(
-                (EnergyConsumptionAndEfficiency)jProductTypeDetail.getSelectedItem());
+                (EnergyConsumptionAndEfficiency) jProductTypeDetail.getSelectedItem());
         getEnergyLabel().setJobNumber(jJobNumber.getText());
         getEnergyLabel().setLabelName(jLabelName.getText());
 
@@ -453,7 +469,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setLabelFor(jProductType);
-        jLabel20.setText("Product Type Detail:");
+        jLabel20.setText("Product Type/Class Detail:");
 
         jAEER.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jAEER.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -694,6 +710,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeActionPerformed
         getEnergyLabel().setType((String) jProductType.getSelectedItem());
+        updateProductTypeDetailModel();
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 

@@ -709,7 +709,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jProductType"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Product Type Detail:"/>
+        <Property name="text" type="java.lang.String" value="Product Type/Class Detail:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jAEER">

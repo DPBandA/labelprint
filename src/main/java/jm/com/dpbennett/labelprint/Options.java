@@ -24,7 +24,7 @@ import jm.com.dpbennett.business.entity.fileutils.PropertiesFile;
 import jm.com.dpbennett.business.entity.utils.Security;
 
 /**
- * This class manages the system properties file.
+ * This class manages the options file.
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
 public class Options extends PropertiesFile {
@@ -52,6 +52,11 @@ public class Options extends PropertiesFile {
             "Operating cost", "operatingCost"}
     };
 
+    /**
+     * Constructs an Options object and attempts to read the properties from the
+     * properties file.
+     * @param systemFile 
+     */
     public Options(String systemFile) {
         
         super(systemFile);
@@ -66,9 +71,13 @@ public class Options extends PropertiesFile {
         }
     }
 
+    /**
+     * Writes the properties to the properties file with the given header.
+     * @return 
+     */
     @Override
     public boolean write() {
-        return super.writeSystemData("LabelPrint Properties");
+        return super.write("LabelPrint Properties");
     }
 
     public String[][] getFieldsToSearch() {

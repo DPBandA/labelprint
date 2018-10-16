@@ -16,3 +16,6 @@
 - Put a text area below the product type details to show all the details of the 
   the selected item. Put item no. and other small info in the combo box instead.
 - Add a non-white background to the label view.
+- Create and let EnergyConsumptionAndEfficiency impl EnergyProductTypeDetail 
+  and EnergyProductClass interfaces?
+- Add system options for logo image and header files.

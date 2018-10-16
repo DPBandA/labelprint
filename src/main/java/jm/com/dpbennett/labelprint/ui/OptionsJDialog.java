@@ -75,8 +75,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
         // Label defaults
         jRatedVoltage.setSelectedItem(sysOptions.getProperty("DefaultRatedVoltage"));
         jRatedFrequency.setSelectedItem(sysOptions.getProperty("DefaultRatedFrequency"));
-        jStandardNo.setText(sysOptions.getProperty("Standard"));
-        jProductType.setText(sysOptions.getProperty("ProductType"));
+        jStandardNo.setSelectedItem(sysOptions.getProperty("Standard"));
+        jProductType.setSelectedItem(sysOptions.getProperty("DefaultProductType"));
 
         isDirty = false;
     }
@@ -132,13 +132,17 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jPDF = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jStandardNo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jProductType = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jRatedVoltage = new javax.swing.JComboBox<>();
         jRatedFrequency = new javax.swing.JComboBox<>();
+        jProductType = new javax.swing.JComboBox<>();
+        jProductTypeDetail = new javax.swing.JComboBox<>();
+        jProductClass = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jStandardNo = new javax.swing.JComboBox<>();
         jOk = new javax.swing.JButton();
         jCancel = new javax.swing.JButton();
 
@@ -271,7 +275,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelContentPanel);
@@ -396,7 +400,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jDatabasePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jDatabaseOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Database", jDatabasePanel);
@@ -452,7 +456,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                     .addComponent(jPNG)
                     .addComponent(jGIF)
                     .addComponent(jJPEG))
-                .addGap(0, 111, Short.MAX_VALUE))
+                .addGap(0, 125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,35 +469,25 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addComponent(jGIF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPDF)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Label Defaults", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel6.setText("Standard no.:");
-
-        jStandardNo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jStandardNo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jStandardNoKeyReleased(evt);
-            }
-        });
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Standard No.:");
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel8.setText("Product type:");
-
-        jProductType.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jProductType.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jProductTypeKeyReleased(evt);
-            }
-        });
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Product Type:");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel7.setText("Rated voltage:");
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Rated Voltage:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Rated Frequency:");
 
         jRatedVoltage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "110", "115", "120", "125", "220", "230", "240", "110/220", "115/230", "120/240" }));
@@ -510,29 +504,70 @@ public class OptionsJDialog extends javax.swing.JDialog {
             }
         });
 
+        jProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Basic Refrigerator", "Freezer", "Refrigerator", "Room Air-conditioner" }));
+        jProductType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProductTypeActionPerformed(evt);
+            }
+        });
+
+        jProductTypeDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProductTypeDetailActionPerformed(evt);
+            }
+        });
+
+        jProductClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProductClassActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Product Type Detail:");
+
+        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Product Class:");
+
+        jStandardNo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JS 178", "JS 179" }));
+        jStandardNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStandardNoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel6))
-                .addGap(3, 3, 3)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jStandardNo)
-                    .addComponent(jProductType)
-                    .addComponent(jRatedVoltage, 0, 210, Short.MAX_VALUE)
-                    .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(8, 8, 8)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel11)))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRatedVoltage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jProductTypeDetail, 0, 409, Short.MAX_VALUE)
+                    .addComponent(jProductClass, 0, 409, Short.MAX_VALUE)
+                    .addComponent(jStandardNo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jRatedVoltage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -540,15 +575,23 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jRatedFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jStandardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jProductType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel8)
+                    .addComponent(jProductType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jProductTypeDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jProductClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jMiscellaneousPanelLayout = new javax.swing.GroupLayout(jMiscellaneousPanel);
@@ -557,19 +600,21 @@ public class OptionsJDialog extends javax.swing.JDialog {
             jMiscellaneousPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMiscellaneousPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jMiscellaneousPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jMiscellaneousPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 418, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jMiscellaneousPanelLayout.setVerticalGroup(
             jMiscellaneousPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMiscellaneousPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jMiscellaneousPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Content", jMiscellaneousPanel);
@@ -653,9 +698,10 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 jRatedVoltage.getSelectedItem().toString());
         sysOptions.setProperty("DefaultRatedFrequency", 
                 jRatedFrequency.getSelectedItem().toString());
-        sysOptions.setProperty("ProductType", jProductType.getText());    
-        sysOptions.setProperty("Standard", jStandardNo.getText());
-        sysOptions.setProperty("ProductType", jProductType.getText());        
+        //sysOptions.setProperty("DefaultProductTypeDetail", jProductType.getText());    
+        sysOptions.setProperty("Standard", jStandardNo.getSelectedItem().toString());
+        sysOptions.setProperty("DefaultProductType", 
+                jProductType.getSelectedItem().toString());        
 
         sysOptions.write();
 
@@ -761,13 +807,21 @@ public class OptionsJDialog extends javax.swing.JDialog {
         isDirty = true;
     }//GEN-LAST:event_jPDFActionPerformed
 
-    private void jStandardNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jStandardNoKeyReleased
+    private void jProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeActionPerformed
         isDirty = true;
-    }//GEN-LAST:event_jStandardNoKeyReleased
+    }//GEN-LAST:event_jProductTypeActionPerformed
 
-    private void jProductTypeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jProductTypeKeyReleased
+    private void jProductTypeDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeDetailActionPerformed
         isDirty = true;
-    }//GEN-LAST:event_jProductTypeKeyReleased
+    }//GEN-LAST:event_jProductTypeDetailActionPerformed
+
+    private void jProductClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductClassActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jProductClassActionPerformed
+
+    private void jStandardNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStandardNoActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jStandardNoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -787,6 +841,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jGIF;
     private javax.swing.JCheckBox jJPEG;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -814,7 +870,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField;
-    private javax.swing.JTextField jProductType;
+    private javax.swing.JComboBox<String> jProductClass;
+    private javax.swing.JComboBox<String> jProductType;
+    private javax.swing.JComboBox<String> jProductTypeDetail;
     private javax.swing.JComboBox<String> jRatedFrequency;
     private javax.swing.JComboBox<String> jRatedVoltage;
     private javax.swing.JScrollPane jScrollPane1;
@@ -824,7 +882,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextField jStandardNo;
+    private javax.swing.JComboBox<String> jStandardNo;
     private javax.swing.JTextField jUsernameTextField;
     // End of variables declaration//GEN-END:variables
 }
