@@ -137,15 +137,23 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     }
 
+    /**
+     * Sets the edited (dirty) status of a label and the title of this window.
+     * It first checks if the LabelDataPanel was constructed by checking if it
+     * is null.
+     * @param flag 
+     */
     public void setDirty(boolean flag) {
-        getLabelDataPanel().getEnergyLabel().setIsDirty(flag);
+        if (getLabelDataPanel() != null) {
+            getLabelDataPanel().getEnergyLabel().setIsDirty(flag);
 
-        if (getLabelDataPanel().getEnergyLabel().getIsDirty()) {
-            this.setTitle("LabelPrint - "
-                    + getLabelDataPanel().getEnergyLabel().getLabelName() + " - MODIFIED");
-        } else {
-            this.setTitle("LabelPrint - "
-                    + getLabelDataPanel().getEnergyLabel().getLabelName());
+            if (getLabelDataPanel().getEnergyLabel().getIsDirty()) {
+                this.setTitle("LabelPrint - "
+                        + getLabelDataPanel().getEnergyLabel().getLabelName() + " - MODIFIED");
+            } else {
+                this.setTitle("LabelPrint - "
+                        + getLabelDataPanel().getEnergyLabel().getLabelName());
+            }
         }
     }
 
@@ -569,18 +577,16 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
                             + "Try to connect to a database in the options dialog and try again.",
                             "Save Error",
                             JOptionPane.ERROR_MESSAGE);
-                }
-                else {
+                } else {
                     setDirty(false);
                 }
             } else {
-                 JOptionPane.showMessageDialog(this,
-                            returnMessage.getMessage(),
-                            returnMessage.getHeader(),
-                            JOptionPane.ERROR_MESSAGE);   
+                JOptionPane.showMessageDialog(this,
+                        returnMessage.getMessage(),
+                        returnMessage.getHeader(),
+                        JOptionPane.ERROR_MESSAGE);
             }
 
-            
         } catch (HeadlessException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(this,

@@ -19,7 +19,12 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import jm.com.dpbennett.business.entity.BusinessEntity;
+import jm.com.dpbennett.business.entity.EnergyConsumptionAndEfficiency;
+import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
 import jm.com.dpbennett.labelprint.Options;
 
 /**
@@ -77,8 +82,46 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jRatedFrequency.setSelectedItem(sysOptions.getProperty("DefaultRatedFrequency"));
         jStandardNo.setSelectedItem(sysOptions.getProperty("Standard"));
         jProductType.setSelectedItem(sysOptions.getProperty("DefaultProductType"));
+        loadProductTypeDetailandClassCombos(sysOptions);
 
         isDirty = false;
+    }
+
+    private void loadProductTypeDetailandClassCombos(Options sysOptions) {
+        List<BusinessEntity> productTypeDetails = new ArrayList<>();
+        List<BusinessEntity> productClasses = new ArrayList<>();
+
+        // Product classes
+        productClasses.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                labelPrintFrame.getEntityManager(),
+                "Room Air-conditioner"));
+
+        // Product type details
+        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                labelPrintFrame.getEntityManager(),
+                "Refrigerator"));
+        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                labelPrintFrame.getEntityManager(),
+                "Basic Refrigerator"));
+        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                labelPrintFrame.getEntityManager(),
+                "Freezer"));
+        
+        jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
+                (List<BusinessEntity>) productTypeDetails, 4, 1, 5));
+        jProductClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductClass,
+                (List<BusinessEntity>) productClasses, 4, 1, 5));
+        
+        // Set combos' values
+        EnergyConsumptionAndEfficiency productTypeDetail = 
+                    EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(), 
+                            sysOptions.getLongProperty("DefaultProductTypeDetailId"));
+        jProductTypeDetail.setSelectedItem(productTypeDetail);
+        EnergyConsumptionAndEfficiency productClass = 
+                    EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(), 
+                            sysOptions.getLongProperty("DefaultProductClassId"));
+        jProductClass.setSelectedItem(productClass);
+        
     }
 
     public boolean hasDatabaseConnectionOptionsChanged() {
@@ -679,7 +722,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setProperty("Note3_2", jNote3_2_TextArea.getText());
         sysOptions.setProperty("Note3_3", jNote3_3_TextArea.getText());
         // Database
-        sysOptions.setProperty("DefaultFieldToSearch", 
+        sysOptions.setProperty("DefaultFieldToSearch",
                 jDefaultSearchFieldComboBox.getSelectedItem().toString());
         char[] password = jPasswordField.getPassword();
         String passwordString = new String(password).trim();
@@ -694,14 +737,17 @@ public class OptionsJDialog extends javax.swing.JDialog {
         sysOptions.setExportGIF(jGIF.isSelected());
         sysOptions.setExportJPEG(jJPEG.isSelected());
         // Label defaults
-        sysOptions.setProperty("DefaultRatedVoltage", 
+        sysOptions.setProperty("DefaultRatedVoltage",
                 jRatedVoltage.getSelectedItem().toString());
-        sysOptions.setProperty("DefaultRatedFrequency", 
-                jRatedFrequency.getSelectedItem().toString());
-        //sysOptions.setProperty("DefaultProductTypeDetail", jProductType.getText());    
+        sysOptions.setProperty("DefaultRatedFrequency",
+                jRatedFrequency.getSelectedItem().toString());            
         sysOptions.setProperty("Standard", jStandardNo.getSelectedItem().toString());
-        sysOptions.setProperty("DefaultProductType", 
-                jProductType.getSelectedItem().toString());        
+        sysOptions.setProperty("DefaultProductType",
+                jProductType.getSelectedItem().toString());
+        sysOptions.setProperty("DefaultProductTypeDetailId", 
+                ((EnergyConsumptionAndEfficiency)jProductTypeDetail.getSelectedItem()).getId().toString());
+        sysOptions.setProperty("DefaultProductClassId", 
+                ((EnergyConsumptionAndEfficiency)jProductClass.getSelectedItem()).getId().toString());
 
         sysOptions.write();
 

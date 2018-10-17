@@ -53,6 +53,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
         init();
     }
 
+    /**
+     * Initialize the LabelDataPanel and create a new label.
+     */
     private void init() {
         createLabel();
     }
@@ -68,32 +71,46 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setRatedFrequency(labelPrintFrame.getSystemOptions().getProperty("DefaultRatedFrequency"));
         getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("Standard"));
 
-        // tk add product type/class detail from options
-        updateProductTypeDetailModel();
+        updateProductTypeDetailAndClassModel();
 
         getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
     }
 
-    private void updateProductTypeDetailModel() {
+    private void updateProductTypeDetailAndClassModel() {
         List<BusinessEntity> data = new ArrayList<>();
 
         if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
             data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                            labelPrintFrame.getEntityManager(),
-                            "Room Air-conditioner"));
+                    labelPrintFrame.getEntityManager(),
+                    "Room Air-conditioner"));
         } else {
             data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                            labelPrintFrame.getEntityManager(),
-                            "Refrigerator"));
+                    labelPrintFrame.getEntityManager(),
+                    "Refrigerator"));
             data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                            labelPrintFrame.getEntityManager(),
-                            "Basic Refrigerator"));
+                    labelPrintFrame.getEntityManager(),
+                    "Basic Refrigerator"));
             data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                            labelPrintFrame.getEntityManager(),
-                            "Freezer"));
+                    labelPrintFrame.getEntityManager(),
+                    "Freezer"));
         }
         jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
                 (List<BusinessEntity>) data, 4, 1, 5));
+
+        // Set the default values for product type detail and class
+        if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+            EnergyConsumptionAndEfficiency productTypeDetailOrClass
+                    = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
+                            labelPrintFrame.getSystemOptions().getLongProperty("DefaultProductClassId"));
+            jProductTypeDetail.setSelectedItem(productTypeDetailOrClass);
+        }
+        else {
+            EnergyConsumptionAndEfficiency productTypeDetailOrClass
+                    = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
+                            labelPrintFrame.getSystemOptions().getLongProperty("DefaultProductTypeDetailId"));
+            jProductTypeDetail.setSelectedItem(productTypeDetailOrClass);
+        }
+
     }
 
     public EnergyLabel getEnergyLabel() {
@@ -710,7 +727,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeActionPerformed
         getEnergyLabel().setType((String) jProductType.getSelectedItem());
-        updateProductTypeDetailModel();
+        updateProductTypeDetailAndClassModel();
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 
