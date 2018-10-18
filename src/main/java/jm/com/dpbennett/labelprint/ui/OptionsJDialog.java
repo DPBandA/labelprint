@@ -106,22 +106,22 @@ public class OptionsJDialog extends javax.swing.JDialog {
         productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
                 labelPrintFrame.getEntityManager(),
                 "Freezer"));
-        
+
         jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
                 (List<BusinessEntity>) productTypeDetails, 4, 1, 5));
         jProductClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductClass,
                 (List<BusinessEntity>) productClasses, 4, 1, 5));
-        
+
         // Set combos' values
-        EnergyConsumptionAndEfficiency productTypeDetail = 
-                    EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(), 
-                            sysOptions.getLongProperty("DefaultProductTypeDetailId"));
+        EnergyConsumptionAndEfficiency productTypeDetail
+                = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
+                        sysOptions.getLongProperty("DefaultProductTypeDetailId"));
         jProductTypeDetail.setSelectedItem(productTypeDetail);
-        EnergyConsumptionAndEfficiency productClass = 
-                    EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(), 
-                            sysOptions.getLongProperty("DefaultProductClassId"));
+        EnergyConsumptionAndEfficiency productClass
+                = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
+                        sysOptions.getLongProperty("DefaultProductClassId"));
         jProductClass.setSelectedItem(productClass);
-        
+
     }
 
     public boolean hasDatabaseConnectionOptionsChanged() {
@@ -370,7 +370,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Connect to database:");
 
+        jConnectToDatabaseCheckBox.setSelected(true);
         jConnectToDatabaseCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jConnectToDatabaseCheckBox.setEnabled(false);
         jConnectToDatabaseCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jConnectToDatabaseCheckBoxActionPerformed(evt);
@@ -713,70 +715,82 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private void jOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOkActionPerformed
         Options sysOptions = labelPrintFrame.getSystemOptions();
 
-        // Label Notes
-        sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
-        sysOptions.setProperty("Note1_2", jNote1_2_TextArea.getText());
-        sysOptions.setProperty("Note2_1", jNote2_1_TextArea.getText());
-        sysOptions.setProperty("Note2_2", jNote2_2_TextArea.getText());
-        sysOptions.setProperty("Note3_1", jNote3_1_TextArea.getText());
-        sysOptions.setProperty("Note3_2", jNote3_2_TextArea.getText());
-        sysOptions.setProperty("Note3_3", jNote3_3_TextArea.getText());
-        // Database
-        sysOptions.setProperty("DefaultFieldToSearch",
-                jDefaultSearchFieldComboBox.getSelectedItem().toString());
+        // Database authentication
         char[] password = jPasswordField.getPassword();
         String passwordString = new String(password).trim();
         sysOptions.setConnectionPassword(passwordString);
         sysOptions.setProperty("ConnectionUserName", jUsernameTextField.getText().trim());
         sysOptions.setProperty("ConnectionURL", jDatabaseURLTextField.getText().trim());
         sysOptions.setConnectToDatabase(jConnectToDatabaseCheckBox.isSelected());
-        // Label Content
-        // Image export formats
-        sysOptions.setExportPDF(jPDF.isSelected());
-        sysOptions.setExportPNG(jPNG.isSelected());
-        sysOptions.setExportGIF(jGIF.isSelected());
-        sysOptions.setExportJPEG(jJPEG.isSelected());
-        // Label defaults
-        sysOptions.setProperty("DefaultRatedVoltage",
-                jRatedVoltage.getSelectedItem().toString());
-        sysOptions.setProperty("DefaultRatedFrequency",
-                jRatedFrequency.getSelectedItem().toString());            
-        sysOptions.setProperty("Standard", jStandardNo.getSelectedItem().toString());
-        sysOptions.setProperty("DefaultProductType",
-                jProductType.getSelectedItem().toString());
-        sysOptions.setProperty("DefaultProductTypeDetailId", 
-                ((EnergyConsumptionAndEfficiency)jProductTypeDetail.getSelectedItem()).getId().toString());
-        sysOptions.setProperty("DefaultProductClassId", 
-                ((EnergyConsumptionAndEfficiency)jProductClass.getSelectedItem()).getId().toString());
 
-        sysOptions.write();
+        if (labelPrintFrame.setupDatabaseConnection()) {
+            try {
+                // Label Notes
+                sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
+                sysOptions.setProperty("Note1_2", jNote1_2_TextArea.getText());
+                sysOptions.setProperty("Note2_1", jNote2_1_TextArea.getText());
+                sysOptions.setProperty("Note2_2", jNote2_2_TextArea.getText());
+                sysOptions.setProperty("Note3_1", jNote3_1_TextArea.getText());
+                sysOptions.setProperty("Note3_2", jNote3_2_TextArea.getText());
+                sysOptions.setProperty("Note3_3", jNote3_3_TextArea.getText());
+                // Database
+                sysOptions.setProperty("DefaultFieldToSearch",
+                        jDefaultSearchFieldComboBox.getSelectedItem().toString());
+                // Label Content
+                // Image export formats
+                sysOptions.setExportPDF(jPDF.isSelected());
+                sysOptions.setExportPNG(jPNG.isSelected());
+                sysOptions.setExportGIF(jGIF.isSelected());
+                sysOptions.setExportJPEG(jJPEG.isSelected());
+                // Label defaults
+                sysOptions.setProperty("DefaultRatedVoltage",
+                        jRatedVoltage.getSelectedItem().toString());
+                sysOptions.setProperty("DefaultRatedFrequency",
+                        jRatedFrequency.getSelectedItem().toString());
+                sysOptions.setProperty("Standard", jStandardNo.getSelectedItem().toString());
+                sysOptions.setProperty("DefaultProductType",
+                        jProductType.getSelectedItem().toString());
+                if (jProductTypeDetail.getSelectedItem() != null) {
+                    sysOptions.setProperty("DefaultProductTypeDetailId",
+                            ((EnergyConsumptionAndEfficiency) jProductTypeDetail.getSelectedItem()).getId().toString());
+                }
+                if (jProductClass.getSelectedItem() != null) {
+                    sysOptions.setProperty("DefaultProductClassId",
+                            ((EnergyConsumptionAndEfficiency) jProductClass.getSelectedItem()).getId().toString());
+                }
 
-        // Update relevant views that are dependent on system options
-        java.awt.EventQueue.invokeLater(() -> {
-            if (labelPrintFrame.getLabelPanel() != null) {
-                labelPrintFrame.getLabelPanel().updateLabel();
-            }
-        });
+                sysOptions.write();
 
-        // Test the database connection
-        if (sysOptions.isConnectToDatabase()) {
-            System.out.println("will try to setup db with user:"
-                    + sysOptions.getProperty("ConnectionUserName"));
-            if (labelPrintFrame.setupDatabaseConnection()) {
+                // Update relevant views that are dependent on system options
+                java.awt.EventQueue.invokeLater(() -> {
+                    if (labelPrintFrame.getLabelPanel() != null) {
+                        labelPrintFrame.getLabelPanel().updateLabel();
+                    }
+                });
 
                 labelPrintFrame.setStatus("Ready...");
                 dispose();
-            } else {
+
+            } catch (Exception e) {
+                System.out.println(e);
                 labelPrintFrame.setStatus("A database connection error occurred!");
                 JOptionPane.showMessageDialog(this,
-                        "A database connection error occurred.\n"
-                        + "Check that the database options are valid",
+                        "A database connection error occurred\n"
+                        + "so the options were not saved. Check that\n"
+                        + "the database options are valid",
                         "Database Error",
                         JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            dispose();
+            labelPrintFrame.setStatus("A database connection error occurred!");
+            JOptionPane.showMessageDialog(this,
+                    "A database connection error occurred\n"
+                    + "so the options were not saved. Check that\n"
+                    + "the database options are valid",
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
+
 
     }//GEN-LAST:event_jOkActionPerformed
 
