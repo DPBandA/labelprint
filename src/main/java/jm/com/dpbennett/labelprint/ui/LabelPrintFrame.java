@@ -38,7 +38,7 @@ import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 
 /**
  *
- * @author dbennett
+ * @author Desmond Bennett
  */
 public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
@@ -212,7 +212,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("LabelPrint");
         setMinimumSize(new java.awt.Dimension(550, 500));
-        setPreferredSize(new java.awt.Dimension(800, 800));
+        setPreferredSize(new java.awt.Dimension(800, 850));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

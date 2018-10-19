@@ -80,8 +80,10 @@ public class OptionsJDialog extends javax.swing.JDialog {
         // Label defaults
         jRatedVoltage.setSelectedItem(sysOptions.getProperty("DefaultRatedVoltage"));
         jRatedFrequency.setSelectedItem(sysOptions.getProperty("DefaultRatedFrequency"));
-        jStandardNo.setSelectedItem(sysOptions.getProperty("Standard"));
+        jRefrigeratorStandard.setSelectedItem(sysOptions.getProperty("RefrigeratorStandard"));
+        jRoomACStandard.setSelectedItem(sysOptions.getProperty("RoomACStandard"));
         jProductType.setSelectedItem(sysOptions.getProperty("DefaultProductType"));
+        
         loadProductTypeDetailandClassCombos(sysOptions);
 
         isDirty = false;
@@ -110,7 +112,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
                 (List<BusinessEntity>) productTypeDetails, 4, 1, 5));
         jProductClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductClass,
-                (List<BusinessEntity>) productClasses, 4, 1, 5));
+                (List<BusinessEntity>) productClasses, 2, 1, 5));
 
         // Set combos' values
         EnergyConsumptionAndEfficiency productTypeDetail
@@ -161,6 +163,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jPNG = new javax.swing.JCheckBox();
         jGIF = new javax.swing.JCheckBox();
         jPDF = new javax.swing.JCheckBox();
+        jTIFF = new javax.swing.JCheckBox();
+        jSVG = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -173,7 +177,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jProductClass = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jStandardNo = new javax.swing.JComboBox<>();
+        jRefrigeratorStandard = new javax.swing.JComboBox<>();
+        jRoomACStandard = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
         jDatabasePanel = new javax.swing.JPanel();
         jDatabaseOptionsPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -320,7 +326,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelNotesPanel);
@@ -365,38 +371,64 @@ public class OptionsJDialog extends javax.swing.JDialog {
             }
         });
 
+        jTIFF.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTIFF.setText("TIFF");
+        jTIFF.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jTIFF.setEnabled(false);
+        jTIFF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTIFFActionPerformed(evt);
+            }
+        });
+
+        jSVG.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jSVG.setText("SVG");
+        jSVG.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jSVG.setEnabled(false);
+        jSVG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSVGActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPDF)
-                    .addComponent(jPNG)
-                    .addComponent(jGIF)
-                    .addComponent(jJPEG))
-                .addGap(0, 125, Short.MAX_VALUE))
+                .addComponent(jJPEG)
+                .addGap(18, 18, 18)
+                .addComponent(jPNG)
+                .addGap(18, 18, 18)
+                .addComponent(jGIF)
+                .addGap(18, 18, 18)
+                .addComponent(jPDF)
+                .addGap(18, 18, 18)
+                .addComponent(jTIFF)
+                .addGap(18, 18, 18)
+                .addComponent(jSVG)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jJPEG)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPNG)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jGIF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPDF)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jJPEG)
+                    .addComponent(jPNG)
+                    .addComponent(jGIF)
+                    .addComponent(jPDF)
+                    .addComponent(jTIFF)
+                    .addComponent(jSVG))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Label Defaults", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Standard No.:");
+        jLabel6.setText("Refrigerator Standard:");
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -451,12 +483,23 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Product Class:");
 
-        jStandardNo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JS 178", "JS 179" }));
-        jStandardNo.addActionListener(new java.awt.event.ActionListener() {
+        jRefrigeratorStandard.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JS 178", "JS 179" }));
+        jRefrigeratorStandard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jStandardNoActionPerformed(evt);
+                jRefrigeratorStandardActionPerformed(evt);
             }
         });
+
+        jRoomACStandard.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JS 178", "JS 179" }));
+        jRoomACStandard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRoomACStandardActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel15.setText("Room AC Standard:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -474,15 +517,17 @@ public class OptionsJDialog extends javax.swing.JDialog {
                                 .addComponent(jLabel11)))
                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jRatedVoltage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProductTypeDetail, 0, 409, Short.MAX_VALUE)
-                    .addComponent(jProductClass, 0, 409, Short.MAX_VALUE)
-                    .addComponent(jStandardNo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jProductTypeDetail, 0, 398, Short.MAX_VALUE)
+                    .addComponent(jProductClass, 0, 398, Short.MAX_VALUE)
+                    .addComponent(jRefrigeratorStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRoomACStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -498,7 +543,11 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jStandardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRefrigeratorStandard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRoomACStandard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -511,7 +560,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jProductClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLabelContentPanelLayout = new javax.swing.GroupLayout(jLabelContentPanel);
@@ -522,9 +571,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jLabelContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jLabelContentPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 418, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jLabelContentPanelLayout.setVerticalGroup(
@@ -532,9 +579,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jLabelContentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Content", jLabelContentPanel);
@@ -661,7 +708,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jDatabasePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jDatabaseOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Database", jDatabasePanel);
@@ -693,7 +740,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jContantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Constants", jContantsPanel);
@@ -730,7 +777,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jOptionsTabbedPane)
+                .addComponent(jOptionsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCancel)
@@ -781,7 +828,10 @@ public class OptionsJDialog extends javax.swing.JDialog {
                         jRatedVoltage.getSelectedItem().toString());
                 sysOptions.setProperty("DefaultRatedFrequency",
                         jRatedFrequency.getSelectedItem().toString());
-                sysOptions.setProperty("Standard", jStandardNo.getSelectedItem().toString());
+                sysOptions.setProperty("RefrigeratorStandard", 
+                        jRefrigeratorStandard.getSelectedItem().toString());
+                sysOptions.setProperty("RoomACStandard", 
+                        jRoomACStandard.getSelectedItem().toString());
                 sysOptions.setProperty("DefaultProductType",
                         jProductType.getSelectedItem().toString());
                 if (jProductTypeDetail.getSelectedItem() != null) {
@@ -913,9 +963,21 @@ public class OptionsJDialog extends javax.swing.JDialog {
         isDirty = true;
     }//GEN-LAST:event_jProductClassActionPerformed
 
-    private void jStandardNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStandardNoActionPerformed
+    private void jRefrigeratorStandardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRefrigeratorStandardActionPerformed
         isDirty = true;
-    }//GEN-LAST:event_jStandardNoActionPerformed
+    }//GEN-LAST:event_jRefrigeratorStandardActionPerformed
+
+    private void jRoomACStandardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRoomACStandardActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jRoomACStandardActionPerformed
+
+    private void jTIFFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTIFFActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jTIFFActionPerformed
+
+    private void jSVGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSVGActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jSVGActionPerformed
 
     /**
      * @param args the command line arguments
@@ -941,6 +1003,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -971,6 +1034,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jProductTypeDetail;
     private javax.swing.JComboBox<String> jRatedFrequency;
     private javax.swing.JComboBox<String> jRatedVoltage;
+    private javax.swing.JComboBox<String> jRefrigeratorStandard;
+    private javax.swing.JComboBox<String> jRoomACStandard;
+    private javax.swing.JCheckBox jSVG;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -978,7 +1044,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JComboBox<String> jStandardNo;
+    private javax.swing.JCheckBox jTIFF;
     private javax.swing.JTextField jUsernameTextField;
     // End of variables declaration//GEN-END:variables
 }

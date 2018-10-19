@@ -30,7 +30,7 @@ import jm.com.dpbennett.business.entity.EnergyLabel;
 
 /**
  *
- * @author dbennett
+ * @author Desmond Bennett
  */
 public class OpenLabelDialog extends java.awt.Dialog {
 
