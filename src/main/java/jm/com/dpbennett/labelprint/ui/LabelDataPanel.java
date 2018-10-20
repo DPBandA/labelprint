@@ -108,6 +108,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
             data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
                     labelPrintFrame.getEntityManager(),
                     "Freezer"));
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
+                    labelPrintFrame.getEntityManager(),
+                    "Wine Chiller"));
 
             jProductTypeDetailOrClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetailOrClass,
                     (List<BusinessEntity>) data, 4, 1, 5));
@@ -159,12 +162,13 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setBrand(jBrand.getText());
         getEnergyLabel().setModel(jModelNo.getText());
         getEnergyLabel().setValidity(jValidity.getText());
+        getEnergyLabel().setFreshFoodCompartmentVol(jFreshFoodComptVol.getText());
+        getEnergyLabel().setFreezerCompartmentVol(jFreezerComptVol.getText());
         getEnergyLabel().setCapacity(jCapacity.getText());
         getEnergyLabel().setCoolingCapacity(jCoolingCapacity.getText());
         getEnergyLabel().setHeatingCapacity(jHeatingCapacity.getText());
         getEnergyLabel().setAEER(jAEER.getText());
         getEnergyLabel().setACOP(jACOP.getText());
-        getEnergyLabel().setStandard(jStandardNo.getText());
         getEnergyLabel().setOperatingCost(jOperatingCost.getText());
         getEnergyLabel().setManufacturer(jManufacturer.getText());
         getEnergyLabel().setCountry(jCountryOfOrigin.getText());
@@ -189,12 +193,13 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jBrand.setText(getEnergyLabel().getBrand());
         jModelNo.setText(getEnergyLabel().getModel());
         jValidity.setText(getEnergyLabel().getValidity());
+        jFreshFoodComptVol.setText(getEnergyLabel().getFreshFoodCompartmentVol());
+        jFreezerComptVol.setText(getEnergyLabel().getFreezerCompartmentVol());
         jCapacity.setText(getEnergyLabel().getCapacity());
         jCoolingCapacity.setText(getEnergyLabel().getCoolingCapacity());
         jHeatingCapacity.setText(getEnergyLabel().getHeatingCapacity());
         jAEER.setText(getEnergyLabel().getAEER());
         jACOP.setText(getEnergyLabel().getACOP());
-        jStandardNo.setText(getEnergyLabel().getStandard());
         jOperatingCost.setText(getEnergyLabel().getOperatingCost());
         jManufacturer.setText(getEnergyLabel().getManufacturer());
         jCountryOfOrigin.setText(getEnergyLabel().getCountry());
@@ -249,8 +254,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jElectricityRate = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jValidity = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jStandardNo = new javax.swing.JTextField();
         jViewLabel = new javax.swing.JButton();
         jSaveLabel = new javax.swing.JButton();
         jDefrost = new javax.swing.JComboBox();
@@ -306,7 +309,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jLabel1.setText("Product Type:");
 
         jProductType.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jProductType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basic Refrigerator", "Freezer", "Refrigerator", "Room Air-conditioner" }));
+        jProductType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basic Refrigerator", "Freezer", "Refrigerator", "Room Air-conditioner", "Wine Chiller" }));
         jProductType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jProductTypeActionPerformed(evt);
@@ -424,17 +427,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jValidity.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jValidityKeyReleased(evt);
-            }
-        });
-
-        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("Standard:");
-
-        jStandardNo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jStandardNo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jStandardNoKeyReleased(evt);
             }
         });
 
@@ -620,10 +612,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
                         .addGap(2, 2, 2)
                         .addComponent(jValidity))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jStandardNo))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
@@ -651,14 +639,14 @@ public class LabelDataPanel extends javax.swing.JPanel {
                             .addComponent(jFreshFoodComptVol)
                             .addComponent(jFreezerComptVol)))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabelName))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jViewLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(jSaveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 154, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabelName)))
+                        .addGap(0, 154, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -759,11 +747,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jValidity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jStandardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jViewLabel)
                     .addComponent(jSaveLabel))
@@ -801,8 +785,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
         } else {
             getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("RefrigeratorStandard"));
         }
-        jStandardNo.setText(getEnergyLabel().getStandard());
-        
+                
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 
@@ -866,11 +849,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jValidityKeyReleased
 
-    private void jStandardNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jStandardNoKeyReleased
-        getEnergyLabel().setStandard(jStandardNo.getText());
-        labelPrintFrame.setDirty(true);
-    }//GEN-LAST:event_jStandardNoKeyReleased
-
     private void jDefrostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDefrostActionPerformed
         getEnergyLabel().setDefrost((String) jDefrost.getSelectedItem());
         labelPrintFrame.setDirty(true);
@@ -913,11 +891,13 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jACOPKeyReleased
 
     private void jFreshFoodComptVolKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFreshFoodComptVolKeyReleased
-        // TODO add your handling code here:
+        getEnergyLabel().setFreshFoodCompartmentVol(jFreshFoodComptVol.getText());
+        labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jFreshFoodComptVolKeyReleased
 
     private void jFreezerComptVolKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFreezerComptVolKeyReleased
-        // TODO add your handling code here:
+        getEnergyLabel().setFreezerCompartmentVol(jFreezerComptVol.getText());
+        labelPrintFrame.setDirty(true);
     }//GEN-LAST:event_jFreezerComptVolKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -939,7 +919,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -968,7 +947,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox jRatedFrequency;
     private javax.swing.JComboBox jRatedVoltage;
     private javax.swing.JButton jSaveLabel;
-    private javax.swing.JTextField jStandardNo;
     private javax.swing.JTextField jValidity;
     private javax.swing.JButton jViewLabel;
     // End of variables declaration//GEN-END:variables

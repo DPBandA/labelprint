@@ -41,7 +41,7 @@ import org.apache.batik.transcoder.print.PrintTranscoder;
  *
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public class SVGLabelPanel extends javax.swing.JPanel {
+public class LabelPanel extends javax.swing.JPanel {
 
     private boolean showGreenBackground;
     private boolean showYellowBackground;
@@ -80,7 +80,7 @@ public class SVGLabelPanel extends javax.swing.JPanel {
     /**
      * Creates new SVGLabelPanel
      */
-    public SVGLabelPanel() {
+    public LabelPanel() {
         initComponents();
         initLabel();
     }
@@ -90,7 +90,7 @@ public class SVGLabelPanel extends javax.swing.JPanel {
      *
      * @param labelPrintFrame
      */
-    public SVGLabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
+    public LabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
         this.labelPrintFrame = labelPrintFrame;
         initComponents();
         initLabel();

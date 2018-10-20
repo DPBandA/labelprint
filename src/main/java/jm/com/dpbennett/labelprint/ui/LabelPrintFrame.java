@@ -45,7 +45,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private Options sysOptions;
     private EntityManagerFactory emf;
     private LabelDataPanel labelDataPanel;
-    private SVGLabelPanel labelPanel;
+    private LabelPanel labelPanel;
 
     /**
      * Creates new form LabelPrintFrame
@@ -212,7 +212,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("LabelPrint");
         setMinimumSize(new java.awt.Dimension(550, 500));
-        setPreferredSize(new java.awt.Dimension(800, 850));
+        setPreferredSize(new java.awt.Dimension(800, 875));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -488,7 +488,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
 
     }
 
-    public SVGLabelPanel getLabelPanel() {
+    public LabelPanel getLabelPanel() {
 
         return labelPanel;
     }
@@ -663,7 +663,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         }
 
         if (labelPanel == null) {
-            labelPanel = new SVGLabelPanel(this);
+            labelPanel = new LabelPanel(this);
 
             getjEnergyLabelPane().add("Label View", labelPanel);
 
