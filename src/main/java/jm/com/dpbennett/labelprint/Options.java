@@ -19,8 +19,11 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint;
 
+import javax.persistence.EntityManager;
 import javax.swing.*;
 import jm.com.dpbennett.business.entity.fileutils.PropertiesFile;
+import jm.com.dpbennett.business.entity.utils.NumberUtils;
+import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 import jm.com.dpbennett.business.entity.utils.Security;
 
 /**
@@ -134,6 +137,22 @@ public class Options extends PropertiesFile {
 
     public void setConnectionPassword(String connectionPassword) {
         setProperty("ConnectionPassword", Security.encrypt(connectionPassword));
+    }
+    
+    public ReturnMessage validate(EntityManager em) {
+        try {
+            // Validate double values
+//            if (!NumberUtils.validateDoubleValue(getFreshFoodCompartmentVol()).isSuccess()) {
+//                return new ReturnMessage(false, "Invalid Fresh Food Compartment Volume",
+//                        "The fresh food compartment volume is invalid", null);
+//            }
+            
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return new ReturnMessage();
     }
 
 }

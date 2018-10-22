@@ -32,12 +32,18 @@ import jm.com.dpbennett.labelprint.Options;
  *
  * @author Desmond Bennett
  */
-public class OptionsJDialog extends javax.swing.JDialog {
+public class OptionsDialog extends javax.swing.JDialog {
 
     private boolean isDirty;
     private LabelPrintFrame labelPrintFrame;
 
-    public OptionsJDialog(java.awt.Frame parent, boolean modal) {
+    /**
+     * Constructs an OptionsDialog
+     * 
+     * @param parent
+     * @param modal 
+     */
+    public OptionsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
 
         initComponents();
@@ -46,6 +52,11 @@ public class OptionsJDialog extends javax.swing.JDialog {
 
     }
 
+    /**
+     * Initializes the fields with the saved properties/options.
+     * 
+     * @param parent 
+     */
     private void init(java.awt.Frame parent) {
         String[][] fieldsToSearch;
         labelPrintFrame = (LabelPrintFrame) parent;
@@ -83,6 +94,11 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jRefrigeratorStandard.setSelectedItem(sysOptions.getProperty("RefrigeratorStandard"));
         jRoomACStandard.setSelectedItem(sysOptions.getProperty("RoomACStandard"));
         jProductType.setSelectedItem(sysOptions.getProperty("DefaultProductType"));
+        // Refrigerator constants
+        jTestChamberTemp.setText(sysOptions.getProperty("TestChamberTemp"));
+        jFreshFoodComptAvgTemp.setText(sysOptions.getProperty("FreshFoodComptAvgTemp"));
+        
+        
         
         loadProductTypeDetailandClassCombos(sysOptions);
 
@@ -199,10 +215,16 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jFreshFoodComptAvgTemp = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jFreshFoodComptAvgTemp2 = new javax.swing.JTextField();
+        jBasicRefrigeratorTemp = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jFreshFoodComptAvgTemp3 = new javax.swing.JTextField();
+        jAllRefrigeratorTemp = new javax.swing.JTextField();
+        jRefrigeratorFreezerTemp = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jFreezerTemp = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jWineChillerTemp = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
         jOk = new javax.swing.JButton();
         jCancel = new javax.swing.JButton();
 
@@ -335,7 +357,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelNotesPanel);
@@ -590,7 +612,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Content", jLabelContentPanel);
@@ -717,7 +739,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
             .addGroup(jDatabasePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jDatabaseOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Database", jDatabasePanel);
@@ -740,62 +762,107 @@ public class OptionsJDialog extends javax.swing.JDialog {
         jLabel17.setText("Avg fresh food compar't operat'g temp. (⁰C):");
 
         jLabel18.setFont(new java.awt.Font("SansSerif", 3, 12)); // NOI18N
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel18.setText("Adjustment factors for refrigerators and refrigerator-freezers");
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel18.setText("Adjustment factors for refrigerators and refrigerator-freezers:");
 
-        jFreshFoodComptAvgTemp2.setText("-9.4");
-        jFreshFoodComptAvgTemp2.addActionListener(new java.awt.event.ActionListener() {
+        jBasicRefrigeratorTemp.setText("-9.4");
+        jBasicRefrigeratorTemp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFreshFoodComptAvgTemp2ActionPerformed(evt);
+                jBasicRefrigeratorTempActionPerformed(evt);
             }
         });
 
         jLabel19.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel19.setText("Basic refrig'tor type household refrig'tors (⁰C):");
+        jLabel19.setText("Basic household refrigerators (⁰C):");
 
         jLabel20.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel20.setText("All-refrig'tor type household refrig'tors (⁰C):");
+        jLabel20.setText("All-refrigerator household refrigerators (⁰C):");
 
-        jFreshFoodComptAvgTemp3.setText("3.3");
-        jFreshFoodComptAvgTemp3.addActionListener(new java.awt.event.ActionListener() {
+        jAllRefrigeratorTemp.setText("3.3");
+        jAllRefrigeratorTemp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFreshFoodComptAvgTemp3ActionPerformed(evt);
+                jAllRefrigeratorTempActionPerformed(evt);
             }
         });
+
+        jRefrigeratorFreezerTemp.setText("-15.0");
+        jRefrigeratorFreezerTemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRefrigeratorFreezerTempActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Refrigerator-freezer household refrigerators (⁰C):");
+
+        jFreezerTemp.setText("-18.0");
+        jFreezerTemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFreezerTempActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel22.setText("Household freezers (⁰C):");
+
+        jWineChillerTemp.setText("12.8");
+        jWineChillerTemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jWineChillerTempActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText("Household wine chillers (⁰C):");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel20)
+                        .addComponent(jLabel17))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel19)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel20)
-                                .addGap(1, 1, 1)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFreshFoodComptAvgTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTestChamberTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jFreshFoodComptAvgTemp2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jFreshFoodComptAvgTemp3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74))))
+                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jFreshFoodComptAvgTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTestChamberTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jBasicRefrigeratorTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jAllRefrigeratorTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jRefrigeratorFreezerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jFreezerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jWineChillerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -813,12 +880,24 @@ public class OptionsJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jFreshFoodComptAvgTemp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBasicRefrigeratorTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFreshFoodComptAvgTemp3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAllRefrigeratorTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRefrigeratorFreezerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFreezerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jWineChillerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jContantsPanelLayout = new javax.swing.GroupLayout(jContantsPanel);
@@ -827,15 +906,15 @@ public class OptionsJDialog extends javax.swing.JDialog {
             jContantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jContantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jContantsPanelLayout.setVerticalGroup(
             jContantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jContantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jOptionsTabbedPane.addTab("Constants", jContantsPanel);
@@ -1075,26 +1154,40 @@ public class OptionsJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jSVGActionPerformed
 
     private void jFreshFoodComptAvgTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFreshFoodComptAvgTempActionPerformed
-        // TODO add your handling code here:
+        isDirty = true;
     }//GEN-LAST:event_jFreshFoodComptAvgTempActionPerformed
 
-    private void jFreshFoodComptAvgTemp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFreshFoodComptAvgTemp2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFreshFoodComptAvgTemp2ActionPerformed
+    private void jBasicRefrigeratorTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBasicRefrigeratorTempActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jBasicRefrigeratorTempActionPerformed
 
-    private void jFreshFoodComptAvgTemp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFreshFoodComptAvgTemp3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFreshFoodComptAvgTemp3ActionPerformed
+    private void jAllRefrigeratorTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAllRefrigeratorTempActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jAllRefrigeratorTempActionPerformed
+
+    private void jRefrigeratorFreezerTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRefrigeratorFreezerTempActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jRefrigeratorFreezerTempActionPerformed
+
+    private void jFreezerTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFreezerTempActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jFreezerTempActionPerformed
+
+    private void jWineChillerTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWineChillerTempActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jWineChillerTempActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new OptionsJDialog(new javax.swing.JFrame(), true).setVisible(true);
+            new OptionsDialog(new javax.swing.JFrame(), true).setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField jAllRefrigeratorTemp;
+    private javax.swing.JTextField jBasicRefrigeratorTemp;
     private javax.swing.JButton jCancel;
     private javax.swing.JCheckBox jConnectToDatabaseCheckBox;
     private javax.swing.JPanel jContantsPanel;
@@ -1102,9 +1195,8 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jDatabasePanel;
     private javax.swing.JTextField jDatabaseURLTextField;
     private javax.swing.JComboBox jDefaultSearchFieldComboBox;
+    private javax.swing.JTextField jFreezerTemp;
     private javax.swing.JTextField jFreshFoodComptAvgTemp;
-    private javax.swing.JTextField jFreshFoodComptAvgTemp2;
-    private javax.swing.JTextField jFreshFoodComptAvgTemp3;
     private javax.swing.JCheckBox jGIF;
     private javax.swing.JCheckBox jJPEG;
     private javax.swing.JLabel jLabel1;
@@ -1120,6 +1212,9 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1149,6 +1244,7 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jProductTypeDetail;
     private javax.swing.JComboBox<String> jRatedFrequency;
     private javax.swing.JComboBox<String> jRatedVoltage;
+    private javax.swing.JTextField jRefrigeratorFreezerTemp;
     private javax.swing.JComboBox<String> jRefrigeratorStandard;
     private javax.swing.JComboBox<String> jRoomACStandard;
     private javax.swing.JCheckBox jSVG;
@@ -1162,5 +1258,6 @@ public class OptionsJDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox jTIFF;
     private javax.swing.JTextField jTestChamberTemp;
     private javax.swing.JTextField jUsernameTextField;
+    private javax.swing.JTextField jWineChillerTemp;
     // End of variables declaration//GEN-END:variables
 }
