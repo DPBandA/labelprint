@@ -39,9 +39,9 @@ public class OptionsDialog extends javax.swing.JDialog {
 
     /**
      * Constructs an OptionsDialog
-     * 
+     *
      * @param parent
-     * @param modal 
+     * @param modal
      */
     public OptionsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -54,8 +54,8 @@ public class OptionsDialog extends javax.swing.JDialog {
 
     /**
      * Initializes the fields with the saved properties/options.
-     * 
-     * @param parent 
+     *
+     * @param parent
      */
     private void init(java.awt.Frame parent) {
         String[][] fieldsToSearch;
@@ -97,9 +97,12 @@ public class OptionsDialog extends javax.swing.JDialog {
         // Refrigerator constants
         jTestChamberTemp.setText(sysOptions.getProperty("TestChamberTemp"));
         jFreshFoodComptAvgTemp.setText(sysOptions.getProperty("FreshFoodComptAvgTemp"));
-        
-        
-        
+        jBasicRefrigeratorTemp.setText(sysOptions.getProperty("BasicRefrigeratorTemp"));
+        jAllRefrigeratorTemp.setText(sysOptions.getProperty("AllRefrigeratorTemp"));
+        jRefrigeratorFreezerTemp.setText(sysOptions.getProperty("RefrigeratorFreezerTemp"));
+        jFreezerTemp.setText(sysOptions.getProperty("FreezerTemp"));
+        jWineChillerTemp.setText(sysOptions.getProperty("WineChillerTemp"));
+
         loadProductTypeDetailandClassCombos(sysOptions);
 
         isDirty = false;
@@ -750,13 +753,13 @@ public class OptionsDialog extends javax.swing.JDialog {
         jLabel16.setText("Test chamber ambient test temperature (⁰C):");
 
         jTestChamberTemp.setText("43.3");
-
-        jFreshFoodComptAvgTemp.setText("3.3");
-        jFreshFoodComptAvgTemp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFreshFoodComptAvgTempActionPerformed(evt);
+        jTestChamberTemp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTestChamberTempKeyReleased(evt);
             }
         });
+
+        jFreshFoodComptAvgTemp.setText("3.3");
 
         jLabel17.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel17.setText("Avg fresh food compar't operat'g temp. (⁰C):");
@@ -766,11 +769,6 @@ public class OptionsDialog extends javax.swing.JDialog {
         jLabel18.setText("Adjustment factors for refrigerators and refrigerator-freezers:");
 
         jBasicRefrigeratorTemp.setText("-9.4");
-        jBasicRefrigeratorTemp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBasicRefrigeratorTempActionPerformed(evt);
-            }
-        });
 
         jLabel19.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -781,40 +779,20 @@ public class OptionsDialog extends javax.swing.JDialog {
         jLabel20.setText("All-refrigerator household refrigerators (⁰C):");
 
         jAllRefrigeratorTemp.setText("3.3");
-        jAllRefrigeratorTemp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAllRefrigeratorTempActionPerformed(evt);
-            }
-        });
 
         jRefrigeratorFreezerTemp.setText("-15.0");
-        jRefrigeratorFreezerTemp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRefrigeratorFreezerTempActionPerformed(evt);
-            }
-        });
 
         jLabel21.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel21.setText("Refrigerator-freezer household refrigerators (⁰C):");
 
         jFreezerTemp.setText("-18.0");
-        jFreezerTemp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFreezerTempActionPerformed(evt);
-            }
-        });
 
         jLabel22.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Household freezers (⁰C):");
 
         jWineChillerTemp.setText("12.8");
-        jWineChillerTemp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jWineChillerTempActionPerformed(evt);
-            }
-        });
 
         jLabel23.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -1002,9 +980,9 @@ public class OptionsDialog extends javax.swing.JDialog {
                         jRatedVoltage.getSelectedItem().toString());
                 sysOptions.setProperty("DefaultRatedFrequency",
                         jRatedFrequency.getSelectedItem().toString());
-                sysOptions.setProperty("RefrigeratorStandard", 
+                sysOptions.setProperty("RefrigeratorStandard",
                         jRefrigeratorStandard.getSelectedItem().toString());
-                sysOptions.setProperty("RoomACStandard", 
+                sysOptions.setProperty("RoomACStandard",
                         jRoomACStandard.getSelectedItem().toString());
                 sysOptions.setProperty("DefaultProductType",
                         jProductType.getSelectedItem().toString());
@@ -1016,6 +994,14 @@ public class OptionsDialog extends javax.swing.JDialog {
                     sysOptions.setProperty("DefaultProductClassId",
                             ((EnergyConsumptionAndEfficiency) jProductClass.getSelectedItem()).getId().toString());
                 }
+                // Refrigerator constants
+                sysOptions.setProperty("TestChamberTemp", jTestChamberTemp.getText());
+                sysOptions.setProperty("FreshFoodComptAvgTemp", jFreshFoodComptAvgTemp.getText());
+                sysOptions.setProperty("BasicRefrigeratorTemp", jBasicRefrigeratorTemp.getText());
+                sysOptions.setProperty("AllRefrigeratorTemp", jAllRefrigeratorTemp.getText());
+                sysOptions.setProperty("RefrigeratorFreezerTemp", jRefrigeratorFreezerTemp.getText());
+                sysOptions.setProperty("FreezerTemp", jFreezerTemp.getText());
+                sysOptions.setProperty("WineChillerTemp", jWineChillerTemp.getText());
 
                 sysOptions.write();
 
@@ -1153,29 +1139,9 @@ public class OptionsDialog extends javax.swing.JDialog {
         isDirty = true;
     }//GEN-LAST:event_jSVGActionPerformed
 
-    private void jFreshFoodComptAvgTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFreshFoodComptAvgTempActionPerformed
+    private void jTestChamberTempKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTestChamberTempKeyReleased
         isDirty = true;
-    }//GEN-LAST:event_jFreshFoodComptAvgTempActionPerformed
-
-    private void jBasicRefrigeratorTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBasicRefrigeratorTempActionPerformed
-        isDirty = true;
-    }//GEN-LAST:event_jBasicRefrigeratorTempActionPerformed
-
-    private void jAllRefrigeratorTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAllRefrigeratorTempActionPerformed
-        isDirty = true;
-    }//GEN-LAST:event_jAllRefrigeratorTempActionPerformed
-
-    private void jRefrigeratorFreezerTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRefrigeratorFreezerTempActionPerformed
-        isDirty = true;
-    }//GEN-LAST:event_jRefrigeratorFreezerTempActionPerformed
-
-    private void jFreezerTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFreezerTempActionPerformed
-        isDirty = true;
-    }//GEN-LAST:event_jFreezerTempActionPerformed
-
-    private void jWineChillerTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWineChillerTempActionPerformed
-        isDirty = true;
-    }//GEN-LAST:event_jWineChillerTempActionPerformed
+    }//GEN-LAST:event_jTestChamberTempKeyReleased
 
     /**
      * @param args the command line arguments
