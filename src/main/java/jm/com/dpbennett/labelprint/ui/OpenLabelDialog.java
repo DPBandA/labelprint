@@ -34,7 +34,7 @@ import jm.com.dpbennett.business.entity.EnergyLabel;
  */
 public class OpenLabelDialog extends java.awt.Dialog {
 
-    private LabelPrintFrame labelPrintFrame;
+    private Application app;
     private int numberOfLabelsFound;
     private boolean bLoadLabel;
     private ArrayList labels, labelIDs;
@@ -58,13 +58,13 @@ public class OpenLabelDialog extends java.awt.Dialog {
     }
 
     private void init(java.awt.Frame parent) {
-        labelPrintFrame = (LabelPrintFrame) parent;
+        app = (Application) parent;
 
         // Centre
         setLocationRelativeTo(null);
 
         // Get system options
-        Options sysOptions = labelPrintFrame.getSystemOptions();
+        Options sysOptions = app.getSystemOptions();
         fieldsToSearch = sysOptions.getFieldsToSearch();
         defaultFieldToSearch = sysOptions.getProperty("DefaultFieldToSearch");
         defaultFieldToDisplay = sysOptions.getProperty("DefaultFieldToDisplay");
@@ -417,7 +417,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
         if (LabelsFoundList.getSelectedIndex() != -1) {
             java.awt.EventQueue.invokeLater(() -> {
                 bLoadLabel = true;
-                labelPrintFrame.setStatus("Opening label...");
+                app.setStatus("Opening label...");
                 dispose();
             });
 
@@ -443,7 +443,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
         if (selectedLabelIndex != -1) {
             labelId = (Long) labelIDs.get(selectedLabelIndex);
 
-            EnergyLabel reld = labelPrintFrame.findLabel(labelId);
+            EnergyLabel reld = app.findLabel(labelId);
             // Display label record
             jManufacturerTextField.setText(reld.getManufacturer());
             jDistributorTextField.setText(reld.getDistributor());
@@ -458,7 +458,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
     }//GEN-LAST:event_LabelsFoundListValueChanged
 
     private void jHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHelpButtonActionPerformed
-        SearchHelpJDialog shdlg = new SearchHelpJDialog(labelPrintFrame, true);
+        SearchHelpJDialog shdlg = new SearchHelpJDialog(app, true);
         shdlg.setVisible(true);
     }//GEN-LAST:event_jHelpButtonActionPerformed
 
@@ -498,7 +498,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
         labels = new ArrayList();
         numberOfLabelsFound = 0;
 
-        List<EnergyLabel> labelsFound = labelPrintFrame.findLabels(searchField, searchPattern);
+        List<EnergyLabel> labelsFound = app.findLabels(searchField, searchPattern);
 
         if (labelsFound != null) {
             ListIterator<EnergyLabel> iter = labelsFound.listIterator();

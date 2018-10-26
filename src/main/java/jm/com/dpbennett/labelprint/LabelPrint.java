@@ -20,11 +20,9 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint;
 
 import java.awt.*;
-import java.util.Enumeration;
-import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import jm.com.dpbennett.labelprint.ui.LabelPrintFrame;
+import jm.com.dpbennett.labelprint.ui.Application;
 
 /**
  * The is the main application class where it all begins.
@@ -33,26 +31,26 @@ import jm.com.dpbennett.labelprint.ui.LabelPrintFrame;
  */
 public class LabelPrint {
 
-    private LabelPrintFrame labelPrintFrame;
+    private Application app;
 
     /**
      * The default constructor. The window frame is centred as part of the the
      * initialization.
      */
     public LabelPrint() {
-        labelPrintFrame = new LabelPrintFrame();
-        labelPrintFrame.pack();
+        app = new Application();
+        app.pack();
 
         // Centre the main window
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension frameSize = labelPrintFrame.getSize();
+        Dimension frameSize = app.getSize();
         if (frameSize.height > screenSize.height) {
             frameSize.height = screenSize.height;
         }
         if (frameSize.width > screenSize.width) {
             frameSize.width = screenSize.width;
         }
-        labelPrintFrame.setLocation((screenSize.width - frameSize.width) / 2,
+        app.setLocation((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2);
     }
 
@@ -61,8 +59,8 @@ public class LabelPrint {
      *
      * @return
      */
-    public LabelPrintFrame getLabelPrintFrame() {
-        return labelPrintFrame;
+    public Application getApp() {
+        return app;
     }
 
     /**
@@ -80,7 +78,7 @@ public class LabelPrint {
             System.out.println(e);
         }
         LabelPrint labelPrint = new LabelPrint();
-        labelPrint.getLabelPrintFrame().setVisible(true);
+        labelPrint.getApp().setVisible(true);
 
     }
 

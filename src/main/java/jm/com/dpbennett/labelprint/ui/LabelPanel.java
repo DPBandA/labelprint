@@ -46,7 +46,7 @@ public class LabelPanel extends javax.swing.JPanel {
     private boolean showGreenBackground;
     private boolean showYellowBackground;
     private boolean showContents;
-    private LabelPrintFrame labelPrintFrame;
+    private Application app;
     private JSVGCanvas svgCanvas;
     private Document svgDocument;
 
@@ -88,10 +88,10 @@ public class LabelPanel extends javax.swing.JPanel {
     /**
      * Creates new SVGLabelPanel
      *
-     * @param labelPrintFrame
+     * @param app
      */
-    public LabelPanel(jm.com.dpbennett.labelprint.ui.LabelPrintFrame labelPrintFrame) {
-        this.labelPrintFrame = labelPrintFrame;
+    public LabelPanel(jm.com.dpbennett.labelprint.ui.Application app) {
+        this.app = app;
         initComponents();
         initLabel();
 
@@ -175,17 +175,17 @@ public class LabelPanel extends javax.swing.JPanel {
 
         add(svgCanvas, java.awt.BorderLayout.CENTER);
 
-        labelPrintFrame.getjEnergyLabelPane().repaint();
+        app.getjEnergyLabelPane().repaint();
     }
 
     public void updateLabel() {
 
-        if (labelPrintFrame != null && svgCanvas != null && svgDocument != null) {
+        if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
                 // Type
-                setElementText("type", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getType());
+                setElementText("type", app.getLabelDataPanel().getEnergyLabel().getType());
                 // Capacity tk impl capacity unit instead of hard code
-                setElementText("capacity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCapacity() + "m");
+                setElementText("capacity", app.getLabelDataPanel().getEnergyLabel().getCapacity() + "m");
                 // Set location of the capacity unit power based on width of capacity
                 Element svgElement = svgDocument.getElementById("capacity");
                 SVGLocatable locatable = (SVGLocatable) svgElement;
@@ -193,41 +193,41 @@ public class LabelPanel extends javax.swing.JPanel {
                 Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
                 unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                 // Defrost
-                setElementText("distributorOrDefrost", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDefrost());
+                setElementText("distributorOrDefrost", app.getLabelDataPanel().getEnergyLabel().getDefrost());
                 // Distributor
-                setElementText("distributor", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getDistributor());
+                setElementText("distributor", app.getLabelDataPanel().getEnergyLabel().getDistributor());
                 // Manufacturer
-                setElementText("manufacturer", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getManufacturer());
+                setElementText("manufacturer", app.getLabelDataPanel().getEnergyLabel().getManufacturer());
                 // Model
-                setElementText("model", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getModel());
+                setElementText("model", app.getLabelDataPanel().getEnergyLabel().getModel());
                 // Country
-                setElementText("country", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCountry());
+                setElementText("country", app.getLabelDataPanel().getEnergyLabel().getCountry());
                 // Operating cost
-                setElementText("operatingCost", "$" + labelPrintFrame.getLabelDataPanel().getEnergyLabel().getOperatingCost());
+                setElementText("operatingCost", "$" + app.getLabelDataPanel().getEnergyLabel().getOperatingCost());
                 // Energy note
-                setElementText("note1.1", labelPrintFrame
+                setElementText("note1.1", app
                         .getSystemOptions().getProperty("Note1_1")
                         .replace("[AnnualConsumption]",
-                                labelPrintFrame.getLabelDataPanel().getEnergyLabel().getAnnualConsumption())
+                                app.getLabelDataPanel().getEnergyLabel().getAnnualConsumption())
                         .replace("[CostPerKwh]",
-                                labelPrintFrame.getLabelDataPanel().getEnergyLabel().getCostPerKwh()));
-                setElementText("note1.2", labelPrintFrame.
+                                app.getLabelDataPanel().getEnergyLabel().getCostPerKwh()));
+                setElementText("note1.2", app.
                         getSystemOptions().getProperty("Note1_2"));
                 // Validity
-                setElementText("validity", labelPrintFrame.getLabelDataPanel().getEnergyLabel().getValidity());
+                setElementText("validity", app.getLabelDataPanel().getEnergyLabel().getValidity());
                 // Standard note
-                setElementText("note2.1", labelPrintFrame
+                setElementText("note2.1", app
                         .getSystemOptions().getProperty("Note2_1"));
-                setElementText("note2.2", labelPrintFrame
+                setElementText("note2.2", app
                         .getSystemOptions().getProperty("Note2_2")
                         .replace("[Standard]",
-                                labelPrintFrame.getLabelDataPanel().getEnergyLabel().getStandard()));
+                                app.getLabelDataPanel().getEnergyLabel().getStandard()));
                 // Violation note
-                setElementText("note3.1", labelPrintFrame
+                setElementText("note3.1", app
                         .getSystemOptions().getProperty("Note3_1"));
-                setElementText("note3.2", labelPrintFrame
+                setElementText("note3.2", app
                         .getSystemOptions().getProperty("Note3_2"));
-                setElementText("note3.3", labelPrintFrame
+                setElementText("note3.3", app
                         .getSystemOptions().getProperty("Note3_3"));
                 // Energy stars
                 updateEnergyStars();
@@ -389,11 +389,11 @@ public class LabelPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jEditLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditLabelDataActionPerformed
-       labelPrintFrame.getTabbedPane().setSelectedIndex(0);
+       app.getTabbedPane().setSelectedIndex(0);
     }//GEN-LAST:event_jEditLabelDataActionPerformed
 
     private void jSaveLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelDataActionPerformed
-        labelPrintFrame.saveLabel();
+        app.saveLabel();
     }//GEN-LAST:event_jSaveLabelDataActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

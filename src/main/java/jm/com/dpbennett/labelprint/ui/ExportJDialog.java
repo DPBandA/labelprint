@@ -24,7 +24,7 @@ package jm.com.dpbennett.labelprint.ui;
  * @author  Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
 public class ExportJDialog extends javax.swing.JDialog implements Runnable {
-    private LabelPrintFrame labelPrintFrame;
+    private Application app;
     private String fileName;
     
     /** Creates new form ExportJDialog
@@ -38,13 +38,13 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
     }
     
     private void init(java.awt.Frame parent) {
-        labelPrintFrame = (LabelPrintFrame)parent;
+        app = (Application)parent;
         
         // Centre
         setLocationRelativeTo(null);
         
         // Do export
-        fileName = labelPrintFrame.getFileAbsolutePath("Export");
+        fileName = app.getFileAbsolutePath("Export");
         new Thread(this).start();
     }
     
@@ -92,11 +92,8 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ExportJDialog(new javax.swing.JFrame(), true).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ExportJDialog(new javax.swing.JFrame(), true).setVisible(true);
         });
     }
     
@@ -105,12 +102,12 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
         
         if (fileName != null) {
 
-            if (labelPrintFrame.getSystemOptions().isExportJPEG()) {
-                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
+            if (app.getSystemOptions().isExportJPEG()) {
+                app.getLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
                 jProgressBar1.setValue(50);
             }
-            if (labelPrintFrame.getSystemOptions().isExportPNG()) {
-                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "png");
+            if (app.getSystemOptions().isExportPNG()) {
+                app.getLabelPanel().exportLabelToRasterGraphic(fileName, "png");
                 jProgressBar1.setValue(70);
             }
 

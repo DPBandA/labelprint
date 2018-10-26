@@ -40,7 +40,7 @@ import jm.com.dpbennett.business.entity.utils.ReturnMessage;
  *
  * @author Desmond Bennett
  */
-public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
+public class Application extends javax.swing.JFrame implements Runnable {
 
     private Options sysOptions;
     private EntityManagerFactory emf;
@@ -48,9 +48,9 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
     private LabelPanel labelPanel;
 
     /**
-     * Creates new form LabelPrintFrame
+     * Creates new Application
      */
-    public LabelPrintFrame() {
+    public Application() {
 
         initComponents();
         init();
@@ -263,7 +263,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("LabelPrint");
         setMinimumSize(new java.awt.Dimension(550, 500));
-        setPreferredSize(new java.awt.Dimension(800, 875));
+        setPreferredSize(new java.awt.Dimension(800, 850));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -902,7 +902,7 @@ public class LabelPrintFrame extends javax.swing.JFrame implements Runnable {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new LabelPrintFrame().setVisible(true);
+            new Application().setVisible(true);
         });
     }
 

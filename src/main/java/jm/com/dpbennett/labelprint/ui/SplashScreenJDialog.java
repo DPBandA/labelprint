@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  */
 public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable {
 
-    private LabelPrintFrame labelPrintFrame;
+    private Application app;
 
     /**
      * Creates new form SplashScreenJDialog
@@ -44,7 +44,7 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
     }
 
     private void init(java.awt.Frame parent) {
-        labelPrintFrame = (LabelPrintFrame) parent;
+        app = (Application) parent;
 
         // Centre
         this.setLocationRelativeTo(null);
@@ -99,8 +99,8 @@ public class SplashScreenJDialog extends javax.swing.JDialog implements Runnable
         // Setup persistence/connect to database
         // Display error message only if option to store database set
         jProgressBar1.setValue(50);
-        if (!labelPrintFrame.setupDatabaseConnection()
-                && labelPrintFrame.getSystemOptions().isConnectToDatabase()) {
+        if (!app.setupDatabaseConnection()
+                && app.getSystemOptions().isConnectToDatabase()) {
             JOptionPane.showMessageDialog(this,
                     "A database connection error occurred.\n"
                     + "Consult your database administrator",

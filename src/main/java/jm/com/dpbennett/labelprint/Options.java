@@ -56,15 +56,15 @@ public class Options extends PropertiesFile {
     };
 
     /**
-     * Constructs an Options object and attempts to read the properties from the
-     * properties file.
+     * Constructs an Options object and attempts to load the properties from the
+ properties file.
      * @param systemFile 
      */
     public Options(String systemFile) {
         
         super(systemFile);
         
-        if (!read()) {
+        if (!load()) {
 
             JOptionPane.showMessageDialog(null,
                     "Error occured while loading system options",
@@ -79,8 +79,8 @@ public class Options extends PropertiesFile {
      * @return 
      */
     @Override
-    public boolean write() {
-        return super.write("LabelPrint Properties");
+    public boolean save() {
+        return super.save("LabelPrint Properties");
     }
 
     public String[][] getFieldsToSearch() {

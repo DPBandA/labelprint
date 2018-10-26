@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import jm.com.dpbennett.business.entity.BusinessEntity;
 import jm.com.dpbennett.business.entity.EnergyConsumptionAndEfficiency;
 import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
+import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 import jm.com.dpbennett.labelprint.Options;
 
 /**
@@ -35,7 +36,7 @@ import jm.com.dpbennett.labelprint.Options;
 public class OptionsDialog extends javax.swing.JDialog {
 
     private boolean isDirty;
-    private LabelPrintFrame labelPrintFrame;
+    private Application app;
 
     /**
      * Constructs an OptionsDialog
@@ -59,11 +60,11 @@ public class OptionsDialog extends javax.swing.JDialog {
      */
     private void init(java.awt.Frame parent) {
         String[][] fieldsToSearch;
-        labelPrintFrame = (LabelPrintFrame) parent;
+        app = (Application) parent;
         setLocationRelativeTo(null);
 
         // Load existing options
-        Options sysOptions = labelPrintFrame.getSystemOptions();
+        Options sysOptions = app.getSystemOptions();
         // Notes tab
         jNote1_1_TextArea.setText(sysOptions.getProperty("Note1_1"));
         jNote1_2_TextArea.setText(sysOptions.getProperty("Note1_2"));
@@ -113,19 +114,15 @@ public class OptionsDialog extends javax.swing.JDialog {
         List<BusinessEntity> productClasses = new ArrayList<>();
 
         // Product classes
-        productClasses.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                labelPrintFrame.getEntityManager(),
+        productClasses.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                 "Room Air-conditioner"));
 
         // Product type details
-        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                labelPrintFrame.getEntityManager(),
+        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                 "Refrigerator"));
-        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                labelPrintFrame.getEntityManager(),
+        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                 "Basic Refrigerator"));
-        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                labelPrintFrame.getEntityManager(),
+        productTypeDetails.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                 "Freezer"));
 
         jProductTypeDetail.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetail,
@@ -135,11 +132,11 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         // Set combos' values
         EnergyConsumptionAndEfficiency productTypeDetail
-                = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
+                = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
                         sysOptions.getLongProperty("DefaultProductTypeDetailId"));
         jProductTypeDetail.setSelectedItem(productTypeDetail);
         EnergyConsumptionAndEfficiency productClass
-                = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
+                = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
                         sysOptions.getLongProperty("DefaultProductClassId"));
         jProductClass.setSelectedItem(productClass);
 
@@ -946,7 +943,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jConnectToDatabaseCheckBoxActionPerformed
 
     private void jOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOkActionPerformed
-        Options sysOptions = labelPrintFrame.getSystemOptions();
+        Options sysOptions = app.getSystemOptions();
 
         // Database authentication
         char[] password = jPasswordField.getPassword();
@@ -956,7 +953,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         sysOptions.setProperty("ConnectionURL", jDatabaseURLTextField.getText().trim());
         sysOptions.setConnectToDatabase(jConnectToDatabaseCheckBox.isSelected());
 
-        if (labelPrintFrame.setupDatabaseConnection()) {
+        if (app.setupDatabaseConnection()) {
             try {
                 // Label Notes
                 sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
@@ -1003,21 +1000,23 @@ public class OptionsDialog extends javax.swing.JDialog {
                 sysOptions.setProperty("FreezerTemp", jFreezerTemp.getText());
                 sysOptions.setProperty("WineChillerTemp", jWineChillerTemp.getText());
 
-                sysOptions.write();
+                ReturnMessage message = sysOptions.validate(app.getEntityManager());
+                
+                sysOptions.save();
 
                 // Update relevant views that are dependent on system options
                 java.awt.EventQueue.invokeLater(() -> {
-                    if (labelPrintFrame.getLabelPanel() != null) {
-                        labelPrintFrame.getLabelPanel().updateLabel();
+                    if (app.getLabelPanel() != null) {
+                        app.getLabelPanel().updateLabel();
                     }
                 });
 
-                labelPrintFrame.setStatus("Ready...");
+                app.setStatus("Ready...");
                 dispose();
 
             } catch (Exception e) {
                 System.out.println(e);
-                labelPrintFrame.setStatus("A database connection error occurred!");
+                app.setStatus("A database connection error occurred!");
                 JOptionPane.showMessageDialog(this,
                         "A database connection error occurred\n"
                         + "so the options were not saved. Check that\n"
@@ -1026,7 +1025,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                         JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            labelPrintFrame.setStatus("A database connection error occurred!");
+            app.setStatus("A database connection error occurred!");
             JOptionPane.showMessageDialog(this,
                     "A database connection error occurred\n"
                     + "so the options were not saved. Check that\n"

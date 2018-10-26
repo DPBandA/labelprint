@@ -31,7 +31,7 @@ import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 
 public class LabelDataPanel extends javax.swing.JPanel {
 
-    private LabelPrintFrame labelPrintFrame;
+    private Application app;
     private EnergyLabel energyLabel;
 
     /**
@@ -45,10 +45,10 @@ public class LabelDataPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabelDataDialog
      *
-     * @param labelPrintFrame
+     * @param app
      */
-    public LabelDataPanel(LabelPrintFrame labelPrintFrame) {
-        this.labelPrintFrame = labelPrintFrame;
+    public LabelDataPanel(Application app) {
+        this.app = app;
         initComponents();
         init();
     }
@@ -65,17 +65,17 @@ public class LabelDataPanel extends javax.swing.JPanel {
      */
     public void createLabel() {
         setEnergyLabel(new EnergyLabel());
-        getEnergyLabel().setType(labelPrintFrame.getSystemOptions().getProperty("DefaultProductType"));
+        getEnergyLabel().setType(app.getSystemOptions().getProperty("DefaultProductType"));
         if (getEnergyLabel().getType().equals("Refrigerator")
                 || getEnergyLabel().getType().equals("Basic Refrigerator")) {
             getEnergyLabel().setDefrost("Automatic");
         }
-        getEnergyLabel().setRatedVoltage(labelPrintFrame.getSystemOptions().getProperty("DefaultRatedVoltage"));
-        getEnergyLabel().setRatedFrequency(labelPrintFrame.getSystemOptions().getProperty("DefaultRatedFrequency"));
+        getEnergyLabel().setRatedVoltage(app.getSystemOptions().getProperty("DefaultRatedVoltage"));
+        getEnergyLabel().setRatedFrequency(app.getSystemOptions().getProperty("DefaultRatedFrequency"));
         if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-            getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("RoomACStandard"));
+            getEnergyLabel().setStandard(app.getSystemOptions().getProperty("RoomACStandard"));
         } else {
-            getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("RefrigeratorStandard"));
+            getEnergyLabel().setStandard(app.getSystemOptions().getProperty("RefrigeratorStandard"));
         }
 
         updateProductTypeDetailAndClassModel();
@@ -92,24 +92,19 @@ public class LabelDataPanel extends javax.swing.JPanel {
         List<BusinessEntity> data = new ArrayList<>();
 
         if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                    labelPrintFrame.getEntityManager(),
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                     "Room Air-conditioner"));
 
             jProductTypeDetailOrClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetailOrClass,
                     (List<BusinessEntity>) data, 2, 1, 5));
         } else {
-            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                    labelPrintFrame.getEntityManager(),
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                     "Refrigerator"));
-            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                    labelPrintFrame.getEntityManager(),
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                     "Basic Refrigerator"));
-            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                    labelPrintFrame.getEntityManager(),
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                     "Freezer"));
-            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(
-                    labelPrintFrame.getEntityManager(),
+            data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
                     "Wine Chiller"));
 
             jProductTypeDetailOrClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetailOrClass,
@@ -118,13 +113,13 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
             EnergyConsumptionAndEfficiency productTypeDetailOrClass
-                    = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
-                            labelPrintFrame.getSystemOptions().getLongProperty("DefaultProductClassId"));
+                    = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
+                            app.getSystemOptions().getLongProperty("DefaultProductClassId"));
             jProductTypeDetailOrClass.setSelectedItem(productTypeDetailOrClass);
         } else {
             EnergyConsumptionAndEfficiency productTypeDetailOrClass
-                    = EnergyConsumptionAndEfficiency.findById(labelPrintFrame.getEntityManager(),
-                            labelPrintFrame.getSystemOptions().getLongProperty("DefaultProductTypeDetailId"));
+                    = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
+                            app.getSystemOptions().getLongProperty("DefaultProductTypeDetailId"));
             jProductTypeDetailOrClass.setSelectedItem(productTypeDetailOrClass);
         }
 
@@ -757,14 +752,14 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
 
     private void jSaveLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelActionPerformed
-        labelPrintFrame.saveLabel();
+        app.saveLabel();
     }//GEN-LAST:event_jSaveLabelActionPerformed
 
     private void jViewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewLabelActionPerformed
-        ReturnMessage returnMessage = getEnergyLabel().validate(labelPrintFrame.getEntityManager());
+        ReturnMessage returnMessage = getEnergyLabel().validate(app.getEntityManager());
         if (returnMessage.isSuccess()) {
-            labelPrintFrame.getLabelPanel().updateLabel();
-            labelPrintFrame.getTabbedPane().setSelectedIndex(1);
+            app.getLabelPanel().updateLabel();
+            app.getTabbedPane().setSelectedIndex(1);
         } else {
 
             JOptionPane.showMessageDialog(this,
@@ -780,124 +775,124 @@ public class LabelDataPanel extends javax.swing.JPanel {
         updateProductTypeDetailAndClassModel();
         // Set standard
         if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-            getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("RoomACStandard"));
+            getEnergyLabel().setStandard(app.getSystemOptions().getProperty("RoomACStandard"));
             
         } else {
-            getEnergyLabel().setStandard(labelPrintFrame.getSystemOptions().getProperty("RefrigeratorStandard"));
+            getEnergyLabel().setStandard(app.getSystemOptions().getProperty("RefrigeratorStandard"));
         }
                 
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 
     private void jLabelNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelNameKeyReleased
         getEnergyLabel().setLabelName(jLabelName.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jLabelNameKeyReleased
 
     private void jJobNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jJobNumberKeyReleased
         getEnergyLabel().setJobNumber(jJobNumber.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jJobNumberKeyReleased
 
     private void jCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCapacityKeyReleased
         getEnergyLabel().setCapacity(jCapacity.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jCapacityKeyReleased
 
     private void jDistributorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDistributorKeyReleased
         getEnergyLabel().setDistributor(jDistributor.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jDistributorKeyReleased
 
     private void jManufacturerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jManufacturerKeyReleased
         getEnergyLabel().setManufacturer(jManufacturer.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jManufacturerKeyReleased
 
     private void jBrandKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBrandKeyReleased
         getEnergyLabel().setBrand(jBrand.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jBrandKeyReleased
 
     private void jModelNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jModelNoKeyReleased
         getEnergyLabel().setModel(jModelNo.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jModelNoKeyReleased
 
     private void jCountryOfOriginKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCountryOfOriginKeyReleased
         getEnergyLabel().setCountry(jCountryOfOrigin.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jCountryOfOriginKeyReleased
 
     private void jOperatingCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jOperatingCostKeyReleased
         getEnergyLabel().setOperatingCost(jOperatingCost.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jOperatingCostKeyReleased
 
     private void jAnnualConsumptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAnnualConsumptionKeyReleased
         getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jAnnualConsumptionKeyReleased
 
     private void jElectricityRateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jElectricityRateKeyReleased
         getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jElectricityRateKeyReleased
 
     private void jValidityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jValidityKeyReleased
         getEnergyLabel().setValidity(jValidity.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jValidityKeyReleased
 
     private void jDefrostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDefrostActionPerformed
         getEnergyLabel().setDefrost((String) jDefrost.getSelectedItem());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jDefrostActionPerformed
 
     private void jCoolingCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoolingCapacityKeyReleased
         getEnergyLabel().setCoolingCapacity((String) jCoolingCapacity.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jCoolingCapacityKeyReleased
 
     private void jHeatingCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jHeatingCapacityKeyReleased
         getEnergyLabel().setHeatingCapacity((String) jHeatingCapacity.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jHeatingCapacityKeyReleased
 
     private void jRatedVoltageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedVoltageActionPerformed
         getEnergyLabel().setRatedVoltage((String) jRatedVoltage.getSelectedItem());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jRatedVoltageActionPerformed
 
     private void jRatedFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedFrequencyActionPerformed
         getEnergyLabel().setRatedFrequency((String) jRatedFrequency.getSelectedItem());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jRatedFrequencyActionPerformed
 
     private void jProductTypeDetailOrClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProductTypeDetailOrClassActionPerformed
         getEnergyLabel().setEnergyConsumptionAndEfficiency(
                 (EnergyConsumptionAndEfficiency) jProductTypeDetailOrClass.getSelectedItem());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jProductTypeDetailOrClassActionPerformed
 
     private void jAEERKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAEERKeyReleased
         getEnergyLabel().setAEER(jAEER.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jAEERKeyReleased
 
     private void jACOPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jACOPKeyReleased
         getEnergyLabel().setACOP(jACOP.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jACOPKeyReleased
 
     private void jFreshFoodComptVolKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFreshFoodComptVolKeyReleased
         getEnergyLabel().setFreshFoodCompartmentVol(jFreshFoodComptVol.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jFreshFoodComptVolKeyReleased
 
     private void jFreezerComptVolKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFreezerComptVolKeyReleased
         getEnergyLabel().setFreezerCompartmentVol(jFreezerComptVol.getText());
-        labelPrintFrame.setDirty(true);
+        app.setDirty(true);
     }//GEN-LAST:event_jFreezerComptVolKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
