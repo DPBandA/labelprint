@@ -23,7 +23,7 @@ package jm.com.dpbennett.labelprint.ui;
  *
  * @author Desmond Bennett
  */
-public class SearchHelpJDialog extends javax.swing.JDialog {
+public class SearchHelpDialog extends javax.swing.JDialog {
 
     /**
      * Creates new SearchHelpJDialog
@@ -31,7 +31,7 @@ public class SearchHelpJDialog extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public SearchHelpJDialog(java.awt.Frame parent, boolean modal) {
+    public SearchHelpDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
@@ -113,7 +113,7 @@ public class SearchHelpJDialog extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new SearchHelpJDialog(new javax.swing.JFrame(), true).setVisible(true);
+            new SearchHelpDialog(new javax.swing.JFrame(), true).setVisible(true);
         });
     }
 

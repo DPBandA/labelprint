@@ -142,10 +142,55 @@ public class Options extends PropertiesFile {
     public ReturnMessage validate(EntityManager em) {
         try {
             // Validate double values
-//            if (!NumberUtils.validateDoubleValue(getFreshFoodCompartmentVol()).isSuccess()) {
-//                return new ReturnMessage(false, "Invalid Fresh Food Compartment Volume",
-//                        "The fresh food compartment volume is invalid", null);
-//            }
+            // Test chamber ambient test temperature
+            if (!NumberUtils.validateDoubleValue(getProperty("TestChamberTemp")).
+                    isSuccess()) {
+                return new ReturnMessage(false, 
+                        "Invalid test chamber ambient test temperature",
+                        "The test chamber ambient test temperature is invalid", null);
+            }
+            // Average fresh food compartment operating temperature
+            if (!NumberUtils.validateDoubleValue(getProperty("FreshFoodComptAvgTemp")).
+                    isSuccess()) {
+                return new ReturnMessage(false, 
+                        "Invalid average fresh food compartment operating temperature",
+                        "The average fresh food compartment operating temperature is invalid", null);
+            }
+            // Basic household refrigerator temperature
+            if (!NumberUtils.validateDoubleValue(getProperty("BasicRefrigeratorTemp")).
+                    isSuccess()) {
+                return new ReturnMessage(false, 
+                        "Invalid basic household refrigerator temperature",
+                        "The basic household refrigerator temperature is invalid", null);
+            }
+            // All-refrigerator household refrigerator temperature.
+            if (!NumberUtils.validateDoubleValue(getProperty("AllRefrigeratorTemp")).
+                    isSuccess()) {
+                return new ReturnMessage(false, 
+                        "Invalid all-refrigerator household refrigerator temperature",
+                        "The all-refrigerator household refrigerator temperature is invalid", null);
+            }
+            // Refrigerator-freezer household refrigerator temperature
+            if (!NumberUtils.validateDoubleValue(getProperty("RefrigeratorFreezerTemp")).
+                    isSuccess()) {
+                return new ReturnMessage(false, 
+                        "Invalid refrigerator-freezer household refrigerator temperature",
+                        "The refrigerator-freezer household refrigerator temperature is invalid", null);
+            }
+            // Household freezer temperature
+            if (!NumberUtils.validateDoubleValue(getProperty("FreezerTemp")).
+                    isSuccess()) {
+                return new ReturnMessage(false, 
+                        "Invalid household freezer temperature",
+                        "The household freezer temperature is invalid", null);
+            }
+            // Household wine chiller temperature
+            if (!NumberUtils.validateDoubleValue(getProperty("WineChillerTemp")).
+                    isSuccess()) {
+                return new ReturnMessage(false, 
+                        "Invalid household wine chiller temperature",
+                        "The household wine chiller temperature is invalid", null);
+            }
             
 
         } catch (Exception e) {

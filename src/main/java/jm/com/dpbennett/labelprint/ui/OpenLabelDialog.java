@@ -458,7 +458,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
     }//GEN-LAST:event_LabelsFoundListValueChanged
 
     private void jHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHelpButtonActionPerformed
-        SearchHelpJDialog shdlg = new SearchHelpJDialog(app, true);
+        SearchHelpDialog shdlg = new SearchHelpDialog(app, true);
         shdlg.setVisible(true);
     }//GEN-LAST:event_jHelpButtonActionPerformed
 

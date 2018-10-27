@@ -30,7 +30,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.Options;
@@ -41,7 +40,7 @@ import jm.com.dpbennett.business.entity.utils.ReturnMessage;
  *
  * @author Desmond Bennett
  */
-public class Application extends javax.swing.JFrame implements Runnable {
+public class Application_bkup extends javax.swing.JFrame implements Runnable {
 
     private Options sysOptions;
     private EntityManagerFactory emf;
@@ -51,7 +50,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
     /**
      * Creates new Application
      */
-    public Application() {
+    public Application_bkup() {
 
         initComponents();
         init();
@@ -264,7 +263,6 @@ public class Application extends javax.swing.JFrame implements Runnable {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("LabelPrint");
         setMinimumSize(new java.awt.Dimension(550, 500));
-        setPreferredSize(new java.awt.Dimension(800, 875));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -804,13 +802,12 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private void initLabelPanels() {
 
         if (labelDataPanel == null) {
-            labelDataPanel = new LabelDataPanel(this);
-            JScrollPane scrollPane = new JScrollPane(labelDataPanel);
-            getjEnergyLabelPane().add("Label Data", scrollPane);
+            // tk labelDataPanel = new LabelDataPanel(this);
+            getjEnergyLabelPane().add("Label Data", labelDataPanel);
         }
 
         if (labelPanel == null) {
-            labelPanel = new LabelPanel(this);
+            // tk labelPanel = new LabelPanel(this);
 
             getjEnergyLabelPane().add("Label View", labelPanel);
 
@@ -904,7 +901,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Application().setVisible(true);
+            new Application_bkup().setVisible(true);
         });
     }
 

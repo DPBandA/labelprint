@@ -29,7 +29,7 @@ import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
 import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
 import jm.com.dpbennett.business.entity.utils.ReturnMessage;
 
-public class LabelDataPanel extends javax.swing.JPanel {
+public class LabelDataPanel_bkup extends javax.swing.JPanel {
 
     private Application app;
     private EnergyLabel energyLabel;
@@ -37,7 +37,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabelDataDialog.
      */
-    public LabelDataPanel() {
+    public LabelDataPanel_bkup() {
         initComponents();
         init();
     }
@@ -47,7 +47,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
      *
      * @param app
      */
-    public LabelDataPanel(Application app) {
+    public LabelDataPanel_bkup(Application app) {
         this.app = app;
         initComponents();
         init();
@@ -270,8 +270,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         jFreezerComptVol = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jCompEnerConsumption = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         setName(""); // NOI18N
@@ -551,17 +549,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jLabel24.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel24.setText("Freezer Comp't Vol. (L):");
 
-        jLabel25.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel25.setText("Comp. Ener. Cons'n. (CEC):");
-
-        jCompEnerConsumption.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jCompEnerConsumption.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jCompEnerConsumptionKeyReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -569,7 +556,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(344, 344, 344))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,6 +629,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
                             .addComponent(jCoolingCapacity)
                             .addComponent(jHeatingCapacity)
                             .addComponent(jProductTypeDetailOrClass, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jAEER)
+                            .addComponent(jACOP)
                             .addComponent(jFreshFoodComptVol)
                             .addComponent(jFreezerComptVol)))
                     .addGroup(layout.createSequentialGroup()
@@ -650,19 +641,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
                         .addComponent(jViewLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(jSaveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 154, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jACOP))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jAEER))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jCompEnerConsumption)))
+                        .addGap(0, 154, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -702,23 +681,19 @@ public class LabelDataPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCompEnerConsumption, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jAEER, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jACOP, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCoolingCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jHeatingCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jHeatingCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jAEER, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jACOP, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -767,7 +742,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jValidity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jViewLabel)
                     .addComponent(jSaveLabel))
@@ -801,11 +776,11 @@ public class LabelDataPanel extends javax.swing.JPanel {
         // Set standard
         if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
             getEnergyLabel().setStandard(app.getSystemOptions().getProperty("RoomACStandard"));
-
+            
         } else {
             getEnergyLabel().setStandard(app.getSystemOptions().getProperty("RefrigeratorStandard"));
         }
-
+                
         app.setDirty(true);
     }//GEN-LAST:event_jProductTypeActionPerformed
 
@@ -920,18 +895,12 @@ public class LabelDataPanel extends javax.swing.JPanel {
         app.setDirty(true);
     }//GEN-LAST:event_jFreezerComptVolKeyReleased
 
-    private void jCompEnerConsumptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCompEnerConsumptionKeyReleased
-        getEnergyLabel().setCEC(jCompEnerConsumption.getText());
-        app.setDirty(true);
-    }//GEN-LAST:event_jCompEnerConsumptionKeyReleased
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jACOP;
     private javax.swing.JTextField jAEER;
     private javax.swing.JTextField jAnnualConsumption;
     private javax.swing.JTextField jBrand;
     private javax.swing.JTextField jCapacity;
-    private javax.swing.JTextField jCompEnerConsumption;
     private javax.swing.JTextField jCoolingCapacity;
     private javax.swing.JTextField jCountryOfOrigin;
     private javax.swing.JComboBox jDefrost;
@@ -957,7 +926,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
