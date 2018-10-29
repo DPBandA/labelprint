@@ -30,7 +30,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.Options;
@@ -45,7 +44,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     private Options sysOptions;
     private EntityManagerFactory emf;
-    private LabelDataPanel labelDataPanel;
+    //private LabelDataPanel labelDataPanel;
+    private LabelFormPanel labelFormPanel;
     private LabelPanel labelPanel;
 
     /**
@@ -56,6 +56,15 @@ public class Application extends javax.swing.JFrame implements Runnable {
         initComponents();
         init();
     }
+
+    /**
+     * Gets the form that holds the label data.
+     * 
+     * @return 
+     */
+    public LabelFormPanel getLabelFormPanel() {
+        return labelFormPanel;
+    }        
 
     /**
      * Performs most of the work of initializations including the loading of
@@ -185,15 +194,15 @@ public class Application extends javax.swing.JFrame implements Runnable {
      * @param flag 
      */
     public void setDirty(boolean flag) {
-        if (getLabelDataPanel() != null) {
-            getLabelDataPanel().getEnergyLabel().setIsDirty(flag);
+        if (getLabelFormPanel() != null) {
+            getLabelFormPanel().getEnergyLabel().setIsDirty(flag);
 
-            if (getLabelDataPanel().getEnergyLabel().getIsDirty()) {
+            if (getLabelFormPanel().getEnergyLabel().getIsDirty()) {
                 this.setTitle("LabelPrint - "
-                        + getLabelDataPanel().getEnergyLabel().getLabelName() + " - MODIFIED");
+                        + getLabelFormPanel().getEnergyLabel().getLabelName() + " - MODIFIED");
             } else {
                 this.setTitle("LabelPrint - "
-                        + getLabelDataPanel().getEnergyLabel().getLabelName());
+                        + getLabelFormPanel().getEnergyLabel().getLabelName());
             }
         }
     }
@@ -204,7 +213,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      * @return 
      */
     public boolean isDirty() {
-        return getLabelDataPanel().getEnergyLabel().getIsDirty();
+        return getLabelFormPanel().getEnergyLabel().getIsDirty();
     }
 
     
@@ -609,10 +618,10 @@ public class Application extends javax.swing.JFrame implements Runnable {
      * 
      * @return 
      */
-    public LabelDataPanel getLabelDataPanel() {
-
-        return labelDataPanel;
-    }
+//    public LabelDataPanel getLabelDataPanel() {
+//
+//        return labelDataPanel;
+//    }
 
 
     /**
@@ -639,7 +648,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      */
     public void updateLabelPanels() {
 
-        getLabelDataPanel().updateLabelData();
+        getLabelFormPanel().updateLabelData();
         getLabelPanel().updateLabel();
 
         getjEnergyLabelPane().repaint();
@@ -662,13 +671,13 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
                 initLabelPanels();
 
-                getLabelDataPanel().setEnergyLabel(findLabel(oldlg.getLabelId()));
+                getLabelFormPanel().setEnergyLabel(findLabel(oldlg.getLabelId()));
 
                 updateLabelPanels();
 
                 getjEnergyLabelPane().setSelectedIndex(1);
 
-                setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());
+                setTitle("LabelPrint - " + getLabelFormPanel().getEnergyLabel().getLabelName());
                 enableMenuItems(true);
             }
         } else {
@@ -690,9 +699,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
     public void saveLabel() {
 
         try {
-            ReturnMessage returnMessage = getLabelDataPanel().getEnergyLabel().validate(getEntityManager());
+            ReturnMessage returnMessage = getLabelFormPanel().getEnergyLabel().validate(getEntityManager());
             if (returnMessage.isSuccess()) {
-                if (!getLabelDataPanel().getEnergyLabel().save(getEntityManager()).isSuccess()) {
+                if (!getLabelFormPanel().getEnergyLabel().save(getEntityManager()).isSuccess()) {
                     JOptionPane.showMessageDialog(this,
                             "An error occured while saving the current label.\n"
                             + "This could occur because you do not have a database connection.\n"
@@ -763,7 +772,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
         }
 
         getjEnergyLabelPane().removeAll();
-        labelDataPanel = null;
+        labelFormPanel = null;
         labelPanel = null;
 
         setTitle("LabelPrint");
@@ -778,8 +787,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private int saveFileIfDirty() {
         int choice = JOptionPane.YES_OPTION;
 
-        if (getLabelDataPanel() != null) {
-            if (getLabelDataPanel().getEnergyLabel().getIsDirty()) {
+        if (getLabelFormPanel() != null) {
+            if (getLabelFormPanel().getEnergyLabel().getIsDirty()) {
                 choice = JOptionPane.showConfirmDialog(this,
                         "Label has been changed. Do you want to save it?",
                         "Save",
@@ -803,10 +812,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
      */
     private void initLabelPanels() {
 
-        if (labelDataPanel == null) {
-            labelDataPanel = new LabelDataPanel(this);
-            JScrollPane scrollPane = new JScrollPane(labelDataPanel);
-            getjEnergyLabelPane().add("Label Data", scrollPane);
+        if (labelFormPanel == null) {
+            labelFormPanel = new LabelFormPanel(this);            
+            getjEnergyLabelPane().add("Label Data", labelFormPanel);
         }
 
         if (labelPanel == null) {
@@ -832,13 +840,13 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
         initLabelPanels();
 
-        getLabelDataPanel().createLabel();
+        getLabelFormPanel().createLabel();
 
         updateLabelPanels();
 
         getjEnergyLabelPane().setSelectedIndex(0);
 
-        this.setTitle("LabelPrint - " + getLabelDataPanel().getEnergyLabel().getLabelName());
+        this.setTitle("LabelPrint - " + getLabelFormPanel().getEnergyLabel().getLabelName());
         enableMenuItems(true);
     }
 

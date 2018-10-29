@@ -183,9 +183,9 @@ public class LabelPanel extends javax.swing.JPanel {
         if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
                 // Type
-                setElementText("type", app.getLabelDataPanel().getEnergyLabel().getType());
+                setElementText("type", app.getLabelFormPanel().getEnergyLabel().getType());
                 // Capacity tk impl capacity unit instead of hard code
-                setElementText("capacity", app.getLabelDataPanel().getEnergyLabel().getCapacity() + "m");
+                setElementText("capacity", app.getLabelFormPanel().getEnergyLabel().getCapacity() + "m");
                 // Set location of the capacity unit power based on width of capacity
                 Element svgElement = svgDocument.getElementById("capacity");
                 SVGLocatable locatable = (SVGLocatable) svgElement;
@@ -193,35 +193,35 @@ public class LabelPanel extends javax.swing.JPanel {
                 Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
                 unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                 // Defrost
-                setElementText("distributorOrDefrost", app.getLabelDataPanel().getEnergyLabel().getDefrost());
+                setElementText("distributorOrDefrost", app.getLabelFormPanel().getEnergyLabel().getDefrost());
                 // Distributor
-                setElementText("distributor", app.getLabelDataPanel().getEnergyLabel().getDistributor());
+                setElementText("distributor", app.getLabelFormPanel().getEnergyLabel().getDistributor());
                 // Manufacturer
-                setElementText("manufacturer", app.getLabelDataPanel().getEnergyLabel().getManufacturer());
+                setElementText("manufacturer", app.getLabelFormPanel().getEnergyLabel().getManufacturer());
                 // Model
-                setElementText("model", app.getLabelDataPanel().getEnergyLabel().getModel());
+                setElementText("model", app.getLabelFormPanel().getEnergyLabel().getModel());
                 // Country
-                setElementText("country", app.getLabelDataPanel().getEnergyLabel().getCountry());
+                setElementText("country", app.getLabelFormPanel().getEnergyLabel().getCountry());
                 // Operating cost
-                setElementText("operatingCost", "$" + app.getLabelDataPanel().getEnergyLabel().getOperatingCost());
+                setElementText("operatingCost", "$" + app.getLabelFormPanel().getEnergyLabel().getOperatingCost());
                 // Energy note
                 setElementText("note1.1", app
                         .getSystemOptions().getProperty("Note1_1")
                         .replace("[AnnualConsumption]",
-                                app.getLabelDataPanel().getEnergyLabel().getAnnualConsumption())
+                                app.getLabelFormPanel().getEnergyLabel().getAnnualConsumption())
                         .replace("[CostPerKwh]",
-                                app.getLabelDataPanel().getEnergyLabel().getCostPerKwh()));
+                                app.getLabelFormPanel().getEnergyLabel().getCostPerKwh()));
                 setElementText("note1.2", app.
                         getSystemOptions().getProperty("Note1_2"));
                 // Validity
-                setElementText("validity", app.getLabelDataPanel().getEnergyLabel().getValidity());
+                setElementText("validity", app.getLabelFormPanel().getEnergyLabel().getValidity());
                 // Standard note
                 setElementText("note2.1", app
                         .getSystemOptions().getProperty("Note2_1"));
                 setElementText("note2.2", app
                         .getSystemOptions().getProperty("Note2_2")
                         .replace("[Standard]",
-                                app.getLabelDataPanel().getEnergyLabel().getStandard()));
+                                app.getLabelFormPanel().getEnergyLabel().getStandard()));
                 // Violation note
                 setElementText("note3.1", app
                         .getSystemOptions().getProperty("Note3_1"));
