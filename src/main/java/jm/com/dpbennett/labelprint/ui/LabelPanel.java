@@ -245,11 +245,22 @@ public class LabelPanel extends javax.swing.JPanel {
         }
     }
     
+    private void addEnergyStars() {
+        // tk
+        for (int i = 1; i < 9; i++) {
+            updateStarState("outer.star." + i, STARSTATE.FULL, "008000");            
+        }
+        for (int i = 1; i < 7; i++) {
+            updateStarState("inner.star." + i, STARSTATE.FULL, "ffdf00");            
+        }
+    }
+    
     /**
      * Updates the energy stars based on energy efficiency rating.
      */
     private void updateEnergyStars() {
-       eraseEnergyStars();        
+       eraseEnergyStars();  
+       addEnergyStars();
     }
 
     private void setElementText(String elementId, String content) {
