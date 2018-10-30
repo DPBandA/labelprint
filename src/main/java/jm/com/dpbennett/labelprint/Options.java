@@ -92,19 +92,19 @@ public class Options extends PropertiesFile {
     }
 
     public boolean isExportJPEG() {
-        return Boolean.parseBoolean(getProperty("ExportJPEG"));
+        return getBooleanProperty("ExportJPEG");
     }
 
     public boolean isExportGIF() {
-        return Boolean.parseBoolean(getProperty("ExportGIF"));
+        return getBooleanProperty("ExportGIF");
     }
 
     public boolean isExportPNG() {
-        return Boolean.parseBoolean(getProperty("ExportPNG"));
+        return getBooleanProperty("ExportPNG");
     }
 
     public boolean isExportPDF() {
-        return Boolean.parseBoolean(getProperty("ExportPDF"));
+        return getBooleanProperty("ExportPDF");
     }
 
     public void setExportJPEG(boolean b) {

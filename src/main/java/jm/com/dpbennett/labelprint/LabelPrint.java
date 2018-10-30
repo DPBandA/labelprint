@@ -70,13 +70,23 @@ public class LabelPrint {
      * @param args
      */
     public static void main(String[] args) {
+//        try {
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());            
+//
+//        } catch (ClassNotFoundException | IllegalAccessException
+//                | InstantiationException | UnsupportedLookAndFeelException e) {
+//            System.out.println(e);
+//        }
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());            
-
-        } catch (ClassNotFoundException | IllegalAccessException
-                | InstantiationException | UnsupportedLookAndFeelException e) {
-            System.out.println(e);
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }
+        
         LabelPrint labelPrint = new LabelPrint();
         labelPrint.getApp().setVisible(true);
 
