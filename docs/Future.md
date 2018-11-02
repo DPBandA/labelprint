@@ -1,4 +1,5 @@
 # General
+- Put in the units for CEC, BEC etc in the respective field labels.
 - JComboBox execBrokerCombobox = new JComboBox();
 String[] obj = new String[5];
 for (i = 0; i < 5; i++) {
