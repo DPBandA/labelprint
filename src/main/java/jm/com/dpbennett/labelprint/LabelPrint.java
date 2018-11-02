@@ -70,14 +70,12 @@ public class LabelPrint {
      * @param args
      */
     public static void main(String[] args) {
-//        try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());            
-//
-//        } catch (ClassNotFoundException | IllegalAccessException
-//                | InstantiationException | UnsupportedLookAndFeelException e) {
-//            System.out.println(e);
-//        }
+
         try {
+            // Set the system look and feel by default
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            
+            // Find and use the Nimbus look and feel if it's installed.
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());

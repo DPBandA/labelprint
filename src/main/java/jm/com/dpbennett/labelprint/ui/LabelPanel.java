@@ -22,6 +22,7 @@ package jm.com.dpbennett.labelprint.ui;
 import java.io.*;
 import java.awt.print.PrinterException;
 import java.net.URL;
+import jm.com.dpbennett.business.entity.EnergyLabel;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
@@ -63,19 +64,19 @@ public class LabelPanel extends javax.swing.JPanel {
     public static final String DEFAULTSTARSTYLE
             = "opacity:1;fill-opacity:1;stroke:#000000;stroke-width:0;"
             + "stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;";
-    public static final String MORESTARSTEXTSTYLE 
-            = "font-style:normal;font-weight:normal;font-size:9.8777771px;" + 
-            "line-height:125%;font-family:sans-serif;letter-spacing:0px;" + 
-            "word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;" + 
-            "stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
-    public static final String HEATINGORCOOLINGTEXTSTYLE 
-            = "font-style:normal;font-variant:normal;font-weight:bold;" + 
-            "font-stretch:normal;font-size:9.87777805px;line-height:125%;" + 
-            "font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';" + 
-            "text-align:start;letter-spacing:0px;word-spacing:0px;" + 
-            "writing-mode:lr-tb;text-anchor:start;opacity:0.98000004;fill:#000000;" + 
-            "fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;" + 
-            "stroke-linejoin:miter;stroke-opacity:1";
+    public static final String MORESTARSTEXTSTYLE
+            = "font-style:normal;font-weight:normal;font-size:9.8777771px;"
+            + "line-height:125%;font-family:sans-serif;letter-spacing:0px;"
+            + "word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;"
+            + "stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
+    public static final String HEATINGORCOOLINGTEXTSTYLE
+            = "font-style:normal;font-variant:normal;font-weight:bold;"
+            + "font-stretch:normal;font-size:9.87777805px;line-height:125%;"
+            + "font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';"
+            + "text-align:start;letter-spacing:0px;word-spacing:0px;"
+            + "writing-mode:lr-tb;text-anchor:start;opacity:0.98000004;fill:#000000;"
+            + "fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;"
+            + "stroke-linejoin:miter;stroke-opacity:1";
 
     /**
      * Creates new SVGLabelPanel
@@ -178,14 +179,18 @@ public class LabelPanel extends javax.swing.JPanel {
         app.getjEnergyLabelPane().repaint();
     }
 
+    private EnergyLabel getEnergyLabel() {
+        return app.getLabelFormPanel().getEnergyLabel();
+    }
+
     public void updateLabel() {
 
         if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
                 // Type
-                setElementText("type", app.getLabelFormPanel().getEnergyLabel().getType());
+                setElementText("type", getEnergyLabel().getType());
                 // Capacity tk impl capacity unit instead of hard code
-                setElementText("capacity", app.getLabelFormPanel().getEnergyLabel().getCapacity() + "m");
+                setElementText("capacity", getEnergyLabel().getCapacity() + "m");
                 // Set location of the capacity unit power based on width of capacity
                 Element svgElement = svgDocument.getElementById("capacity");
                 SVGLocatable locatable = (SVGLocatable) svgElement;
@@ -193,35 +198,35 @@ public class LabelPanel extends javax.swing.JPanel {
                 Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
                 unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                 // Defrost
-                setElementText("distributorOrDefrost", app.getLabelFormPanel().getEnergyLabel().getDefrost());
+                setElementText("distributorOrDefrost", getEnergyLabel().getDefrost());
                 // Distributor
-                setElementText("distributor", app.getLabelFormPanel().getEnergyLabel().getDistributor());
+                setElementText("distributor", getEnergyLabel().getDistributor());
                 // Manufacturer
-                setElementText("manufacturer", app.getLabelFormPanel().getEnergyLabel().getManufacturer());
+                setElementText("manufacturer", getEnergyLabel().getManufacturer());
                 // Model
-                setElementText("model", app.getLabelFormPanel().getEnergyLabel().getModel());
+                setElementText("model", getEnergyLabel().getModel());
                 // Country
-                setElementText("country", app.getLabelFormPanel().getEnergyLabel().getCountry());
+                setElementText("country", getEnergyLabel().getCountry());
                 // Operating cost
-                setElementText("operatingCost", "$" + app.getLabelFormPanel().getEnergyLabel().getOperatingCost());
+                setElementText("operatingCost", "$" + getEnergyLabel().getOperatingCost());
                 // Energy note
                 setElementText("note1.1", app
                         .getSystemOptions().getProperty("Note1_1")
                         .replace("[AnnualConsumption]",
-                                app.getLabelFormPanel().getEnergyLabel().getAnnualConsumption())
+                                getEnergyLabel().getAnnualConsumption())
                         .replace("[CostPerKwh]",
-                                app.getLabelFormPanel().getEnergyLabel().getCostPerKwh()));
+                                getEnergyLabel().getCostPerKwh()));
                 setElementText("note1.2", app.
                         getSystemOptions().getProperty("Note1_2"));
                 // Validity
-                setElementText("validity", app.getLabelFormPanel().getEnergyLabel().getValidity());
+                setElementText("validity", getEnergyLabel().getValidity());
                 // Standard note
                 setElementText("note2.1", app
                         .getSystemOptions().getProperty("Note2_1"));
                 setElementText("note2.2", app
                         .getSystemOptions().getProperty("Note2_2")
                         .replace("[Standard]",
-                                app.getLabelFormPanel().getEnergyLabel().getStandard()));
+                                getEnergyLabel().getStandard()));
                 // Violation note
                 setElementText("note3.1", app
                         .getSystemOptions().getProperty("Note3_1"));
@@ -235,32 +240,53 @@ public class LabelPanel extends javax.swing.JPanel {
         }
 
     }
-    
+
     private void eraseEnergyStars() {
         for (int i = 1; i < 9; i++) {
-            updateStarState("outer.star." + i, STARSTATE.NONE, "008000");            
+            updateStarState("outer.star." + i, STARSTATE.NONE, "008000");
         }
         for (int i = 1; i < 7; i++) {
-            updateStarState("inner.star." + i, STARSTATE.NONE, "ffdf00");            
+            updateStarState("inner.star." + i, STARSTATE.NONE, "ffdf00");
         }
     }
-    
+
     private void addEnergyStars() {
-        // tk
-        for (int i = 1; i < 9; i++) {
-            updateStarState("outer.star." + i, STARSTATE.FULL, "008000");            
+
+        try {
+            String starRating = getEnergyLabel().getStarRating();
+            String stars[] = starRating.split("\\.");
+
+            int numFullOuterStars
+                    = ((Integer.parseInt(stars[0]) - 6) > 0 ? (Integer.parseInt(stars[0]) - 6) : 0);
+            int numFullInnerStars = Integer.parseInt(stars[0]) - numFullOuterStars;
+
+            // Add inner full stars
+            for (int i = 1; i < (numFullInnerStars + 1); i++) {
+                updateStarState("inner.star." + i, STARSTATE.FULL, "ffdf00");
+            }
+            // Add inner half star if any
+            if (stars[1].equals("5")) {
+                updateStarState("inner.star." + (numFullInnerStars + 1), STARSTATE.HALF, "ffdf00");
+            }
+
+            // Add outer full stars if any
+            if (numFullOuterStars > 0) {
+                for (int i = 1; i < (numFullOuterStars + 1); i++) {
+                    updateStarState("outer.star." + i, STARSTATE.FULL, "008000");
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid star rating!");
         }
-        for (int i = 1; i < 7; i++) {
-            updateStarState("inner.star." + i, STARSTATE.FULL, "ffdf00");            
-        }
+
     }
-    
+
     /**
      * Updates the energy stars based on energy efficiency rating.
      */
     private void updateEnergyStars() {
-       eraseEnergyStars();  
-       addEnergyStars();
+        eraseEnergyStars();
+        addEnergyStars();
     }
 
     private void setElementText(String elementId, String content) {
@@ -400,7 +426,7 @@ public class LabelPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jEditLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditLabelDataActionPerformed
-       app.getTabbedPane().setSelectedIndex(0);
+        app.getTabbedPane().setSelectedIndex(0);
     }//GEN-LAST:event_jEditLabelDataActionPerformed
 
     private void jSaveLabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveLabelDataActionPerformed
