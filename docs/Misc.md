@@ -1,5 +1,8 @@
 # General
-- JComboBox execBrokerCombobox = new JComboBox();
+- Make sure that the new note with the 2 electricity rates are used on the label.
+- Next inv # 000349
+- Use Glazed list for autocomplete.
+* JComboBox execBrokerCombobox = new JComboBox();
 String[] obj = new String[5];
 for (i = 0; i < 5; i++) {
    obj[i] = "Option" + (i+1);
