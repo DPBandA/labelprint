@@ -208,13 +208,13 @@ public class LabelPanel extends javax.swing.JPanel {
                     } else {
                         setElementText("innerCircText_1", "HEATING");
                     }
-                    setElementText("innerCircText_2", "The more stars the");
+                    setElementText("innerCircText_2", " The more stars the");
                     setElementText("innerCircText_3", "more efficient");
                     setElementStyle("innerCircText_line", INNERCIRCTEXTLINE + "stroke:#000000;");
                 } else {
                     setElementStyle("innerCircText_1", DEFAULTINNERCIRCTEXTSTYLE);
                     setElementText("innerCircText_1", "The more");
-                    setElementText("innerCircText_2", "        stars the");
+                    setElementText("innerCircText_2", "         stars the");
                     setElementText("innerCircText_3", "more efficient");
                     setElementStyle("innerCircText_line", INNERCIRCTEXTLINE + "stroke:none;");
                 }
