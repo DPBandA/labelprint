@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.43799421"
-     inkscape:cx="537.21558"
-     inkscape:cy="958.72934"
+     inkscape:cx="844.4706"
+     inkscape:cy="711.75414"
      inkscape:document-units="px"
      inkscape:current-layer="bottomSection"
      showgrid="true"
@@ -500,28 +500,26 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222214px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="7.121376"
-       y="216.06308"
+       y="213.80533"
        id="note1.1"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4189"
-       sodipodi:insensitive="true"><tspan
+       inkscape:label="#text4189"><tspan
          sodipodi:role="line"
          id="tspan4191"
          x="7.121376"
-         y="216.06308">Based on a total consumption 000 kwh per year at an *estimated average rate of $00/hwh.</tspan></text>
+         y="213.80533">Based on a total consumption of 000 kwh per year.</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="8.2554502"
-       y="228.59769"
-       id="note1.2"
+       x="7.8114285"
+       y="235.37094"
+       id="note1.3"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4193"
-       sodipodi:insensitive="true"><tspan
+       inkscape:label="#text4193"><tspan
          sodipodi:role="line"
          id="tspan4195"
-         x="8.2554502"
-         y="228.59769">* Your cost will vary with electricity rates and how you use your product.</tspan></text>
+         x="7.8114285"
+         y="235.37094">Your cost will vary with electricity rates and how you use your product.</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -561,19 +559,6 @@
        width="85.533554"
        inkscape:label="#image4284"
        sodipodi:insensitive="true" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="145.30322"
-       y="253.28831"
-       id="note2.1"
-       sodipodi:linespacing="125%"
-       inkscape:label="#text4287"
-       sodipodi:insensitive="true"><tspan
-         sodipodi:role="line"
-         x="145.30322"
-         y="253.28831"
-         id="tspan4291">This model has been tested</tspan></text>
     <rect
        style="fill:#008000"
        id="violationNoteBackground"
@@ -587,7 +572,7 @@
        sodipodi:insensitive="true" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.12888885;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 4.709775,236.96813 452.119985,0"
+       d="m 4.709775,240.91921 452.119985,0"
        id="path4198"
        inkscape:connector-curvature="0" />
     <text
@@ -614,19 +599,35 @@
          x="321.86951"
          y="257.9425"
          id="tspan4210">Removal of this label before</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="144.2063"
-       y="266.50943"
-       id="note2.2"
-       sodipodi:linespacing="125%"
-       inkscape:label="#text4205"
-       sodipodi:insensitive="true"><tspan
-         sodipodi:role="line"
-         id="tspan4207"
+    <g
+       id="g4290"
+       transform="translate(0,6.2088885)"
+       sodipodi:insensitive="true">
+      <text
+         inkscape:label="#text4287"
+         sodipodi:linespacing="125%"
+         id="note2.1"
+         y="253.28831"
+         x="145.30322"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan4291"
+           y="253.28831"
+           x="145.30322"
+           sodipodi:role="line">This model has been tested</tspan></text>
+      <text
+         inkscape:label="#text4205"
+         sodipodi:linespacing="125%"
+         id="note2.2"
+         y="266.50943"
          x="144.2063"
-         y="266.50943">in accordance with JS 000 </tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="266.50943"
+           x="144.2063"
+           id="tspan4207"
+           sodipodi:role="line">in accordance with JS 000 </tspan></text>
+    </g>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -666,6 +667,18 @@
          id="tspan4288"
          x="6.875926"
          y="56.350502">Item:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="7.4083524"
+       y="225.42503"
+       id="note1.2"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4837"><tspan
+         sodipodi:role="line"
+         id="tspan4839"
+         x="7.4083524"
+         y="225.42503">*Using an average rate of $9.59/kWh for the 1st 100kWh and $22.33/kwh for the remaining kWh.</tspan></text>
   </g>
   <text
      xml:space="preserve"
@@ -690,10 +703,10 @@
        id="textPath4224"><tspan
    id="tspan4221">SUPER EFFICIENCY RATING</tspan></textPath></text>
   <g
-     id="g4305">
+     id="innerCircTextGroup">
     <text
        sodipodi:linespacing="125%"
-       id="text4227"
+       id="innerCircText_1"
        y="138.29333"
        x="206.56119"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87777805px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -704,7 +717,7 @@
          y="138.29333">HEATING</tspan></text>
     <text
        sodipodi:linespacing="125%"
-       id="text4231"
+       id="innerCircText_2"
        y="150.37366"
        x="184.30002"
        style="font-style:normal;font-weight:normal;font-size:9.8777771px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -715,7 +728,7 @@
          sodipodi:role="line">The more stars the</tspan></text>
     <text
        sodipodi:linespacing="125%"
-       id="text4235"
+       id="innerCircText_3"
        y="162.45399"
        x="196.28308"
        style="font-style:normal;font-weight:normal;font-size:9.8777771px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -725,9 +738,9 @@
          id="tspan4237"
          sodipodi:role="line">more efficient</tspan></text>
     <path
-       style="fill:none;fill-rule:nonzero;stroke:#000000;stroke-width:0.56444444;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.56444442;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 205.4682,139.65688 50.90377,0"
-       id="path4643"
+       id="innerCircText_line"
        inkscape:connector-curvature="0" />
   </g>
   <g

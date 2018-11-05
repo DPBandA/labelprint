@@ -1,5 +1,4 @@
 # General
-- Make sure that the new note with the 2 electricity rates are used on the label.
 - Next inv # 000349
 - Use Glazed list for autocomplete.
 * JComboBox execBrokerCombobox = new JComboBox();
@@ -8,7 +7,15 @@ for (i = 0; i < 5; i++) {
    obj[i] = "Option" + (i+1);
 }
 AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
+
 - Create separate dialogs for "Room AC" and "Refrigeration" product?
+- Re-add the product type detail/class combo box if required.
+- Include the max/min energy for a product to qualify for 
+  super efficiency. See labelling standard (JS 1 pt 21).
+- Put units beside BEC/CEC.
+- Use text to create header instead of importing an image. Do a print and 
+  see if the light green background has been fix since setting the image background
+  to none.
 
 # Packaging
 - Setup izpack installer 

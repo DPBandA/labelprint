@@ -75,13 +75,14 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" pref="424" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="521" max="32767" attributes="0"/>
                           <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
                           <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane3" alignment="1" max="32767" attributes="0"/>
                           <Component id="jScrollPane5" alignment="1" max="32767" attributes="0"/>
                           <Component id="jScrollPane6" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane7" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane8" alignment="0" pref="521" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -93,11 +94,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="61" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="52" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane8" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -117,7 +120,7 @@
                               <Component id="jScrollPane7" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="147" max="32767" attributes="0"/>
+                      <EmptySpace pref="193" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -276,6 +279,25 @@
                   </Properties>
                   <Events>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jNote3_3_TextAreaKeyReleased"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jNote1_3_TextArea">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="lineWrap" type="boolean" value="true"/>
+                    <Property name="rows" type="int" value="2"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jNote1_3_TextAreaKeyReleased"/>
                   </Events>
                 </Component>
               </SubComponents>

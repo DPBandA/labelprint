@@ -198,11 +198,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
             getLabelFormPanel().getEnergyLabel().setIsDirty(flag);
 
             if (getLabelFormPanel().getEnergyLabel().getIsDirty()) {
-                this.setTitle("LabelPrint - "
-                        + getLabelFormPanel().getEnergyLabel().getLabelName() + " - MODIFIED");
+                this.setTitle("LabelPrint - MODIFIED");
             } else {
-                this.setTitle("LabelPrint - "
-                        + getLabelFormPanel().getEnergyLabel().getLabelName());
+                this.setTitle("LabelPrint");
             }
         }
     }
@@ -677,7 +675,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
                 getjEnergyLabelPane().setSelectedIndex(1);
 
-                setTitle("LabelPrint - " + getLabelFormPanel().getEnergyLabel().getLabelName());
+                setTitle("LabelPrint");
                 enableMenuItems(true);
             }
         } else {
@@ -846,7 +844,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
         getjEnergyLabelPane().setSelectedIndex(0);
 
-        this.setTitle("LabelPrint - " + getLabelFormPanel().getEnergyLabel().getLabelName());
+        setTitle("LabelPrint");
         enableMenuItems(true);
     }
 

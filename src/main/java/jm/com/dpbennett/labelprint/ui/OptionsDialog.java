@@ -69,6 +69,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         // Notes tab
         jNote1_1_TextArea.setText(sysOptions.getProperty("Note1_1"));
         jNote1_2_TextArea.setText(sysOptions.getProperty("Note1_2"));
+        jNote1_3_TextArea.setText(sysOptions.getProperty("Note1_3"));
         jNote2_1_TextArea.setText(sysOptions.getProperty("Note2_1"));
         jNote2_2_TextArea.setText(sysOptions.getProperty("Note2_2"));
         jNote3_1_TextArea.setText(sysOptions.getProperty("Note3_1"));
@@ -174,6 +175,8 @@ public class OptionsDialog extends javax.swing.JDialog {
         jNote3_2_TextArea = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
         jNote3_3_TextArea = new javax.swing.JTextArea();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jNote1_3_TextArea = new javax.swing.JTextArea();
         jLabelContentPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jJPEG = new javax.swing.JCheckBox();
@@ -312,6 +315,16 @@ public class OptionsDialog extends javax.swing.JDialog {
         });
         jScrollPane7.setViewportView(jNote3_3_TextArea);
 
+        jNote1_3_TextArea.setColumns(20);
+        jNote1_3_TextArea.setLineWrap(true);
+        jNote1_3_TextArea.setRows(2);
+        jNote1_3_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote1_3_TextAreaKeyReleased(evt);
+            }
+        });
+        jScrollPane8.setViewportView(jNote1_3_TextArea);
+
         javax.swing.GroupLayout jLabelNotesPanelLayout = new javax.swing.GroupLayout(jLabelNotesPanel);
         jLabelNotesPanel.setLayout(jLabelNotesPanelLayout);
         jLabelNotesPanelLayout.setHorizontalGroup(
@@ -324,13 +337,14 @@ public class OptionsDialog extends javax.swing.JDialog {
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane6)
-                    .addComponent(jScrollPane7))
+                    .addComponent(jScrollPane7)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jLabelNotesPanelLayout.setVerticalGroup(
@@ -339,10 +353,12 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLabelNotesPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,7 +374,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelNotesPanel);
@@ -957,6 +973,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                 // Label Notes
                 sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
                 sysOptions.setProperty("Note1_2", jNote1_2_TextArea.getText());
+                sysOptions.setProperty("Note1_3", jNote1_3_TextArea.getText());
                 sysOptions.setProperty("Note2_1", jNote2_1_TextArea.getText());
                 sysOptions.setProperty("Note2_2", jNote2_2_TextArea.getText());
                 sysOptions.setProperty("Note3_1", jNote3_1_TextArea.getText());
@@ -1013,14 +1030,13 @@ public class OptionsDialog extends javax.swing.JDialog {
 
                     app.setStatus("Ready...");
                     dispose();
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(this,
-                        message.getMessage(),
-                        message.getHeader(),
-                        JOptionPane.ERROR_MESSAGE);
-                    
-                    app.setStatus("Invalid options...");                    
+                            message.getMessage(),
+                            message.getHeader(),
+                            JOptionPane.ERROR_MESSAGE);
+
+                    app.setStatus("Invalid options...");
                 }
 
             } catch (HeadlessException e) {
@@ -1151,6 +1167,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         isDirty = true;
     }//GEN-LAST:event_jTestChamberTempKeyReleased
 
+    private void jNote1_3_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote1_3_TextAreaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNote1_3_TextAreaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1200,6 +1220,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jLabelNotesPanel;
     private javax.swing.JTextArea jNote1_1_TextArea;
     private javax.swing.JTextArea jNote1_2_TextArea;
+    private javax.swing.JTextArea jNote1_3_TextArea;
     private javax.swing.JTextArea jNote2_1_TextArea;
     private javax.swing.JTextArea jNote2_2_TextArea;
     private javax.swing.JTextArea jNote3_1_TextArea;
@@ -1229,6 +1250,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JCheckBox jTIFF;
     private javax.swing.JTextField jTestChamberTemp;
     private javax.swing.JTextField jUsernameTextField;
