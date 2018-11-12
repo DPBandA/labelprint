@@ -1,3 +1,8 @@
+# Label Design
+- Use text instead of image for label header cause header is printing 
+  with pail green background.
+- The label image is still getting shifted to the lower right corner. Fix!
+
 # Updated standard implementation
 - Make corner of label more rounded. See dimensions in standard.
 - Centre all text in inner semi-circle.
