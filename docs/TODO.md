@@ -17,8 +17,9 @@
 - Add feature to add "Sample" watermark.
 
 # Documentation
-- Take screen shots.
+- Take screen shots
 - Edit user manual
+- Do website with overview and installation instructions (See Jekyll book)
 
 # Deployment
 - Update the database tables in enerbase on all mysql servers.
