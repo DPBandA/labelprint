@@ -8,7 +8,6 @@ for (i = 0; i < 5; i++) {
 }
 AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 
-- Create separate dialogs for "Room AC" and "Refrigeration" product?
 - Re-add the product type detail/class combo box if required.
 - Include the max/min energy for a product to qualify for 
   super efficiency. See labelling standard (JS 1 pt 21).
