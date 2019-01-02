@@ -15,6 +15,9 @@
 - Try to make the star points sharper.
 - Impl feature turn off background colors.
 - Add feature to add "Sample" watermark.
+- Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
+  sentence be put on the label (except reference to  LPG rates)? We have only been 
+  using part of the disclaimer.
 
 # Documentation
 - Take screen shots
