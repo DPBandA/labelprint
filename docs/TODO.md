@@ -18,6 +18,7 @@
 - Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
   sentence be put on the label (except reference to  LPG rates)? We have only been 
   using part of the disclaimer.
+- Do sample labels for heating, cooling and fridge.
 
 # Documentation
 - Take screen shots
