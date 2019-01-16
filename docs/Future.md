@@ -1,5 +1,7 @@
 # General
-- Next inv # 000349
+- Get the radius dimensions from the standard and make corner of label more rounded.
+- Use text instead of image for label header cause header is printing 
+  with pail green background.
 - Use Glazed list for autocomplete.
 * JComboBox execBrokerCombobox = new JComboBox();
 String[] obj = new String[5];
@@ -15,6 +17,8 @@ AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Use text to create header instead of importing an image. Do a print and 
   see if the light green background has been fix since setting the image background
   to none.
+- The label image is still getting shifted to the lower right corner. Fix!
+- Add ConnectionTimeout=3000 as an option in the options dialog.
 
 # Packaging
 - Setup izpack installer 

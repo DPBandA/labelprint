@@ -22,9 +22,13 @@ package jm.com.dpbennett.labelprint.ui;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -59,17 +63,17 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the form that holds the label data.
-     * 
-     * @return 
+     *
+     * @return
      */
     public LabelFormPanel getLabelFormPanel() {
         return labelFormPanel;
-    }        
+    }
 
     /**
      * Performs most of the work of initializations including the loading of
      * system-wide options/properties of the application.
-     * 
+     *
      */
     private void init() {
 
@@ -84,8 +88,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the system-wide options/properties of the application.
-     * 
-     * @return 
+     *
+     * @return
      */
     public Options getSystemOptions() {
         return sysOptions;
@@ -93,10 +97,10 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Finds all labels that match the given search pattern.
-     * 
+     *
      * @param searchField
      * @param searchPattern
-     * @return 
+     * @return
      */
     public List<EnergyLabel> findLabels(String searchField,
             String searchPattern) {
@@ -122,8 +126,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
     }
 
     /**
-     * Sets up a connection to the application's database and creates a new label.
-     * 
+     * Sets up a connection to the application's database and creates a new
+     * label.
+     *
      */
     public final void doSetup() {
 
@@ -147,19 +152,18 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the application's status note.
-     * 
-     * @param status 
+     *
+     * @param status
      */
     public void setStatus(String status) {
         jStatusLabel.setText(status);
     }
 
-    
     /**
      * Finds an energy label given the label's id.
-     * 
+     *
      * @param id
-     * @return 
+     * @return
      */
     public EnergyLabel findLabel(Long id) {
         return getEntityManager().find(EnergyLabel.class, id);
@@ -167,9 +171,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Searches the label database for a label with the given name.
-     * 
+     *
      * @param labelName
-     * @return 
+     * @return
      */
     public boolean isLabelNameUsed(String labelName) {
         try {
@@ -188,10 +192,11 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Sets the edited (dirty) status of a label and the title of this window.
-     * 
+     *
      * It first checks if the LabelDataPanel was constructed by checking if it
      * is null.
-     * @param flag 
+     *
+     * @param flag
      */
     public void setDirty(boolean flag) {
         if (getLabelFormPanel() != null) {
@@ -207,18 +212,17 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the edited (dirty) status of a label.
-     * 
-     * @return 
+     *
+     * @return
      */
     public boolean isDirty() {
         return getLabelFormPanel().getEnergyLabel().getIsDirty();
     }
 
-    
     /**
      * Enables/disables various application menu items.
-     * 
-     * @param flag 
+     *
+     * @param flag
      */
     public final void enableMenuItems(boolean flag) {
         jMenuFileSave.setEnabled(flag);
@@ -460,11 +464,11 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
      * Displays the "About" dialog of this application.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpAboutActionPerformed
 
@@ -479,8 +483,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Initiates editing of the label data by displaying the LabelDataPanel.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jMenuEditLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditLabelActionPerformed
         jEnergyLabelPane.setSelectedIndex(0);
@@ -488,8 +492,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates a new label then displays the LabelDataPanel for label editing.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void NewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewLabelActionPerformed
         createLabel();
@@ -497,8 +501,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Displays the Options dialog for editing the system-wide options.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jMenuEditOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditOptionsActionPerformed
         OptionsDialog odlg = new OptionsDialog(this, true);
@@ -509,9 +513,10 @@ public class Application extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuEditOptionsActionPerformed
 
     /**
-     * Enables/disables the display of the green background sections of the label.
-     * 
-     * @param evt 
+     * Enables/disables the display of the green background sections of the
+     * label.
+     *
+     * @param evt
      */
     private void jCheckBoxMenuViewGreenBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
         getLabelPanel().setShowGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
@@ -526,26 +531,28 @@ public class Application extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
 
     /**
-     * Displays the OpenLabelDialog to allow the searching for opening of labels.
-     * 
-     * @param evt 
+     * Displays the OpenLabelDialog to allow the searching for opening of
+     * labels.
+     *
+     * @param evt
      */
     private void openLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openLabelActionPerformed
         openLabel();
     }//GEN-LAST:event_openLabelActionPerformed
 
     /**
-     * Displays the OpenLabelDialog to allow the searching for opening of labels.
-     * 
-     * @param evt 
+     * Displays the OpenLabelDialog to allow the searching for opening of
+     * labels.
+     *
+     * @param evt
      */
     private void jMenuFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileOpenActionPerformed
         openLabel();
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
 
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jMenuFilePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilePrintActionPerformed
 
@@ -555,9 +562,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the absolute path of a file via the JFileChooser dialog.
-     * 
+     *
      * @param action
-     * @return 
+     * @return
      */
     public String getFileAbsolutePath(String action) {
         JFileChooser chooser = new JFileChooser();
@@ -577,9 +584,10 @@ public class Application extends javax.swing.JFrame implements Runnable {
     }
 
     /**
-     * Initiates the exportation of a label to one or more of the selected file formats.
-     * 
-     * @param evt 
+     * Initiates the exportation of a label to one or more of the selected file
+     * formats.
+     *
+     * @param evt
      */
     private void jMenuFileExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExportActionPerformed
 
@@ -589,7 +597,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Exports a label to one or more of the selected file formats.
-     * 
+     *
      */
     public void doLabelImageExport() {
         if (saveFileIfDirty() == JOptionPane.CANCEL_OPTION) {
@@ -603,8 +611,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the JPanel that displays a label.
-     * 
-     * @return 
+     *
+     * @return
      */
     public LabelPanel getLabelPanel() {
 
@@ -613,19 +621,17 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Get the JPanel that displays label data for editing.
-     * 
-     * @return 
+     *
+     * @return
      */
 //    public LabelDataPanel getLabelDataPanel() {
 //
 //        return labelDataPanel;
 //    }
-
-
     /**
      * Initiates the saving of a label.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void SaveLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLabelActionPerformed
         saveLabel();
@@ -633,8 +639,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the JTabbedPane that displays the label and label data JPanels.
-     * 
-     * @return 
+     *
+     * @return
      */
     public JTabbedPane getjEnergyLabelPane() {
         return jEnergyLabelPane;
@@ -642,7 +648,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Initiates the update of the label and label data JPanels.
-     * 
+     *
      */
     public void updateLabelPanels() {
 
@@ -654,7 +660,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Opens and displays a label and its data.
-     * 
+     *
      */
     private void openLabel() {
 
@@ -692,7 +698,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Validates and save a label.
-     * 
+     *
      */
     public void saveLabel() {
 
@@ -730,8 +736,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Initiates the saving of a label.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jMenuFileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileSaveActionPerformed
         saveLabel();
@@ -739,7 +745,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Exits this application.
-     * 
+     *
      */
     private void exit() {
 
@@ -751,8 +757,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Initiates exiting this application.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileExitActionPerformed
         exit();
@@ -760,8 +766,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Executes the process of closing a label.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jMenuFileCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileCloseActionPerformed
 
@@ -779,8 +785,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Executes the process of saving a label.
-     * 
-     * @return 
+     *
+     * @return
      */
     private int saveFileIfDirty() {
         int choice = JOptionPane.YES_OPTION;
@@ -811,7 +817,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private void initLabelPanels() {
 
         if (labelFormPanel == null) {
-            labelFormPanel = new LabelFormPanel(this);            
+            labelFormPanel = new LabelFormPanel(this);
             getjEnergyLabelPane().add("Label Data", labelFormPanel);
         }
 
@@ -828,7 +834,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates and displays a new label.
-     * 
+     *
      */
     private void createLabel() {
 
@@ -850,7 +856,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Initiates the creation of a new label.
-     * 
+     *
      */
     private void jMenuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileNewActionPerformed
         createLabel();
@@ -859,8 +865,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
     /**
      * Handles the state change of the labels pane. Currently the label JPanel
      * is updated.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jEnergyLabelPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jEnergyLabelPaneStateChanged
 
@@ -872,8 +878,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Handles the window closing event of this application.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         exit();
@@ -881,8 +887,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Enables/disables the display of the yellow background of a label.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jCheckBoxMenuViewYellowBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
         getLabelPanel().setShowYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
@@ -896,8 +902,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * Gets the JTabbedPane that holds the label and label data JPanels.
-     * 
-     * @return 
+     *
+     * @return
      */
     public JTabbedPane getTabbedPane() {
         return jEnergyLabelPane;
@@ -905,7 +911,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * This is used to launch the application.
-     * 
+     *
      * @param args
      */
     public static void main(String args[]) {
@@ -916,8 +922,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
     /**
      * This gets a JPA entity manager for database access.
-     * 
-     * @return 
+     *
+     * @return
      */
     public EntityManager getEntityManager() {
         if (emf != null) {
@@ -930,48 +936,77 @@ public class Application extends javax.swing.JFrame implements Runnable {
     }
 
     /**
-     * Attempts to setup a database connection. It returns true if the setup
-     * was successful.
-     * 
-     * @return 
+     * Attempts to setup a database connection. It returns true if the setup was
+     * successful.
+     *
+     * @return
      */
     public boolean setupDatabaseConnection() {
 
-        try {
-            HashMap prop = new HashMap();
+        if (getDatabaseConnection() != null) {
+            try {
+                HashMap prop = new HashMap();
+                
+                // Close any existing connection if any
+                if (emf != null) {
+                    emf.close();
+                    emf = null;
+                }
+                prop.put("javax.persistence.jdbc.user",
+                        sysOptions.getProperty("ConnectionUserName"));
+                prop.put("javax.persistence.jdbc.password",
+                        sysOptions.getConnectionPassword());
+                prop.put("javax.persistence.jdbc.url",
+                        sysOptions.getProperty("ConnectionURL"));
+                prop.put("javax.persistence.jdbc.driver",
+                        sysOptions.getProperty("ConnectionDriverName"));
+                prop.put("eclipselink.jdbc.connection_pool.default.wait",
+                        "10000"); // tk
+                emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);
 
-            // Close any existing connection if any
-            if (emf != null) {
-                emf.close();
-                emf = null;
+                return true;
+                
+            } catch (Exception e) {
+                System.out.println(e);
             }
-
-            prop.put("javax.persistence.jdbc.user",
-                    sysOptions.getProperty("ConnectionUserName"));
-            prop.put("javax.persistence.jdbc.password",
-                    sysOptions.getConnectionPassword());
-            prop.put("javax.persistence.jdbc.url",
-                    sysOptions.getProperty("ConnectionURL"));
-            prop.put("javax.persistence.jdbc.driver",
-                    sysOptions.getProperty("ConnectionDriverName"));
-
-            emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);
-
-            return true;
-
-        } catch (Exception e) {
-            System.out.println(e);
+            
             return false;
+
         }
+
+        return false;
+    }
+
+    public Connection getDatabaseConnection() {
+
+        try {
+
+            Properties properties = new Properties();
+            String dbConnectionString
+                    = sysOptions.getProperty("ConnectionURL")
+                    + "?user=" + sysOptions.getProperty("ConnectionUserName")
+                    + "&password=" + sysOptions.getConnectionPassword();
+
+            properties.put("connectTimeout", sysOptions.getProperty("ConnectionTimeout"));
+            Connection dbConnect = DriverManager.getConnection(dbConnectionString, properties);
+
+            return dbConnect;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return null;
     }
 
     /**
-     * Runs a thread that does setup work such as establishing a database connection.
-     * 
+     * Runs a thread that does setup work such as establishing a database
+     * connection.
+     *
      */
     @Override
     public void run() {
-        
+
         if (sysOptions.isConnectToDatabase()) {
             if (!setupDatabaseConnection()) {
                 JOptionPane.showMessageDialog(this,
@@ -982,7 +1017,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
             }
         }
-        
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton NewLabel;
