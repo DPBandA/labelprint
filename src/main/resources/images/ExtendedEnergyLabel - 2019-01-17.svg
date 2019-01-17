@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="ExtendedEnergyLabel - Draft.svg">
+   sodipodi:docname="ExtendedEnergyLabel - 2019-01-17.svg">
   <title
      id="title4241">Energy Label</title>
   <defs
@@ -32,7 +32,7 @@
      inkscape:cx="795.0961"
      inkscape:cy="816.50088"
      inkscape:document-units="px"
-     inkscape:current-layer="svg8"
+     inkscape:current-layer="bottomSection"
      showgrid="true"
      inkscape:window-width="1215"
      inkscape:window-height="1000"
@@ -725,8 +725,7 @@
        id="textPath4224"><tspan
    id="tspan4221">SUPER EFFICIENCY RATING</tspan></textPath></text>
   <g
-     id="innerCircTextGroup"
-     sodipodi:insensitive="true">
+     id="innerCircTextGroup">
     <text
        sodipodi:linespacing="125%"
        id="innerCircText_1"
