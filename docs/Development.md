@@ -1,4 +1,5 @@
 # General
+- Add feature to add "Sample" watermark. Add code to hide or show it.
 - Impl feature turn off background colors.
 - If necessary, get the radius dimensions from the standard and make corner of label more rounded.
 - Use text instead of image for label header cause header is printing 
@@ -10,7 +11,6 @@ for (i = 0; i < 5; i++) {
    obj[i] = "Option" + (i+1);
 }
 AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
-
 - Re-add the product type detail/class combo box if required.
 - Include the max/min energy for a product to qualify for 
   super efficiency. See labelling standard (JS 1 pt 21).
@@ -27,13 +27,20 @@ AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Check out the exact color code on the Jamaican flag.
 - Try to make the star points sharper. Make each arm of the star more narrow and
 don't make each half of a star overlap.
+- Check with Kathy if label should show m3 or litres.
+- Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
+  sentence be put on the label (except reference to  LPG rates)? We have only been 
+  using part of the disclaimer.
 
-# Packaging
-- Setup izpack installer 
-  * Use "maven copy resources" to copy the "LP.jar" and "LabelProperties" to staging
-  * Fork from desbenn repo.
-  * Ensure installer works on all Windows.
+# Deployment
+- Use InstallForge to setup installation and test installation on APPDEV.
+- Impl option to load label file from external source in addition to the resources folder.
+- Setup website to introduce the application and give instructions for installation
+(See Jekyll book).
+
+# Documentation
+- Take screen shots
+- Edit user manual
 - Edit LabelPrintIcon.png to create a different image. Try a using letter e
   in green on a yellow background.
 - Impl splashscreen using existing dialog.
-- Impl option to load label file from external source in addition to the resources folder.
