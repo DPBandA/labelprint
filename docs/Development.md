@@ -1,15 +1,15 @@
 # General
-- Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
-  sentence be put on the label (except reference to  LPG rates)? We have only been 
-  using part of the disclaimer.
-  * Make space for an additional line and see if the disclaimer can fit.
-- Please see clause 3.7 of the labelling standard. The wording for the operating 
-  cost should be “Ener$ave Jamaica operating cost”
-  * Replace existing wording with the required wording.
 - Please see clause 4.1 (f). The AEER (for cooling) or ACOP (for heating) is not 
   captured for the a.c. labels. Also see clause 10.9 (should be 10.10) and 10.10 
   (should be 10.11)of JS179.
   * Check standard for where these should be placed. If not check with Kathy.
+- Please see clause 3.7 of the labelling standard. The wording for the operating 
+  cost should be “Ener$ave Jamaica operating cost”
+  * Replace existing wording with the required wording.
+- Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
+  sentence be put on the label (except reference to  LPG rates)? We have only been 
+  using part of the disclaimer.
+  * Make space for an additional line and see if the disclaimer can fit.
 - Shift the "PER YEAR" text a little bit to the left.
 - Put the default electricity rates in the system properties file and use them
   to initialize the text fields in the "Label Data" panel.
