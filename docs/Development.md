@@ -1,16 +1,23 @@
 # General
+- Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
+  sentence be put on the label (except reference to  LPG rates)? We have only been 
+  using part of the disclaimer.
+  * Make space for an additional line and see if the disclaimer can fit.
+- Please see clause 3.7 of the labelling standard. The wording for the operating 
+  cost should be “Ener$ave Jamaica operating cost”
+  * Replace existing wording with the required wording.
+- Please see clause 4.1 (f). The AEER (for cooling) or ACOP (for heating) is not 
+  captured for the a.c. labels. Also see clause 10.9 (should be 10.10) and 10.10 
+  (should be 10.11)of JS179.
+  * Check standard for where these should be placed. If not check with Kathy.
+- Shift the "PER YEAR" text a little bit to the left.
+- Put the default electricity rates in the system properties file and use them
+  to initialize the text fields in the "Label Data" panel.
 - Add feature to add "Sample" watermark. Add code to hide or show it.
 - Impl feature turn off background colors.
 - If necessary, get the radius dimensions from the standard and make corner of label more rounded.
 - Use text instead of image for label header cause header is printing 
   with pail green background.
-- Use Glazed list for autocomplete.
-* JComboBox execBrokerCombobox = new JComboBox();
-String[] obj = new String[5];
-for (i = 0; i < 5; i++) {
-   obj[i] = "Option" + (i+1);
-}
-AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Re-add the product type detail/class combo box if required.
 - Include the max/min energy for a product to qualify for 
   super efficiency. See labelling standard (JS 1 pt 21).
@@ -28,12 +35,18 @@ AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Try to make the star points sharper. Make each arm of the star more narrow and
 don't make each half of a star overlap.
 - Check with Kathy if label should show m3 or litres.
-- Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
-  sentence be put on the label (except reference to  LPG rates)? We have only been 
-  using part of the disclaimer.
+- Make sure that operating cost is properly calculated based on the 2 costs per kwh.
+- Use Glazed list for autocomplete.
+ * JComboBox execBrokerCombobox = new JComboBox();
+   String[] obj = new String[5];
+   for (i = 0; i < 5; i++) {
+      obj[i] = "Option" + (i+1);
+   }
+AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 
 # Deployment
 - Use InstallForge to setup installation and test installation on APPDEV.
+- Copy system options file in the correct place when doing installation.
 - Impl option to load label file from external source in addition to the resources folder.
 - Setup website to introduce the application and give instructions for installation
 (See Jekyll book).
@@ -43,4 +56,5 @@ don't make each half of a star overlap.
 - Edit user manual
 - Edit LabelPrintIcon.png to create a different image. Try a using letter e
   in green on a yellow background.
-- Impl splashscreen using existing dialog.
+- Impl splashscreen using existing dialog. Display status info such as database
+  connection status.
