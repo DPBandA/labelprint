@@ -18,6 +18,8 @@
 - If necessary, get the radius dimensions from the standard and make corner of label more rounded.
 - Use text instead of image for label header cause header is printing 
   with pail green background.
+- Impl validation of star rating value before saving.
+- Although it may not be allowed get the super efficiency area to display half star.
 - Re-add the product type detail/class combo box if required.
 - Include the max/min energy for a product to qualify for 
   super efficiency. See labelling standard (JS 1 pt 21).
