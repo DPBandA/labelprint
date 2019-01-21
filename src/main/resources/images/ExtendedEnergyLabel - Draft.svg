@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.43799421"
-     inkscape:cx="788.0338"
-     inkscape:cy="872.32579"
+     inkscape:zoom="0.61941735"
+     inkscape:cx="827.02004"
+     inkscape:cy="468.79055"
      inkscape:document-units="px"
      inkscape:current-layer="bottomSection"
      showgrid="true"
@@ -441,16 +441,15 @@
          id="tspan4192">--</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:Impact;-inkscape-font-specification:Impact;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="6.9136367"
-       y="124.63825"
-       id="text4196"
-       sodipodi:linespacing="125%"
-       sodipodi:insensitive="true"><tspan
+       y="121.81603"
+       id="operatingCostLabel"
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4198"
+         id="tspan4304"
          x="6.9136367"
-         y="124.63825">ENERGY OPERATING COST:</tspan></text>
+         y="121.81603">Ener$ave Jamaica operating cost:</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:125%;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -466,53 +465,25 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:57.66501617px;line-height:125%;font-family:Impact;-inkscape-font-specification:'Impact Condensed';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="124.85725"
-       y="183.87733"
+       y="175.41077"
        id="operatingCost"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4181"
-       sodipodi:insensitive="true"><tspan
+       inkscape:label="#text4181"><tspan
          sodipodi:role="line"
          id="tspan4183"
          x="124.85725"
-         y="183.87733">$00000</tspan></text>
+         y="175.41077">$00000</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.11111069px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="323.14194"
-       y="200.29327"
-       id="text4185"
-       sodipodi:linespacing="125%"
-       sodipodi:insensitive="true"><tspan
+       x="314.67514"
+       y="189.00452"
+       id="perYear"
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4187"
-         x="323.14194"
-         y="200.29327">PER YEAR</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222214px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="7.121376"
-       y="213.80533"
-       id="note1.1"
-       sodipodi:linespacing="125%"
-       inkscape:label="#text4189"
-       sodipodi:insensitive="true"><tspan
-         sodipodi:role="line"
-         id="tspan4191"
-         x="7.121376"
-         y="213.80533">Based on a total consumption of 000 kwh per year.</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="7.8114285"
-       y="235.37094"
-       id="note1.3"
-       sodipodi:linespacing="125%"
-       inkscape:label="#text4193"
-       sodipodi:insensitive="true"><tspan
-         sodipodi:role="line"
-         id="tspan4195"
-         x="7.8114285"
-         y="235.37094">Your cost will vary with electricity rates and how you use your product.</tspan></text>
+         x="314.67514"
+         y="189.00452">PER YEAR</tspan></text>
     <g
        id="validtext"
        inkscape:label="#g7294"
@@ -670,17 +641,51 @@
          y="56.350502">Item:</tspan></text>
     <text
        xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222214px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="7.121376"
+       y="199.12978"
+       id="note1.1"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4189"><tspan
+         sodipodi:role="line"
+         id="tspan4191"
+         x="7.121376"
+         y="199.12978">Based on an Annual Energy Efficiency Ratio (AEER) of 8.3.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="7.6322837"
+       y="219.98399"
+       id="note1.3"
+       sodipodi:linespacing="125%"
+       inkscape:label="#text4193"><tspan
+         sodipodi:role="line"
+         id="tspan4195"
+         x="7.6322837"
+         y="219.98399">Your cost will vary with electricity rates, how you use the appliance or product, and the ambient temperature in the immediate</tspan></text>
+    <text
+       xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="7.4083524"
-       y="225.42503"
+       y="210.74948"
        id="note1.2"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4837"
-       sodipodi:insensitive="true"><tspan
+       inkscape:label="#text4837"><tspan
          sodipodi:role="line"
          id="tspan4839"
          x="7.4083524"
-         y="225.42503">*Using an average rate of $9.59/kWh for the 1st 100kWh and $22.33/kwh for the remaining kWh.</tspan></text>
+         y="210.74948">*Using an average rate of $9.59/kWh for the 1st 100kWh and $22.33/kwh for the remaining kWh.</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="note1.4"
+       y="228.53441"
+       x="6.9535999"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="228.53441"
+         x="6.9535999"
+         id="tspan4316"
+         sodipodi:role="line">location of the appliance or product (a lower ambient temperature arising from seasonal and/or elevation will result in</tspan></text>
     <rect
        inkscape:label="#rect3412"
        ry="0"
@@ -727,6 +732,17 @@
          id="tspan4508"
          x="-45.727455"
          y="268.92331">SAMPLE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="7.639174"
+       y="237.76869"
+       id="note1.5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4328"
+         x="7.639174"
+         y="237.76869">increased energy efficiency or lower energy usage). </tspan></text>
   </g>
   <text
      xml:space="preserve"
