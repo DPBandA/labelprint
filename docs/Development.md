@@ -7,9 +7,7 @@
 - Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
   sentence be put on the label (except reference to  LPG rates)? We have only been 
   using part of the disclaimer.
-  * Put word "immediate" on second line and adjust other lines accordingly.
   * Add system options and code for the additional notes.
-- Do new sample labels with different model numbers. Enter 3 different labels into the database.
 - Put the default electricity rates in the system properties file and use them
   to initialize the text fields in the "Label Data" panel.
 - Add feature to add "Sample" watermark. Add code to hide or show it.
@@ -44,6 +42,10 @@ don't make each half of a star overlap.
       obj[i] = "Option" + (i+1);
    }
 AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
+- Consider making all the options such as note 1 fields in the EnergyLabel.
+- Add feature to copy a label data to create a new label.
+- Do not calculate star rating by default.
+- Hide label view content when exporting to avoid flicker of label content.
 
 # Deployment
 - Use InstallForge to setup installation and test installation on APPDEV.

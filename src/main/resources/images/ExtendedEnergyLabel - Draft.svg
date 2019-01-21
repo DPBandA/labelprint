@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.61941735"
-     inkscape:cx="827.02004"
-     inkscape:cy="468.79055"
+     inkscape:cx="783.83349"
+     inkscape:cy="640.78537"
      inkscape:document-units="px"
      inkscape:current-layer="bottomSection"
      showgrid="true"
@@ -662,19 +662,19 @@
          sodipodi:role="line"
          id="tspan4195"
          x="7.6322837"
-         y="219.98399">Your cost will vary with electricity rates, how you use the appliance or product, and the ambient temperature in the immediate</tspan></text>
+         y="219.98399">Your cost will vary with electricity rates, how you use the appliance or product, and the ambient temperature in the</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="7.4083524"
-       y="210.74948"
+       y="209.62061"
        id="note1.2"
        sodipodi:linespacing="125%"
        inkscape:label="#text4837"><tspan
          sodipodi:role="line"
          id="tspan4839"
          x="7.4083524"
-         y="210.74948">*Using an average rate of $9.59/kWh for the 1st 100kWh and $22.33/kwh for the remaining kWh.</tspan></text>
+         y="209.62061">*Using an average rate of $9.59/kWh for the 1st 100kWh and $22.33/kwh for the remaining kWh.</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="note1.4"
@@ -685,7 +685,7 @@
          y="228.53441"
          x="6.9535999"
          id="tspan4316"
-         sodipodi:role="line">location of the appliance or product (a lower ambient temperature arising from seasonal and/or elevation will result in</tspan></text>
+         sodipodi:role="line">immediate location of the appliance or product (a lower ambient temperature arising from seasonal and/or elevation</tspan></text>
     <rect
        inkscape:label="#rect3412"
        ry="0"
@@ -742,7 +742,7 @@
          sodipodi:role="line"
          id="tspan4328"
          x="7.639174"
-         y="237.76869">increased energy efficiency or lower energy usage). </tspan></text>
+         y="237.76869">will result in increased energy efficiency or lower energy usage). </tspan></text>
   </g>
   <text
      xml:space="preserve"
