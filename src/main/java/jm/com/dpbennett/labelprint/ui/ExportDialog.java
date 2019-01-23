@@ -20,26 +20,31 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 /**
- *
- * @author  Desmond Bennett
+ * This dialog shows the progress when exporting labels to various file formats.
+ * @author  Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public class ExportJDialog extends javax.swing.JDialog implements Runnable {
-    private LabelPrintFrame labelPrintFrame;
-    private boolean bExportSuccessful;
+public class ExportDialog extends javax.swing.JDialog implements Runnable {
+    private Application app;
     private String fileName;
     
     /** Creates new form ExportJDialog
      * @param parent
      * @param modal */
-    public ExportJDialog(java.awt.Frame parent, boolean modal) {
+    public ExportDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init(parent);
         
-        labelPrintFrame = (LabelPrintFrame)parent;
+    }
+    
+    private void init(java.awt.Frame parent) {
+        app = (Application)parent;
         
         // Centre
-        this.setLocationRelativeTo(null);
-        fileName = labelPrintFrame.getFileAbsolutePath("Export");
+        setLocationRelativeTo(null);
+        
+        // Do export
+        fileName = app.getFileAbsolutePath("Export");
         new Thread(this).start();
     }
     
@@ -87,11 +92,8 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ExportJDialog(new javax.swing.JFrame(), true).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ExportDialog(new javax.swing.JFrame(), true).setVisible(true);
         });
     }
     
@@ -99,23 +101,16 @@ public class ExportJDialog extends javax.swing.JDialog implements Runnable {
     public void run() {
         
         if (fileName != null) {
-            // Check to see which format to export
-//            if (labelPrintFrame.getSystemOptions().isExportGIF()) {
-//                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "gif");
-//                jProgressBar1.setValue(25);
-//            }
-            if (labelPrintFrame.getSystemOptions().isExportJPEG()) {
-                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
+
+            if (app.getSystemOptions().isExportJPEG()) {
+                app.getLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
                 jProgressBar1.setValue(50);
             }
-            if (labelPrintFrame.getSystemOptions().isExportPNG()) {
-                labelPrintFrame.getLabelPanel().exportLabelToRasterGraphic(fileName, "png");
+            if (app.getSystemOptions().isExportPNG()) {
+                app.getLabelPanel().exportLabelToRasterGraphic(fileName, "png");
                 jProgressBar1.setValue(70);
             }
-//            if (labelPrintFrame.getSystemOptions().isExportPDF()) {
-//                labelPrintFrame.getLabelPanel().exportLabelToPDF(fileName);
-//                jProgressBar1.setValue(90);
-//            }
+
             // Finish up
             jProgressBar1.setValue(100);
             try {
