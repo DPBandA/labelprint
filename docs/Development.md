@@ -48,6 +48,7 @@ AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Hide label view content when exporting to avoid flicker of label content.
 
 # Deployment
+- It seems the properties file cannot befound when the file path has space. Fix.
 - Use InstallForge to setup installation and test installation on APPDEV.
 - Copy system options file in the correct place when doing installation.
 - Impl option to load label file from external source in addition to the resources folder.
