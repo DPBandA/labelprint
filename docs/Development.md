@@ -1,9 +1,5 @@
 # General
-- Please see clause 4.1 (f). The AEER (for cooling) or ACOP (for heating) is not 
-  captured for the a.c. labels. Also see clause 10.9 (should be 10.10) and 10.10 
-  (should be 10.11)of JS179.
-  * Check with Kathy for suitable values for AEER and ACOP. 
-  * Use 8.3 for AEER and 4.7 for COP for now.
+- Add separate "note 1" for ACOP/AEER. See sample labels.
 - Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
   sentence be put on the label (except reference to  LPG rates)? We have only been 
   using part of the disclaimer.
