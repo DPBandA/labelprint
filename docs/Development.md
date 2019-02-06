@@ -42,6 +42,7 @@ AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Add feature to copy a label data to create a new label.
 - Do not calculate star rating by default.
 - Hide label view content when exporting to avoid flicker of label content.
+- By the way, please ensure that all the fields in the top of the label (i.e. manufacturer, capacity, country of origin, etc.) have the colons beside them. When I looked back on the recent sample sent I realized that this was not uniformed throughout.
 
 # Deployment
 - It seems the properties file cannot befound when the file path has space. Fix.
