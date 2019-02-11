@@ -32,7 +32,7 @@ don't make each half of a star overlap.
 - Check with Kathy if label should show m3 or litres.
 - Make sure that operating cost is properly calculated based on the 2 costs per kwh.
 - Use Glazed list for autocomplete.
- * JComboBox execBrokerCombobox = new JComboBox();
+  * JComboBox execBrokerCombobox = new JComboBox();
    String[] obj = new String[5];
    for (i = 0; i < 5; i++) {
       obj[i] = "Option" + (i+1);
