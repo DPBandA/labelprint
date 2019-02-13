@@ -251,7 +251,7 @@ public class LabelPanel extends javax.swing.JPanel {
                     setElementText("distributorOrDefrost", getEnergyLabel().getDefrost());
                     setElementText("distributorLabel", "Distributor");
                     setElementText("distributor", getEnergyLabel().getDistributor());
-                }               
+                }
                 // Manufacturer
                 setElementText("manufacturer", getEnergyLabel().getManufacturer());
                 // Model
@@ -261,10 +261,26 @@ public class LabelPanel extends javax.swing.JPanel {
                 // Operating cost
                 setElementText("operatingCost", "$" + getEnergyLabel().getOperatingCost());
                 // Energy note
-                setElementText("note1.1", app
-                        .getSystemOptions().getProperty("Note1_1")
-                        .replace("[AnnualConsumption]",
-                                getEnergyLabel().getAnnualConsumption()));
+                // Line 1 note
+                if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+                    if (getEnergyLabel().getShowCoolingCapacity()) {
+                        setElementText("note1.1", app
+                                .getSystemOptions().getProperty("Note1_1_AEER")
+                                .replace("[AEER]",
+                                        getEnergyLabel().getAEER()));
+                    } else {
+                        setElementText("note1.1", app
+                                .getSystemOptions().getProperty("Note1_1_ACOP")
+                                .replace("[ACOP]",
+                                        getEnergyLabel().getACOP()));
+                    }
+                } else {
+                    setElementText("note1.1", app
+                            .getSystemOptions().getProperty("Note1_1")
+                            .replace("[AnnualConsumption]",
+                                    getEnergyLabel().getAnnualConsumption()));
+                }
+                // Line 2 note
                 setElementText("note1.2", app
                         .getSystemOptions().getProperty("Note1_2")
                         .replace("[CostPerKwh]",

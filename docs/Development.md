@@ -1,9 +1,5 @@
 # General
-- Please see clause 4.1 (f). The AEER (for cooling) or ACOP (for heating) is not 
-  captured for the a.c. labels. Also see clause 10.9 (should be 10.10) and 10.10 
-  (should be 10.11)of JS179.
-  * Check with Kathy for suitable values for AEER and ACOP. 
-  * Use 8.3 for AEER and 4.7 for COP for now.
+- Add separate "note 1" for ACOP/AEER. See sample labels.
 - Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
   sentence be put on the label (except reference to  LPG rates)? We have only been 
   using part of the disclaimer.
@@ -36,7 +32,7 @@ don't make each half of a star overlap.
 - Check with Kathy if label should show m3 or litres.
 - Make sure that operating cost is properly calculated based on the 2 costs per kwh.
 - Use Glazed list for autocomplete.
- * JComboBox execBrokerCombobox = new JComboBox();
+  * JComboBox execBrokerCombobox = new JComboBox();
    String[] obj = new String[5];
    for (i = 0; i < 5; i++) {
       obj[i] = "Option" + (i+1);
@@ -46,8 +42,11 @@ AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Add feature to copy a label data to create a new label.
 - Do not calculate star rating by default.
 - Hide label view content when exporting to avoid flicker of label content.
+- By the way, please ensure that all the fields in the top of the label (i.e. manufacturer, capacity, country of origin, etc.) have the colons beside them. When I looked back on the recent sample sent I realized that this was not uniformed throughout.
+* Some of the labels don't have colons. Make the colons align vertically?
 
 # Deployment
+- It seems the properties file cannot befound when the file path has space. Fix.
 - Use InstallForge to setup installation and test installation on APPDEV.
 - Copy system options file in the correct place when doing installation.
 - Impl option to load label file from external source in addition to the resources folder.
