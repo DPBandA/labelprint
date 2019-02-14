@@ -57,7 +57,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = F:\Projects\labelprint\docs\installation\LabelPrintSetup.exe
+File = C:\Users\dbennett\Desktop\LabelPrintSetup.exe
 [Updater]
 Allow = 0
 1 = <appname>

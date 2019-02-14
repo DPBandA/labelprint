@@ -52,6 +52,7 @@ AutoCompleteSupport.install(jexecBrokerCombobox, GlazedLists.eventListOf(obj));
 - Impl option to load label file from external source in addition to the resources folder.
 - Setup website to introduce the application and give instructions for installation
 (See Jekyll book).
+- After deployment put the remaining items the github issue tracker.
 
 # Documentation
 - Take screen shots
