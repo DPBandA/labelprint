@@ -187,6 +187,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jNote1_3_TextArea1 = new javax.swing.JTextArea();
         jScrollPane12 = new javax.swing.JScrollPane();
         jNote1_3_TextArea2 = new javax.swing.JTextArea();
+        jLabel26 = new javax.swing.JLabel();
         jLabelContentPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jJPEG = new javax.swing.JCheckBox();
@@ -381,6 +382,9 @@ public class OptionsDialog extends javax.swing.JDialog {
         });
         jScrollPane12.setViewportView(jNote1_3_TextArea2);
 
+        jLabel26.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel26.setText("Ann. coeff. perf. note:");
+
         javax.swing.GroupLayout jLabelNotesPanelLayout = new javax.swing.GroupLayout(jLabelNotesPanel);
         jLabelNotesPanel.setLayout(jLabelNotesPanelLayout);
         jLabelNotesPanelLayout.setHorizontalGroup(
@@ -392,7 +396,8 @@ public class OptionsDialog extends javax.swing.JDialog {
                     .addComponent(jLabel13)
                     .addComponent(jLabel12)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel25))
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
@@ -425,7 +430,9 @@ public class OptionsDialog extends javax.swing.JDialog {
                     .addComponent(jLabel25)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -448,7 +455,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelNotesPanel);
@@ -1301,6 +1308,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
