@@ -50,8 +50,7 @@
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
-                <executions>  
-                    <!--                  
+                <executions>           
                     <execution>
                         <id>copy-system-files</id>
                         <phase>install</phase>
@@ -67,7 +66,6 @@
                             </resources>              
                         </configuration>            
                     </execution>
-                    -->
                     <execution>
                         <id>copy-images</id>
                         <phase>install</phase>
