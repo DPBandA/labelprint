@@ -85,35 +85,35 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
         // Setup jProductTypeDetailOrClass combo box model and selected item.
         //if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-            // Set model
-            //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
-            //        "Room Air-conditioner"));
-            //jProductTypeDetailOrClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetailOrClass,
-            //        (List<BusinessEntity>) data, 2, 1, 5));
-            // Set item
-            //EnergyConsumptionAndEfficiency productTypeDetailOrClass
-            //        = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
-            //                app.getSystemOptions().getLongProperty("DefaultProductClassId"));
-            //jProductTypeDetailOrClass.setSelectedItem(productTypeDetailOrClass);
+        // Set model
+        //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
+        //        "Room Air-conditioner"));
+        //jProductTypeDetailOrClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetailOrClass,
+        //        (List<BusinessEntity>) data, 2, 1, 5));
+        // Set item
+        //EnergyConsumptionAndEfficiency productTypeDetailOrClass
+        //        = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
+        //                app.getSystemOptions().getLongProperty("DefaultProductClassId"));
+        //jProductTypeDetailOrClass.setSelectedItem(productTypeDetailOrClass);
         //} else {
-            // Set model
-            //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
-            //        "Refrigerator"));
-            //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
-            //        "Basic Refrigerator"));
-            //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
-            //        "Refrigerator-Freezer"));
-            //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
-            //        "Freezer"));
-            //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
-            //        "Wine Chiller"));
-            //jProductTypeDetailOrClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetailOrClass,
-            //        (List<BusinessEntity>) data, 4, 1, 5));
-            // Set item
-            //EnergyConsumptionAndEfficiency productTypeDetailOrClass
-            //        = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
-            //                app.getSystemOptions().getLongProperty("DefaultProductTypeDetailId"));
-            //jProductTypeDetailOrClass.setSelectedItem(productTypeDetailOrClass);
+        // Set model
+        //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
+        //        "Refrigerator"));
+        //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
+        //        "Basic Refrigerator"));
+        //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
+        //        "Refrigerator-Freezer"));
+        //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
+        //        "Freezer"));
+        //data.addAll(EnergyConsumptionAndEfficiency.findAllByProductType(app.getEntityManager(),
+        //        "Wine Chiller"));
+        //jProductTypeDetailOrClass.setModel(SwingUtils.getBusinessEntityComboBoxModel(jProductTypeDetailOrClass,
+        //        (List<BusinessEntity>) data, 4, 1, 5));
+        // Set item
+        //EnergyConsumptionAndEfficiency productTypeDetailOrClass
+        //        = EnergyConsumptionAndEfficiency.findById(app.getEntityManager(),
+        //                app.getSystemOptions().getLongProperty("DefaultProductTypeDetailId"));
+        //jProductTypeDetailOrClass.setSelectedItem(productTypeDetailOrClass);
         //}
         // Set standard
         if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
@@ -1187,9 +1187,9 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCapacityKeyReleased
         getEnergyLabel().setCapacity(jCapacity.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jCapacityKeyReleased
 
@@ -1255,97 +1255,97 @@ public class LabelDataPanel extends javax.swing.JPanel {
 
     private void jRatedVoltageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedVoltageActionPerformed
         getEnergyLabel().setRatedVoltage((String) jRatedVoltage.getSelectedItem());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jRatedVoltageActionPerformed
 
     private void jRatedFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRatedFrequencyActionPerformed
         getEnergyLabel().setRatedFrequency((String) jRatedFrequency.getSelectedItem());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jRatedFrequencyActionPerformed
 
     private void jAEERKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAEERKeyReleased
         getEnergyLabel().setAEER(jAEER.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jAEERKeyReleased
 
     private void jACOPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jACOPKeyReleased
         getEnergyLabel().setACOP(jACOP.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jACOPKeyReleased
 
     private void jFreshFoodComptVolKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFreshFoodComptVolKeyReleased
         getEnergyLabel().setFreshFoodCompartmentVol(jFreshFoodComptVol.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jFreshFoodComptVolKeyReleased
 
     private void jFreezerComptVolKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFreezerComptVolKeyReleased
         getEnergyLabel().setFreezerCompartmentVol(jFreezerComptVol.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jFreezerComptVolKeyReleased
 
     private void jCECKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCECKeyReleased
         getEnergyLabel().setCEC(jCEC.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jCECKeyReleased
 
     private void jTotalAdjustedVolKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTotalAdjustedVolKeyReleased
         getEnergyLabel().setTotalAdjustedVol(jTotalAdjustedVol.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jTotalAdjustedVolKeyReleased
 
     private void jCfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCfKeyReleased
         getEnergyLabel().setCf(jCf.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jCfKeyReleased
 
     private void jCvKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCvKeyReleased
         getEnergyLabel().setCv(jCv.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jCvKeyReleased
 
     private void jBECKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBECKeyReleased
         getEnergyLabel().setBEC(jBEC.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jBECKeyReleased
 
     private void jERFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jERFKeyReleased
         getEnergyLabel().setERF(jERF.getText());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jERFKeyReleased
 
@@ -1367,27 +1367,27 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setCalcBEC(jCalcBEC.isSelected());
         jBEC.setText(getEnergyLabel().getBEC());
         setFieldForCalc(jBEC, jCalcBEC.isSelected());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jCalcBECActionPerformed
 
     private void jShowCoolingCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowCoolingCapActionPerformed
         getEnergyLabel().setShowCoolingCapacity(jShowCoolingCap.isSelected());
         getEnergyLabel().setShowHeatingCapacity(jShowHeatingCap.isSelected());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jShowCoolingCapActionPerformed
 
     private void jShowHeatingCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowHeatingCapActionPerformed
         getEnergyLabel().setShowCoolingCapacity(jShowCoolingCap.isSelected());
         getEnergyLabel().setShowHeatingCapacity(jShowHeatingCap.isSelected());
-        
+
         updateStarRating();
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jShowHeatingCapActionPerformed
 
@@ -1397,7 +1397,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jElectricityRate2KeyReleased
 
     private void jShowSampleWatermarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowSampleWatermarkActionPerformed
-        // TODO add your handling code here:
+        getEnergyLabel().setShowSampleWatermark(jShowSampleWatermark.isSelected());
     }//GEN-LAST:event_jShowSampleWatermarkActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

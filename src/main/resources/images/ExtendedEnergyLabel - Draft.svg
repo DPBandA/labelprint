@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.61941735"
-     inkscape:cx="783.83349"
-     inkscape:cy="640.78537"
+     inkscape:zoom="0.43799421"
+     inkscape:cx="661.48531"
+     inkscape:cy="567.83766"
      inkscape:document-units="px"
      inkscape:current-layer="bottomSection"
      showgrid="true"
@@ -721,7 +721,7 @@
          y="133.97906" /></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:105.83332825px;line-height:125%;font-family:Impact;letter-spacing:0px;word-spacing:0px;opacity:0.25;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:105.83333132px;line-height:125%;font-family:Impact;letter-spacing:0px;word-spacing:0px;opacity:0.25;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'Impact, Condensed';text-anchor:start;text-align:start;writing-mode:lr;"
        x="-45.727455"
        y="268.92331"
        id="sample"
@@ -729,9 +729,7 @@
        transform="matrix(0.81149808,-0.58435512,0.58435506,0.81149808,0,0)"
        sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
-         id="tspan4508"
-         x="-45.727455"
-         y="268.92331">SAMPLE</tspan></text>
+         id="tspan4309"></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

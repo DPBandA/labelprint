@@ -201,7 +201,12 @@ public class LabelPanel extends javax.swing.JPanel {
         if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
                 // Sample watermark
-                
+                if (getEnergyLabel().getShowSampleWatermark()) {
+                   setElementText("sample", "SAMPLE"); 
+                }
+                else {
+                    setElementText("sample", "");
+                }
                 // Star area inner circle text
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
                     setElementStyle("innerCircText_1", HEATINGORCOOLINGTEXTSTYLE);
