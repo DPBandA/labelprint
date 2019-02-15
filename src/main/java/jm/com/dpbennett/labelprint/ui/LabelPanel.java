@@ -200,6 +200,8 @@ public class LabelPanel extends javax.swing.JPanel {
 
         if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
+                // Sample watermark
+                
                 // Star area inner circle text
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
                     setElementStyle("innerCircText_1", HEATINGORCOOLINGTEXTSTYLE);
@@ -242,14 +244,14 @@ public class LabelPanel extends javax.swing.JPanel {
                 unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                 // Defrost/Distributor
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-                    setElementText("distributorOrDefrostLabel", "Distributor");
+                    setElementText("distributorOrDefrostLabel", "Distributor:");
                     setElementText("distributorOrDefrost", getEnergyLabel().getDistributor());
                     setElementText("distributorLabel", " ");
                     setElementText("distributor", " ");
                 } else {
-                    setElementText("distributorOrDefrostLabel", "Defrost");
+                    setElementText("distributorOrDefrostLabel", "Defrost:");
                     setElementText("distributorOrDefrost", getEnergyLabel().getDefrost());
-                    setElementText("distributorLabel", "Distributor");
+                    setElementText("distributorLabel", "Distributor:");
                     setElementText("distributor", getEnergyLabel().getDistributor());
                 }
                 // Manufacturer
@@ -283,12 +285,19 @@ public class LabelPanel extends javax.swing.JPanel {
                 // Line 2 note
                 setElementText("note1.2", app
                         .getSystemOptions().getProperty("Note1_2")
-                        .replace("[CostPerKwh]",
+                        .replace("[CostPerKWh1]",
                                 getEnergyLabel().getCostPerKwh())
-                        .replace("[CostPerKwh2]",
+                        .replace("[CostPerKWh2]",
                                 getEnergyLabel().getCostPerKwh2()));
+                // Disclaimer line 1
                 setElementText("note1.3", app.
                         getSystemOptions().getProperty("Note1_3"));
+                // Disclaimer line 2
+                setElementText("note1.4", app.
+                        getSystemOptions().getProperty("Note1_4"));
+                // Disclaimer line 3
+                setElementText("note1.5", app.
+                        getSystemOptions().getProperty("Note1_5"));
                 // Validity
                 setElementText("validity", getEnergyLabel().getValidity());
                 // Standard note

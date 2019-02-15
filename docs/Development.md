@@ -1,11 +1,4 @@
 # General
-- Add separate "note 1" for ACOP/AEER. See sample labels.
-- Please take a look at the disclaimer in 4.1 (1) of JS1:Part 21. Can all that 
-  sentence be put on the label (except reference to  LPG rates)? We have only been 
-  using part of the disclaimer.
-  * Add system options and code for the additional notes.
-- Put the default electricity rates in the system properties file and use them
-  to initialize the text fields in the "Label Data" panel.
 - Add feature to add "Sample" watermark. Add code to hide or show it.
 - Impl feature turn off background colors.
 - If necessary, get the radius dimensions from the standard and make corner of label more rounded.

@@ -68,6 +68,8 @@ public class OptionsDialog extends javax.swing.JDialog {
         Options sysOptions = app.getSystemOptions();
         // Notes tab
         jNote1_1_TextArea.setText(sysOptions.getProperty("Note1_1"));
+        jNote1_1_AEER_TextArea.setText(sysOptions.getProperty("Note1_1_AEER"));
+        jNote1_1_ACOP_TextArea.setText(sysOptions.getProperty("Note1_1_ACOP"));
         jNote1_2_TextArea.setText(sysOptions.getProperty("Note1_2"));
         jNote1_3_TextArea.setText(sysOptions.getProperty("Note1_3"));
         jNote1_4_TextArea.setText(sysOptions.getProperty("Note1_4"));
@@ -88,6 +90,9 @@ public class OptionsDialog extends javax.swing.JDialog {
         jDefaultSearchFieldComboBox.setSelectedItem(sysOptions.getProperty("DefaultFieldToSearch"));
         jConnectToDatabaseCheckBox.setSelected(sysOptions.isConnectToDatabase());
         // Label Content tab  
+        // Electricity rates
+        jElectricityRate1.setText(sysOptions.getProperty("CostPerKWh_1"));
+        jElectricityRate2.setText(sysOptions.getProperty("CostPerKWh_2"));
         // Image Export Formats
         jJPEG.setSelected(sysOptions.isExportJPEG());
         jGIF.setSelected(sysOptions.isExportGIF());
@@ -219,6 +224,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         jRefrigeratorStandard = new javax.swing.JComboBox<>();
         jRoomACStandard = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jElectricityRate1 = new javax.swing.JTextField();
+        jElectricityRate2 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
         jDatabasePanel = new javax.swing.JPanel();
         jDatabaseOptionsPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -497,7 +506,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel32)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelNotesPanel);
@@ -672,6 +681,18 @@ public class OptionsDialog extends javax.swing.JDialog {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Room AC Standard (JS):");
 
+        jLabel33.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel33.setText("Electricity Rate 1 ($/kWh):");
+
+        jElectricityRate1.setText("0.0");
+
+        jElectricityRate2.setText("0.0");
+
+        jLabel34.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel34.setText("Electricity Rate 2 ($/kWh):");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -685,21 +706,31 @@ public class OptionsDialog extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel6)
-                                .addComponent(jLabel11)))
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel33)
+                                .addComponent(jLabel34)))
                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRatedVoltage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProductTypeDetail, 0, 371, Short.MAX_VALUE)
-                    .addComponent(jProductClass, 0, 371, Short.MAX_VALUE)
-                    .addComponent(jRefrigeratorStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRoomACStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRatedVoltage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jProductTypeDetail, 0, 223, Short.MAX_VALUE)
+                            .addComponent(jProductClass, 0, 223, Short.MAX_VALUE)
+                            .addComponent(jRefrigeratorStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRoomACStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jElectricityRate1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jElectricityRate2)))
+                .addGap(235, 235, 235))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -731,7 +762,15 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jProductClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(jElectricityRate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jElectricityRate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLabelContentPanelLayout = new javax.swing.GroupLayout(jLabelContentPanel);
@@ -750,9 +789,9 @@ public class OptionsDialog extends javax.swing.JDialog {
             .addGroup(jLabelContentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Content", jLabelContentPanel);
@@ -879,7 +918,7 @@ public class OptionsDialog extends javax.swing.JDialog {
             .addGroup(jDatabasePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jDatabaseOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Database", jDatabasePanel);
@@ -1010,7 +1049,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jWineChillerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jContantsPanelLayout = new javax.swing.GroupLayout(jContantsPanel);
@@ -1095,6 +1134,8 @@ public class OptionsDialog extends javax.swing.JDialog {
             try {
                 // Label Notes
                 sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
+                sysOptions.setProperty("Note1_1_AEER", jNote1_1_AEER_TextArea.getText());
+                sysOptions.setProperty("Note1_1_ACOP", jNote1_1_ACOP_TextArea.getText());
                 sysOptions.setProperty("Note1_2", jNote1_2_TextArea.getText());
                 sysOptions.setProperty("Note1_3", jNote1_3_TextArea.getText());
                 sysOptions.setProperty("Note1_4", jNote1_4_TextArea.getText());
@@ -1108,6 +1149,9 @@ public class OptionsDialog extends javax.swing.JDialog {
                 sysOptions.setProperty("DefaultFieldToSearch",
                         jDefaultSearchFieldComboBox.getSelectedItem().toString());
                 // Label Content
+                // Electricity rates
+                sysOptions.setProperty("CostPerKWh_1", jElectricityRate1.getText());
+                sysOptions.setProperty("CostPerKWh_2", jElectricityRate2.getText());
                 // Image export formats
                 sysOptions.setExportPDF(jPDF.isSelected());
                 sysOptions.setExportPNG(jPNG.isSelected());
@@ -1330,6 +1374,8 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jDatabasePanel;
     private javax.swing.JTextField jDatabaseURLTextField;
     private javax.swing.JComboBox jDefaultSearchFieldComboBox;
+    private javax.swing.JTextField jElectricityRate1;
+    private javax.swing.JTextField jElectricityRate2;
     private javax.swing.JTextField jFreezerTemp;
     private javax.swing.JTextField jFreshFoodComptAvgTemp;
     private javax.swing.JCheckBox jGIF;
@@ -1360,6 +1406,8 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

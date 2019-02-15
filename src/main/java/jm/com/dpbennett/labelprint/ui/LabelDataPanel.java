@@ -20,13 +20,8 @@ Email: info@dpbennett.com.jm
 package jm.com.dpbennett.labelprint.ui;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.text.JTextComponent;
-import jm.com.dpbennett.business.entity.BusinessEntity;
-import jm.com.dpbennett.business.entity.EnergyConsumptionAndEfficiency;
 import jm.com.dpbennett.business.entity.EnergyLabel;
-import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
 import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
 
 public class LabelDataPanel extends javax.swing.JPanel {
@@ -70,6 +65,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
         } else {
             getEnergyLabel().setStandard(app.getSystemOptions().getProperty("RefrigeratorStandard"));
         }
+        getEnergyLabel().setCostPerKwh(app.getSystemOptions().getProperty("CostPerKWh_1"));
+        getEnergyLabel().setCostPerKwh2(app.getSystemOptions().getProperty("CostPerKWh_2"));
 
         updateLabelDataBasedOnProductType();
 
@@ -202,6 +199,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setRatedVoltage(jRatedVoltage.getSelectedItem().toString());
         getEnergyLabel().setRatedFrequency(jRatedFrequency.getSelectedItem().toString());
         getEnergyLabel().setCostPerKwh(jElectricityRate.getText());
+        getEnergyLabel().setCostPerKwh2(jElectricityRate2.getText());
         getEnergyLabel().setBrand(jBrand.getText());
         getEnergyLabel().setModel(jModelNo.getText());
         getEnergyLabel().setValidity(jValidity.getText());
@@ -485,6 +483,8 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jShowHeatingCap = new javax.swing.JRadioButton();
         jElectricityRate2 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        jShowSampleWatermark = new javax.swing.JCheckBox();
+        jLabel16 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
         setName(""); // NOI18N
@@ -821,7 +821,6 @@ public class LabelDataPanel extends javax.swing.JPanel {
         });
 
         jCalcStarRating.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jCalcStarRating.setSelected(true);
         jCalcStarRating.setText("calculate");
         jCalcStarRating.setToolTipText("Automatically calculate the Star Rating");
         jCalcStarRating.addActionListener(new java.awt.event.ActionListener() {
@@ -872,6 +871,20 @@ public class LabelDataPanel extends javax.swing.JPanel {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Electricity Rate 2 ($/kwh):");
 
+        jShowSampleWatermark.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jShowSampleWatermark.setToolTipText("Check to show the \"SAMPLE\" watermark on the label.");
+        jShowSampleWatermark.setMargin(new java.awt.Insets(2, 0, 0, 0));
+        jShowSampleWatermark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jShowSampleWatermarkActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel16.setLabelFor(jShowSampleWatermark);
+        jLabel16.setText("Sample Watermark:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -894,19 +907,23 @@ public class LabelDataPanel extends javax.swing.JPanel {
                             .addComponent(jFreezerComptVol, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFreshFoodComptVol, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2)
                                 .addComponent(jProductType, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(jJobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jStarRating, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jJobNumber))))
+                                    .addComponent(jShowSampleWatermark))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCalcStarRating))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1017,7 +1034,11 @@ public class LabelDataPanel extends javax.swing.JPanel {
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCalcStarRating))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jShowSampleWatermark)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jJobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
@@ -1375,6 +1396,10 @@ public class LabelDataPanel extends javax.swing.JPanel {
         app.setDirty(true);
     }//GEN-LAST:event_jElectricityRate2KeyReleased
 
+    private void jShowSampleWatermarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowSampleWatermarkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jShowSampleWatermarkActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup capacityGroup;
     private javax.swing.JTextField jACOP;
@@ -1420,6 +1445,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
@@ -1436,6 +1462,7 @@ public class LabelDataPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox jRatedVoltage;
     private javax.swing.JRadioButton jShowCoolingCap;
     private javax.swing.JRadioButton jShowHeatingCap;
+    private javax.swing.JCheckBox jShowSampleWatermark;
     private javax.swing.JTextField jStarRating;
     private javax.swing.JTextField jTotalAdjustedVol;
     private javax.swing.JLabel jTotalAdjustedVolLabel;
