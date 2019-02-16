@@ -1,2 +1,2 @@
 # LabelPrint
-A software for generating and printing energy efficiency labels
+A software for generating and printing energy efficiency labels.
