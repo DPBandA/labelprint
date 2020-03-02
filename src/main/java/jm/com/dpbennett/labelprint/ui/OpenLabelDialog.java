@@ -26,7 +26,7 @@ import java.util.ListIterator;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import jm.com.dpbennett.labelprint.Options;
-import jm.com.dpbennett.business.entity.EnergyLabel;
+import jm.com.dpbennett.business.entity.mt.EnergyLabel;
 
 /**
  *

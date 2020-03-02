@@ -24,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.text.JTextComponent;
 import jm.com.dpbennett.business.entity.BusinessEntity;
-import jm.com.dpbennett.business.entity.EnergyConsumptionAndEfficiency;
-import jm.com.dpbennett.business.entity.EnergyLabel;
-import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
-import jm.com.dpbennett.business.entity.utils.BusinessEntityUtils;
+import jm.com.dpbennett.business.entity.mt.EnergyConsumptionAndEfficiency;
+import jm.com.dpbennett.business.entity.mt.EnergyLabel;
+import jm.com.dpbennett.business.entity.su.SwingUtils;
+import jm.com.dpbennett.business.entity.util.BusinessEntityUtils;
 
 public class LabelDataPanel extends javax.swing.JPanel {
 

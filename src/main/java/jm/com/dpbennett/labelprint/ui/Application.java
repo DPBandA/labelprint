@@ -37,8 +37,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jm.com.dpbennett.labelprint.Options;
-import jm.com.dpbennett.business.entity.EnergyLabel;
-import jm.com.dpbennett.business.entity.utils.ReturnMessage;
+import jm.com.dpbennett.business.entity.mt.EnergyLabel;
+import jm.com.dpbennett.business.entity.util.ReturnMessage;
 
 /**
  *
@@ -80,7 +80,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/LabelPrintIcon.png")));
 
-        sysOptions = new Options("/system/LabelPrint.properties");
+        sysOptions = new Options("LabelPrint.properties");
         enableMenuItems(false);
 
         doSetup();

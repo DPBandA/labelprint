@@ -21,10 +21,10 @@ package jm.com.dpbennett.labelprint;
 
 import javax.persistence.EntityManager;
 import javax.swing.*;
-import jm.com.dpbennett.business.entity.fileutils.PropertiesFile;
-import jm.com.dpbennett.business.entity.utils.NumberUtils;
-import jm.com.dpbennett.business.entity.utils.ReturnMessage;
-import jm.com.dpbennett.business.entity.utils.Security;
+import jm.com.dpbennett.business.entity.fu.PropertiesFile;
+import jm.com.dpbennett.business.entity.util.NumberUtils;
+import jm.com.dpbennett.business.entity.util.ReturnMessage;
+import jm.com.dpbennett.business.entity.util.Security;
 
 /**
  * This class manages the options file.

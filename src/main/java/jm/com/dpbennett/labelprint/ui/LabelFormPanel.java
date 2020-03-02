@@ -21,8 +21,8 @@ package jm.com.dpbennett.labelprint.ui;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import jm.com.dpbennett.business.entity.EnergyLabel;
-import jm.com.dpbennett.business.entity.utils.ReturnMessage;
+import jm.com.dpbennett.business.entity.mt.EnergyLabel;
+import jm.com.dpbennett.business.entity.util.ReturnMessage;
 
 /**
  *

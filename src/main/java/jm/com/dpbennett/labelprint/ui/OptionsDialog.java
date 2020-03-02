@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import jm.com.dpbennett.business.entity.BusinessEntity;
-import jm.com.dpbennett.business.entity.EnergyConsumptionAndEfficiency;
-import jm.com.dpbennett.business.entity.swingutils.SwingUtils;
-import jm.com.dpbennett.business.entity.utils.ReturnMessage;
+import jm.com.dpbennett.business.entity.mt.EnergyConsumptionAndEfficiency;
+import jm.com.dpbennett.business.entity.su.SwingUtils;
+import jm.com.dpbennett.business.entity.util.ReturnMessage;
 import jm.com.dpbennett.labelprint.Options;
 
 /**

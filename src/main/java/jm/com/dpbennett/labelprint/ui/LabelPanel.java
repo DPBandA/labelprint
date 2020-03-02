@@ -22,7 +22,7 @@ package jm.com.dpbennett.labelprint.ui;
 import java.io.*;
 import java.awt.print.PrinterException;
 import java.net.URL;
-import jm.com.dpbennett.business.entity.EnergyLabel;
+import jm.com.dpbennett.business.entity.mt.EnergyLabel;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
