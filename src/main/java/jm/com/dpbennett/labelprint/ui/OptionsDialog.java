@@ -68,8 +68,12 @@ public class OptionsDialog extends javax.swing.JDialog {
         Options sysOptions = app.getSystemOptions();
         // Notes tab
         jNote1_1_TextArea.setText(sysOptions.getProperty("Note1_1"));
+        jNote1_1_AEER_TextArea.setText(sysOptions.getProperty("Note1_1_AEER"));
+        jNote1_1_ACOP_TextArea.setText(sysOptions.getProperty("Note1_1_ACOP"));
         jNote1_2_TextArea.setText(sysOptions.getProperty("Note1_2"));
         jNote1_3_TextArea.setText(sysOptions.getProperty("Note1_3"));
+        jNote1_4_TextArea.setText(sysOptions.getProperty("Note1_4"));
+        jNote1_5_TextArea.setText(sysOptions.getProperty("Note1_5"));
         jNote2_1_TextArea.setText(sysOptions.getProperty("Note2_1"));
         jNote2_2_TextArea.setText(sysOptions.getProperty("Note2_2"));
         jNote3_1_TextArea.setText(sysOptions.getProperty("Note3_1"));
@@ -86,6 +90,9 @@ public class OptionsDialog extends javax.swing.JDialog {
         jDefaultSearchFieldComboBox.setSelectedItem(sysOptions.getProperty("DefaultFieldToSearch"));
         jConnectToDatabaseCheckBox.setSelected(sysOptions.isConnectToDatabase());
         // Label Content tab  
+        // Electricity rates
+        jElectricityRate1.setText(sysOptions.getProperty("CostPerKWh_1"));
+        jElectricityRate2.setText(sysOptions.getProperty("CostPerKWh_2"));
         // Image Export Formats
         jJPEG.setSelected(sysOptions.isExportJPEG());
         jGIF.setSelected(sysOptions.isExportGIF());
@@ -177,6 +184,23 @@ public class OptionsDialog extends javax.swing.JDialog {
         jNote3_3_TextArea = new javax.swing.JTextArea();
         jScrollPane8 = new javax.swing.JScrollPane();
         jNote1_3_TextArea = new javax.swing.JTextArea();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jNote1_1_AEER_TextArea = new javax.swing.JTextArea();
+        jLabel24 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jNote1_1_ACOP_TextArea = new javax.swing.JTextArea();
+        jLabel25 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jNote1_4_TextArea = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jNote1_5_TextArea = new javax.swing.JTextArea();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
         jLabelContentPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jJPEG = new javax.swing.JCheckBox();
@@ -200,6 +224,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         jRefrigeratorStandard = new javax.swing.JComboBox<>();
         jRoomACStandard = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jElectricityRate1 = new javax.swing.JTextField();
+        jElectricityRate2 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
         jDatabasePanel = new javax.swing.JPanel();
         jDatabaseOptionsPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -238,7 +266,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jNote1_1_TextArea.setColumns(20);
         jNote1_1_TextArea.setLineWrap(true);
-        jNote1_1_TextArea.setRows(2);
+        jNote1_1_TextArea.setRows(1);
         jNote1_1_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jNote1_1_TextAreaKeyReleased(evt);
@@ -248,7 +276,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jNote1_2_TextArea.setColumns(20);
         jNote1_2_TextArea.setLineWrap(true);
-        jNote1_2_TextArea.setRows(2);
+        jNote1_2_TextArea.setRows(1);
         jNote1_2_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jNote1_2_TextAreaKeyReleased(evt);
@@ -257,7 +285,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jNote1_2_TextArea);
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel12.setText("Test standard note:");
+        jLabel12.setText("Standard note line 1:");
 
         jNote2_1_TextArea.setColumns(20);
         jNote2_1_TextArea.setLineWrap(true);
@@ -270,7 +298,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jScrollPane3.setViewportView(jNote2_1_TextArea);
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel13.setText("Violation note:");
+        jLabel13.setText("Violation note line 1:");
 
         jNote3_1_TextArea.setColumns(20);
         jNote3_1_TextArea.setLineWrap(true);
@@ -317,13 +345,80 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jNote1_3_TextArea.setColumns(20);
         jNote1_3_TextArea.setLineWrap(true);
-        jNote1_3_TextArea.setRows(2);
+        jNote1_3_TextArea.setRows(1);
         jNote1_3_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jNote1_3_TextAreaKeyReleased(evt);
             }
         });
         jScrollPane8.setViewportView(jNote1_3_TextArea);
+
+        jNote1_1_AEER_TextArea.setColumns(20);
+        jNote1_1_AEER_TextArea.setLineWrap(true);
+        jNote1_1_AEER_TextArea.setRows(1);
+        jNote1_1_AEER_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote1_1_AEER_TextAreaKeyReleased(evt);
+            }
+        });
+        jScrollPane9.setViewportView(jNote1_1_AEER_TextArea);
+
+        jLabel24.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel24.setText("Ann. ener. eff. note:");
+
+        jNote1_1_ACOP_TextArea.setColumns(20);
+        jNote1_1_ACOP_TextArea.setLineWrap(true);
+        jNote1_1_ACOP_TextArea.setRows(1);
+        jNote1_1_ACOP_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote1_1_ACOP_TextAreaKeyReleased(evt);
+            }
+        });
+        jScrollPane10.setViewportView(jNote1_1_ACOP_TextArea);
+
+        jLabel25.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel25.setText("Ann. coeff. perf. note:");
+
+        jNote1_4_TextArea.setColumns(20);
+        jNote1_4_TextArea.setLineWrap(true);
+        jNote1_4_TextArea.setRows(1);
+        jNote1_4_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote1_4_TextAreaKeyReleased(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jNote1_4_TextArea);
+
+        jNote1_5_TextArea.setColumns(20);
+        jNote1_5_TextArea.setLineWrap(true);
+        jNote1_5_TextArea.setRows(1);
+        jNote1_5_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNote1_5_TextAreaKeyReleased(evt);
+            }
+        });
+        jScrollPane12.setViewportView(jNote1_5_TextArea);
+
+        jLabel26.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel26.setText("Electricity rates note:");
+
+        jLabel27.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel27.setText("Disclaimer line 1:");
+
+        jLabel28.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel28.setText("Disclaimer line 2:");
+
+        jLabel29.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel29.setText("Disclaimer line 3:");
+
+        jLabel30.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel30.setText("Standard note line 2:");
+
+        jLabel31.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel31.setText("Violation note line 2:");
+
+        jLabel32.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel32.setText("Violation note line 3:");
 
         javax.swing.GroupLayout jLabelNotesPanelLayout = new javax.swing.GroupLayout(jLabelNotesPanel);
         jLabelNotesPanel.setLayout(jLabelNotesPanelLayout);
@@ -334,7 +429,16 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel32))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
@@ -344,7 +448,11 @@ public class OptionsDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane6)
                     .addComponent(jScrollPane7)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jLabelNotesPanelLayout.setVerticalGroup(
@@ -354,27 +462,51 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLabelNotesPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel24)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
+                .addGap(7, 7, 7)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addGap(9, 9, 9)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28))
+                .addGap(9, 9, 9)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addGroup(jLabelNotesPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                    .addComponent(jLabel30)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLabelNotesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Notes", jLabelNotesPanel);
@@ -549,6 +681,18 @@ public class OptionsDialog extends javax.swing.JDialog {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Room AC Standard (JS):");
 
+        jLabel33.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel33.setText("Electricity Rate 1 ($/kWh):");
+
+        jElectricityRate1.setText("0.0");
+
+        jElectricityRate2.setText("0.0");
+
+        jLabel34.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel34.setText("Electricity Rate 2 ($/kWh):");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -562,21 +706,31 @@ public class OptionsDialog extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel6)
-                                .addComponent(jLabel11)))
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel33)
+                                .addComponent(jLabel34)))
                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRatedVoltage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProductTypeDetail, 0, 371, Short.MAX_VALUE)
-                    .addComponent(jProductClass, 0, 371, Short.MAX_VALUE)
-                    .addComponent(jRefrigeratorStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRoomACStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRatedFrequency, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRatedVoltage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jProductTypeDetail, 0, 223, Short.MAX_VALUE)
+                            .addComponent(jProductClass, 0, 223, Short.MAX_VALUE)
+                            .addComponent(jRefrigeratorStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRoomACStandard, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jElectricityRate1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jElectricityRate2)))
+                .addGap(235, 235, 235))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,7 +762,15 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jProductClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(jElectricityRate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jElectricityRate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLabelContentPanelLayout = new javax.swing.GroupLayout(jLabelContentPanel);
@@ -627,9 +789,9 @@ public class OptionsDialog extends javax.swing.JDialog {
             .addGroup(jLabelContentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Content", jLabelContentPanel);
@@ -756,7 +918,7 @@ public class OptionsDialog extends javax.swing.JDialog {
             .addGroup(jDatabasePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jDatabaseOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Database", jDatabasePanel);
@@ -887,7 +1049,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jWineChillerTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jContantsPanelLayout = new javax.swing.GroupLayout(jContantsPanel);
@@ -972,8 +1134,12 @@ public class OptionsDialog extends javax.swing.JDialog {
             try {
                 // Label Notes
                 sysOptions.setProperty("Note1_1", jNote1_1_TextArea.getText());
+                sysOptions.setProperty("Note1_1_AEER", jNote1_1_AEER_TextArea.getText());
+                sysOptions.setProperty("Note1_1_ACOP", jNote1_1_ACOP_TextArea.getText());
                 sysOptions.setProperty("Note1_2", jNote1_2_TextArea.getText());
                 sysOptions.setProperty("Note1_3", jNote1_3_TextArea.getText());
+                sysOptions.setProperty("Note1_4", jNote1_4_TextArea.getText());
+                sysOptions.setProperty("Note1_5", jNote1_5_TextArea.getText());
                 sysOptions.setProperty("Note2_1", jNote2_1_TextArea.getText());
                 sysOptions.setProperty("Note2_2", jNote2_2_TextArea.getText());
                 sysOptions.setProperty("Note3_1", jNote3_1_TextArea.getText());
@@ -983,6 +1149,9 @@ public class OptionsDialog extends javax.swing.JDialog {
                 sysOptions.setProperty("DefaultFieldToSearch",
                         jDefaultSearchFieldComboBox.getSelectedItem().toString());
                 // Label Content
+                // Electricity rates
+                sysOptions.setProperty("CostPerKWh_1", jElectricityRate1.getText());
+                sysOptions.setProperty("CostPerKWh_2", jElectricityRate2.getText());
                 // Image export formats
                 sysOptions.setExportPDF(jPDF.isSelected());
                 sysOptions.setExportPNG(jPNG.isSelected());
@@ -1171,6 +1340,22 @@ public class OptionsDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jNote1_3_TextAreaKeyReleased
 
+    private void jNote1_1_AEER_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote1_1_AEER_TextAreaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNote1_1_AEER_TextAreaKeyReleased
+
+    private void jNote1_1_ACOP_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote1_1_ACOP_TextAreaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNote1_1_ACOP_TextAreaKeyReleased
+
+    private void jNote1_4_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote1_4_TextAreaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNote1_4_TextAreaKeyReleased
+
+    private void jNote1_5_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNote1_5_TextAreaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNote1_5_TextAreaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1189,6 +1374,8 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jDatabasePanel;
     private javax.swing.JTextField jDatabaseURLTextField;
     private javax.swing.JComboBox jDefaultSearchFieldComboBox;
+    private javax.swing.JTextField jElectricityRate1;
+    private javax.swing.JTextField jElectricityRate2;
     private javax.swing.JTextField jFreezerTemp;
     private javax.swing.JTextField jFreshFoodComptAvgTemp;
     private javax.swing.JCheckBox jGIF;
@@ -1209,7 +1396,18 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1218,9 +1416,13 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jLabelContentPanel;
     private javax.swing.JPanel jLabelNotesPanel;
+    private javax.swing.JTextArea jNote1_1_ACOP_TextArea;
+    private javax.swing.JTextArea jNote1_1_AEER_TextArea;
     private javax.swing.JTextArea jNote1_1_TextArea;
     private javax.swing.JTextArea jNote1_2_TextArea;
     private javax.swing.JTextArea jNote1_3_TextArea;
+    private javax.swing.JTextArea jNote1_4_TextArea;
+    private javax.swing.JTextArea jNote1_5_TextArea;
     private javax.swing.JTextArea jNote2_1_TextArea;
     private javax.swing.JTextArea jNote2_2_TextArea;
     private javax.swing.JTextArea jNote3_1_TextArea;
@@ -1244,6 +1446,9 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jRoomACStandard;
     private javax.swing.JCheckBox jSVG;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1251,6 +1456,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JCheckBox jTIFF;
     private javax.swing.JTextField jTestChamberTemp;
     private javax.swing.JTextField jUsernameTextField;

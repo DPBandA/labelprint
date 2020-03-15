@@ -423,7 +423,7 @@ public class OpenLabelDialog extends java.awt.Dialog {
 
         } else {
             JOptionPane.showMessageDialog(this,
-                    "No label selected for openning",
+                    "No label selected for opening",
                     "Open Error",
                     JOptionPane.ERROR_MESSAGE);
         }

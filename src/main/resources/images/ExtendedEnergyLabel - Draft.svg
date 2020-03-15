@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.61941735"
-     inkscape:cx="783.83349"
-     inkscape:cy="640.78537"
+     inkscape:zoom="0.43799421"
+     inkscape:cx="623.99414"
+     inkscape:cy="567.83766"
      inkscape:document-units="px"
      inkscape:current-layer="bottomSection"
      showgrid="true"
@@ -445,7 +445,8 @@
        x="6.9136367"
        y="121.81603"
        id="operatingCostLabel"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
          id="tspan4304"
          x="6.9136367"
@@ -468,7 +469,8 @@
        y="175.41077"
        id="operatingCost"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4181"><tspan
+       inkscape:label="#text4181"
+       sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
          id="tspan4183"
          x="124.85725"
@@ -479,7 +481,8 @@
        x="314.67514"
        y="189.00452"
        id="perYear"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
          id="tspan4187"
          x="314.67514"
@@ -646,7 +649,8 @@
        y="199.12978"
        id="note1.1"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4189"><tspan
+       inkscape:label="#text4189"
+       sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
          id="tspan4191"
          x="7.121376"
@@ -658,7 +662,8 @@
        y="219.98399"
        id="note1.3"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4193"><tspan
+       inkscape:label="#text4193"
+       sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
          id="tspan4195"
          x="7.6322837"
@@ -670,7 +675,8 @@
        y="209.62061"
        id="note1.2"
        sodipodi:linespacing="125%"
-       inkscape:label="#text4837"><tspan
+       inkscape:label="#text4837"
+       sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
          id="tspan4839"
          x="7.4083524"
@@ -681,7 +687,8 @@
        y="228.53441"
        x="6.9535999"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       xml:space="preserve"><tspan
+       xml:space="preserve"
+       sodipodi:insensitive="true"><tspan
          y="228.53441"
          x="6.9535999"
          id="tspan4316"
@@ -721,7 +728,7 @@
          y="133.97906" /></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:105.83332825px;line-height:125%;font-family:Impact;letter-spacing:0px;word-spacing:0px;opacity:0.25;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:105.83333132px;line-height:125%;font-family:Impact;letter-spacing:0px;word-spacing:0px;opacity:0.25;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:'Impact, Condensed';text-anchor:start;text-align:start;writing-mode:lr;"
        x="-45.727455"
        y="268.92331"
        id="sample"
@@ -729,16 +736,15 @@
        transform="matrix(0.81149808,-0.58435512,0.58435506,0.81149808,0,0)"
        sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
-         id="tspan4508"
-         x="-45.727455"
-         y="268.92331">SAMPLE</tspan></text>
+         id="tspan4309" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="7.639174"
        y="237.76869"
        id="note1.5"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       sodipodi:insensitive="true"><tspan
          sodipodi:role="line"
          id="tspan4328"
          x="7.639174"
