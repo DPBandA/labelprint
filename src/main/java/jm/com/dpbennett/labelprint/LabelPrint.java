@@ -1,6 +1,6 @@
 /*
 LabelPrint - A general purpose energy label printing application 
-Copyright (C) 2018  D P Bennett & Associates Limited
+Copyright (C) 2020  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -31,7 +31,7 @@ import jm.com.dpbennett.labelprint.ui.Application;
  */
 public class LabelPrint {
 
-    private Application app;
+    private final Application app;
 
     /**
      * The default constructor. The window frame is centred as part of the the

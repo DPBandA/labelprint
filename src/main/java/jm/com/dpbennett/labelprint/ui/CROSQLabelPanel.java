@@ -42,11 +42,8 @@ import org.apache.batik.transcoder.print.PrintTranscoder;
  *
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public class LabelPanel extends javax.swing.JPanel {
+public class CROSQLabelPanel extends javax.swing.JPanel {
 
-    private boolean showGreenBackground;
-    private boolean showYellowBackground;
-    private boolean showContents;
     private Application app;
     private JSVGCanvas svgCanvas;
     private Document svgDocument;
@@ -90,7 +87,7 @@ public class LabelPanel extends javax.swing.JPanel {
     /**
      * Creates new SVGLabelPanel
      */
-    public LabelPanel() {
+    public CROSQLabelPanel() {
         initComponents();
         initLabel();
     }
@@ -100,7 +97,7 @@ public class LabelPanel extends javax.swing.JPanel {
      *
      * @param app
      */
-    public LabelPanel(jm.com.dpbennett.labelprint.ui.Application app) {
+    public CROSQLabelPanel(jm.com.dpbennett.labelprint.ui.Application app) {
         this.app = app;
         initComponents();
         initLabel();
@@ -138,36 +135,8 @@ public class LabelPanel extends javax.swing.JPanel {
 
     }
 
-    public boolean isShowGreenBackground() {
-        return showGreenBackground;
-    }
-
-    public void setShowGreenBackground(boolean showGreenBackground) {
-        this.showGreenBackground = showGreenBackground;
-    }
-
-    public boolean isShowYellowBackground() {
-        return showYellowBackground;
-    }
-
-    public void setShowYellowBackground(boolean showYellowBackground) {
-        this.showYellowBackground = showYellowBackground;
-    }
-
-    public boolean isShowContents() {
-        return showContents;
-    }
-
-    public void setShowContents(boolean showContents) {
-        this.showContents = showContents;
-    }
-
     private void initLabel() {
         loadSVGLabel();
-
-        showGreenBackground = true;
-        showYellowBackground = true;
-        showContents = true;
     }
 
     private void loadSVGLabel() {
@@ -202,126 +171,35 @@ public class LabelPanel extends javax.swing.JPanel {
         if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
                 // Sample watermark
-                if (getEnergyLabel().getShowSampleWatermark()) {
-                   setElementText("sample", "SAMPLE"); 
-                }
-                else {
-                    setElementText("sample", "");
-                }
-                // Star area inner circle text
+//                if (getEnergyLabel().getShowSampleWatermark()) {
+//                   setElementText("sample", "SAMPLE"); 
+//                }
+//                else {
+//                    setElementText("sample", "");
+//                }
+
+                // tk hide image
+                Element ratingA = svgDocument.getElementById("ratingA");
+                ratingA.setAttribute("visibility", "hidden");
+
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-                    setElementStyle("innerCircText_1", HEATINGORCOOLINGTEXTSTYLE);
-                    if (getEnergyLabel().getShowCoolingCapacity()) {
-                        setElementText("innerCircText_1", "COOLING");
-                    } else {
-                        setElementText("innerCircText_1", "HEATING");
-                    }
-                    setElementText("innerCircText_2", "The more stars the");
-                    setElementText("innerCircText_3", "more efficient");
-                    setElementStyle("innerCircText_line", INNERCIRCTEXTLINE + "stroke:#000000;");
+
                 } else {
-                    setElementStyle("innerCircText_1", DEFAULTINNERCIRCTEXTSTYLE);
-                    setElementText("innerCircText_1", "The more");
-                    setElementText("innerCircText_2", "        stars the");
-                    setElementText("innerCircText_3", "more efficient");
-                    setElementStyle("innerCircText_line", INNERCIRCTEXTLINE + "stroke:none;");
+
                 }
                 // Type
-                setElementText("type", getEnergyLabel().getType());
+                //setElementText("type", getEnergyLabel().getType());
+
                 // Capacity
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-                    if (getEnergyLabel().getShowCoolingCapacity()) {
-                        setElementText("capacityLabel", "Cooling Capacity:");
-                        setElementText("capacity", getEnergyLabel().getCoolingCapacity() + " kW");
-                    } else {
-                        setElementText("capacityLabel", "Heating Capacity:");
-                        setElementText("capacity", getEnergyLabel().getHeatingCapacity() + " kW");
-                    }
-                    setElementText("capacityUnitPowerTextSpan", " ");
+
                 } else {
-                    setElementText("capacity", getEnergyLabel().getCapacity() + " m");
-                    setElementText("capacityUnitPowerTextSpan", "3");
+
                 }
                 // Set location of the capacity unit power based on width of capacity
-                Element svgElement = svgDocument.getElementById("capacity");
-                SVGLocatable locatable = (SVGLocatable) svgElement;
-                SVGRect rect = locatable.getBBox();
-                Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
-                unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
-                // Defrost/Distributor
-                if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-                    setElementText("distributorOrDefrostLabel", "Distributor:");
-                    setElementText("distributorOrDefrost", getEnergyLabel().getDistributor());
-                    setElementText("distributorLabel", " ");
-                    setElementText("distributor", " ");
-                } else {
-                    setElementText("distributorOrDefrostLabel", "Defrost:");
-                    setElementText("distributorOrDefrost", getEnergyLabel().getDefrost());
-                    setElementText("distributorLabel", "Distributor:");
-                    setElementText("distributor", getEnergyLabel().getDistributor());
-                }
+
                 // Manufacturer
-                setElementText("manufacturer", getEnergyLabel().getManufacturer());
-                // Model
-                setElementText("model", getEnergyLabel().getModel());
-                // Country
-                setElementText("country", getEnergyLabel().getCountry());
                 // Operating cost
-                setElementText("operatingCost", "$" + getEnergyLabel().getOperatingCost());
-                // Energy note
-                // Line 1 note
-                if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-                    if (getEnergyLabel().getShowCoolingCapacity()) {
-                        setElementText("note1.1", app
-                                .getSystemOptions().getProperty("Note1_1_AEER")
-                                .replace("[AEER]",
-                                        getEnergyLabel().getAEER()));
-                    } else {
-                        setElementText("note1.1", app
-                                .getSystemOptions().getProperty("Note1_1_ACOP")
-                                .replace("[ACOP]",
-                                        getEnergyLabel().getACOP()));
-                    }
-                } else {
-                    setElementText("note1.1", app
-                            .getSystemOptions().getProperty("Note1_1")
-                            .replace("[AnnualConsumption]",
-                                    getEnergyLabel().getAnnualConsumption()));
-                }
-                // Line 2 note
-                setElementText("note1.2", app
-                        .getSystemOptions().getProperty("Note1_2")
-                        .replace("[CostPerKWh1]",
-                                getEnergyLabel().getCostPerKwh())
-                        .replace("[CostPerKWh2]",
-                                getEnergyLabel().getCostPerKwh2()));
-                // Disclaimer line 1
-                setElementText("note1.3", app.
-                        getSystemOptions().getProperty("Note1_3"));
-                // Disclaimer line 2
-                setElementText("note1.4", app.
-                        getSystemOptions().getProperty("Note1_4"));
-                // Disclaimer line 3
-                setElementText("note1.5", app.
-                        getSystemOptions().getProperty("Note1_5"));
-                // Validity
-                setElementText("validity", getEnergyLabel().getValidity());
-                // Standard note
-                setElementText("note2.1", app
-                        .getSystemOptions().getProperty("Note2_1"));
-                setElementText("note2.2", app
-                        .getSystemOptions().getProperty("Note2_2")
-                        .replace("[Standard]",
-                                getEnergyLabel().getStandard()));
-                // Violation note
-                setElementText("note3.1", app
-                        .getSystemOptions().getProperty("Note3_1"));
-                setElementText("note3.2", app
-                        .getSystemOptions().getProperty("Note3_2"));
-                setElementText("note3.3", app
-                        .getSystemOptions().getProperty("Note3_3"));
-                // Energy stars
-                updateEnergyStars();
             });
         }
 
@@ -365,14 +243,6 @@ public class LabelPanel extends javax.swing.JPanel {
             System.out.println("Invalid star rating!");
         }
 
-    }
-
-    /**
-     * Updates the energy stars based on energy efficiency rating.
-     */
-    private void updateEnergyStars() {
-        eraseEnergyStars();
-        addEnergyStars();
     }
 
     private void setElementText(String elementId, String content) {

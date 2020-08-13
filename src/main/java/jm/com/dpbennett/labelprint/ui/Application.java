@@ -50,7 +50,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private EntityManagerFactory emf;
     //private LabelDataPanel labelDataPanel;
     private LabelFormPanel labelFormPanel;
-    private LabelPanel labelPanel;
+    //private LabelPanel labelPanel;
+    private CROSQLabelPanel labelPanel;
 
     /**
      * Creates new Application
@@ -519,15 +520,15 @@ public class Application extends javax.swing.JFrame implements Runnable {
      * @param evt
      */
     private void jCheckBoxMenuViewGreenBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
-        getLabelPanel().setShowGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
+//        getLabelPanel().setShowGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
         jEnergyLabelPane.setSelectedIndex(1);
-        if (getLabelPanel().isShowGreenBackground()) {
-            labelPanel.setElementFill("headerBackground", "#008000");
-            labelPanel.setElementFill("violationNoteBackground", "#008000");
-        } else {
-            labelPanel.setElementFill("headerBackground", "none");
-            labelPanel.setElementFill("violationNoteBackground", "none");
-        }
+//        if (getLabelPanel().isShowGreenBackground()) {
+//            labelPanel.setElementFill("headerBackground", "#008000");
+//            labelPanel.setElementFill("violationNoteBackground", "#008000");
+//        } else {
+//            labelPanel.setElementFill("headerBackground", "none");
+//            labelPanel.setElementFill("violationNoteBackground", "none");
+//        }
     }//GEN-LAST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
 
     /**
@@ -614,7 +615,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      *
      * @return
      */
-    public LabelPanel getLabelPanel() {
+    public CROSQLabelPanel getLabelPanel() {
 
         return labelPanel;
     }
@@ -822,7 +823,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
         }
 
         if (labelPanel == null) {
-            labelPanel = new LabelPanel(this);
+            labelPanel = new CROSQLabelPanel(this);
 
             getjEnergyLabelPane().add("Label View", labelPanel);
 
@@ -891,13 +892,13 @@ public class Application extends javax.swing.JFrame implements Runnable {
      * @param evt
      */
     private void jCheckBoxMenuViewYellowBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
-        getLabelPanel().setShowYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
+//        getLabelPanel().setShowYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
         jEnergyLabelPane.setSelectedIndex(1);
-        if (getLabelPanel().isShowYellowBackground()) {
-            labelPanel.setElementFill("mainBackground", "#FFDF00");
-        } else {
-            labelPanel.setElementFill("mainBackground", "none");
-        }
+//        if (getLabelPanel().isShowYellowBackground()) {
+//            labelPanel.setElementFill("mainBackground", "#FFDF00");
+//        } else {
+//            labelPanel.setElementFill("mainBackground", "none");
+//        }
     }//GEN-LAST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
 
     /**
