@@ -113,7 +113,7 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
     }
 
     private void initLabel() {
-        loadSVGLabel("images/CROSQEnergyLabel.svg");
+        loadSVGLabel("images/CROSQFridgeEnergyLabel.svg");
     }
 
     public void loadSVGLabel(String labelFile) {
