@@ -51,7 +51,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
     //private LabelDataPanel labelDataPanel;
     private LabelFormPanel labelFormPanel;
     //private LabelPanel labelPanel;
-    private CROSQLabelPanel labelPanel;
+    private EnergyLabelPanel labelPanel;
 
     /**
      * Creates new Application
@@ -615,7 +615,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      *
      * @return
      */
-    public CROSQLabelPanel getLabelPanel() {
+    public EnergyLabelPanel getLabelPanel() {
 
         return labelPanel;
     }
@@ -823,7 +823,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
         }
 
         if (labelPanel == null) {
-            labelPanel = new CROSQLabelPanel(this);
+            labelPanel = new EnergyLabelPanel(this);
 
             getjEnergyLabelPane().add("Label View", labelPanel);
 

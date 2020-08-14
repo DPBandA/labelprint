@@ -1,6 +1,6 @@
 /*
 LabelPrint - A general purpose energy label printing application 
-Copyright (C) 2018  D P Bennett & Associates Limited
+Copyright (C) 2020  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -42,7 +42,7 @@ import org.apache.batik.transcoder.print.PrintTranscoder;
  *
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public class LabelPanel extends javax.swing.JPanel {
+public class EnergyLabelPanelJM extends javax.swing.JPanel {
 
     private boolean showGreenBackground;
     private boolean showYellowBackground;
@@ -90,7 +90,7 @@ public class LabelPanel extends javax.swing.JPanel {
     /**
      * Creates new SVGLabelPanel
      */
-    public LabelPanel() {
+    public EnergyLabelPanelJM() {
         initComponents();
         initLabel();
     }
@@ -100,7 +100,7 @@ public class LabelPanel extends javax.swing.JPanel {
      *
      * @param app
      */
-    public LabelPanel(jm.com.dpbennett.labelprint.ui.Application app) {
+    public EnergyLabelPanelJM(jm.com.dpbennett.labelprint.ui.Application app) {
         this.app = app;
         initComponents();
         initLabel();
@@ -177,8 +177,7 @@ public class LabelPanel extends javax.swing.JPanel {
 
         svgCanvas = new JSVGCanvas();
         svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
-//        URL url = getClass().getClassLoader().getResource("images/ExtendedEnergyLabel.svg");
-        URL url = getClass().getClassLoader().getResource("images/CROSQEnergyLabel.svg");
+        URL url = getClass().getClassLoader().getResource("images/ExtendedEnergyLabel.svg");
         svgCanvas.setURI(url.toString());
         svgCanvas.addSVGLoadEventDispatcherListener(new SVGLoadEventDispatcherAdapter() {
             @Override

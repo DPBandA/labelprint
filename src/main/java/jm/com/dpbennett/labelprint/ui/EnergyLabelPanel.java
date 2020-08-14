@@ -1,6 +1,6 @@
 /*
 LabelPrint - A general purpose energy label printing application 
-Copyright (C) 2018  D P Bennett & Associates Limited
+Copyright (C) 2020  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -42,30 +42,16 @@ import org.apache.batik.transcoder.print.PrintTranscoder;
  *
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public class CROSQLabelPanel extends javax.swing.JPanel {
+public class EnergyLabelPanel extends javax.swing.JPanel {
 
     private Application app;
     private JSVGCanvas svgCanvas;
     private Document svgDocument;
+    private String labelFile;
 
     /**
-     * The possible states for all energy stars.
-     */
-    public enum STARSTATE {
-        NONE, HALF, FULL
-    }
-
-    /**
-     * The default style for all energy stars.
-     */
-    public static final String DEFAULTSTARSTYLE
-            = "opacity:1;fill-opacity:1;stroke:#000000;stroke-width:0;"
-            + "stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0;";
-    public static final String MORESTARSTEXTSTYLE
-            = "font-style:normal;font-weight:normal;font-size:9.8777771px;"
-            + "line-height:125%;font-family:sans-serif;letter-spacing:0px;"
-            + "word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;"
-            + "stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
+     * The default SVG styles.
+     */    
     public static final String HEATINGORCOOLINGTEXTSTYLE
             = "font-style:normal;font-variant:normal;font-weight:bold;"
             + "font-stretch:normal;font-size:9.87777805px;line-height:125%;"
@@ -74,20 +60,11 @@ public class CROSQLabelPanel extends javax.swing.JPanel {
             + "writing-mode:lr-tb;text-anchor:start;opacity:0.98000004;fill:#000000;"
             + "fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;"
             + "stroke-linejoin:miter;stroke-opacity:1";
-    public static final String DEFAULTINNERCIRCTEXTSTYLE
-            = "font-style:normal;font-weight:normal;font-size:9.8777771px;"
-            + "line-height:125%;font-family:sans-serif;letter-spacing:0px;"
-            + "word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;"
-            + "stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
-    public static final String INNERCIRCTEXTLINE
-            = "fill:none;fill-opacity:1;fill-rule:nonzero;" // stroke:#000000;
-            + "stroke-width:0.56444442;stroke-linecap:butt;"
-            + "stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;";
 
     /**
      * Creates new SVGLabelPanel
      */
-    public CROSQLabelPanel() {
+    public EnergyLabelPanel() {
         initComponents();
         initLabel();
     }
@@ -97,57 +74,56 @@ public class CROSQLabelPanel extends javax.swing.JPanel {
      *
      * @param app
      */
-    public CROSQLabelPanel(jm.com.dpbennett.labelprint.ui.Application app) {
+    public EnergyLabelPanel(jm.com.dpbennett.labelprint.ui.Application app) {
         this.app = app;
         initComponents();
         initLabel();
 
     }
 
-    public void updateStarState(String starId, STARSTATE state, String fill) {
+    public String getLabelFile() {
+        return labelFile;
+    }
+
+    public void setLabelFile(String labelFile) {
+        this.labelFile = labelFile;
+    }
+
+    public void renderRating(String ratingLetter, Boolean render) {
 
         try {
             if (svgCanvas != null && svgDocument != null) {
                 svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
 
-                    Element starFirstHalf = svgDocument.getElementById(starId + ".1");
-                    Element starSecondHalf = svgDocument.getElementById(starId + ".2");
-
-                    switch (state) {
-                        case NONE:
-                            starFirstHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:none");
-                            starSecondHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:none");
-                            break;
-                        case HALF:
-                            starFirstHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:#" + fill);
-                            starSecondHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:none");
-                            break;
-                        case FULL:
-                            starFirstHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:#" + fill);
-                            starSecondHalf.setAttribute("style", DEFAULTSTARSTYLE + "fill:#" + fill);
-                            break;
+                    Element rating = svgDocument.getElementById("rating" + ratingLetter);
+                    
+                    if (render) {
+                        rating.setAttribute("visibility", "visible");
+                    }
+                    else {
+                        rating.setAttribute("visibility", "hidden");
                     }
 
                 });
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
 
     }
 
     private void initLabel() {
-        loadSVGLabel();
+        loadSVGLabel("images/CROSQEnergyLabel.svg");
     }
 
-    private void loadSVGLabel() {
+    public void loadSVGLabel(String labelFile) {
         if (svgCanvas != null) {
             remove(svgCanvas);
         }
 
         svgCanvas = new JSVGCanvas();
         svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
-//        URL url = getClass().getClassLoader().getResource("images/ExtendedEnergyLabel.svg");
-        URL url = getClass().getClassLoader().getResource("images/CROSQEnergyLabel.svg");
+        URL url = getClass().getClassLoader().getResource(labelFile);
         svgCanvas.setURI(url.toString());
         svgCanvas.addSVGLoadEventDispatcherListener(new SVGLoadEventDispatcherAdapter() {
             @Override
@@ -170,17 +146,8 @@ public class CROSQLabelPanel extends javax.swing.JPanel {
 
         if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
-                // Sample watermark
-//                if (getEnergyLabel().getShowSampleWatermark()) {
-//                   setElementText("sample", "SAMPLE"); 
-//                }
-//                else {
-//                    setElementText("sample", "");
-//                }
-
-                // tk hide image
-                Element ratingA = svgDocument.getElementById("ratingA");
-                ratingA.setAttribute("visibility", "hidden");
+                
+                eraseAllRatingLetters(); //tk
 
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
 
@@ -205,44 +172,13 @@ public class CROSQLabelPanel extends javax.swing.JPanel {
 
     }
 
-    private void eraseEnergyStars() {
-        for (int i = 1; i < 9; i++) {
-            updateStarState("outer.star." + i, STARSTATE.NONE, "008000");
-        }
-        for (int i = 1; i < 7; i++) {
-            updateStarState("inner.star." + i, STARSTATE.NONE, "ffdf00");
-        }
-    }
-
-    private void addEnergyStars() {
-
-        try {
-            String starRating = getEnergyLabel().getStarRating();
-            String stars[] = starRating.split("\\.");
-
-            int numFullOuterStars
-                    = ((Integer.parseInt(stars[0]) - 6) > 0 ? (Integer.parseInt(stars[0]) - 6) : 0);
-            int numFullInnerStars = Integer.parseInt(stars[0]) - numFullOuterStars;
-
-            // Add inner full stars
-            for (int i = 1; i < (numFullInnerStars + 1); i++) {
-                updateStarState("inner.star." + i, STARSTATE.FULL, "ffdf00");
-            }
-            // Add inner half star if any
-            if (stars[1].equals("5")) {
-                updateStarState("inner.star." + (numFullInnerStars + 1), STARSTATE.HALF, "ffdf00");
-            }
-
-            // Add outer full stars if any
-            if (numFullOuterStars > 0) {
-                for (int i = 1; i < (numFullOuterStars + 1); i++) {
-                    updateStarState("outer.star." + i, STARSTATE.FULL, "008000");
-                }
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid star rating!");
-        }
-
+    private void eraseAllRatingLetters() {
+        renderRating("A", false);
+        renderRating("B", false);
+        renderRating("C", false);
+        renderRating("D", false);
+        renderRating("E", false);
+        renderRating("F", false);
     }
 
     private void setElementText(String elementId, String content) {
@@ -306,7 +242,7 @@ public class CROSQLabelPanel extends javax.swing.JPanel {
                     return false;
             }
 
-            loadSVGLabel();
+            loadSVGLabel("images/CROSQEnergyLabel.svg");
 
             return true;
         } catch (IOException | TranscoderException e) {
@@ -331,7 +267,7 @@ public class CROSQLabelPanel extends javax.swing.JPanel {
             pt.transcode(new TranscoderInput(svgDocument), null);
             pt.print();
 
-            loadSVGLabel();
+            loadSVGLabel("images/CROSQEnergyLabel.svg");
         } catch (PrinterException e) {
             System.out.println(e);
         }
