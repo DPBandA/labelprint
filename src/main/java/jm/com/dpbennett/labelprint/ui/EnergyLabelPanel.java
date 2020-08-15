@@ -51,7 +51,7 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
 
     /**
      * The default SVG styles.
-     */    
+     */
     public static final String HEATINGORCOOLINGTEXTSTYLE
             = "font-style:normal;font-variant:normal;font-weight:bold;"
             + "font-stretch:normal;font-size:9.87777805px;line-height:125%;"
@@ -96,11 +96,10 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                 svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
 
                     Element rating = svgDocument.getElementById("rating" + ratingLetter);
-                    
+
                     if (render) {
                         rating.setAttribute("visibility", "visible");
-                    }
-                    else {
+                    } else {
                         rating.setAttribute("visibility", "hidden");
                     }
 
@@ -146,11 +145,31 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
 
         if (app != null && svgCanvas != null && svgDocument != null) {
             svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
-                
+
+                // Year of evaluation
+                setElementText("yearOfEvaluation", getEnergyLabel().getYearOfEvaluation(), "start");
+                // Manufacturer
+                setElementText("manufacturer", getEnergyLabel().getManufacturer(), "end");
+                // Model(s)
+                setElementText("models", "Model(s) " + getEnergyLabel().getModel(), "end");
+                // Capacity
+                setElementText("capacity", 
+                        "Capacity " +
+                        getEnergyLabel().getCapacity() +
+                                " Cubic Litres", "end");
+                // Electrical ratings
+                setElementText("electricalRatings", 
+                        getEnergyLabel().getRatedVoltage() + "V, " +
+                                getEnergyLabel().getRatedFrequency() + "Hz, " +
+                                getEnergyLabel().getRatedCurrent() + "A", "end");
+                // Type
+                setElementText("type", getEnergyLabel().getType(), "start");
+                // Defrost
+                setElementText("defrost", "- " + getEnergyLabel().getDefrost(), "start");
+
                 eraseAllRatingLetters(); //tk
 
-                if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-
+                if (getEnergyLabel().getType().equals("Room Air-conditioner")) { 
                 } else {
 
                 }
@@ -181,9 +200,10 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
         renderRating("F", false);
     }
 
-    private void setElementText(String elementId, String content) {
+    private void setElementText(String elementId, String content, String anchor) {
         if (svgDocument != null) {
             Element element = svgDocument.getElementById(elementId);
+            element.setAttribute("text-anchor", anchor);
             element.setTextContent(content);
         }
     }

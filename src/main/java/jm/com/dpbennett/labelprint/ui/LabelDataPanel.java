@@ -74,6 +74,10 @@ public class LabelDataPanel extends javax.swing.JPanel {
         updateLabelDataBasedOnProductType();
 
         getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
+        
+        getEnergyLabel().setYearOfEvaluation(app.getSystemOptions().getProperty("DefaultYearOfEvaluation"));
+        
+        getEnergyLabel().setManufacturer("");
 
     }
 

@@ -242,11 +242,11 @@ public class EnergyLabelPanelJM extends javax.swing.JPanel {
                     setElementText("capacityUnitPowerTextSpan", "3");
                 }
                 // Set location of the capacity unit power based on width of capacity
-                Element svgElement = svgDocument.getElementById("capacity");
-                SVGLocatable locatable = (SVGLocatable) svgElement;
+                Element capacity = svgDocument.getElementById("capacity");
+                SVGLocatable locatable = (SVGLocatable) capacity;
                 SVGRect rect = locatable.getBBox();
-                Element unitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
-                unitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
+                Element capacityUnitPower = svgDocument.getElementById("capacityUnitPowerTextSpan");
+                capacityUnitPower.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                 // Defrost/Distributor
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
                     setElementText("distributorOrDefrostLabel", "Distributor:");
