@@ -1192,8 +1192,8 @@ public class OptionsDialog extends javax.swing.JDialog {
 
                     // Update relevant views that are dependent on system options
                     java.awt.EventQueue.invokeLater(() -> {
-                        if (app.getLabelPanel() != null) {
-                            app.getLabelPanel().updateLabel();
+                        if (app.getEnergyLabelPanel() != null) {
+                            app.getEnergyLabelPanel().updateLabel();
                         }
                     });
 

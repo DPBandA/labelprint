@@ -103,11 +103,11 @@ public class ExportDialog extends javax.swing.JDialog implements Runnable {
         if (fileName != null) {
 
             if (app.getSystemOptions().isExportJPEG()) {
-                app.getLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
+                app.getEnergyLabelPanel().exportLabelToRasterGraphic(fileName, "jpg");
                 jProgressBar1.setValue(50);
             }
             if (app.getSystemOptions().isExportPNG()) {
-                app.getLabelPanel().exportLabelToRasterGraphic(fileName, "png");
+                app.getEnergyLabelPanel().exportLabelToRasterGraphic(fileName, "png");
                 jProgressBar1.setValue(70);
             }
 

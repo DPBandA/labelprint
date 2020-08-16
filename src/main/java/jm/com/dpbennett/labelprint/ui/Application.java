@@ -49,9 +49,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private Options sysOptions;
     private EntityManagerFactory emf;
     //private LabelDataPanel labelDataPanel;
-    private LabelFormPanel labelFormPanel;
-    //private LabelPanel labelPanel;
-    private EnergyLabelPanel labelPanel;
+    private EnergyLabelFormPanel labelFormPanel;
+    //private LabelPanel energyLabelPanel;
+    private EnergyLabelPanel energyLabelPanel;
 
     /**
      * Creates new Application
@@ -67,7 +67,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      *
      * @return
      */
-    public LabelFormPanel getLabelFormPanel() {
+    public EnergyLabelFormPanel getLabelFormPanel() {
         return labelFormPanel;
     }
 
@@ -523,11 +523,11 @@ public class Application extends javax.swing.JFrame implements Runnable {
 //        getLabelPanel().setShowGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
         jEnergyLabelPane.setSelectedIndex(1);
 //        if (getLabelPanel().isShowGreenBackground()) {
-//            labelPanel.setElementFill("headerBackground", "#008000");
-//            labelPanel.setElementFill("violationNoteBackground", "#008000");
+//            energyLabelPanel.setElementFill("headerBackground", "#008000");
+//            energyLabelPanel.setElementFill("violationNoteBackground", "#008000");
 //        } else {
-//            labelPanel.setElementFill("headerBackground", "none");
-//            labelPanel.setElementFill("violationNoteBackground", "none");
+//            energyLabelPanel.setElementFill("headerBackground", "none");
+//            energyLabelPanel.setElementFill("violationNoteBackground", "none");
 //        }
     }//GEN-LAST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
 
@@ -557,7 +557,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      */
     private void jMenuFilePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFilePrintActionPerformed
 
-        java.awt.EventQueue.invokeLater(getLabelPanel()::printLabel);
+        java.awt.EventQueue.invokeLater(getEnergyLabelPanel()::printLabel);
 
     }//GEN-LAST:event_jMenuFilePrintActionPerformed
 
@@ -615,9 +615,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
      *
      * @return
      */
-    public EnergyLabelPanel getLabelPanel() {
+    public EnergyLabelPanel getEnergyLabelPanel() {
 
-        return labelPanel;
+        return energyLabelPanel;
     }
 
     /**
@@ -654,8 +654,11 @@ public class Application extends javax.swing.JFrame implements Runnable {
     public void updateLabelPanels() {
 
         getLabelFormPanel().updateLabelData();
-        getLabelPanel().updateLabel();
+        
+        getLabelFormPanel().updateLabelData();
 
+        getEnergyLabelPanel().updateLabel();
+        
         getjEnergyLabelPane().repaint();
     }
 
@@ -778,7 +781,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
         getjEnergyLabelPane().removeAll();
         labelFormPanel = null;
-        labelPanel = null;
+        energyLabelPanel = null;
 
         setTitle("LabelPrint");
         enableMenuItems(false);
@@ -818,14 +821,14 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private void initLabelPanels() {
 
         if (labelFormPanel == null) {
-            labelFormPanel = new LabelFormPanel(this);
+            labelFormPanel = new EnergyLabelFormPanel(this);
             getjEnergyLabelPane().add("Label Data", labelFormPanel);
         }
 
-        if (labelPanel == null) {
-            labelPanel = new EnergyLabelPanel(this);
+        if (energyLabelPanel == null) {
+            energyLabelPanel = new EnergyLabelPanel(this);
 
-            getjEnergyLabelPane().add("Label View", labelPanel);
+            getjEnergyLabelPane().add("Label View", energyLabelPanel);
 
         }
 
@@ -872,7 +875,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private void jEnergyLabelPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jEnergyLabelPaneStateChanged
 
         if (jEnergyLabelPane.getSelectedIndex() == 1) {
-            labelPanel.updateLabel();
+            energyLabelPanel.updateLabel();
         }
 
     }//GEN-LAST:event_jEnergyLabelPaneStateChanged
@@ -895,9 +898,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
 //        getLabelPanel().setShowYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
         jEnergyLabelPane.setSelectedIndex(1);
 //        if (getLabelPanel().isShowYellowBackground()) {
-//            labelPanel.setElementFill("mainBackground", "#FFDF00");
+//            energyLabelPanel.setElementFill("mainBackground", "#FFDF00");
 //        } else {
-//            labelPanel.setElementFill("mainBackground", "none");
+//            energyLabelPanel.setElementFill("mainBackground", "none");
 //        }
     }//GEN-LAST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
 
@@ -947,7 +950,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
         if (getDatabaseConnection() != null) {
             try {
                 HashMap prop = new HashMap();
-                
+
                 // Close any existing connection if any
                 if (emf != null) {
                     emf.close();
@@ -966,11 +969,11 @@ public class Application extends javax.swing.JFrame implements Runnable {
                 emf = Persistence.createEntityManagerFactory("LabelPrintPU", prop);
 
                 return true;
-                
+
             } catch (Exception e) {
                 System.out.println(e);
             }
-            
+
             return false;
 
         }

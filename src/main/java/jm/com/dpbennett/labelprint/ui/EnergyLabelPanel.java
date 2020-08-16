@@ -144,49 +144,54 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
     public void updateLabel() {
 
         if (app != null && svgCanvas != null && svgDocument != null) {
-            svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
+            try {
+                svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
 
-                // Year of evaluation
-                setElementText("yearOfEvaluation", getEnergyLabel().getYearOfEvaluation(), "start");
-                // Manufacturer
-                setElementText("manufacturer", getEnergyLabel().getManufacturer(), "end");
-                // Model(s)
-                setElementText("models", "Model(s) " + getEnergyLabel().getModel(), "end");
-                // Capacity
-                setElementText("capacity",
-                        "Capacity "
-                        + getEnergyLabel().getCapacity()
-                        + " Cubic Litres", "end");
-                // Electrical ratings
-                setElementText("electricalRatings",
-                        getEnergyLabel().getRatedVoltage() + "V, "
-                        + getEnergyLabel().getRatedFrequency() + "Hz, "
-                        + getEnergyLabel().getRatedCurrent() + "A", "end");
-                // Type
-                setElementText("type", getEnergyLabel().getType(), "start");
-                // Defrost
-                setElementText("defrost", "- " + getEnergyLabel().getDefrost(), "start");
-                // Feature 1
-                setElementText("feature1", "- " + getEnergyLabel().getFeature1(), "start");
-                // Feature 2
-                setElementText("feature2", "- " + getEnergyLabel().getFeature2(), "start");
-                // Letter rating                
-                eraseAllRatingLetters();
-                renderRating(getEnergyLabel().getLetterRating(), true);
-                // Operating cost
-                setElementText("operatingCost", getEnergyLabel().getOperatingCost(), "start");
-                // Annual consumption
-                setElementText("annualConsumption", getEnergyLabel().getAnnualConsumption(), "start");
-                // Annual consumption unit
-                Element annualConsumption = svgDocument.getElementById("annualConsumption");
-                SVGLocatable locatable = (SVGLocatable) annualConsumption;
-                SVGRect rect = locatable.getBBox();
-                Element annualConsumptionUnit = svgDocument.getElementById("annualConsumptionUnitSpan");
-                annualConsumptionUnit.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
-                // Batch code
-                setElementText("batchCode", "getEnergyLabel().getBatchCode()", "middle");
+                    // Year of evaluation
+                    setElementText("yearOfEvaluation", getEnergyLabel().getYearOfEvaluation(), "start");
+                    // Manufacturer
+                    setElementText("manufacturer", getEnergyLabel().getManufacturer(), "end");
+                    // Model(s)
+                    setElementText("models", "Model(s) " + getEnergyLabel().getModel(), "end");
+                    // Capacity
+                    setElementText("capacity",
+                            "Capacity "
+                            + getEnergyLabel().getCapacity()
+                            + " Cubic Litres", "end");
+                    // Electrical ratings
+                    setElementText("electricalRatings",
+                            getEnergyLabel().getRatedVoltage() + "V, "
+                            + getEnergyLabel().getRatedFrequency() + "Hz, "
+                            + getEnergyLabel().getRatedCurrent() + "A", "end");
+                    // Type
+                    setElementText("type", getEnergyLabel().getType(), "start");
+                    // Defrost
+                    setElementText("defrost", "- " + getEnergyLabel().getDefrost(), "start");
+                    // Feature 1
+                    setElementText("feature1", "- " + getEnergyLabel().getFeature1(), "start");
+                    // Feature 2
+                    setElementText("feature2", "- " + getEnergyLabel().getFeature2(), "start");
+                    // Letter rating                
+                    eraseAllRatingLetters();
+                    renderRating(getEnergyLabel().getLetterRating(), true);
+                    // Operating cost
+                    setElementText("operatingCost", getEnergyLabel().getOperatingCost(), "start");
+                    // Annual consumption
+                    setElementText("annualConsumption", getEnergyLabel().getAnnualConsumption(), "start");
+                    // Annual consumption unit
+                    Element annualConsumption = svgDocument.getElementById("annualConsumption");
+                    SVGLocatable locatable = (SVGLocatable) annualConsumption;
+                    SVGRect rect = locatable.getBBox();
+                    Element annualConsumptionUnit = svgDocument.getElementById("annualConsumptionUnitSpan");
+                    annualConsumptionUnit.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
+                    // Batch code
+                    setElementText("batchCode", getEnergyLabel().getBatchCode(), "middle");
 
-            });
+                });
+            } catch (Exception e) {
+                System.out.println("Error updating label..." + e);
+            }
+
         }
 
     }

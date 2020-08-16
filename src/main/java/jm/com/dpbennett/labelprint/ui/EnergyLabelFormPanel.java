@@ -28,7 +28,7 @@ import jm.com.dpbennett.business.entity.util.ReturnMessage;
  *
  * @author Desmond Bennett <info@dpbennett.com.jm at http//dpbennett.com.jm>
  */
-public class LabelFormPanel extends javax.swing.JPanel {
+public class EnergyLabelFormPanel extends javax.swing.JPanel {
 
     private Application app;
     private EnergyLabelDataPanel labelDataPanel;
@@ -38,7 +38,7 @@ public class LabelFormPanel extends javax.swing.JPanel {
      *
      * @param app
      */
-    public LabelFormPanel(Application app) {
+    public EnergyLabelFormPanel(Application app) {
         this.app = app;
         initComponents();
         init();
@@ -142,7 +142,7 @@ public class LabelFormPanel extends javax.swing.JPanel {
     private void jViewLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewLabelActionPerformed
         ReturnMessage returnMessage = getEnergyLabel().validate(app.getEntityManager());
         if (returnMessage.isSuccess()) {
-            app.getLabelPanel().updateLabel();
+            app.getEnergyLabelPanel().updateLabel();
             app.getTabbedPane().setSelectedIndex(1);
         } else {
 
