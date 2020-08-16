@@ -153,15 +153,15 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                 // Model(s)
                 setElementText("models", "Model(s) " + getEnergyLabel().getModel(), "end");
                 // Capacity
-                setElementText("capacity", 
-                        "Capacity " +
-                        getEnergyLabel().getCapacity() +
-                                " Cubic Litres", "end");
+                setElementText("capacity",
+                        "Capacity "
+                        + getEnergyLabel().getCapacity()
+                        + " Cubic Litres", "end");
                 // Electrical ratings
-                setElementText("electricalRatings", 
-                        getEnergyLabel().getRatedVoltage() + "V, " +
-                                getEnergyLabel().getRatedFrequency() + "Hz, " +
-                                getEnergyLabel().getRatedCurrent() + "A", "end");
+                setElementText("electricalRatings",
+                        getEnergyLabel().getRatedVoltage() + "V, "
+                        + getEnergyLabel().getRatedFrequency() + "Hz, "
+                        + getEnergyLabel().getRatedCurrent() + "A", "end");
                 // Type
                 setElementText("type", getEnergyLabel().getType(), "start");
                 // Defrost
@@ -172,25 +172,20 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                 setElementText("feature2", "- " + getEnergyLabel().getFeature2(), "start");
                 // Letter rating                
                 eraseAllRatingLetters();
-                renderRating(getEnergyLabel().getLetterRating(), true);                
-
-                if (getEnergyLabel().getType().equals("Room Air-conditioner")) { 
-                } else {
-
-                }
-                // Type
-                //setElementText("type", getEnergyLabel().getType());
-
-                // Capacity
-                if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-
-                } else {
-
-                }
-                // Set location of the capacity unit power based on width of capacity
-
-                // Manufacturer
+                renderRating(getEnergyLabel().getLetterRating(), true);
                 // Operating cost
+                setElementText("operatingCost", getEnergyLabel().getOperatingCost(), "start");
+                // Annual consumption
+                setElementText("annualConsumption", getEnergyLabel().getAnnualConsumption(), "start");
+                // Annual consumption unit
+                Element annualConsumption = svgDocument.getElementById("annualConsumption");
+                SVGLocatable locatable = (SVGLocatable) annualConsumption;
+                SVGRect rect = locatable.getBBox();
+                Element annualConsumptionUnit = svgDocument.getElementById("annualConsumptionUnitSpan");
+                annualConsumptionUnit.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
+                // Batch code
+                setElementText("batchCode", "getEnergyLabel().getBatchCode()", "middle");
+
             });
         }
 
