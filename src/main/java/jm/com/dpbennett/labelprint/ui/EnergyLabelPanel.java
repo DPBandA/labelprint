@@ -166,8 +166,13 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                 setElementText("type", getEnergyLabel().getType(), "start");
                 // Defrost
                 setElementText("defrost", "- " + getEnergyLabel().getDefrost(), "start");
-
-                eraseAllRatingLetters(); //tk
+                // Feature 1
+                setElementText("feature1", "- " + getEnergyLabel().getFeature1(), "start");
+                // Feature 2
+                setElementText("feature2", "- " + getEnergyLabel().getFeature2(), "start");
+                // Letter rating                
+                eraseAllRatingLetters();
+                renderRating(getEnergyLabel().getLetterRating(), true);                
 
                 if (getEnergyLabel().getType().equals("Room Air-conditioner")) { 
                 } else {

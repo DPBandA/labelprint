@@ -27,7 +27,7 @@ import jm.com.dpbennett.business.entity.mt.EnergyLabel;
 import jm.com.dpbennett.business.entity.su.SwingUtils;
 import jm.com.dpbennett.business.entity.util.BusinessEntityUtils;
 
-public class LabelDataPanel extends javax.swing.JPanel {
+public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
     private Application app;
     private EnergyLabel energyLabel;
@@ -37,14 +37,14 @@ public class LabelDataPanel extends javax.swing.JPanel {
      *
      * @param app
      */
-    public LabelDataPanel(Application app) {
+    public EnergyLabelDataPanel(Application app) {
         this.app = app;
         initComponents();
         init();
     }
 
     /**
-     * Initialize the LabelDataPanel and create a new label.
+     * Initialize the EnergyLabelDataPanel and create a new label.
      */
     private void init() {
         createLabel();

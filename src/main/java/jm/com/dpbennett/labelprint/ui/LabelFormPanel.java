@@ -31,7 +31,7 @@ import jm.com.dpbennett.business.entity.util.ReturnMessage;
 public class LabelFormPanel extends javax.swing.JPanel {
 
     private Application app;
-    private LabelDataPanel labelDataPanel;
+    private EnergyLabelDataPanel labelDataPanel;
 
     /**
      * Creates new form LabelFormPanel
@@ -45,7 +45,7 @@ public class LabelFormPanel extends javax.swing.JPanel {
     }
 
     private void init() {
-        labelDataPanel = new LabelDataPanel(app);
+        labelDataPanel = new EnergyLabelDataPanel(app);
         labelDataPanel.createLabel();
         
         JScrollPane scrollPane = new JScrollPane(labelDataPanel);
@@ -78,7 +78,7 @@ public class LabelFormPanel extends javax.swing.JPanel {
      * 
      * @return 
      */
-    public LabelDataPanel getLabelDataPanel() {
+    public EnergyLabelDataPanel getLabelDataPanel() {
         return labelDataPanel;
     }
 
