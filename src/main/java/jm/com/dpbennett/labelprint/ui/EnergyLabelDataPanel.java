@@ -86,14 +86,17 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
      */
     private void updateLabelDataBasedOnProductType() {
 
-        if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
-            if (app.getEnergyLabelPanel() != null) {
-                app.getEnergyLabelPanel().loadSVGLabel("images/CROSQACEnergyLabel.svg");
-            }
-        } else {
-            if (app.getEnergyLabelPanel() != null) {
-                app.getEnergyLabelPanel().loadSVGLabel("images/CROSQFridgeEnergyLabel.svg");
-            }
+//        if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+//            if (app.getEnergyLabelPanel() != null) {
+//                app.getEnergyLabelPanel().loadSVGLabel("images/CROSQACEnergyLabel.svg");
+//            }
+//        } else {
+//            if (app.getEnergyLabelPanel() != null) {
+//                app.getEnergyLabelPanel().loadSVGLabel("images/CROSQFridgeEnergyLabel.svg");
+//            }
+//        }
+        if (app.getEnergyLabelPanel() != null) {
+            app.getEnergyLabelPanel().loadSVGLabel();
         }
 
         // Enable/disable fields/calulated as required.
@@ -133,13 +136,13 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
         getEnergyLabel().setCostPerKwh2(jElectricityRate2.getText());
         getEnergyLabel().setBrand(jBrand.getText());
         getEnergyLabel().setModel(jModelNo.getText());
-        getEnergyLabel().setValidity(jValidity.getText());        
+        getEnergyLabel().setValidity(jValidity.getText());
         getEnergyLabel().setOperatingCost(jOperatingCost.getText());
         getEnergyLabel().setManufacturer(jManufacturer.getText());
         getEnergyLabel().setCountry(jCountryOfOrigin.getText());
         getEnergyLabel().setAnnualConsumption(jAnnualConsumption.getText());
         getEnergyLabel().setType(jProductType.getSelectedItem().toString());
-      
+
     }
 
     /**

@@ -112,10 +112,18 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
     }
 
     private void initLabel() {
-        loadSVGLabel("images/CROSQFridgeEnergyLabel.svg");
+        loadSVGLabel();
     }
 
-    public void loadSVGLabel(String labelFile) {
+    public void loadSVGLabel() {
+        if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+            loadSVGLabel("images/CROSQACEnergyLabel.svg");
+        } else {
+            loadSVGLabel("images/CROSQFridgeEnergyLabel.svg");
+        }
+    }
+
+    private void loadSVGLabel(String labelFile) {
         if (svgCanvas != null) {
             remove(svgCanvas);
         }
@@ -147,45 +155,65 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
             try {
                 svgCanvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(() -> {
 
-                    // Year of evaluation
-                    setElementText("yearOfEvaluation", getEnergyLabel().getYearOfEvaluation(), "start");
-                    // Manufacturer
-                    setElementText("manufacturer", getEnergyLabel().getManufacturer(), "end");
-                    // Model(s)
-                    setElementText("models", "Model(s) " + getEnergyLabel().getModel(), "end");
-                    // Capacity
-                    setElementText("capacity",
-                            "Capacity "
-                            + getEnergyLabel().getCapacity()
-                            + " Cubic Litres", "end");
-                    // Electrical ratings
-                    setElementText("electricalRatings",
-                            getEnergyLabel().getRatedVoltage() + "V, "
-                            + getEnergyLabel().getRatedFrequency() + "Hz, "
-                            + getEnergyLabel().getRatedCurrent() + "A", "end");
-                    // Type
-                    setElementText("type", getEnergyLabel().getType(), "start");
-                    // Defrost
-                    setElementText("defrost", "- " + getEnergyLabel().getDefrost(), "start");
-                    // Feature 1
-                    setElementText("feature1", "- " + getEnergyLabel().getFeature1(), "start");
-                    // Feature 2
-                    setElementText("feature2", "- " + getEnergyLabel().getFeature2(), "start");
-                    // Letter rating                
-                    eraseAllRatingLetters();
-                    renderRating(getEnergyLabel().getLetterRating(), true);
-                    // Operating cost
-                    setElementText("operatingCost", getEnergyLabel().getOperatingCost(), "start");
-                    // Annual consumption
-                    setElementText("annualConsumption", getEnergyLabel().getAnnualConsumption(), "start");
-                    // Annual consumption unit
-                    Element annualConsumption = svgDocument.getElementById("annualConsumption");
-                    SVGLocatable locatable = (SVGLocatable) annualConsumption;
-                    SVGRect rect = locatable.getBBox();
-                    Element annualConsumptionUnit = svgDocument.getElementById("annualConsumptionUnitSpan");
-                    annualConsumptionUnit.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
-                    // Batch code
-                    setElementText("batchCode", getEnergyLabel().getBatchCode(), "middle");
+                    if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+                        // Year of evaluation
+                        setElementText("yearOfEvaluation", getEnergyLabel().getYearOfEvaluation(), "start");
+                        // Letter rating                
+                        eraseAllRatingLetters();
+                        renderRating(getEnergyLabel().getLetterRating(), true);
+                        // Annual consumption
+                        setElementText("annualConsumption", getEnergyLabel().getAnnualConsumption(), "middle");
+                        // Batch code
+                        setElementText("batchCode", getEnergyLabel().getBatchCode(), "middle");
+                        // Efficiency ratio
+                        setElementText("efficiencyRatio", getEnergyLabel().getEfficiencyRatio(), "middle");
+                        // Carrier //tk
+                        setElementText("carrier", getEnergyLabel().getManufacturer(), "end");
+                        // Code //tk
+                        setElementText("code", getEnergyLabel().getModel(), "end");
+
+                    } else {
+                        // Year of evaluation
+                        setElementText("yearOfEvaluation", getEnergyLabel().getYearOfEvaluation(), "start");
+                        // Manufacturer
+                        setElementText("manufacturer", getEnergyLabel().getManufacturer(), "end");
+                        // Model(s)
+                        setElementText("models", "Model(s) " + getEnergyLabel().getModel(), "end");
+                        // Capacity
+                        setElementText("capacity",
+                                "Capacity "
+                                + getEnergyLabel().getCapacity()
+                                + " Cubic Litres", "end");
+                        // Electrical ratings
+                        setElementText("electricalRatings",
+                                getEnergyLabel().getRatedVoltage() + "V, "
+                                + getEnergyLabel().getRatedFrequency() + "Hz, "
+                                + getEnergyLabel().getRatedCurrent() + "A", "end");
+                        // Type
+                        setElementText("type", getEnergyLabel().getType(), "start");
+                        // Defrost
+                        setElementText("defrost", "- " + getEnergyLabel().getDefrost(), "start");
+                        // Feature 1
+                        setElementText("feature1", "- " + getEnergyLabel().getFeature1(), "start");
+                        // Feature 2
+                        setElementText("feature2", "- " + getEnergyLabel().getFeature2(), "start");
+                        // Letter rating                
+                        eraseAllRatingLetters();
+                        renderRating(getEnergyLabel().getLetterRating(), true);
+                        // Operating cost
+                        setElementText("operatingCost", getEnergyLabel().getOperatingCost(), "start");
+                        // Annual consumption
+                        setElementText("annualConsumption", getEnergyLabel().getAnnualConsumption(), "start");
+                        // Annual consumption unit
+                        Element annualConsumption = svgDocument.getElementById("annualConsumption");
+                        SVGLocatable locatable = (SVGLocatable) annualConsumption;
+                        SVGRect rect = locatable.getBBox();
+                        Element annualConsumptionUnit = svgDocument.getElementById("annualConsumptionUnitSpan");
+                        annualConsumptionUnit.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
+                        // Batch code
+                        setElementText("batchCode", getEnergyLabel().getBatchCode(), "middle");
+                        
+                    }
 
                 });
             } catch (Exception e) {
@@ -267,7 +295,7 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                     return false;
             }
 
-            loadSVGLabel("images/CROSQEnergyLabel.svg");
+            loadSVGLabel();
 
             return true;
         } catch (IOException | TranscoderException e) {
@@ -292,7 +320,7 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
             pt.transcode(new TranscoderInput(svgDocument), null);
             pt.print();
 
-            loadSVGLabel("images/CROSQEnergyLabel.svg");
+            loadSVGLabel();
         } catch (PrinterException e) {
             System.out.println(e);
         }
