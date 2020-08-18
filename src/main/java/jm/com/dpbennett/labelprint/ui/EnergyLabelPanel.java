@@ -55,7 +55,7 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
     public static final String HEATINGORCOOLINGTEXTSTYLE
             = "font-style:normal;font-variant:normal;font-weight:bold;"
             + "font-stretch:normal;font-size:9.87777805px;line-height:125%;"
-            + "font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';"
+            + "font-family:sans-serif;inkscape-font-specification:'sans-serif Bold';"
             + "text-align:start;letter-spacing:0px;word-spacing:0px;"
             + "writing-mode:lr-tb;text-anchor:start;opacity:0.98000004;fill:#000000;"
             + "fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;"
