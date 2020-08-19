@@ -19,10 +19,10 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
-import java.awt.Color;
-import javax.swing.text.JTextComponent;
+import java.util.List;
 import jm.com.dpbennett.business.entity.mt.EnergyLabel;
 import jm.com.dpbennett.business.entity.util.BusinessEntityUtils;
+import jm.com.dpbennett.business.entity.util.StringUtils;
 
 public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
@@ -44,6 +44,16 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
      * Initialize the EnergyLabelDataPanel and create a new label.
      */
     private void init() {
+        // tk init combos
+        List<String> items = StringUtils.splitString(
+                app.getSystemOptions().getProperty("Features"), ";");
+        
+        items.forEach((item) -> {
+            jFeature1.addItem(item);
+            jFeature2.addItem(item);
+        });
+       
+        
         createLabel();
     }
 
@@ -56,6 +66,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
         if (getEnergyLabel().getType().equals("Refrigerator")
                 || getEnergyLabel().getType().equals("Basic Refrigerator")
                 || getEnergyLabel().getType().equals("Refrigerator-Freezer")) {
+
             getEnergyLabel().setDefrost("Automatic");
         }
         getEnergyLabel().setRatedVoltage(app.getSystemOptions().getProperty("DefaultRatedVoltage"));
@@ -72,8 +83,11 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
         getEnergyLabel().setValidity("" + BusinessEntityUtils.getCurrentYear());
 
-        getEnergyLabel().setYearOfEvaluation(app.getSystemOptions().getProperty("DefaultYearOfEvaluation"));
+        getEnergyLabel().setYearOfEvaluation("" + BusinessEntityUtils.getCurrentYear());
 
+        getEnergyLabel().setFeature1("--");
+        getEnergyLabel().setFeature2("--");
+        
         getEnergyLabel().setManufacturer("");
 
     }
@@ -205,26 +219,6 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
             jFeature2.setEnabled(true);
             jFeature1Label.setEnabled(true);
             jFeature2Label.setEnabled(true);
-        }
-    }
-
-    /**
-     * Sets/Unsets a JTextComponent field for automatic value calculation.
-     *
-     * @param field
-     */
-    private void setFieldForCalc(JTextComponent field, Boolean enable) {
-        field.setEnabled(true);
-        field.setEditable(!enable);
-
-        if (enable) {
-            //field.setBackground(new java.awt.Color(255, 223, 0));
-            field.setBackground(new java.awt.Color(0, 200, 0));
-            //field.setForeground(new java.awt.Color(0, 128, 0));
-            field.setForeground(Color.BLACK);
-        } else {
-            field.setBackground(Color.WHITE);
-            field.setForeground(Color.BLACK);
         }
     }
 
@@ -496,7 +490,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
         jFeature1Label.setText("Feature 1:");
 
         jFeature1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jFeature1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Bottom Mounted Freezer", "Without Through-The-Door-Ice-Service" }));
+        jFeature1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         jFeature1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFeature1ActionPerformed(evt);
@@ -508,7 +502,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
         jFeature2Label.setText("Feature 2:");
 
         jFeature2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jFeature2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Bottom Mounted Freezer", "Without Through-The-Door-Ice-Service", " " }));
+        jFeature2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         jFeature2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFeature2ActionPerformed(evt);
@@ -830,7 +824,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
     private void jEfficiencyRatioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jEfficiencyRatioKeyReleased
         getEnergyLabel().setEfficiencyRatio(jEfficiencyRatio.getText());
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jEfficiencyRatioKeyReleased
 

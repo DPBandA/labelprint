@@ -661,10 +661,8 @@
           <Font name="SansSerif" size="12" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value=" "/>
-            <StringItem index="1" value="Bottom Mounted Freezer"/>
-            <StringItem index="2" value="Without Through-The-Door-Ice-Service"/>
+          <StringArray count="1">
+            <StringItem index="0" value="--"/>
           </StringArray>
         </Property>
       </Properties>
@@ -687,11 +685,8 @@
           <Font name="SansSerif" size="12" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value=" "/>
-            <StringItem index="1" value="Bottom Mounted Freezer"/>
-            <StringItem index="2" value="Without Through-The-Door-Ice-Service"/>
-            <StringItem index="3" value=" "/>
+          <StringArray count="1">
+            <StringItem index="0" value="--"/>
           </StringArray>
         </Property>
       </Properties>
