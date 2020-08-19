@@ -101,7 +101,7 @@ public class EnergyLabelFormPanel extends javax.swing.JPanel {
         jButtonPanel.setPreferredSize(new java.awt.Dimension(586, 40));
 
         jViewLabel.setText("View");
-        jViewLabel.setToolTipText("View label with current data");
+        jViewLabel.setToolTipText("View label with validated data");
         jViewLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jViewLabelActionPerformed(evt);

@@ -61,7 +61,7 @@
         <Component class="javax.swing.JButton" name="jViewLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="View"/>
-            <Property name="toolTipText" type="java.lang.String" value="View label with current data"/>
+            <Property name="toolTipText" type="java.lang.String" value="View label with validated data"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jViewLabelActionPerformed"/>

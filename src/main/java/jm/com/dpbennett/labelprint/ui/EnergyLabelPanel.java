@@ -285,6 +285,9 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                     ostream = new FileOutputStream(fileName + ".png");
                     output = new TranscoderOutput(ostream);
                     PNGTranscoder t2 = new PNGTranscoder();
+                    
+                    //t2.addTranscodingHint(PNGTranscoder.KEY_QUALITY,
+                    //        new Float(.8));
 
                     t2.transcode(input, output);
 
