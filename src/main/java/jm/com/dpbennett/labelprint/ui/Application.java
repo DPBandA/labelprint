@@ -475,8 +475,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
         JOptionPane.showMessageDialog(this,
                 new CustomEditorPane("LabelPrint<br>"
-                        + "&copy; 2018 D P Bennett & Associates<br>"
-                        + "<a href=\"http://lp.dpbennett.com.jm\">http://lp.dpbennett.com.jm</a>"),
+                        + "&copy; 2020 D P Bennett & Associates<br>"
+                        + "<a href=\"http://labelprint.dpbennett.com.jm\">http://labelprint.dpbennett.com.jm</a>"),
                 "About",
                 JOptionPane.INFORMATION_MESSAGE);
 

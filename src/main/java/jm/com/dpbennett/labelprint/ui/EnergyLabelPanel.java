@@ -183,7 +183,7 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                         setElementText("capacity",
                                 "Capacity "
                                 + getEnergyLabel().getCapacity()
-                                + " Cubic Litres", "end");
+                                + " Litres", "end");
                         // Electrical ratings
                         setElementText("electricalRatings",
                                 getEnergyLabel().getRatedVoltage() + "V, "
