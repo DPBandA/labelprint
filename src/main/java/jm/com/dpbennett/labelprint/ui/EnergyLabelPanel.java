@@ -273,10 +273,11 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                     output = new TranscoderOutput(ostream);
                     JPEGTranscoder t = new JPEGTranscoder();
 
-                    t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
-                            new Float(.8));
-                    t.addTranscodingHint(JPEGTranscoder.KEY_WIDTH, new Float(900));
-                    t.addTranscodingHint(JPEGTranscoder.KEY_HEIGHT, new Float(1920));
+                    t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(.8));
+                    t.addTranscodingHint(JPEGTranscoder.KEY_WIDTH, 
+                            new Float(app.getSystemOptions().getProperty("ImageWidth")));
+                    t.addTranscodingHint(JPEGTranscoder.KEY_HEIGHT, 
+                            new Float(app.getSystemOptions().getProperty("ImageHeight")));
 
                     t.transcode(input, output);
 
@@ -289,8 +290,10 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                     output = new TranscoderOutput(ostream);
 
                     PNGTranscoder t2 = new PNGTranscoder();
-                    t2.addTranscodingHint(PNGTranscoder.KEY_WIDTH, new Float(900));
-                    t2.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, new Float(1920));
+                    t2.addTranscodingHint(PNGTranscoder.KEY_WIDTH, 
+                            new Float(app.getSystemOptions().getProperty("ImageWidth")));
+                    t2.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, 
+                            new Float(app.getSystemOptions().getProperty("ImageHeight")));
 
                     t2.transcode(input, output);
 

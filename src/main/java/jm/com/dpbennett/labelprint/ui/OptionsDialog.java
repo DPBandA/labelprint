@@ -85,6 +85,9 @@ public class OptionsDialog extends javax.swing.JDialog {
         jGIF.setSelected(sysOptions.isExportGIF());
         jPNG.setSelected(sysOptions.isExportPNG());
         jPDF.setSelected(sysOptions.isExportPDF());
+        // Image size
+        jImageWidth.setText(sysOptions.getProperty("FridgeImageWidth"));
+        jImageHeight.setText(sysOptions.getProperty("FridgeImageHeight"));
         // Label defaults
         jRatedVoltage.setSelectedItem(sysOptions.getProperty("DefaultRatedVoltage"));
         jRatedFrequency.setSelectedItem(sysOptions.getProperty("DefaultRatedFrequency"));
@@ -138,6 +141,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPDF = new javax.swing.JCheckBox();
         jTIFF = new javax.swing.JCheckBox();
         jSVG = new javax.swing.JCheckBox();
+        jLabel10 = new javax.swing.JLabel();
+        jImageWidth = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jImageHeight = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -237,24 +244,55 @@ public class OptionsDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Refrigerator Image width:");
+
+        jImageWidth.setText("0.0");
+        jImageWidth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jImageWidthActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Refrigerator Image Height:");
+
+        jImageHeight.setText("0.0");
+        jImageHeight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jImageHeightActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jJPEG)
-                .addGap(18, 18, 18)
-                .addComponent(jPNG)
-                .addGap(18, 18, 18)
-                .addComponent(jGIF)
-                .addGap(18, 18, 18)
-                .addComponent(jPDF)
-                .addGap(18, 18, 18)
-                .addComponent(jTIFF)
-                .addGap(18, 18, 18)
-                .addComponent(jSVG)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jJPEG)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPNG)
+                        .addGap(18, 18, 18)
+                        .addComponent(jGIF))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPDF)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTIFF)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSVG))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +305,15 @@ public class OptionsDialog extends javax.swing.JDialog {
                     .addComponent(jPDF)
                     .addComponent(jTIFF)
                     .addComponent(jSVG))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Label Defaults", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
@@ -424,7 +470,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jOptionsTabbedPane.addTab("Label Content", jLabelContentPanel);
@@ -667,12 +713,15 @@ public class OptionsDialog extends javax.swing.JDialog {
                 // Label Content
                 // Electricity rates
                 sysOptions.setProperty("CostPerKWh_1", jElectricityRate1.getText());
-                sysOptions.setProperty("CostPerKWh_2", jElectricityRate2.getText());
+                sysOptions.setProperty("CostPerKWh_2", jElectricityRate2.getText());                
                 // Image export formats
                 sysOptions.setExportPDF(jPDF.isSelected());
                 sysOptions.setExportPNG(jPNG.isSelected());
                 sysOptions.setExportGIF(jGIF.isSelected());
                 sysOptions.setExportJPEG(jJPEG.isSelected());
+                // Image size
+                sysOptions.setProperty("FridgeImageWidth", jImageWidth.getText()); 
+                sysOptions.setProperty("FridgeImageHeight", jImageHeight.getText());
                 // Label defaults
                 sysOptions.setProperty("DefaultRatedVoltage",
                         jRatedVoltage.getSelectedItem().toString());
@@ -807,8 +856,16 @@ public class OptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jJPEGActionPerformed
 
     private void jElectricityRate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jElectricityRate1ActionPerformed
-        // TODO add your handling code here:
+        isDirty = true;
     }//GEN-LAST:event_jElectricityRate1ActionPerformed
+
+    private void jImageWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jImageWidthActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jImageWidthActionPerformed
+
+    private void jImageHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jImageHeightActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jImageHeightActionPerformed
 
     /**
      * @param args the command line arguments
@@ -830,8 +887,12 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jElectricityRate2;
     private javax.swing.JTextArea jFeaturesList;
     private javax.swing.JCheckBox jGIF;
+    private javax.swing.JTextField jImageHeight;
+    private javax.swing.JTextField jImageWidth;
     private javax.swing.JCheckBox jJPEG;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
