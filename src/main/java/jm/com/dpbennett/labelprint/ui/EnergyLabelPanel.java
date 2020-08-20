@@ -212,7 +212,7 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                         annualConsumptionUnit.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                         // Batch code
                         setElementText("batchCode", getEnergyLabel().getBatchCode(), "middle");
-                        
+
                     }
 
                 });
@@ -275,6 +275,9 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
 
                     t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
                             new Float(.8));
+                    t.addTranscodingHint(JPEGTranscoder.KEY_WIDTH, new Float(900));
+                    t.addTranscodingHint(JPEGTranscoder.KEY_HEIGHT, new Float(1920));
+
                     t.transcode(input, output);
 
                     ostream.flush();
@@ -284,10 +287,10 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                 case "png":
                     ostream = new FileOutputStream(fileName + ".png");
                     output = new TranscoderOutput(ostream);
+
                     PNGTranscoder t2 = new PNGTranscoder();
-                    
-                    //t2.addTranscodingHint(PNGTranscoder.KEY_QUALITY,
-                    //        new Float(.8));
+                    t2.addTranscodingHint(PNGTranscoder.KEY_WIDTH, new Float(900));
+                    t2.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, new Float(1920));
 
                     t2.transcode(input, output);
 

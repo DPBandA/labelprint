@@ -79,7 +79,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private void init() {
 
         Toolkit toolKit = Toolkit.getDefaultToolkit();
-        setIconImage(toolKit.createImage(getClass().getResource("/images/LabelPrintIcon.png")));
+        setIconImage(toolKit.createImage(getClass().getResource("/images/Icon.png")));
 
         sysOptions = new Options("LabelPrint.properties");
         enableMenuItems(false);
