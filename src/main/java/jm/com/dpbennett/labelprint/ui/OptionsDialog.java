@@ -88,6 +88,8 @@ public class OptionsDialog extends javax.swing.JDialog {
         // Image size
         jImageWidth.setText(sysOptions.getProperty("FridgeImageWidth"));
         jImageHeight.setText(sysOptions.getProperty("FridgeImageHeight"));
+        jACImageWidth.setText(sysOptions.getProperty("ACImageWidth"));
+        jACImageHeight.setText(sysOptions.getProperty("ACImageHeight"));
         // Label defaults
         jRatedVoltage.setSelectedItem(sysOptions.getProperty("DefaultRatedVoltage"));
         jRatedFrequency.setSelectedItem(sysOptions.getProperty("DefaultRatedFrequency"));
@@ -145,6 +147,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         jImageWidth = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jImageHeight = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jACImageWidth = new javax.swing.JTextField();
+        jACImageHeight = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -246,7 +252,7 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Refrigerator Image width:");
+        jLabel10.setText("Refrigerator Image Width:");
 
         jImageWidth.setText("0.0");
         jImageWidth.addActionListener(new java.awt.event.ActionListener() {
@@ -266,6 +272,28 @@ public class OptionsDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("AC Image Width:");
+
+        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("AC Image Height:");
+
+        jACImageWidth.setText("0.0");
+        jACImageWidth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jACImageWidthActionPerformed(evt);
+            }
+        });
+
+        jACImageHeight.setText("0.0");
+        jACImageHeight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jACImageHeightActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -281,7 +309,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                         .addComponent(jGIF))
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPDF)
@@ -289,10 +317,19 @@ public class OptionsDialog extends javax.swing.JDialog {
                         .addComponent(jTIFF)
                         .addGap(18, 18, 18)
                         .addComponent(jSVG))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jACImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jACImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(157, 157, 157))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,11 +345,15 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(jACImageWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(jACImageHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -722,6 +763,8 @@ public class OptionsDialog extends javax.swing.JDialog {
                 // Image size
                 sysOptions.setProperty("FridgeImageWidth", jImageWidth.getText()); 
                 sysOptions.setProperty("FridgeImageHeight", jImageHeight.getText());
+                sysOptions.setProperty("ACImageWidth", jACImageWidth.getText()); 
+                sysOptions.setProperty("ACImageHeight", jACImageHeight.getText());
                 // Label defaults
                 sysOptions.setProperty("DefaultRatedVoltage",
                         jRatedVoltage.getSelectedItem().toString());
@@ -867,6 +910,14 @@ public class OptionsDialog extends javax.swing.JDialog {
         isDirty = true;
     }//GEN-LAST:event_jImageHeightActionPerformed
 
+    private void jACImageWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jACImageWidthActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jACImageWidthActionPerformed
+
+    private void jACImageHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jACImageHeightActionPerformed
+        isDirty = true;
+    }//GEN-LAST:event_jACImageHeightActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -876,6 +927,8 @@ public class OptionsDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField jACImageHeight;
+    private javax.swing.JTextField jACImageWidth;
     private javax.swing.JButton jCancel;
     private javax.swing.JCheckBox jConnectToDatabaseCheckBox;
     private javax.swing.JPanel jContantsPanel;
@@ -893,6 +946,8 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
