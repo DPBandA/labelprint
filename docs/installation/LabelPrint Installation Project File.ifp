@@ -1,9 +1,10 @@
+﻿
 [Header]
-ProjectFileVersion = "1.1"
+ProjectFileVersion = 1.1
 [General]
 Program name = LabelPrint
-Program version = 3.0
-Windows 2000 = 1
+Program version = 3.1.0
+Windows 2000 = 0
 Windows XP = 1
 Windows Server 2003 = 1
 Windows Vista = 1
@@ -14,42 +15,39 @@ Windows 10 = 1
 Windows Server 2016 = 1
 DoNotCheckOS = 0
 Company name = D P Bennett & Associates
-Website = https://lp.dpbennett.com.jm/
+Website = https://labelprint.dpbennett.com.jm
 SFA = 1
 DFA = 1
 Comp = 1
 [Graphics]
 Wizard image = <main>
 Header image = <main>
-Install-icon image = <main>
 Show Label = 1
-Windows style = 1
-XpStyle = 1
+VisualStylesEnabled = 1
 [Files]
-Include Zipfile = 0
-Zipfile = 
-Installation path = <programfiles>\<company>\<appname>\
+Installation path = C:\<AppName>\
 Autcip = 1
 [Uninstall]
 Vwau = 0
-Website = 
+Website = https://
 Include uninstaller = 1
 Uninstaller filename = Uninstall
+UseCustomDisplayIcon = 0
+CustomDisplayIcon = <InstallPath>\
 [Licence]
 Licence dialog = 1
 [Finish]
 Sart program = 1
 Reboot computer = 0
-Execute DLL: = 0
-Program = <installpath>\LabelPrint-3.0-SNAPSHOT.jar
+Program = <InstallPath>\LabelPrint-3.1.0.jar
 ProgramArguments = 
-Dll = 
 [Shortcuts]
 Allowtc = 0
-Shortcut path = <appname>\
+Shortcut path = <AppName>\
 [Serialoptions]
 Allows = 0
-Number = 20
+Number = 1000
+Mask = #####-#####-#####-#####
 [SplashScreen]
 Image = 
 Sound = 
@@ -57,11 +55,15 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\dbennett\Desktop\LabelPrintSetup.exe
+File = 
+SetupIconPath = ..\icons\ancient.ico
+UninstallIconPath = ..\icons\ancient.ico
+CompressionMethod = 0
+CompressionLevel = 2
 [Updater]
 Allow = 0
-1 = <appname>
-2 = <appversion>
+1 = <AppName>
+2 = <AppVersion>
 3 = http://
 4 = http://
 5 = http://
@@ -71,25 +73,34 @@ RunProg =
 RunProgs = 0
 Execdlls = 0
 [Languages]
-3
-4
+1
+2
 [Files/Dirs]
-F:\Projects\labelprint\target\LabelPrint-3.0-SNAPSHOT.jar
-636.1 KB
+C:\Users\dbennett\Documents\Projects\labelprint\target\LabelPrint-3.1.0.jar
+901.7 KB
 jar
-F:\Projects\labelprint\src\main\resources\system\
-n/a
+C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\images\Icon.ico
+20.2 KB
+ico
+C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\images\Icon.png
+3.3 KB
+png
+C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\system\LabelPrint.properties
+1.8 KB
+properties
+C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\system\
+N/A
 [Folder]
-F:\Projects\labelprint\src\main\resources\images\
-n/a
+C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\images\
+N/A
 [Folder]
-F:\Projects\labelprint\target\lib\
-n/a
+C:\Users\dbennett\Documents\Projects\labelprint\target\lib\
+N/A
 [Folder]
 [Licence_Begin]
-37947
-{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fnil\fcharset0 MS Shell Dlg;}}
-\viewkind4\uc1\pard\lang1033\f0\fs17                     GNU AFFERO GENERAL PUBLIC LICENSE\par
+37937
+{\rtf1\fbidis\ansi\deff0{\fonttbl{\f0\fnil\fcharset0 Arial;}}
+\viewkind4\uc1\pard\ltrpar\cf0\lang1033\fs20                     GNU AFFERO GENERAL PUBLIC LICENSE\par
                        Version 3, 19 November 2007\par
 \par
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\par
@@ -750,7 +761,6 @@ specific requirements.\par
 if any, to sign a "copyright disclaimer" for the program, if necessary.\par
 For more information on this, and how to apply and follow the GNU AGPL, see\par
 <http://www.gnu.org/licenses/>.\par
-\par
 }
  [Licence_End]
 [Registry]
@@ -758,21 +768,21 @@ For more information on this, and how to apply and follow the GNU AGPL, see\par
 [SCs]
 Desktop
 LabelPrint
-<installpath>\LabelPrint-3.0-SNAPSHOT.jar
+<InstallPath>\LabelPrint-3.1.0.jar
 
-<installpath>\LabelPrint32x32.ico
-0
-Startmenu
-Uninstall
-<installpath>\Uninstall.exe
-
-
+<InstallPath>\Icon.ico
 0
 Startmenu
 LabelPrint
-<installpath>\LabelPrint-3.0-SNAPSHOT.jar
+<InstallPath>\LabelPrint-3.1.0.jar
 
-<installpath>\LabelPrint32x32.ico
+<InstallPath>\Icon.ico
+0
+Startmenu
+Uninstall
+<InstallPath>\Uninstall.exe
+
+
 0
 [IFP_End]
 [Serials]
