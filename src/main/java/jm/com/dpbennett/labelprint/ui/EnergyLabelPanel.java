@@ -274,10 +274,17 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                     JPEGTranscoder t = new JPEGTranscoder();
 
                     t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(.8));
-                    t.addTranscodingHint(JPEGTranscoder.KEY_WIDTH, 
-                            new Float(app.getSystemOptions().getProperty("ImageWidth")));
-                    t.addTranscodingHint(JPEGTranscoder.KEY_HEIGHT, 
-                            new Float(app.getSystemOptions().getProperty("ImageHeight")));
+                    if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+                        t.addTranscodingHint(JPEGTranscoder.KEY_WIDTH,
+                                new Float(app.getSystemOptions().getProperty("ACImageWidth")));
+                        t.addTranscodingHint(JPEGTranscoder.KEY_HEIGHT,
+                                new Float(app.getSystemOptions().getProperty("ACImageHeight")));
+                    } else {
+                        t.addTranscodingHint(JPEGTranscoder.KEY_WIDTH,
+                                new Float(app.getSystemOptions().getProperty("FridgeImageWidth")));
+                        t.addTranscodingHint(JPEGTranscoder.KEY_HEIGHT,
+                                new Float(app.getSystemOptions().getProperty("FridgeImageHeight")));
+                    }
 
                     t.transcode(input, output);
 
@@ -290,10 +297,17 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                     output = new TranscoderOutput(ostream);
 
                     PNGTranscoder t2 = new PNGTranscoder();
-                    t2.addTranscodingHint(PNGTranscoder.KEY_WIDTH, 
-                            new Float(app.getSystemOptions().getProperty("ImageWidth")));
-                    t2.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, 
-                            new Float(app.getSystemOptions().getProperty("ImageHeight")));
+                    if (getEnergyLabel().getType().equals("Room Air-conditioner")) {
+                        t2.addTranscodingHint(PNGTranscoder.KEY_WIDTH,
+                                new Float(app.getSystemOptions().getProperty("ACImageWidth")));
+                        t2.addTranscodingHint(PNGTranscoder.KEY_HEIGHT,
+                                new Float(app.getSystemOptions().getProperty("ACImageHeight")));
+                    } else {
+                        t2.addTranscodingHint(PNGTranscoder.KEY_WIDTH,
+                                new Float(app.getSystemOptions().getProperty("FridgeImageWidth")));
+                        t2.addTranscodingHint(PNGTranscoder.KEY_HEIGHT,
+                                new Float(app.getSystemOptions().getProperty("FridgeImageHeight")));
+                    }
 
                     t2.transcode(input, output);
 

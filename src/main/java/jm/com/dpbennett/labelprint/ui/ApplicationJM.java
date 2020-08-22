@@ -44,7 +44,7 @@ import jm.com.dpbennett.business.entity.util.ReturnMessage;
  *
  * @author Desmond Bennett
  */
-public class Application extends javax.swing.JFrame implements Runnable {
+public class ApplicationJM extends javax.swing.JFrame implements Runnable {
 
     private Options sysOptions;
     private EntityManagerFactory emf;
@@ -56,7 +56,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
     /**
      * Creates new Application
      */
-    public Application() {
+    public ApplicationJM() {
 
         initComponents();
         init();
@@ -232,6 +232,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
         jMenuFilePrint.setEnabled(flag);
         jMenuEditLabel.setEnabled(flag);
         jMenuFileClose.setEnabled(flag);
+        jCheckBoxMenuViewGreenBackground.setEnabled(false);
+        jCheckBoxMenuViewYellowBackground.setEnabled(false);
     }
 
     /**
@@ -265,13 +267,15 @@ public class Application extends javax.swing.JFrame implements Runnable {
         jMenuEditLabel = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JSeparator();
         jMenuEditOptions = new javax.swing.JMenuItem();
+        jMenuView = new javax.swing.JMenu();
+        jCheckBoxMenuViewGreenBackground = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuViewYellowBackground = new javax.swing.JCheckBoxMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuHelpAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("LabelPrint");
         setMinimumSize(new java.awt.Dimension(550, 500));
-        setPreferredSize(new java.awt.Dimension(800, 875));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -421,6 +425,29 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.add(jMenuEdit);
 
+        jMenuView.setText("View");
+
+        jCheckBoxMenuViewGreenBackground.setSelected(true);
+        jCheckBoxMenuViewGreenBackground.setText("Green background");
+        jCheckBoxMenuViewGreenBackground.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuViewGreenBackgroundActionPerformed(evt);
+            }
+        });
+        jMenuView.add(jCheckBoxMenuViewGreenBackground);
+
+        jCheckBoxMenuViewYellowBackground.setSelected(true);
+        jCheckBoxMenuViewYellowBackground.setText("Yellow background");
+        jCheckBoxMenuViewYellowBackground.setToolTipText("");
+        jCheckBoxMenuViewYellowBackground.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuViewYellowBackgroundActionPerformed(evt);
+            }
+        });
+        jMenuView.add(jCheckBoxMenuViewYellowBackground);
+
+        jMenuBar1.add(jMenuView);
+
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
@@ -484,6 +511,24 @@ public class Application extends javax.swing.JFrame implements Runnable {
             new Thread(this).start();
         }
     }//GEN-LAST:event_jMenuEditOptionsActionPerformed
+
+    /**
+     * Enables/disables the display of the green background sections of the
+     * label.
+     *
+     * @param evt
+     */
+    private void jCheckBoxMenuViewGreenBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
+//        getLabelPanel().setShowGreenBackground(jCheckBoxMenuViewGreenBackground.isSelected());
+        jEnergyLabelPane.setSelectedIndex(1);
+//        if (getLabelPanel().isShowGreenBackground()) {
+//            energyLabelPanel.setElementFill("headerBackground", "#008000");
+//            energyLabelPanel.setElementFill("violationNoteBackground", "#008000");
+//        } else {
+//            energyLabelPanel.setElementFill("headerBackground", "none");
+//            energyLabelPanel.setElementFill("violationNoteBackground", "none");
+//        }
+    }//GEN-LAST:event_jCheckBoxMenuViewGreenBackgroundActionPerformed
 
     /**
      * Displays the OpenLabelDialog to allow the searching for opening of
@@ -775,12 +820,12 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private void initLabelPanels() {
 
         if (labelFormPanel == null) {
-            labelFormPanel = new EnergyLabelFormPanel(this);
+            //labelFormPanel = new EnergyLabelFormPanel(this);
             getjEnergyLabelPane().add("Label Data", labelFormPanel);
         }
 
         if (energyLabelPanel == null) {
-            energyLabelPanel = new EnergyLabelPanel(this);
+            //energyLabelPanel = new EnergyLabelPanel(this);
 
             getjEnergyLabelPane().add("Label View", energyLabelPanel);
 
@@ -844,6 +889,21 @@ public class Application extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_formWindowClosing
 
     /**
+     * Enables/disables the display of the yellow background of a label.
+     *
+     * @param evt
+     */
+    private void jCheckBoxMenuViewYellowBackgroundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
+//        getLabelPanel().setShowYellowBackground(jCheckBoxMenuViewYellowBackground.isSelected());
+        jEnergyLabelPane.setSelectedIndex(1);
+//        if (getLabelPanel().isShowYellowBackground()) {
+//            energyLabelPanel.setElementFill("mainBackground", "#FFDF00");
+//        } else {
+//            energyLabelPanel.setElementFill("mainBackground", "none");
+//        }
+    }//GEN-LAST:event_jCheckBoxMenuViewYellowBackgroundActionPerformed
+
+    /**
      * Gets the JTabbedPane that holds the label and label data JPanels.
      *
      * @return
@@ -859,7 +919,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Application().setVisible(true);
+            new ApplicationJM().setVisible(true);
         });
     }
 
@@ -966,6 +1026,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton NewLabel;
     private javax.swing.JButton OpenLabel;
     private javax.swing.JButton SaveLabel;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewGreenBackground;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuViewYellowBackground;
     private javax.swing.JTabbedPane jEnergyLabelPane;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuEdit;
@@ -981,6 +1043,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuItem jMenuFileSave;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuHelpAbout;
+    private javax.swing.JMenu jMenuView;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
