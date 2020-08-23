@@ -76,31 +76,31 @@ Execdlls = 0
 1
 2
 [Files/Dirs]
-C:\Users\dbennett\Documents\Projects\labelprint\target\LabelPrint-3.1.0.jar
-901.7 KB
+F:\Projects\labelprint\target\LabelPrint-3.1.0.jar
+904.2 KB
 jar
-C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\images\Icon.ico
+F:\Projects\labelprint\target\images\Icon.ico
 20.2 KB
 ico
-C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\images\Icon.png
+F:\Projects\labelprint\target\images\Icon.png
 3.3 KB
 png
-C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\system\LabelPrint.properties
+F:\Projects\labelprint\target\system\LabelPrint.properties
 1.8 KB
 properties
-C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\system\
+F:\Projects\labelprint\src\main\resources\images\
 N/A
 [Folder]
-C:\Users\dbennett\Documents\Projects\labelprint\src\main\resources\images\
+F:\Projects\labelprint\src\main\resources\system\
 N/A
 [Folder]
-C:\Users\dbennett\Documents\Projects\labelprint\target\lib\
+F:\Projects\labelprint\target\lib\
 N/A
 [Folder]
 [Licence_Begin]
-37937
-{\rtf1\fbidis\ansi\deff0{\fonttbl{\f0\fnil\fcharset0 Arial;}}
-\viewkind4\uc1\pard\ltrpar\cf0\lang1033\fs20                     GNU AFFERO GENERAL PUBLIC LICENSE\par
+37931
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fnil\fcharset0 Arial;}}
+\viewkind4\uc1\pard\lang1033\fs20                     GNU AFFERO GENERAL PUBLIC LICENSE\par
                        Version 3, 19 November 2007\par
 \par
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\par
