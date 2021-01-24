@@ -98,6 +98,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         jProductType.setSelectedItem(sysOptions.getProperty("DefaultProductType"));
         // Refrigerator constants       
         jFeaturesList.setText(sysOptions.getProperty("Features"));
+        jProductTypes.setText(sysOptions.getProperty("ProductTypes"));
 
         loadProductTypeDetailandClassCombos(sysOptions);
 
@@ -182,7 +183,13 @@ public class OptionsDialog extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jProductTypes = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jFeaturesList = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jDefrostTypes = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
         jOk = new javax.swing.JButton();
         jCancel = new javax.swing.JButton();
 
@@ -643,34 +650,77 @@ public class OptionsDialog extends javax.swing.JDialog {
 
         jOptionsTabbedPane.addTab("Database", jDatabasePanel);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Refrigerator, freezer and wine chiller contants", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Product data constants", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 51, 153))); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel16.setText("Features:");
 
+        jProductTypes.setColumns(20);
+        jProductTypes.setLineWrap(true);
+        jProductTypes.setRows(3);
+        jScrollPane1.setViewportView(jProductTypes);
+
         jFeaturesList.setColumns(20);
-        jFeaturesList.setRows(5);
-        jScrollPane1.setViewportView(jFeaturesList);
+        jFeaturesList.setLineWrap(true);
+        jFeaturesList.setRows(3);
+        jScrollPane2.setViewportView(jFeaturesList);
+
+        jLabel17.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel17.setText("Product Types:");
+
+        jDefrostTypes.setColumns(20);
+        jDefrostTypes.setLineWrap(true);
+        jDefrostTypes.setRows(3);
+        jScrollPane3.setViewportView(jDefrostTypes);
+
+        jLabel18.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel18.setText("Defrost Types:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel16)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(68, 68, 68))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(105, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(67, 67, 67)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel16)
+                .addGap(61, 61, 61)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addContainerGap(351, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addContainerGap(203, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(365, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jContantsPanelLayout = new javax.swing.GroupLayout(jContantsPanel);
@@ -679,7 +729,7 @@ public class OptionsDialog extends javax.swing.JDialog {
             jContantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jContantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 703, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jContantsPanelLayout.setVerticalGroup(
@@ -778,8 +828,9 @@ public class OptionsDialog extends javax.swing.JDialog {
                         jProductType.getSelectedItem().toString());
                 
                
-                // Refrigerator constants
+                // Product data constants
                 sysOptions.setProperty("Features", jFeaturesList.getText());
+                sysOptions.setProperty("ProductTypes", jProductTypes.getText());
                
 
                 ReturnMessage message = sysOptions.validate(app.getEntityManager());
@@ -936,6 +987,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jDatabasePanel;
     private javax.swing.JTextField jDatabaseURLTextField;
     private javax.swing.JComboBox jDefaultSearchFieldComboBox;
+    private javax.swing.JTextArea jDefrostTypes;
     private javax.swing.JTextField jElectricityRate1;
     private javax.swing.JTextField jElectricityRate2;
     private javax.swing.JTextArea jFeaturesList;
@@ -950,6 +1002,8 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
@@ -970,12 +1024,15 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JComboBox<String> jProductType;
+    private javax.swing.JTextArea jProductTypes;
     private javax.swing.JComboBox<String> jRatedFrequency;
     private javax.swing.JComboBox<String> jRatedVoltage;
     private javax.swing.JComboBox<String> jRefrigeratorStandard;
     private javax.swing.JComboBox<String> jRoomACStandard;
     private javax.swing.JCheckBox jSVG;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JCheckBox jTIFF;
     private javax.swing.JTextField jUsernameTextField;
     // End of variables declaration//GEN-END:variables
