@@ -44,16 +44,31 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
      * Initialize the EnergyLabelDataPanel and create a new label.
      */
     private void init() {
-        // tk init combos
-        List<String> items = StringUtils.splitString(
+        // Combo lists
+        List<String> features = StringUtils.splitString(
                 app.getSystemOptions().getProperty("Features"), ";");
-        
-        items.forEach((item) -> {
-            jFeature1.addItem(item);
-            jFeature2.addItem(item);
+        List<String> productTypes = StringUtils.splitString(
+                app.getSystemOptions().getProperty("ProductTypes"), ";");
+        List<String> energyEfficiencyClasses = StringUtils.splitString(
+                app.getSystemOptions().getProperty("EnergyEfficiencyClasses"), ";");
+        List<String> defrostTypes = StringUtils.splitString(
+                app.getSystemOptions().getProperty("DefrostTypes"), ";");
+        List<String> ratedVoltages = StringUtils.splitString(
+                app.getSystemOptions().getProperty("RatedVoltages"), ";");
+        List<String> ratedFrequencies = StringUtils.splitString(
+                app.getSystemOptions().getProperty("RatedFrequencies"), ";");
+
+        // Init combos
+        features.forEach((feature) -> {
+            jFeature1.addItem(feature);
+            jFeature2.addItem(feature);
         });
-       
-        
+        productTypes.forEach(jProductType::addItem);
+        energyEfficiencyClasses.forEach(jLetterRating::addItem);
+        defrostTypes.forEach(jDefrost::addItem);
+        ratedVoltages.forEach(jRatedVoltage::addItem);
+        ratedFrequencies.forEach(jRatedFrequency::addItem);
+
         createLabel();
     }
 
@@ -87,7 +102,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
         getEnergyLabel().setFeature1("--");
         getEnergyLabel().setFeature2("--");
-        
+
         getEnergyLabel().setManufacturer("");
 
     }
@@ -322,7 +337,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
         jProductType.setEditable(true);
         jProductType.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jProductType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basic Refrigerator", "Refrigerator", "Freezer", "Refrigerator-Freezer", "Room Air-conditioner", "Wine Chiller" }));
+        jProductType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         jProductType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jProductTypeActionPerformed(evt);
@@ -434,7 +449,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
         jDefrost.setEditable(true);
         jDefrost.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jDefrost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Automatic", "Manual", " " }));
+        jDefrost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         jDefrost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDefrostActionPerformed(evt);
@@ -443,7 +458,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
         jRatedVoltage.setEditable(true);
         jRatedVoltage.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jRatedVoltage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "110", "115", "120", "125", "220", "230", "240", "110/220", "115/230", "120/240" }));
+        jRatedVoltage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         jRatedVoltage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRatedVoltageActionPerformed(evt);
@@ -456,7 +471,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
         jRatedFrequency.setEditable(true);
         jRatedFrequency.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jRatedFrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "60", "50/60" }));
+        jRatedFrequency.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         jRatedFrequency.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRatedFrequencyActionPerformed(evt);
@@ -479,7 +494,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
         jLabel13.setText("Electricity Rate 2 ($/kwh):");
 
         jLetterRating.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jLetterRating.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F" }));
+        jLetterRating.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         jLetterRating.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLetterRatingActionPerformed(evt);
@@ -861,7 +876,7 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
 
     private void jCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCapacityKeyReleased
         getEnergyLabel().setCapacity(jCapacity.getText());
-        
+
         app.setDirty(true);
     }//GEN-LAST:event_jCapacityKeyReleased
 
