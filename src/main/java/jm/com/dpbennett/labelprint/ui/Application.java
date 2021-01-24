@@ -22,6 +22,11 @@ package jm.com.dpbennett.labelprint.ui;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -29,6 +34,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -81,7 +88,37 @@ public class Application extends javax.swing.JFrame implements Runnable {
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/Icon.png")));
 
-        sysOptions = new Options("LabelPrint.properties");
+        String optionsFilePath = System.getProperty("user.home") + "\\LabelPrint.properties";
+        
+        // Open options file if it exiss or copy the default file.
+        File optionsFile = new File(optionsFilePath);
+        if (optionsFile.exists()) {
+            sysOptions = new Options(optionsFilePath);
+        } else {
+            FileChannel sourceChannel = null;
+            FileChannel destChannel = null;
+
+            try {
+                sourceChannel = new FileInputStream(new File("LabelPrint.properties")).getChannel();
+                destChannel = new FileOutputStream(new File(optionsFilePath)).getChannel();
+                
+                destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+            } catch (FileNotFoundException ex) {
+                System.out.println(ex);
+            } catch (IOException ex) {
+                System.out.println(ex);
+            } finally {
+                try {
+                    sourceChannel.close();
+                    destChannel.close();
+                    
+                    sysOptions = new Options(optionsFilePath);
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
         enableMenuItems(false);
 
         doSetup();
@@ -608,11 +645,11 @@ public class Application extends javax.swing.JFrame implements Runnable {
     public void updateLabelPanels() {
 
         getLabelFormPanel().updateLabelData();
-        
+
         getLabelFormPanel().updateLabelData();
 
         getEnergyLabelPanel().updateLabel();
-        
+
         getjEnergyLabelPane().repaint();
     }
 

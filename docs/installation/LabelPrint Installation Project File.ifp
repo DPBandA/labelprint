@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = LabelPrint
-Program version = 3.1.0
+Program version = 3.2.0
 Windows 2000 = 0
 Windows XP = 1
 Windows Server 2003 = 1
@@ -42,7 +42,7 @@ Reboot computer = 0
 Program = <InstallPath>\LabelPrint-3.1.0.jar
 ProgramArguments = 
 [Shortcuts]
-Allowtc = 0
+Allowtc = 1
 Shortcut path = <AppName>\
 [Serialoptions]
 Allows = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = 
+File = C:\Users\dbennett\Desktop\LabelPrintSetup.exe
 SetupIconPath = ..\icons\ancient.ico
 UninstallIconPath = ..\icons\ancient.ico
 CompressionMethod = 0
@@ -76,18 +76,12 @@ Execdlls = 0
 1
 2
 [Files/Dirs]
-F:\Projects\labelprint\target\LabelPrint-3.1.0.jar
-904.2 KB
-jar
 F:\Projects\labelprint\target\images\Icon.ico
 20.2 KB
 ico
 F:\Projects\labelprint\target\images\Icon.png
 3.3 KB
 png
-F:\Projects\labelprint\target\system\LabelPrint.properties
-1.8 KB
-properties
 F:\Projects\labelprint\src\main\resources\images\
 N/A
 [Folder]
@@ -97,6 +91,12 @@ N/A
 F:\Projects\labelprint\target\lib\
 N/A
 [Folder]
+F:\Projects\labelprint\src\main\resources\system\LabelPrint.properties
+1.8 KB
+properties
+F:\Projects\labelprint\target\LabelPrint-3.2.0.jar
+715.7 KB
+jar
 [Licence_Begin]
 37931
 {\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fnil\fcharset0 Arial;}}
@@ -768,13 +768,13 @@ For more information on this, and how to apply and follow the GNU AGPL, see\par
 [SCs]
 Desktop
 LabelPrint
-<InstallPath>\LabelPrint-3.1.0.jar
+<InstallPath>\LabelPrint-3.2.0.jar
 
 <InstallPath>\Icon.ico
 0
 Startmenu
 LabelPrint
-<InstallPath>\LabelPrint-3.1.0.jar
+<InstallPath>\LabelPrint-3.2.0.jar
 
 <InstallPath>\Icon.ico
 0
