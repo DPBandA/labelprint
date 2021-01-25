@@ -44,6 +44,12 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
      * Initialize the EnergyLabelDataPanel and create a new label.
      */
     private void init() {
+        initCombos();
+        
+        createLabel();
+    }
+    
+    public void initCombos() {
         // Combo lists
         List<String> features = StringUtils.splitString(
                 app.getSystemOptions().getProperty("Features"), ";");
@@ -68,8 +74,6 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
         defrostTypes.forEach(jDefrost::addItem);
         ratedVoltages.forEach(jRatedVoltage::addItem);
         ratedFrequencies.forEach(jRatedFrequency::addItem);
-
-        createLabel();
     }
 
     /**

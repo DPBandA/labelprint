@@ -52,6 +52,8 @@ public class EnergyLabelFormPanel extends javax.swing.JPanel {
         add(scrollPane, java.awt.BorderLayout.CENTER);
     }
     
+    
+    
     public void createLabel() {
         labelDataPanel.createLabel();
     }

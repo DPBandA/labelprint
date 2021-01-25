@@ -84,13 +84,21 @@ public class Application extends javax.swing.JFrame implements Runnable {
      *
      */
     private void init() {
+        
+        String optionsFilePath;
 
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/Icon.png")));
 
-        String optionsFilePath = System.getProperty("user.home") + "\\LabelPrint.properties";
-        
-        // Open options file if it exiss or copy the default file.
+        String osName = System.getProperty("os.name");
+        if (osName.contains("Windows")) {
+            optionsFilePath = System.getProperty("user.home") + "\\LabelPrint.properties";
+        }
+        else {
+           optionsFilePath = System.getProperty("user.home") + "/LabelPrint.properties"; 
+        }
+
+        // Open options file if it exists or copy the default file.
         File optionsFile = new File(optionsFilePath);
         if (optionsFile.exists()) {
             sysOptions = new Options(optionsFilePath);
@@ -101,7 +109,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
             try {
                 sourceChannel = new FileInputStream(new File("LabelPrint.properties")).getChannel();
                 destChannel = new FileOutputStream(new File(optionsFilePath)).getChannel();
-                
+
                 destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
             } catch (FileNotFoundException ex) {
                 System.out.println(ex);
@@ -111,7 +119,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
                 try {
                     sourceChannel.close();
                     destChannel.close();
-                    
+
                     sysOptions = new Options(optionsFilePath);
                 } catch (IOException ex) {
                     System.out.println(ex);
@@ -646,7 +654,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
 
         getLabelFormPanel().updateLabelData();
 
-        getLabelFormPanel().updateLabelData();
+        //getLabelFormPanel().updateLabelData();
 
         getEnergyLabelPanel().updateLabel();
 
@@ -814,6 +822,9 @@ public class Application extends javax.swing.JFrame implements Runnable {
         if (labelFormPanel == null) {
             labelFormPanel = new EnergyLabelFormPanel(this);
             getjEnergyLabelPane().add("Label Data", labelFormPanel);
+        }
+        else {
+            labelFormPanel.getLabelDataPanel().initCombos();
         }
 
         if (energyLabelPanel == null) {
