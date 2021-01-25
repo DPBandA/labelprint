@@ -90,6 +90,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         setIconImage(toolKit.createImage(getClass().getResource("/images/Icon.png")));
 
+        
+        // Open options file if it exists or copy the default file.
         String osName = System.getProperty("os.name");
         if (osName.contains("Windows")) {
             optionsFilePath = System.getProperty("user.home") + "\\LabelPrint.properties";
@@ -97,8 +99,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
         else {
            optionsFilePath = System.getProperty("user.home") + "/LabelPrint.properties"; 
         }
-
-        // Open options file if it exists or copy the default file.
+        
         File optionsFile = new File(optionsFilePath);
         if (optionsFile.exists()) {
             sysOptions = new Options(optionsFilePath);
@@ -824,6 +825,7 @@ public class Application extends javax.swing.JFrame implements Runnable {
             getjEnergyLabelPane().add("Label Data", labelFormPanel);
         }
         else {
+            labelFormPanel.getLabelDataPanel().resetCombos();
             labelFormPanel.getLabelDataPanel().initCombos();
         }
 

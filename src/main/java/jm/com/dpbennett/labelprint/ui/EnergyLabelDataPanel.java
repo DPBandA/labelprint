@@ -45,10 +45,33 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
      */
     private void init() {
         initCombos();
-        
+
         createLabel();
     }
-    
+
+    public void resetCombos() {
+        jFeature1.removeAllItems();
+        jFeature1.addItem("--");
+
+        jFeature2.removeAllItems();
+        jFeature2.addItem("--");
+
+        jProductType.removeAllItems();
+        jProductType.addItem("--");
+
+        jLetterRating.removeAllItems();
+        jLetterRating.addItem("--");
+
+        jDefrost.removeAllItems();
+        jDefrost.addItem("--");
+
+        jRatedVoltage.removeAllItems();
+        jRatedVoltage.addItem("--");
+
+        jRatedFrequency.removeAllItems();
+        jRatedFrequency.addItem("--");
+    }
+
     public void initCombos() {
         // Combo lists
         List<String> features = StringUtils.splitString(
@@ -69,10 +92,15 @@ public class EnergyLabelDataPanel extends javax.swing.JPanel {
             jFeature1.addItem(feature);
             jFeature2.addItem(feature);
         });
+
         productTypes.forEach(jProductType::addItem);
+
         energyEfficiencyClasses.forEach(jLetterRating::addItem);
+
         defrostTypes.forEach(jDefrost::addItem);
+
         ratedVoltages.forEach(jRatedVoltage::addItem);
+
         ratedFrequencies.forEach(jRatedFrequency::addItem);
     }
 
