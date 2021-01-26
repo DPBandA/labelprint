@@ -59,7 +59,7 @@ public class EnergyLabelDataPanelJM extends javax.swing.JPanel {
         if (getEnergyLabel().getType().equals("Refrigerator")
                 || getEnergyLabel().getType().equals("Basic Refrigerator")
                 || getEnergyLabel().getType().equals("Refrigerator-Freezer")) {
-            getEnergyLabel().setDefrost("Automatic");
+            getEnergyLabel().setDefrost("Automatic defrost");
         }
         getEnergyLabel().setRatedVoltage(app.getSystemOptions().getProperty("DefaultRatedVoltage"));
         getEnergyLabel().setRatedFrequency(app.getSystemOptions().getProperty("DefaultRatedFrequency"));

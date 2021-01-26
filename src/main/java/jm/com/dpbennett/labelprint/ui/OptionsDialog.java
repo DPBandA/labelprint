@@ -99,6 +99,10 @@ public class OptionsDialog extends javax.swing.JDialog {
         // Refrigerator constants       
         jFeaturesList.setText(sysOptions.getProperty("Features"));
         jProductTypes.setText(sysOptions.getProperty("ProductTypes"));
+        jDefrostTypes.setText(sysOptions.getProperty("DefrostTypes"));
+        jEfficiencyClasses.setText(sysOptions.getProperty("EnergyEfficiencyClasses"));
+        jRatedVoltages.setText(sysOptions.getProperty("RatedVoltages"));
+        jRatedFrequencies.setText(sysOptions.getProperty("RatedFrequencies"));
 
         loadProductTypeDetailandClassCombos(sysOptions);
 
@@ -190,6 +194,12 @@ public class OptionsDialog extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         jDefrostTypes = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jEfficiencyClasses = new javax.swing.JTextField();
+        jRatedVoltages = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jRatedFrequencies = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
         jOk = new javax.swing.JButton();
         jCancel = new javax.swing.JButton();
 
@@ -605,7 +615,7 @@ public class OptionsDialog extends javax.swing.JDialog {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(jConnectToDatabaseCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         jDatabaseOptionsPanelLayout.setVerticalGroup(
             jDatabaseOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,38 +686,46 @@ public class OptionsDialog extends javax.swing.JDialog {
         jLabel18.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel18.setText("Defrost Types:");
 
+        jLabel19.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel19.setText("Efficiency Classes:");
+
+        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel14.setText("Rated Voltages:");
+
+        jLabel20.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel20.setText("Rated Frequencies:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel16)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(68, 68, 68))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(105, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(67, 67, 67)))
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jRatedFrequencies)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(jEfficiencyClasses, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(jRatedVoltages))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel16)
-                .addGap(61, 61, 61)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
@@ -715,12 +733,19 @@ public class OptionsDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addContainerGap(203, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(21, 21, 21)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(365, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(jEfficiencyClasses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRatedVoltages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRatedFrequencies, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jContantsPanelLayout = new javax.swing.GroupLayout(jContantsPanel);
@@ -729,14 +754,14 @@ public class OptionsDialog extends javax.swing.JDialog {
             jContantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jContantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 703, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jContantsPanelLayout.setVerticalGroup(
             jContantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jContantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -760,7 +785,7 @@ public class OptionsDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jOptionsTabbedPane)
+            .addComponent(jOptionsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jOk)
@@ -797,23 +822,23 @@ public class OptionsDialog extends javax.swing.JDialog {
         sysOptions.setConnectToDatabase(jConnectToDatabaseCheckBox.isSelected());
 
         if (app.setupDatabaseConnection()) {
-            try {               
+            try {
                 // Database
                 sysOptions.setProperty("DefaultFieldToSearch",
                         jDefaultSearchFieldComboBox.getSelectedItem().toString());
                 // Label Content
                 // Electricity rates
                 sysOptions.setProperty("CostPerKWh_1", jElectricityRate1.getText());
-                sysOptions.setProperty("CostPerKWh_2", jElectricityRate2.getText());                
+                sysOptions.setProperty("CostPerKWh_2", jElectricityRate2.getText());
                 // Image export formats
                 sysOptions.setExportPDF(jPDF.isSelected());
                 sysOptions.setExportPNG(jPNG.isSelected());
                 sysOptions.setExportGIF(jGIF.isSelected());
                 sysOptions.setExportJPEG(jJPEG.isSelected());
                 // Image size
-                sysOptions.setProperty("FridgeImageWidth", jImageWidth.getText()); 
+                sysOptions.setProperty("FridgeImageWidth", jImageWidth.getText());
                 sysOptions.setProperty("FridgeImageHeight", jImageHeight.getText());
-                sysOptions.setProperty("ACImageWidth", jACImageWidth.getText()); 
+                sysOptions.setProperty("ACImageWidth", jACImageWidth.getText());
                 sysOptions.setProperty("ACImageHeight", jACImageHeight.getText());
                 // Label defaults
                 sysOptions.setProperty("DefaultRatedVoltage",
@@ -826,12 +851,14 @@ public class OptionsDialog extends javax.swing.JDialog {
                         jRoomACStandard.getSelectedItem().toString());
                 sysOptions.setProperty("DefaultProductType",
                         jProductType.getSelectedItem().toString());
-                
-               
+
                 // Product data constants
                 sysOptions.setProperty("Features", jFeaturesList.getText());
                 sysOptions.setProperty("ProductTypes", jProductTypes.getText());
-               
+                sysOptions.setProperty("DefrostTypes", jDefrostTypes.getText());
+                sysOptions.setProperty("EnergyEfficiencyClasses", jEfficiencyClasses.getText());
+                sysOptions.setProperty("RatedVoltages", jRatedVoltages.getText());
+                sysOptions.setProperty("RatedFrequencies", jRatedFrequencies.getText());
 
                 ReturnMessage message = sysOptions.validate(app.getEntityManager());
 
@@ -988,6 +1015,7 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jDatabaseURLTextField;
     private javax.swing.JComboBox jDefaultSearchFieldComboBox;
     private javax.swing.JTextArea jDefrostTypes;
+    private javax.swing.JTextField jEfficiencyClasses;
     private javax.swing.JTextField jElectricityRate1;
     private javax.swing.JTextField jElectricityRate2;
     private javax.swing.JTextArea jFeaturesList;
@@ -1000,11 +1028,14 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -1025,8 +1056,10 @@ public class OptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JComboBox<String> jProductType;
     private javax.swing.JTextArea jProductTypes;
+    private javax.swing.JTextField jRatedFrequencies;
     private javax.swing.JComboBox<String> jRatedFrequency;
     private javax.swing.JComboBox<String> jRatedVoltage;
+    private javax.swing.JTextField jRatedVoltages;
     private javax.swing.JComboBox<String> jRefrigeratorStandard;
     private javax.swing.JComboBox<String> jRoomACStandard;
     private javax.swing.JCheckBox jSVG;

@@ -492,8 +492,8 @@ public class Application extends javax.swing.JFrame implements Runnable {
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpAboutActionPerformed
 
         JOptionPane.showMessageDialog(this,
-                new CustomEditorPane("LabelPrint<br>"
-                        + "&copy; 2020 D P Bennett & Associates<br>"
+                new CustomEditorPane("LabelPrint 3.2.0<br>"
+                        + "&copy; 2021 D P Bennett & Associates<br>"
                         + "<a href=\"http://labelprint.dpbennett.com.jm\">http://labelprint.dpbennett.com.jm</a>"),
                 "About",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -654,8 +654,6 @@ public class Application extends javax.swing.JFrame implements Runnable {
     public void updateLabelPanels() {
 
         getLabelFormPanel().updateLabelData();
-
-        //getLabelFormPanel().updateLabelData();
 
         getEnergyLabelPanel().updateLabel();
 
