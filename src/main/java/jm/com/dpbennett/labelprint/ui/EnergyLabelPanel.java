@@ -19,10 +19,14 @@ Email: info@dpbennett.com.jm
  */
 package jm.com.dpbennett.labelprint.ui;
 
+import com.google.zxing.WriterException;
 import java.io.*;
 import java.awt.print.PrinterException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jm.com.dpbennett.business.entity.mt.EnergyLabel;
+import jm.com.dpbennett.labelprint.GenerateQRCode;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherAdapter;
 import org.apache.batik.swing.svg.SVGLoadEventDispatcherEvent;
@@ -36,6 +40,7 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.print.PrintTranscoder;
+import org.apache.batik.util.SVGConstants;
 
 /**
  * Displays and manage SVG type of labels.
@@ -171,6 +176,16 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                         setElementText("carrier", getEnergyLabel().getManufacturer(), "end");
                         // Code //tk
                         setElementText("code", getEnergyLabel().getModel(), "end");
+                        Element qrcode = svgDocument.getElementById("qrcode");
+                        try {
+                            qrcode.setAttributeNS(SVGConstants.XLINK_NAMESPACE_URI,
+                                    SVGConstants.XLINK_HREF_QNAME,
+                                    "data:image/png;base64," +
+                                            GenerateQRCode.getQRCodeImageData(
+                                                    getQRCodeData(), 125));
+                        } catch (WriterException | IOException ex) {
+                            System.out.println(ex);
+                        }
 
                     } else {
                         // Year of evaluation
@@ -212,6 +227,17 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                         annualConsumptionUnit.setAttribute("x", "" + (rect.getX() + rect.getWidth()));
                         // Batch code
                         setElementText("batchCode", getEnergyLabel().getBatchCode(), "middle");
+                        // QR Code
+                        Element qrcode = svgDocument.getElementById("qrcode");
+                        try {
+                            qrcode.setAttributeNS(SVGConstants.XLINK_NAMESPACE_URI,
+                                    SVGConstants.XLINK_HREF_QNAME,
+                                    "data:image/png;base64," +
+                                            GenerateQRCode.getQRCodeImageData(
+                                                    getQRCodeData(), 125));
+                        } catch (WriterException | IOException ex) {
+                            System.out.println(ex);
+                        }
 
                     }
 
@@ -222,6 +248,15 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
 
         }
 
+    }
+    
+    private String getQRCodeData() {
+      return "Manufacturer: " + getEnergyLabel().getManufacturer() + "\n" +
+              "Distributor: " + getEnergyLabel().getDistributor() + "\n" + 
+              "Country of Origin: " + getEnergyLabel().getCountry() + "\n" +
+              "Brand: " + getEnergyLabel().getBrand() + "\n" +
+              "Model: " + getEnergyLabel().getModel() + "\n" +
+              "";  
     }
 
     private void eraseAllRatingLetters() {
