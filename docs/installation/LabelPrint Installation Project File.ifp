@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = LabelPrint
-Program version = 3.2.0
+Program version = 3.3.0
 Windows 2000 = 0
 Windows XP = 1
 Windows Server 2003 = 1
@@ -39,7 +39,7 @@ Licence dialog = 1
 [Finish]
 Sart program = 1
 Reboot computer = 0
-Program = <InstallPath>\LabelPrint-3.1.0.jar
+Program = <InstallPath>\LabelPrint-3.3.0.jar
 ProgramArguments = 
 [Shortcuts]
 Allowtc = 1
@@ -94,8 +94,8 @@ N/A
 F:\Projects\labelprint\src\main\resources\system\LabelPrint.properties
 1.8 KB
 properties
-F:\Projects\labelprint\target\LabelPrint-3.2.0.jar
-715.7 KB
+F:\Projects\labelprint\target\LabelPrint-3.3.0.jar
+720.6 KB
 jar
 [Licence_Begin]
 37931
@@ -768,13 +768,13 @@ For more information on this, and how to apply and follow the GNU AGPL, see\par
 [SCs]
 Desktop
 LabelPrint
-<InstallPath>\LabelPrint-3.2.0.jar
+<InstallPath>\LabelPrint-3.3.0.jar
 
 <InstallPath>\Icon.ico
 0
 Startmenu
 LabelPrint
-<InstallPath>\LabelPrint-3.2.0.jar
+<InstallPath>\LabelPrint-3.3.0.jar
 
 <InstallPath>\Icon.ico
 0
