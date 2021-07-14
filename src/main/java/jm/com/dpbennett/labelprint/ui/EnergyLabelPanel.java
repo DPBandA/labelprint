@@ -180,9 +180,9 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                         try {
                             qrcode.setAttributeNS(SVGConstants.XLINK_NAMESPACE_URI,
                                     SVGConstants.XLINK_HREF_QNAME,
-                                    "data:image/png;base64," +
-                                            GenerateQRCode.getQRCodeImageData(
-                                                    getQRCodeData(), 125));
+                                    "data:image/png;base64,"
+                                    + GenerateQRCode.getQRCodeImageData(
+                                            getQRCodeData(), 125));
                         } catch (WriterException | IOException ex) {
                             System.out.println(ex);
                         }
@@ -232,9 +232,9 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
                         try {
                             qrcode.setAttributeNS(SVGConstants.XLINK_NAMESPACE_URI,
                                     SVGConstants.XLINK_HREF_QNAME,
-                                    "data:image/png;base64," +
-                                            GenerateQRCode.getQRCodeImageData(
-                                                    getQRCodeData(), 125));
+                                    "data:image/png;base64,"
+                                    + GenerateQRCode.getQRCodeImageData(
+                                            getQRCodeData(), 125));
                         } catch (WriterException | IOException ex) {
                             System.out.println(ex);
                         }
@@ -249,14 +249,20 @@ public class EnergyLabelPanel extends javax.swing.JPanel {
         }
 
     }
-    
+
     private String getQRCodeData() {
-      return "Manufacturer: " + getEnergyLabel().getManufacturer() + "\n" +
-              "Distributor: " + getEnergyLabel().getDistributor() + "\n" + 
-              "Country of Origin: " + getEnergyLabel().getCountry() + "\n" +
-              "Brand: " + getEnergyLabel().getBrand() + "\n" +
-              "Model: " + getEnergyLabel().getModel() + "\n" +
-              "";  
+        String data = "Manufacturer: " + getEnergyLabel().getManufacturer() + "\n"
+                + "Distributor: " + getEnergyLabel().getDistributor() + "\n"
+                + "Country of origin: " + getEnergyLabel().getCountry() + "\n"
+                + "Brand: " + getEnergyLabel().getBrand() + "\n"
+                + "Model: " + getEnergyLabel().getModel() + "\n"
+                + "Electricity rate 1: " + getEnergyLabel().getCostPerKwh() + "\n"
+                + "Electricity rate 2: " + getEnergyLabel().getCostPerKwh2() + "\n"
+                + "Year of evaluation: " + getEnergyLabel().getYearOfEvaluation() + "\n"
+                + "Batch code: " + getEnergyLabel().getBatchCode() + "\n"
+                + "";
+
+        return data;
     }
 
     private void eraseAllRatingLetters() {
