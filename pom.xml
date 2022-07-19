@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jm.com.dpbennett</groupId>
-    <artifactId>client-management</artifactId>
-    <version>2.0.0</version>
+    <artifactId>labelprint-web</artifactId>
+    <version>1.0.0</version>
     <packaging>war</packaging>
 
-    <name>CM</name>
+    <name>LP</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -26,6 +26,12 @@
             <version>2.0.0</version>
             <type>war</type>
         </dependency> 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>client-management</artifactId>
+            <version>2.0.0</version>
+            <type>war</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -59,10 +65,16 @@
                             <artifactId>system-management</artifactId>
                         </overlay>
                     </overlays>
+                    <overlays>
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>client-management</artifactId>
+                        </overlay>
+                    </overlays>
                    
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    <description>An enterprise client management web application.</description>
+    <description>The LabelPrint web application.</description>
 </project>
