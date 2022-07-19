@@ -17,7 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 Email: info@dpbennett.com.jm
  */
-package jm.com.dpbennett.cm.manager;
+package jm.com.dpbennett.lp.manager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ import javax.persistence.EntityManager;
 import jm.com.dpbennett.business.entity.hrm.User;
 import jm.com.dpbennett.business.entity.mt.EnergyLabel;
 import jm.com.dpbennett.business.entity.util.BusinessEntityUtils;
+import jm.com.dpbennett.cm.manager.ClientManager;
 import jm.com.dpbennett.sm.manager.SystemManager;
 import jm.com.dpbennett.sm.util.BeanUtils;
 import jm.com.dpbennett.sm.util.MainTabView;
@@ -49,6 +50,18 @@ public class LabelManager implements Serializable, AuthenticationListener {
     public LabelManager() {
         init();
     }
+    
+    public void okLabel() {
+        
+    }
+    
+    public void cancelLabelEdit() {
+        
+    }
+
+    public void updateEnergyLabel() {
+
+    }
 
     public EnergyLabel getSelectedEnergyLabel() {
         return selectedEnergyLabel;
@@ -57,14 +70,14 @@ public class LabelManager implements Serializable, AuthenticationListener {
     public void setSelectedEnergyLabel(EnergyLabel selectedEnergyLabel) {
         this.selectedEnergyLabel = selectedEnergyLabel;
     }
-    
-     public void editSelectedEnergyLabel() {
 
-        PrimeFacesUtils.openDialog(null, "energyLabelDialog", true, true, true, 550, 700);
+    public void editSelectedEnergyLabel() {
+
+        PrimeFacesUtils.openDialog(null, "labelDialog", true, true, true, 550, 700);
     }
-    
-    public void createNewEnergyLabel () {
-        
+
+    public void createNewEnergyLabel() {
+
     }
 
     public String getApplicationHeader() {
@@ -114,12 +127,34 @@ public class LabelManager implements Serializable, AuthenticationListener {
 
     public void reset() {
         searchText = "";
-        foundEnergyLabels = new ArrayList<>();
+        //foundEnergyLabels = new ArrayList<>();
 
         initManagers();
     }
 
+    // tk
+    public List<EnergyLabel> findLabels(String searchField,
+            String searchPattern) {
+
+        List<EnergyLabel> labelsFound;
+
+        String query = "SELECT r FROM EnergyLabel r WHERE r." + searchField + " LIKE '%" + searchPattern + "%'";
+
+        try {
+            labelsFound = (List<EnergyLabel>) getEntityManager1().createQuery(query).getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+
+            labelsFound = new ArrayList<>();
+        }
+
+        return labelsFound;
+    }
+
     public List<EnergyLabel> getFoundEnergyLabels() {
+        if (foundEnergyLabels == null) {
+            foundEnergyLabels = findLabels("model", "");
+        }
         return foundEnergyLabels;
     }
 
@@ -173,7 +208,7 @@ public class LabelManager implements Serializable, AuthenticationListener {
     }
 
     public void doDefaultSearch() {
-        
+
         switch (getSystemManager().getDashboard().getSelectedTabId()) {
             case "Energy Labels":
                 break;

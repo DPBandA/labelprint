@@ -62,20 +62,91 @@ Email: info@dpbennett.com.jm
                  editMode="cell"
                  paginator="true"                                 
                  rows="15"
+                 widgetVar="labelVar"
                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                  value="#{labelManager.foundEnergyLabels}">                        
 
-        <p:ajax event="cellEdit" listener="#{labelManager.onLabelCellEdit}" />
+        <p:ajax event="cellEdit" 
+                update="energyLabelsTable"
+                listener="#{labelManager.onLabelCellEdit}" />
 
         <f:facet name="header">
             <h:outputText value="Search Results (found: #{labelManager.numLabelsFound})" />
         </f:facet>
 
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="Job Number"/>
+        <p:column headerText="Job Number">
+            <p:cellEditor>
+            <f:facet name="output">
+               <h:outputText value="#{label.jobNumber}" /> 
             </f:facet>
-            <h:outputText value="#{label.jobNumber}" />
+            <f:facet name="input">
+               <p:inputText  value="#{label.jobNumber}" >
+                    <p:ajax update="energyLabelsTable"
+                           listener="#{labelManager.updateEnergyLabel}"
+                           process="@this" />
+               </p:inputText>
+            </f:facet>   
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="Brand">
+            <p:cellEditor>
+            <f:facet name="output">
+               <h:outputText value="#{label.brand}" /> 
+            </f:facet>
+            <f:facet name="input">
+               <p:inputText  value="#{label.brand}" >
+                    <p:ajax update="energyLabelsTable"
+                           listener="#{labelManager.updateEnergyLabel}"
+                           process="@this" />
+               </p:inputText>
+            </f:facet>   
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="Distributor">
+            <p:cellEditor>
+            <f:facet name="output">
+               <h:outputText value="#{label.distributor}" /> 
+            </f:facet>
+            <f:facet name="input">
+               <p:inputText  value="#{label.distributor}" >
+                    <p:ajax update="energyLabelsTable"
+                           listener="#{labelManager.updateEnergyLabel}"
+                           process="@this" />
+               </p:inputText>
+            </f:facet>   
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="Manufacturer">
+            <p:cellEditor>
+            <f:facet name="output">
+               <h:outputText value="#{label.manufacturer}" /> 
+            </f:facet>
+            <f:facet name="input">
+               <p:inputText  value="#{label.manufacturer}" >
+                    <p:ajax update="energyLabelsTable"
+                           listener="#{labelManager.updateEnergyLabel}"
+                           process="@this" />
+               </p:inputText>
+            </f:facet>   
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="Country">
+            <p:cellEditor>
+            <f:facet name="output">
+               <h:outputText value="#{label.country}" /> 
+            </f:facet>
+            <f:facet name="input">
+               <p:inputText  value="#{label.country}" >
+                    <p:ajax update="energyLabelsTable"
+                           listener="#{labelManager.updateEnergyLabel}"
+                           process="@this" />
+               </p:inputText>
+            </f:facet>   
+            </p:cellEditor>
         </p:column>
 
         <p:column style="width:32px">
