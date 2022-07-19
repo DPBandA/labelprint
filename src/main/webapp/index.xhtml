@@ -32,7 +32,7 @@ Email: info@dpbennett.com.jm
         <meta http-equiv="expires" content="0" />
         <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
         <meta http-equiv="pragma" content="no-cache" />
-        <title>LabelPrint</title>     
+        <title>#{labelManager.applicationHeader}</title>     
         <link rel="shortcut icon" type="image/x-icon" href="#{systemManager.appShortcutIconURL}" />
         <script type="text/javascript" src="js/javascripts.js" />   
         <link rel="stylesheet" href="css/main.css" />  
@@ -61,7 +61,7 @@ Email: info@dpbennett.com.jm
                             
                             <h:panelGrid columns="1">   
 
-                                <h:outputText value="LabelPrint"
+                                <h:outputText value="#{labelManager.applicationHeader}"
                                               style="color: darkgrey; font-size: 14pt; font-weight: bold;" />
 
                                 <h:outputText value="#{systemManager.applicationSubheader}"
@@ -93,9 +93,10 @@ Email: info@dpbennett.com.jm
                 </p:splitterPanel>
                 <p:splitterPanel>
                     <p:splitter>
-                        <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center" 
+                        <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center"  
                                          size="30" minSize="0">
-                             <p:panel id="dashboardPanel" header="Dashboard">
+                             <p:panel id="dashboardPanel" 
+                                      header="Dashboard">
 
                                 <p:commandButton
                                     id="doGeneralSearchButton"
@@ -116,37 +117,18 @@ Email: info@dpbennett.com.jm
                             </p:panel>
                         </p:splitterPanel>     
                         <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center" 
-                                         size="70" minSize="65">
+                                         size="100" minSize="65">
                             <p:tabView id="mainTabView"   
                                        rendered="#{systemManager.mainTabView.render}"
-                                       value="#{systemManager.mainTabView.tabs}" 
-                                       var="t"         
                                        style="border-width: 0px;"
-
                                        widgetVar="mainTabViewVar">
+                                                           
+                                <p:tab title="Energy Labels" >
+                                    <ui:include src="label/labelsTab.xhtml" /> 
+                                </p:tab>
 
-                                <p:ajax event="tabClose" 
-                                        immediate="true"
-                                        process="@this"
-                                        update=""
-                                        listener="#{systemManager.onMainViewTabClose}" />  
-
-                                <p:ajax event="tabChange" 
-                                        immediate="true"
-                                        process="@this"                                
-                                        listener="#{systemManager.onMainViewTabChange}" />  
-
-
-                                <p:tab title="#{t.name}" closable="true"  >
-
-                                    <h:panelGroup rendered="#{t.id == 'System Administration'}" >
-                                        <ui:include src="admin/generalAdminTab.xhtml" /> 
-                                    </h:panelGroup>  
-
-                                    <h:panelGroup rendered="#{t.id == 'Clients'}" >
-                                        <ui:include src="client/clientsTab.xhtml" />                                                                
-                                    </h:panelGroup>
-
+                                <p:tab title="Clients" >
+                                    <ui:include src="client/clientsTab.xhtml" />
                                 </p:tab>
 
                             </p:tabView> 
