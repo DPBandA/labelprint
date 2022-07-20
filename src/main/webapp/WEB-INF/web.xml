@@ -5,6 +5,7 @@
         <param-value>   
             /WEB-INF/faces-config-sm.xml,      
             /WEB-INF/faces-config-cm.xml,
+            /WEB-INF/faces-config-jmts.xml,
             /WEB-INF/faces-config-lp.xml
         </param-value>
     </context-param>

@@ -14,22 +14,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>     
+    <dependencies>  
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>client-management-lib</artifactId>
-            <version>2.0.0</version>
-        </dependency>        
+            <artifactId>job-management-tracking-system-lib</artifactId>
+            <version>4.0.1</version>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>system-management</artifactId>
-            <version>2.0.0</version>
-            <type>war</type>
-        </dependency> 
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>client-management</artifactId>
-            <version>2.0.0</version>
+            <artifactId>job-management-tracking-system</artifactId>
+            <version>4.0.1</version>
             <type>war</type>
         </dependency>
     </dependencies>
@@ -62,16 +56,9 @@
                     <overlays>
                         <overlay>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>system-management</artifactId>
+                            <artifactId>job-management-tracking-system</artifactId>
                         </overlay>
-                    </overlays>
-                    <overlays>
-                        <overlay>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>client-management</artifactId>
-                        </overlay>
-                    </overlays>
-                   
+                    </overlays>                   
                 </configuration>
             </plugin>
         </plugins>
