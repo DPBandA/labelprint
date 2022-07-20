@@ -74,6 +74,14 @@ Email: info@dpbennett.com.jm
                                     listener="#{labelManager.updateEnergyLabel}"
                                     process="@this"/>
                         </p:inputText>
+
+                        <h:outputText value="Model" />        
+                        <p:inputText value="#{labelManager.selectedEnergyLabel.model}"
+                                     id="model" >
+                            <p:ajax event="change"                
+                                    listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+                        </p:inputText>
                         
                         <h:outputText value="Distributor" />        
                         <p:inputText value="#{labelManager.selectedEnergyLabel.distributor}"
@@ -100,8 +108,72 @@ Email: info@dpbennett.com.jm
                         </p:inputText>
                     </h:panelGrid>                    
                 </p:tab>
-                <p:tab title="Features">
-                    
+                <p:tab title="Description &amp; Features">
+                    <h:panelGrid columns="2" cellspacing="10">
+                        <h:outputLabel value="Product type" 
+                                       for="productType"/>
+                        <p:selectOneMenu id="productType" 
+                                         style="width: 300px;"
+                                         value="#{labelManager.selectedEnergyLabel.type}">
+
+                            <f:selectItems  value="#{labelManager.energyEfficiencyProductTypes}"
+                                            var="productType"                            
+                                            itemValue="#{productType}"
+                                            itemLabel="#{productType}"/>
+
+                            <p:ajax listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+
+                        </p:selectOneMenu>
+                        
+                        <h:outputLabel value="Defrost" 
+                                       for="defrost"/>
+                        <p:selectOneMenu id="defrost" 
+                                         style="width: 300px;"
+                                         value="#{labelManager.selectedEnergyLabel.defrost}">
+
+                            <f:selectItems  value="#{labelManager.defrostTypes}"
+                                            var="defrost"                            
+                                            itemValue="#{defrost}"
+                                            itemLabel="#{defrost}"/>
+
+                            <p:ajax listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Feature 1" 
+                                       for="feature1"/>
+                        <p:selectOneMenu id="feature1" 
+                                         style="width: 300px;"
+                                         value="#{labelManager.selectedEnergyLabel.feature1}">
+
+                            <f:selectItems  value="#{labelManager.refrigeratorFeatures}"
+                                            var="feature1"                            
+                                            itemValue="#{feature1}"
+                                            itemLabel="#{feature1}"/>
+
+                            <p:ajax listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Feature 2" 
+                                       for="feature2"/>
+                        <p:selectOneMenu id="feature2" 
+                                         style="width: 300px;"
+                                         value="#{labelManager.selectedEnergyLabel.feature2}">
+
+                            <f:selectItems  value="#{labelManager.refrigeratorFeatures}"
+                                            var="feature2"                            
+                                            itemValue="#{feature2}"
+                                            itemLabel="#{feature2}"/>
+
+                            <p:ajax listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+
+                        </p:selectOneMenu>
+                    </h:panelGrid>
                 </p:tab>
                 <p:tab title="Specification &amp; Rating">
                     

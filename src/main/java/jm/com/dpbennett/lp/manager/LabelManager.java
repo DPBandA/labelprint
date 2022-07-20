@@ -22,6 +22,7 @@ package jm.com.dpbennett.lp.manager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
 import jm.com.dpbennett.business.entity.hrm.User;
 import jm.com.dpbennett.business.entity.mt.EnergyLabel;
@@ -31,6 +32,7 @@ import jm.com.dpbennett.sm.manager.SystemManager;
 import jm.com.dpbennett.sm.util.BeanUtils;
 import jm.com.dpbennett.sm.util.MainTabView;
 import jm.com.dpbennett.sm.Authentication.AuthenticationListener;
+import static jm.com.dpbennett.sm.manager.SystemManager.getStringListAsSelectItems;
 import jm.com.dpbennett.sm.util.PrimeFacesUtils;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.CellEditEvent;
@@ -50,6 +52,21 @@ public class LabelManager implements Serializable, AuthenticationListener {
      */
     public LabelManager() {
         init();
+    }
+
+    public List<SelectItem> getEnergyEfficiencyProductTypes() {
+       return SystemManager.getStringListAsSelectItems(getEntityManager1(),
+                "energyEfficiencyProductTypes");
+    }
+    
+    public List<SelectItem> getDefrostTypes() {
+       return SystemManager.getStringListAsSelectItems(getEntityManager1(),
+                "defrostTypes");
+    }
+    
+    public List<SelectItem> getRefrigeratorFeatures() {
+       return SystemManager.getStringListAsSelectItems(getEntityManager1(),
+                "refrigeratorFeatures");
     }
 
     public void okLabel() {
