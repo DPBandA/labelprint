@@ -53,8 +53,10 @@ public class LabelManager implements Serializable, AuthenticationListener {
     }
 
     public void okLabel() {
-        // tk
-        selectedEnergyLabel.save(getEntityManager1());
+        if (selectedEnergyLabel.getIsDirty()) {
+            selectedEnergyLabel.save(getEntityManager1());
+            selectedEnergyLabel.setIsDirty(false);
+        }
 
         PrimeFaces.current().dialog().closeDynamic(null);
     }
