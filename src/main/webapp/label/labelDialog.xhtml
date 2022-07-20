@@ -58,7 +58,15 @@ Email: info@dpbennett.com.jm
                        style="margin-top: 1px;margin-bottom: 1px;"
                        widgetVar="labelFormTabVar" >
                 <p:tab title="General">
-                    
+                    <h:panelGrid columns="2" cellspacing="10">
+                        <h:outputText value="Identification" />        
+                        <p:inputText value="#{labelManager.selectedEnergyLabel.jobNumber}"
+                                     id="jobNumber" >
+                            <p:ajax event="change"                
+                                    listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+                        </p:inputText>
+                    </h:panelGrid>                    
                 </p:tab>
                 <p:tab title="Features">
                     

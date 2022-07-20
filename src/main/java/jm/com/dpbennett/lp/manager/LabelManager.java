@@ -32,6 +32,7 @@ import jm.com.dpbennett.sm.util.BeanUtils;
 import jm.com.dpbennett.sm.util.MainTabView;
 import jm.com.dpbennett.sm.Authentication.AuthenticationListener;
 import jm.com.dpbennett.sm.util.PrimeFacesUtils;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.CellEditEvent;
 
 /**
@@ -50,17 +51,20 @@ public class LabelManager implements Serializable, AuthenticationListener {
     public LabelManager() {
         init();
     }
-    
+
     public void okLabel() {
-        
+        // tk
+        selectedEnergyLabel.save(getEntityManager1());
+
+        PrimeFaces.current().dialog().closeDynamic(null);
     }
-    
+
     public void cancelLabelEdit() {
-        
+        PrimeFaces.current().dialog().closeDynamic(null);
     }
 
     public void updateEnergyLabel() {
-
+        selectedEnergyLabel.setIsDirty(true);
     }
 
     public EnergyLabel getSelectedEnergyLabel() {
@@ -77,7 +81,9 @@ public class LabelManager implements Serializable, AuthenticationListener {
     }
 
     public void createNewEnergyLabel() {
+        selectedEnergyLabel = new EnergyLabel();
 
+        editSelectedEnergyLabel();
     }
 
     public String getApplicationHeader() {
@@ -132,7 +138,7 @@ public class LabelManager implements Serializable, AuthenticationListener {
         initManagers();
     }
 
-    // tk
+    // tk Implement find* method in the EnergyLabel class that searches more fields.
     public List<EnergyLabel> findLabels(String searchField,
             String searchPattern) {
 
@@ -172,15 +178,8 @@ public class LabelManager implements Serializable, AuthenticationListener {
     }
 
     public void doEnergyLabelSearch() {
-//        if (searchText.trim().length() > 1) {
-//            if (getIsActiveClientsOnly()) {
-//                foundClients = Client.findActiveClientsByAnyPartOfName(getEntityManager1(), searchText);
-//            } else {
-//                foundClients = Client.findClientsByAnyPartOfName(getEntityManager1(), searchText);
-//            }
-//        } else {
-//            foundClients = new ArrayList<>();
-//        }
+        // tk Implement better search
+        foundEnergyLabels = findLabels("brand", searchText);
     }
 
     public String getSearchText() {
