@@ -59,7 +59,7 @@ Email: info@dpbennett.com.jm
                        widgetVar="labelFormTabVar" >
                 <p:tab title="General">
                     <h:panelGrid columns="2" cellspacing="10">
-                        <h:outputText value="Job number" />        
+                        <h:outputLabel value="Job number" for="jobNumber" />        
                         <p:inputText value="#{labelManager.selectedEnergyLabel.jobNumber}"
                                      id="jobNumber" >
                             <p:ajax event="change"                
@@ -67,7 +67,7 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
                         </p:inputText>
 
-                        <h:outputText value="Brand" />        
+                        <h:outputLabel value="Brand" for="brand" />        
                         <p:inputText value="#{labelManager.selectedEnergyLabel.brand}"
                                      id="brand" >
                             <p:ajax event="change"                
@@ -75,15 +75,23 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
                         </p:inputText>
 
-                        <h:outputText value="Model" />        
+                        <h:outputLabel value="Model" for="model" />        
                         <p:inputText value="#{labelManager.selectedEnergyLabel.model}"
                                      id="model" >
                             <p:ajax event="change"                
                                     listener="#{labelManager.updateEnergyLabel}"
                                     process="@this"/>
                         </p:inputText>
+
+                        <h:outputLabel value="Batch code" for="batchCode" />        
+                        <p:inputText value="#{labelManager.selectedEnergyLabel.batchCode}"
+                                     id="batchCode" >
+                            <p:ajax event="change"                
+                                    listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+                        </p:inputText>
                         
-                        <h:outputText value="Distributor" />        
+                        <h:outputLabel value="Distributor" for="distributor" />        
                         <p:inputText value="#{labelManager.selectedEnergyLabel.distributor}"
                                      id="distributor" >
                             <p:ajax event="change"                
@@ -91,7 +99,7 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
                         </p:inputText>
 
-                        <h:outputText value="Manufacturer" />        
+                        <h:outputLabel value="Manufacturer" for="manufacturer" />        
                         <p:inputText value="#{labelManager.selectedEnergyLabel.manufacturer}"
                                      id="manufacturer" >
                             <p:ajax event="change"                
@@ -99,7 +107,7 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
                         </p:inputText>
 
-                        <h:outputText value="Country" />        
+                        <h:outputLabel value="Country" for="country" />        
                         <p:inputText value="#{labelManager.selectedEnergyLabel.country}"
                                      id="country" >
                             <p:ajax event="change"                
@@ -176,10 +184,94 @@ Email: info@dpbennett.com.jm
                     </h:panelGrid>
                 </p:tab>
                 <p:tab title="Specification &amp; Rating">
-                    
+                    <h:panelGrid columns="2" cellspacing="10">
+                        <h:outputLabel value="Capacity" for="capacity" />        
+                        <p:inputNumber value="#{labelManager.selectedEnergyLabel.capacity}"
+                                       decimalPlaces="3" 
+                                       id="capacity" >
+                            <p:ajax event="change"                
+                                    listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+                        </p:inputNumber>
+
+                        <h:outputLabel value="Rated voltage (V)" 
+                                       for="ratedVoltage"/>
+                        <p:selectOneMenu id="ratedVoltage" 
+                                         value="#{labelManager.selectedEnergyLabel.ratedVoltage}">
+
+                            <f:selectItems  value="#{labelManager.ratedVoltages}"
+                                            var="ratedVoltage"                            
+                                            itemValue="#{ratedVoltage}"
+                                            itemLabel="#{ratedVoltage}"/>
+
+                            <p:ajax listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Rated current (A)" 
+                                       for="ratedCurrent" />        
+                        <p:inputNumber value="#{labelManager.selectedEnergyLabel.ratedCurrent}"
+                                       decimalPlaces="3" 
+                                       id="ratedCurrent" >
+                            <p:ajax event="change"                
+                                    listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+                        </p:inputNumber>
+
+                        <h:outputLabel value="Rated frequency (Hz)" 
+                                       for="ratedFrequency"/>
+                        <p:selectOneMenu id="ratedFrequency" 
+                                         value="#{labelManager.selectedEnergyLabel.ratedFrequency}">
+
+                            <f:selectItems  value="#{labelManager.ratedFrequencies}"
+                                            var="ratedFrequency"                            
+                                            itemValue="#{ratedFrequency}"
+                                            itemLabel="#{ratedFrequency}"/>
+
+                            <p:ajax listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+
+                        </p:selectOneMenu>                        
+                    </h:panelGrid>
                 </p:tab>
                 <p:tab title="Energy Efficiency">
-                    
+                    <h:panelGrid columns="2" cellspacing="10">
+                        <h:outputLabel value="Energy efficiency class" 
+                                       for="letterRating"/>
+                        <p:selectOneMenu id="letterRating" 
+                                         value="#{labelManager.selectedEnergyLabel.letterRating}">
+
+                            <f:selectItems  value="#{labelManager.energyEfficiencyClasses}"
+                                            var="letterRating"                            
+                                            itemValue="#{letterRating}"
+                                            itemLabel="#{letterRating}"/>
+
+                            <p:ajax listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Operating cost ($/yr)" 
+                                       for="operatingCost" />        
+                        <p:inputNumber value="#{labelManager.selectedEnergyLabel.operatingCost}"
+                                       decimalPlaces="0" 
+                                       id="operatingCost" >
+                            <p:ajax event="change"                
+                                    listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+                        </p:inputNumber>
+
+                        <h:outputLabel value="Annual consumption (kwh/yr)" 
+                                       for="annualConsumption" />        
+                        <p:inputNumber value="#{labelManager.selectedEnergyLabel.annualConsumption}"
+                                       decimalPlaces="0" 
+                                       id="annualConsumption" >
+                            <p:ajax event="change"                
+                                    listener="#{labelManager.updateEnergyLabel}"
+                                    process="@this"/>
+                        </p:inputNumber>
+                    </h:panelGrid>
                 </p:tab>                
             </p:tabView>
             <p:toolbar>

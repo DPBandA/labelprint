@@ -104,6 +104,21 @@ Email: info@dpbennett.com.jm
             </p:cellEditor>
         </p:column>
 
+        <p:column headerText="Model">
+            <p:cellEditor>
+            <f:facet name="output">
+               <h:outputText value="#{label.model}" /> 
+            </f:facet>
+            <f:facet name="input">
+               <p:inputText  value="#{label.model}" >
+                    <p:ajax update="energyLabelsTable"
+                           listener="#{labelManager.updateEnergyLabel}"
+                           process="@this" />
+               </p:inputText>
+            </f:facet>   
+            </p:cellEditor>
+        </p:column>
+
         <p:column headerText="Distributor">
             <p:cellEditor>
             <f:facet name="output">
