@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jm.com.dpbennett</groupId>
-    <artifactId>labelprint-web</artifactId>
-    <version>1.0.0</version>
+    <artifactId>labelprint</artifactId>
+    <version>4.0.0</version>
     <packaging>war</packaging>
 
     <name>LP</name>
@@ -15,17 +15,55 @@
     </properties>
 
     <dependencies>  
+        
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>job-management-tracking-system-lib</artifactId>
-            <version>4.0.1</version>
+            <artifactId>system-management-lib</artifactId>
+            <version>2.2.0</version>
+        </dependency> 
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>system-management</artifactId>
+            <version>2.2.0</version>
+            <type>war</type>
+        </dependency>  
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>report-management</artifactId>
+            <version>2.0.0</version>
+            <type>war</type>
+        </dependency> 
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>human-resource-management</artifactId>
+            <version>2.0.0</version>
+            <type>war</type>
         </dependency>
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>client-management</artifactId>
+            <version>2.0.0</version>
+            <type>war</type>
+        </dependency> 
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>financial-management</artifactId>
+            <version>1.5.0</version>
+            <type>war</type>
+        </dependency> 
+        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>job-management-tracking-system</artifactId>
-            <version>4.0.1</version>
+            <version>4.4.0</version>
             <type>war</type>
-        </dependency>
+        </dependency>         
+        
     </dependencies>
 
     <build>
@@ -54,6 +92,36 @@
                         index.xhtml                        
                     </dependentWarExcludes>
                     <overlays>
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>report-management</artifactId>
+                        </overlay>  
+                                                     
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>human-resource-management</artifactId>
+                        </overlay>
+                        
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>client-management</artifactId>
+                        </overlay>
+                        
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>system-management</artifactId>
+                        </overlay>
+                        
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>system-management</artifactId>
+                        </overlay>
+                        
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>financial-management</artifactId> 
+                        </overlay>
+                        
                         <overlay>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>job-management-tracking-system</artifactId>
