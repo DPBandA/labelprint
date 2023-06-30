@@ -1,5 +1,5 @@
 <!--
-Job Management & Tracking System (JMTS) 
+LabelPrint (LP) 
 Copyright (C) 2023  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
@@ -22,57 +22,21 @@ Email: info@dpbennett.com.jm
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-    <ui:include src="/job/finance/accpac/accPacClientInformationDialog.xhtml"/>
-
-
     <p:toolbar style="margin-bottom: 1px;">
 
         <p:toolbarGroup align="left">
 
             <p:menuButton value="New" >  
 
-                <p:menuitem
-                    actionListener="#{legalDocumentManager.createNewLegalDocument}"
-                    rendered="#{jobManager.user.hasModule('legalDocumentManager')}"
-                    value="Document" 
-                    title="Add a new document"
-                    icon="pi pi-plus"
-                    process="@this" >
-
-                    <p:ajax event="dialogReturn" 
-                            update=":appForm:mainTabView"
-                            listener="#{legalDocumentManager.documentDialogReturn}" />
-
-                </p:menuitem>
-
-                <p:menuitem  
-                    value="Document type"
-                    icon="pi pi-plus" 
-                    actionListener="#{legalDocumentManager.createNewDocumentType}"     
-                    rendered="#{jobManager.user.hasModule('legalDocumentManager')}"
-                    process="@this"
-                    title="Add a new document type" />
-
-                <p:menuitem 
-                    value="Classification"
-                    icon="pi pi-plus" 
-                    actionListener="#{legalDocumentManager.createNewClassification}"  
-                    rendered="#{jobManager.user.hasModule('legalDocumentManager')}"
-                    process="@this"
-                    title="Add a new classification" />
-
-                <p:separator />
-
-                <p:menuitem value="Job"
-                            title="Create new job"
+                <p:menuitem value="Label"
+                            title="Create new label"
                             icon="pi pi-plus"
-                            actionListener="#{jobManager.createNewJob}"  
-                            rendered="#{jobManager.user.hasModule('jobManager')}"
+                            actionListener="#{energyLabelManager.createNewEnergyLabel}" 
                             process="@this" >
 
                     <p:ajax event="dialogReturn" 
                             update=":appForm:mainTabView"
-                            listener="#{jobManager.jobDialogReturn}" />
+                            listener="#{energyLabelManager.energyLabelDialogReturn}" />
 
                 </p:menuitem>    
 
@@ -80,7 +44,7 @@ Email: info@dpbennett.com.jm
 
                 <p:menuitem
                     actionListener="#{clientManager.createNewClient}"                
-                    disabled="#{!jobManager.user.can('AddClient')}"
+                    disabled="#{!energyLabelManager.user.can('AddClient')}"
                     global="true" 
                     value="Client"
                     title="Create new client"
@@ -91,23 +55,7 @@ Email: info@dpbennett.com.jm
                             update=":appForm:mainTabView:clientsTable" />
 
                 </p:menuitem>
-
-                <p:separator />
-
-                <p:menuitem value="Proforma Invoice"
-                            title="Create new proforma invoice"
-                            icon="pi pi-plus"
-                            disabled="false"
-                            actionListener="#{jobFinanceManager.openNewProformaInvoiceDialog}" 
-                            rendered="#{jobManager.user.hasModule('jobManager')}"
-                            process="@this" >
-
-                    <p:ajax event="dialogReturn" 
-                            listener="#{jobFinanceManager.proformaDialogReturn}"
-                            update=""/>
-
-                </p:menuitem> 
-                
+                               
             </p:menuButton>    
 
         </p:toolbarGroup>
@@ -118,11 +66,10 @@ Email: info@dpbennett.com.jm
             <p:tieredMenu overlay="true" trigger="dynaButton" my="left top" 
                           at="left bottom" style="width:200px">  
 
-                <p:menuitem value="Job Browser"
-                            title="Open the Job Browser tab" 
+                <p:menuitem value="Label Browser"
+                            title="Open the Energy Label Browser" 
                             icon="pi pi-briefcase"
-                            actionListener="#{jobManager.openJobBrowser}" 
-                            rendered="#{jobManager.user.hasModule('jobManager')}"
+                            actionListener="#{energyLabelManager.openEnergyLabelBrowser}" 
                             process="@this" />  
 
                 <p:separator />
@@ -130,35 +77,16 @@ Email: info@dpbennett.com.jm
                 <p:menuitem value="Client Management"
                             title="Open the Clients tab"
                             icon="pi pi-users"
-                            actionListener="#{jobManager.openClientsTab}" 
-                            process="@this" />
-
-                <p:menuitem actionListener="#{jobFinanceManager.updateAccPacClient}"                                                
-                            value="Client Credit Status"
-                            icon="pi pi-thumbs-up"
-                            update=""
-                            oncomplete="PF('accPacClientInformationDialog').show();"
-                            process="@this" />
-
-                <p:separator />
-
-                <p:menuitem value="Proforma Invoices"
-                            title="Browse proforma invoices"
-                            icon="pi pi-dollar"
-                            disabled="false" 
-                            actionListener="#{jobFinanceManager.openProformaInvoicesTab}"
+                            actionListener="#{energyLabelManager.openClientsTab}" 
                             process="@this" />
                 
                 <p:separator />
-                
+               
                 <p:menuitem value="Reports"
                             title="Open the Reports tab"
                             icon="pi pi-file-o"
-                            actionListener="#{jobManager.openReportsTab}"
+                            actionListener="#{energyLabelManager.openReportsTab}"
                             process="@this" />
-
-                <p:separator />
-
 
             </p:tieredMenu>         
         </p:toolbarGroup>

@@ -29,8 +29,8 @@ Email: info@dpbennett.com.jm
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>#{jobManager.applicationHeader}</title>     
-        <link rel="shortcut icon" type="image/x-icon" href="#{jobManager.appShortcutIconURL}" />
+        <title>#{energyLabelManager.applicationHeader}</title>     
+        <link rel="shortcut icon" type="image/x-icon" href="#{energyLabelManager.appShortcutIconURL}" />
         <script type="text/javascript" src="js/javascripts.js" /> 
         <h:outputStylesheet library="webjars" name="primeflex/3.2.1/primeflex.min.css" />       
         <link rel="stylesheet" type="text/css" href="css/main.css" />           
@@ -41,7 +41,7 @@ Email: info@dpbennett.com.jm
         <ui:include src="job/loginDialog.xhtml"/>         
         <ui:include src="common/userProfileDialog.xhtml"/> 
 
-        <h:form id="appForm" rendered="#{jobManager.userLoggedIn}">   
+        <h:form id="appForm" rendered="#{energyLabelManager.userLoggedIn}">   
 
             <p:growl id="growl3" life="5000" showDetail="true" />
             <p:panel>
@@ -53,17 +53,17 @@ Email: info@dpbennett.com.jm
                                 <div class="grid">
                                     <div class="col-12 md:col-3">
                                         <h:panelGroup style="float: left;margin-right: 10px;" >
-                                            <p:graphicImage value="#{jobManager.logoURL}"
+                                            <p:graphicImage value="#{energyLabelManager.logoURL}"
                                                             class="logo"
-                                                            height="#{jobManager.logoURLImageHeight}" 
-                                                            width="#{jobManager.logoURLImageWidth}"/>
+                                                            height="#{energyLabelManager.logoURLImageHeight}" 
+                                                            width="#{energyLabelManager.logoURLImageWidth}"/>
                                         </h:panelGroup>
                                         <h:panelGrid columns="1" cellspacing="0" >   
 
-                                            <p:outputLabel value="#{jobManager.applicationHeader}"
+                                            <p:outputLabel value="#{energyLabelManager.applicationHeader}"
                                                            class="header-text" />
 
-                                            <p:outputLabel value="Job Administration &amp; Management"
+                                            <p:outputLabel value="#{energyLabelManager.applicationSubheader}"
                                                            class="subheader-text" />  
 
                                         </h:panelGrid>
@@ -94,7 +94,7 @@ Email: info@dpbennett.com.jm
                                                         <p:ajax event="select" 
                                                                 update=":appForm:notificationBadge"
                                                                 oncomplete="PF('NotificationPanelVar').hide()"
-                                                                listener="#{jobManager.onNotificationSelect}" />
+                                                                listener="#{energyLabelManager.onNotificationSelect}" />
 
                                                         <p:column>
                                                             <p:outputLabel value="#{notification.name}" 
@@ -108,7 +108,7 @@ Email: info@dpbennett.com.jm
                                             <p:spacer width="30"/>
                                             <p:menuButton iconPos="left"
                                                           icon="pi pi-user"
-                                                          title="#{jobManager.user.employee.firstName} #{jobManager.user.employee.lastName} (#{jobManager.user.username})"
+                                                          title="#{energyLabelManager.user.employee.firstName} #{energyLabelManager.user.employee.lastName} (#{energyLabelManager.user.username})"
                                                           id="userMenu"
                                                           class="usermenu-button" >
 
@@ -118,7 +118,7 @@ Email: info@dpbennett.com.jm
                                                             icon="pi pi-cog"
                                                             value="Profile"
                                                             process="@this"/>  
-                                                <p:menuitem actionListener="#{jobManager.logout}"                                             
+                                                <p:menuitem actionListener="#{energyLabelManager.logout}"                                             
                                                             icon="pi pi-sign-out"
                                                             value="Logout"
                                                             oncomplete="location.reload();"
@@ -138,7 +138,7 @@ Email: info@dpbennett.com.jm
 
                                         <p:defaultCommand target="defaultCommand" />
 
-                                        <ui:include src="dashboard/job/adminTab.xhtml" />
+                                        <ui:include src="dashboard/label/adminTab.xhtml" />
 
                                     </div>    
                                     <div class="col-12 md:col-8">

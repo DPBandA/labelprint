@@ -11,5 +11,11 @@
             <to-view-id>/label/labelDialog.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>   
+    
+    <managed-bean>
+        <managed-bean-name>energyLabelManager</managed-bean-name>
+        <managed-bean-class>jm.com.dpbennett.mt.manager.EnergyLabelManager</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
 </faces-config>
