@@ -26,68 +26,68 @@ Email: info@dpbennett.com.jm
 
     <h:panelGrid columns="2" cellspacing="5" >
         <p:outputLabel value="Search type" />            
-        <p:selectOneMenu value="#{jobManager.searchType}" >
+        <p:selectOneMenu value="#{energyLabelManager.searchType}" >
 
-            <f:selectItems value="#{jobManager.groupedSearchTypes}" />
+            <f:selectItems value="#{energyLabelManager.groupedSearchTypes}" />
 
             <p:ajax update="dateField,datePeriod,startSearchDate,endSearchDate" 
-                    listener="#{jobManager.updateSearchType}"
+                    listener="#{energyLabelManager.updateSearchType}"
                     global="false" 
                     process="@this" />
 
         </p:selectOneMenu>
 
         <p:outputLabel value="Date field" />
-        <p:selectOneMenu value="#{jobManager.dateSearchPeriod.dateField}" 
+        <p:selectOneMenu value="#{energyLabelManager.dateSearchPeriod.dateField}" 
                          id="dateField" >
             <p:ajax                        
-                listener="#{jobManager.updateDateSearchField}"
+                listener="#{energyLabelManager.updateDateSearchField}"
                 global="false"
                 process="@this" />
 
-            <f:selectItems value="#{jobManager.allDateSearchFields}" />
+            <f:selectItems value="#{energyLabelManager.allDateSearchFields}" />
 
         </p:selectOneMenu>
 
         <p:outputLabel value="Date period" />               
-        <p:selectOneMenu value= "#{jobManager.dateSearchPeriod.name}" 
+        <p:selectOneMenu value= "#{energyLabelManager.dateSearchPeriod.name}" 
                          id="datePeriod" >
 
-            <p:ajax listener="#{jobManager.dateSearchPeriod.initDatePeriod}"
+            <p:ajax listener="#{energyLabelManager.dateSearchPeriod.initDatePeriod}"
                     global="false"
                     update="startSearchDate,endSearchDate"
                     process="@this" />
 
-            <f:selectItems value="#{jobManager.datePeriods}"/>
+            <f:selectItems value="#{energyLabelManager.datePeriods}"/>
 
         </p:selectOneMenu>
         <p:outputLabel value="Start" />
         <p:calendar id="startSearchDate"
-                    value="#{jobManager.dateSearchPeriod.startDate}"                    
+                    value="#{energyLabelManager.dateSearchPeriod.startDate}"                    
                     size="17"
                     navigator="true"
                     autocomplete="off"
                     validator="requiredFieldValidator"
-                    disabled="#{jobManager.dateSearchPeriod.startDateDisabled}"
+                    disabled="#{energyLabelManager.dateSearchPeriod.startDateDisabled}"
                     pattern="MMM dd, yyyy" />
 
         <p:outputLabel value="End" />
         <p:calendar id="endSearchDate"
-                    value="#{jobManager.dateSearchPeriod.endDate}"
+                    value="#{energyLabelManager.dateSearchPeriod.endDate}"
                     size="17"
                     navigator="true"
                     validator="requiredFieldValidator"
-                    disabled="#{jobManager.dateSearchPeriod.endDateDisabled}"
+                    disabled="#{energyLabelManager.dateSearchPeriod.endDateDisabled}"
                     pattern="MMM dd, yyyy" />
 
     </h:panelGrid>   
 
-    <p:inputText value="#{jobManager.searchText}"  
+    <p:inputText value="#{energyLabelManager.searchText}"  
                  id="searchText" >
 
         <p:ajax event="keyup"
                 global="false"
-                listener="#{jobManager.updateSearch}"
+                listener="#{energyLabelManager.updateSearch}"
                 process="@this"/>
 
     </p:inputText>                    
@@ -95,7 +95,7 @@ Email: info@dpbennett.com.jm
     <p:spacer width="5" />
     <p:commandButton id="defaultCommand"
                      class="search-button"   
-                     actionListener="#{jobManager.doDefaultCommand}"
+                     actionListener="#{energyLabelManager.doDefaultCommand}"
                      update=":appForm:mainTabView"
                      icon="pi pi-search"
                      process="@form" />

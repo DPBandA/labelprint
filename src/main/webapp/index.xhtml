@@ -38,7 +38,7 @@ Email: info@dpbennett.com.jm
     <h:body>
 
         <ui:include src="common/commonDialogs.xhtml" />          
-        <ui:include src="job/loginDialog.xhtml"/>         
+        <ui:include src="label/loginDialog.xhtml"/>         
         <ui:include src="common/userProfileDialog.xhtml"/> 
 
         <h:form id="appForm" rendered="#{energyLabelManager.userLoggedIn}">   
@@ -143,8 +143,8 @@ Email: info@dpbennett.com.jm
                                     </div>    
                                     <div class="col-12 md:col-8">
                                         <p:tabView id="mainTabView"  
-                                                   rendered="#{jobManager.mainTabView.render}"
-                                                   value="#{jobManager.mainTabView.tabs}" 
+                                                   rendered="#{energyLabelManager.mainTabView.render}"
+                                                   value="#{energyLabelManager.mainTabView.tabs}" 
                                                    var="t" 
                                                    dynamic="false"
                                                    widgetVar="mainTabViewVar">
@@ -152,39 +152,23 @@ Email: info@dpbennett.com.jm
                                             <p:ajax event="tabClose" 
                                                     immediate="true"
                                                     process="@this"
-                                                    listener="#{jobManager.onMainViewTabClose}" />  
+                                                    listener="#{energyLabelManager.onMainViewTabClose}" />  
 
                                             <p:ajax event="tabChange" 
                                                     immediate="true"
                                                     process="@this"                                
-                                                    listener="#{jobManager.onMainViewTabChange}" />  
+                                                    listener="#{energyLabelManager.onMainViewTabChange}" />  
 
 
                                             <p:tab title="#{t.name}" closable="true"  >
-
-                                                <h:panelGroup rendered="#{t.id == 'Job Browser'}">                                
-                                                    <ui:include src="job/jobBrowser.xhtml" /> 
-                                                </h:panelGroup>
                                                 
-                                                <h:panelGroup rendered="#{t.id == 'Proforma Invoices'}">                                
-                                                    <ui:include src="job/finance/proformaInvoicesTab.xhtml" /> 
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{t.id == 'Document Browser'}">                                
-                                                    <ui:include src="legal/documentBrowser.xhtml" />   
-                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{t.id == 'Label Browser'}" >
+                                                    <ui:include src="label/labelsTab.xhtml" /> 
+                                                </h:panelGroup> 
 
                                                 <h:panelGroup rendered="#{t.id == 'System Administration'}" >
                                                     <ui:include src="admin/generalAdminTab.xhtml" /> 
                                                 </h:panelGroup>  
-
-                                                <h:panelGroup  rendered="#{t.id == 'Financial Administration'}">
-                                                    <ui:include src="finance/financialAdminTab.xhtml" /> 
-                                                </h:panelGroup> 
-
-                                                <h:panelGroup rendered="#{t.id == 'Human Resource'}" >
-                                                    <ui:include src="hr/hrmTab.xhtml" /> 
-                                                </h:panelGroup>
 
                                                 <h:panelGroup rendered="#{t.id == 'Clients'}" >
                                                     <ui:include src="client/clientsTab.xhtml" />                                                                
@@ -197,14 +181,6 @@ Email: info@dpbennett.com.jm
                                                 <h:panelGroup rendered="#{t.id == 'Report Templates'}" >
                                                     <ui:include src="report/reportTemplatesTab.xhtml" />                                                               
                                                 </h:panelGroup>                                            
-
-                                                <h:panelGroup rendered="#{t.id == 'Purchase Requisitions'}" >
-                                                    <ui:include src="finance/purch/purchreqsTab.xhtml" />                                                                
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{t.id == 'Suppliers'}" >
-                                                    <ui:include src="finance/purch/suppliersTab.xhtml" />                                                                
-                                                </h:panelGroup>
 
                                             </p:tab>
 
@@ -219,7 +195,7 @@ Email: info@dpbennett.com.jm
                     <div class="col-12">
 
                         <p:outputLabel value=" &copy; D P Bennett &amp; Associates"   
-                                       onclick="window.open('https://dpbennett.com.jm/jmts');"
+                                       onclick="window.open('https://dpbennett.com.jm/lp');"
                                        class="header-text" />
 
                     </div>
@@ -228,7 +204,7 @@ Email: info@dpbennett.com.jm
             <p:poll interval="60" 
                     global="false"
                     onerror="PF('connectionErrorDialog').show();"
-                    listener="#{jobManager.handleKeepAlive}" />
+                    listener="#{energyLabelManager.handleKeepAlive}" />
 
         </h:form>
 

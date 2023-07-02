@@ -1,5 +1,5 @@
 <!--
-Job Management & Tracking System (JMTS) 
+LabelPrint (LP) 
 Copyright (C) 2023  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
@@ -31,19 +31,7 @@ Email: info@dpbennett.com.jm
             title="System administration" 
             rendered="#{systemManager.user.hasModule('systemManager')}"
             value="System" 
-            icon="pi pi-database" />     
-
-        <p:menuitem value="Finance"
-                    icon="pi pi-fw pi-dollar"
-                    title="Financial administration" 
-                    rendered="#{systemManager.user.hasModule('financeManager')}"
-                    actionListener="#{financeManager.openFinancialAdministration}" />
-
-        <p:menuitem value="Human Resource"
-                    title="Human resource management"
-                    rendered="#{systemManager.user.hasModule('humanResourceManager')}"
-                    icon="pi pi-users"
-                    actionListener="#{humanResourceManager.openHumanResourceBrowser}" />  
+            icon="pi pi-database" />  
 
         <ui:remove>
             <f:facet name="options">
