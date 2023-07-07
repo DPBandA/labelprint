@@ -39,7 +39,7 @@ Email: info@dpbennett.com.jm
             <p:growl id="label_growl" life="5000" showDetail="true"/>
 
             <p:toolbar>
-                <p:toolbarGroup>
+                <p:toolbarGroup align="left">
                     <p:commandButton value="Ok"
                                      actionListener="#{energyLabelManager.okLabel}"
                                      update="label_growl"  
@@ -49,11 +49,16 @@ Email: info@dpbennett.com.jm
                                      immediate="true" 
                                      actionListener="#{energyLabelManager.cancelLabelEdit}"
                                      icon="pi pi-times" />
-                    <p:spacer width="10"/>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="right">
+
                     <p:commandButton value="Export"
-                                     actionListener="#{energyLabelManager.getSVDoc}"
+                                     actionListener="#{energyLabelManager.exportEnergyLabel}"
+                                     title="Export energy label image"
                                      update="label_growl"  
-                                     icon="pi pi-check"/>
+                                     icon="pi pi-image"/>
+
                 </p:toolbarGroup>
             </p:toolbar>
 
@@ -308,7 +313,7 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
 
                         </p:inputNumber>
-                        
+
                         <h:outputLabel value="Electricity Rate 1 ($/kwh)" 
                                        for="costPerKwh" />        
                         <p:inputNumber value="#{energyLabelManager.selectedEnergyLabel.costPerKwh}"
@@ -320,7 +325,7 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
 
                         </p:inputNumber>
-                        
+
                         <h:outputLabel value="Electricity Rate 2 ($/kwh)" 
                                        for="costPerKwh2" />        
                         <p:inputNumber value="#{energyLabelManager.selectedEnergyLabel.costPerKwh2}"
@@ -332,7 +337,7 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
 
                         </p:inputNumber>
-                        
+
                         <h:outputLabel value="Year of evaluation" 
                                        for="yearOfEvaluation" />        
                         <p:inputNumber value="#{energyLabelManager.selectedEnergyLabel.yearOfEvaluation}"
@@ -349,7 +354,7 @@ Email: info@dpbennett.com.jm
                 </p:tab>                
             </p:tabView>
             <p:toolbar>
-                <p:toolbarGroup>
+                <p:toolbarGroup align="left">
                     <p:commandButton value="Ok"
                                      actionListener="#{energyLabelManager.okLabel}"
                                      update="label_growl"                             
@@ -359,6 +364,16 @@ Email: info@dpbennett.com.jm
                                      immediate="true" 
                                      actionListener="#{energyLabelManager.cancelLabelEdit}"
                                      icon="pi pi-times" />
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="right">
+
+                    <p:commandButton value="Export"
+                                     actionListener="#{energyLabelManager.exportEnergyLabel}"
+                                     title="Export energy label image"
+                                     update="label_growl"  
+                                     icon="pi pi-image"/>
+
                 </p:toolbarGroup>
             </p:toolbar>
         </h:form>     
