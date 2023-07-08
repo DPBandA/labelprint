@@ -54,10 +54,13 @@ Email: info@dpbennett.com.jm
                 <p:toolbarGroup align="right">
 
                     <p:commandButton value="Export"
-                                     actionListener="#{energyLabelManager.exportEnergyLabel}"
                                      title="Export energy label image"
                                      update="label_growl"  
-                                     icon="pi pi-image"/>
+                                     icon="pi pi-image">
+
+                        <p:fileDownload value="#{energyLabelManager.energyLabelImage}"/>
+
+                    </p:commandButton>
 
                 </p:toolbarGroup>
             </p:toolbar>
@@ -369,10 +372,13 @@ Email: info@dpbennett.com.jm
                 <p:toolbarGroup align="right">
 
                     <p:commandButton value="Export"
-                                     actionListener="#{energyLabelManager.exportEnergyLabel}"
                                      title="Export energy label image"
                                      update="label_growl"  
-                                     icon="pi pi-image"/>
+                                     icon="pi pi-image">
+
+                        <p:fileDownload value="#{energyLabelManager.energyLabelImage}"/>
+
+                    </p:commandButton>
 
                 </p:toolbarGroup>
             </p:toolbar>
