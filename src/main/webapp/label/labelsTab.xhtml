@@ -35,7 +35,7 @@ Email: info@dpbennett.com.jm
                 title="Add a new label" >
 
                 <p:ajax event="dialogReturn" 
-                        listener="#{energyLabelManager.doEnergyLabelSearch}"
+                        listener="#{energyLabelManager.energyLabelDialogReturn}"
                         update=":appForm:mainTabView:energyLabelsTable"/>
 
             </p:commandButton>
@@ -76,91 +76,91 @@ Email: info@dpbennett.com.jm
 
         <p:column headerText="Manufacturer">
             <p:cellEditor>
-            <f:facet name="output">
-               <h:outputText value="#{label.manufacturer}" /> 
-            </f:facet>
-            <f:facet name="input">
-               <p:inputText  value="#{label.manufacturer}" >
-                    <p:ajax update="energyLabelsTable"
-                           listener="#{energyLabelManager.updateEnergyLabel}"
-                           process="@this" />
-               </p:inputText>
-            </f:facet>   
+                <f:facet name="output">
+                    <h:outputText value="#{label.manufacturer}" /> 
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText  value="#{label.manufacturer}" >
+                        <p:ajax update="energyLabelsTable"
+                                listener="#{energyLabelManager.updateEnergyLabel}"
+                                process="@this" />
+                    </p:inputText>
+                </f:facet>   
             </p:cellEditor>
         </p:column>
 
         <p:column headerText="Distributor">
             <p:cellEditor>
-            <f:facet name="output">
-               <h:outputText value="#{label.distributor}" /> 
-            </f:facet>
-            <f:facet name="input">
-               <p:inputText  value="#{label.distributor}" >
-                    <p:ajax update="energyLabelsTable"
-                           listener="#{energyLabelManager.updateEnergyLabel}"
-                           process="@this" />
-               </p:inputText>
-            </f:facet>   
+                <f:facet name="output">
+                    <h:outputText value="#{label.distributor}" /> 
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText  value="#{label.distributor}" >
+                        <p:ajax update="energyLabelsTable"
+                                listener="#{energyLabelManager.updateEnergyLabel}"
+                                process="@this" />
+                    </p:inputText>
+                </f:facet>   
             </p:cellEditor>
         </p:column>
 
         <p:column headerText="Country">
             <p:cellEditor>
-            <f:facet name="output">
-               <h:outputText value="#{label.country}" /> 
-            </f:facet>
-            <f:facet name="input">
-               <p:inputText  value="#{label.country}" >
-                    <p:ajax update="energyLabelsTable"
-                           listener="#{energyLabelManager.updateEnergyLabel}"
-                           process="@this" />
-               </p:inputText>
-            </f:facet>   
+                <f:facet name="output">
+                    <h:outputText value="#{label.country}" /> 
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText  value="#{label.country}" >
+                        <p:ajax update="energyLabelsTable"
+                                listener="#{energyLabelManager.updateEnergyLabel}"
+                                process="@this" />
+                    </p:inputText>
+                </f:facet>   
             </p:cellEditor>
         </p:column>
 
         <p:column headerText="Distributor">
             <p:cellEditor>
-            <f:facet name="output">
-               <h:outputText value="#{label.distributor}" /> 
-            </f:facet>
-            <f:facet name="input">
-               <p:inputText  value="#{label.distributor}" >
-                    <p:ajax update="energyLabelsTable"
-                           listener="#{energyLabelManager.updateEnergyLabel}"
-                           process="@this" />
-               </p:inputText>
-            </f:facet>   
+                <f:facet name="output">
+                    <h:outputText value="#{label.distributor}" /> 
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText  value="#{label.distributor}" >
+                        <p:ajax update="energyLabelsTable"
+                                listener="#{energyLabelManager.updateEnergyLabel}"
+                                process="@this" />
+                    </p:inputText>
+                </f:facet>   
             </p:cellEditor>
         </p:column>
 
         <p:column headerText="Brand">
             <p:cellEditor>
-            <f:facet name="output">
-               <h:outputText value="#{label.brand}" /> 
-            </f:facet>
-            <f:facet name="input">
-               <p:inputText  value="#{label.brand}" >
-                    <p:ajax update="energyLabelsTable"
-                           listener="#{energyLabelManager.updateEnergyLabel}"
-                           process="@this" />
-               </p:inputText>
-            </f:facet>   
+                <f:facet name="output">
+                    <h:outputText value="#{label.brand}" /> 
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText  value="#{label.brand}" >
+                        <p:ajax update="energyLabelsTable"
+                                listener="#{energyLabelManager.updateEnergyLabel}"
+                                process="@this" />
+                    </p:inputText>
+                </f:facet>   
             </p:cellEditor>
         </p:column>
 
         <p:column headerText="Model">
             <p:cellEditor>
-            <f:facet name="output">
-               <h:outputText value="#{label.model}" /> 
-            </f:facet>
-            <f:facet name="input">
-               <p:inputText  value="#{label.model}" >
-                    <p:ajax update="energyLabelsTable"
-                           listener="#{energyLabelManager.updateEnergyLabel}"
-                           process="@this" />
-               </p:inputText>
-            </f:facet>   
+                <f:facet name="output">
+                    <h:outputText value="#{label.model}" /> 
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText  value="#{label.model}" >
+                        <p:ajax update="energyLabelsTable"
+                                listener="#{energyLabelManager.updateEnergyLabel}"
+                                process="@this" />
+                    </p:inputText>
+                </f:facet>   
             </p:cellEditor>
         </p:column>
 
@@ -174,7 +174,8 @@ Email: info@dpbennett.com.jm
                                              target="#{energyLabelManager.selectedEnergyLabel}" />
 
                 <p:ajax event="dialogReturn" 
-                        update=":appForm:mainTabView:energyLabelsTable"/>
+                        listener="#{energyLabelManager.energyLabelDialogReturn}"
+                        update=":appForm:mainTabView"/>
 
             </p:commandButton>
         </p:column>
@@ -190,7 +191,7 @@ Email: info@dpbennett.com.jm
                 title="Add a new label" >
 
                 <p:ajax event="dialogReturn" 
-                        listener="#{energyLabelManager.doEnergyLabelSearch}"
+                        listener="#{energyLabelManager.energyLabelDialogReturn}"
                         update=":appForm:mainTabView:energyLabelsTable"/>
 
             </p:commandButton>
