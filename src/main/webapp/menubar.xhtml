@@ -28,9 +28,9 @@ Email: info@dpbennett.com.jm
 
         <p:submenu label="Settings" icon="pi pi-cog">
             <p:menuitem 
-                actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+                actionListener="#{systemManager.mainTabView.openTab('Compliance')}" 
                 title="Show compliance settings" 
-                rendered="#{systemManager.user.hasModule('systemManager')}"
+                rendered="#{systemManager.user.hasModule('energyLabelManager')}"
                 value="Compliance" 
                 icon="pi pi-check-square" />
             <p:menuitem 
