@@ -26,22 +26,33 @@ Email: info@dpbennett.com.jm
 
     <p:menubar id="main_menubar" style="width: 100%;">
 
-        <p:menuitem 
-            actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
-            title="Show system administration options" 
-            rendered="#{systemManager.user.hasModule('systemManager')}"
-            value="Options" 
-            icon="pi pi-database" />  
+        <p:submenu label="Settings" icon="pi pi-cog">
+            <p:menuitem 
+                actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+                title="Show compliance settings" 
+                rendered="#{systemManager.user.hasModule('systemManager')}"
+                value="Compliance" 
+                icon="pi pi-check-square" />
+            <p:menuitem 
+                actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+                title="Show energy efficiency settings" 
+                rendered="#{systemManager.user.hasModule('systemManager')}"
+                value="Energy Efficiency" 
+                icon="pi pi-sun" />
+            <p:menuitem 
+                actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+                title="Show LabelPrint settings" 
+                rendered="#{systemManager.user.hasModule('systemManager')}"
+                value="LabelPrint" 
+                icon="pi pi-file" />
+            <p:menuitem 
+                actionListener="#{systemManager.mainTabView.openTab('System')}" 
+                title="Show system settings" 
+                rendered="#{systemManager.user.hasModule('systemManager')}"
+                value="System" 
+                icon="pi pi-database" />  
+        </p:submenu>
 
-        <ui:remove>
-            <f:facet name="options">
-                <div class="ui-input-icon-left mr-2">
-                    <i class="pi pi-fw pi-search" />
-                    <p:inputText placeholder="Enter search text"/>
-                </div>
-                <p:button icon="pi pi-fw pi-search" styleClass="ui-button-info"/>
-            </f:facet>
-        </ui:remove>
 
     </p:menubar>
 
