@@ -26,7 +26,9 @@ Email: info@dpbennett.com.jm
 
     <p:menubar id="main_menubar" style="width: 100%;">
 
-        <p:submenu label="Settings" icon="pi pi-cog">
+        <p:submenu label="Settings" 
+                   rendered="#{systemManager.user.hasModule('energyLabelManager')}"
+                   icon="pi pi-cog" >
             <p:menuitem 
                 actionListener="#{systemManager.mainTabView.openTab('Compliance')}" 
                 title="Show compliance settings" 
@@ -34,15 +36,15 @@ Email: info@dpbennett.com.jm
                 value="Compliance" 
                 icon="pi pi-check-square" />
             <p:menuitem 
-                actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+                actionListener="#{systemManager.mainTabView.openTab('Energy Efficiency')}" 
                 title="Show energy efficiency settings" 
-                rendered="#{systemManager.user.hasModule('systemManager')}"
+                rendered="#{systemManager.user.hasModule('energyLabelManager')}"
                 value="Energy Efficiency" 
                 icon="pi pi-sun" />
             <p:menuitem 
-                actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+                actionListener="#{systemManager.mainTabView.openTab('LabelPrint')}" 
                 title="Show LabelPrint settings" 
-                rendered="#{systemManager.user.hasModule('systemManager')}"
+                rendered="#{systemManager.user.hasModule('energyLabelManager')}"
                 value="LabelPrint" 
                 icon="pi pi-file" />
             <p:menuitem 

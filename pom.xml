@@ -42,14 +42,7 @@
             <version>2.0.0</version>
             <type>war</type>
         </dependency> 
-            
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>job-management-tracking-system</artifactId>
-            <version>4.4.0</version>
-            <type>war</type>
-        </dependency>         
-        
+             
     </dependencies>
 
     <build>

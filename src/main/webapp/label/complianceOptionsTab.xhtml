@@ -42,13 +42,13 @@ Email: info@dpbennett.com.jm
             <p:spacer width="20" />
             <p:inputText value="#{systemManager.systemOptionSearchText}"                                             
                          style="width:300px" placeholder="Enter any part of option description">
-                
+
                 <p:ajax event="keyup"
                         global="false"
                         update=":appForm:mainTabView:complianceOptionsTable"
                         listener="#{systemManager.doSystemOptionSearch('Compliance')}"
                         process="@this"/>
-                
+
             </p:inputText>
         </p:toolbarGroup>
     </p:toolbar>    
@@ -64,26 +64,50 @@ Email: info@dpbennett.com.jm
                  value="#{systemManager.foundSystemOptionsByCategory}">
 
         <f:facet name="header">
-            Financial Options
+            Compliance Setting
         </f:facet>
 
-        <p:column headerText="Description">
+        <p:column>
+            <f:facet name="header">
+                <p:outputLabel value="Description"/>
+            </f:facet>
             <p:cellEditor>
                 <f:facet name="output"> 
                     <p:outputLabel value="#{systemOption.comments}" />
                 </f:facet>
-                <f:facet name="input"><p:inputText value="#{systemOption.comments}" style="width:96%"/></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{systemOption.comments}" style="width:96%"/>
+                </f:facet>
             </p:cellEditor>                                           
         </p:column>   
 
-        <p:column headerText="Value">
+        <p:column rendered="#{systemManager.user.can('BeSuperUser')}">
+            <f:facet name="header" >
+                <p:outputLabel value="Name"/>
+            </f:facet>
+            <p:cellEditor>
+                <f:facet name="output"> 
+                    <p:outputLabel value="#{systemOption.name}" />
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{systemOption.name}" style="width:96%"/>
+                </f:facet>
+            </p:cellEditor>                                         
+        </p:column>   
+
+        <p:column>
+            <f:facet name="header">
+                <p:outputLabel value="Value"/>
+            </f:facet>
             <p:cellEditor>
                 <f:facet name="output"> 
                     <p:outputLabel value="#{systemOption.optionValue}" />
                 </f:facet>
-                <f:facet name="input"><p:inputText value="#{systemOption.optionValue}" style="width:96%"/></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{systemOption.optionValue}" style="width:96%"/>
+                </f:facet>
             </p:cellEditor>                                         
-        </p:column>   
+        </p:column>  
 
         <p:column>
             <p:commandButton title="View or edit system option"   
