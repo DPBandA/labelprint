@@ -32,6 +32,7 @@ Email: info@dpbennett.com.jm
                             title="Create new label"
                             icon="pi pi-plus"
                             actionListener="#{energyLabelManager.createNewEnergyLabel}" 
+                            disabled="#{!energyLabelManager.user.can('CreateEnergyLabel')}"
                             process="@this" >
 
                     <p:ajax event="dialogReturn" 
@@ -42,20 +43,22 @@ Email: info@dpbennett.com.jm
 
                 <p:separator />
 
-                <p:menuitem
-                    actionListener="#{clientManager.createNewClient}"                
-                    disabled="#{!energyLabelManager.user.can('AddClient')}"
-                    global="true" 
-                    value="Client"
-                    title="Create new client"
-                    icon="pi pi-plus"
-                    process="@this" >
+                <ui:remove>
+                    <p:menuitem
+                        actionListener="#{clientManager.createNewClient}"                
+                        disabled="#{!energyLabelManager.user.can('AddClient')}"
+                        global="true" 
+                        value="Client"
+                        title="Create new client"
+                        icon="pi pi-plus"
+                        process="@this" >
 
-                    <p:ajax event="dialogReturn" 
-                            update=":appForm:mainTabView:clientsTable" />
+                        <p:ajax event="dialogReturn" 
+                                update=":appForm:mainTabView:clientsTable" />
 
-                </p:menuitem>
-                               
+                    </p:menuitem>
+                </ui:remove>
+
             </p:menuButton>    
 
         </p:toolbarGroup>
@@ -79,9 +82,9 @@ Email: info@dpbennett.com.jm
                             icon="pi pi-users"
                             actionListener="#{energyLabelManager.openClientsTab}" 
                             process="@this" />
-                
+
                 <p:separator />
-               
+
                 <p:menuitem value="Reports"
                             title="Open the Reports tab"
                             icon="pi pi-file-o"

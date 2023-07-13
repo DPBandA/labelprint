@@ -30,7 +30,8 @@ Email: info@dpbennett.com.jm
             <p:commandButton 
                 value="New"
                 icon="pi pi-plus" 
-                actionListener="#{energyLabelManager.createNewEnergyLabel}"                                            
+                actionListener="#{energyLabelManager.createNewEnergyLabel}"   
+                disabled="#{!energyLabelManager.user.can('CreateEnergyLabel')}"
                 process="@this"
                 title="Add a new label" >
 
@@ -167,6 +168,7 @@ Email: info@dpbennett.com.jm
         <p:column>
             <p:commandButton icon="pi pi-pencil"
                              actionListener="#{energyLabelManager.editSelectedEnergyLabel}"
+                             disabled="#{!energyLabelManager.user.can('EditEnergyLabel')}"
                              process="@this"
                              title="View or edit this label's detail">
 
@@ -186,6 +188,7 @@ Email: info@dpbennett.com.jm
             <p:commandButton 
                 value="New"
                 icon="pi pi-plus" 
+                disabled="#{!energyLabelManager.user.can('CreateEnergyLabel')}"
                 actionListener="#{energyLabelManager.createNewEnergyLabel}"                                            
                 process="@this"
                 title="Add a new label" >
