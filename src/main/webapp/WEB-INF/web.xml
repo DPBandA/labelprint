@@ -3,8 +3,7 @@
     <context-param>
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>   
-            /WEB-INF/faces-config-sm.xml,      
-            /WEB-INF/faces-config-cm.xml,
+            /WEB-INF/faces-config-sm.xml, 
             /WEB-INF/faces-config-lp.xml
         </param-value>
     </context-param>
