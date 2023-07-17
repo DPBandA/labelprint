@@ -71,13 +71,11 @@ Email: info@dpbennett.com.jm
             </p:toolbar>
 
             <p:tabView id="labelFormTabView"
-                       dynamic="true"
+                       dynamic="false"
                        style="margin-top: 1px;margin-bottom: 1px;"
                        widgetVar="labelFormTabVar" >
 
-                <p:ajax event="tabChange" 
-                        update=":labelForm:labelFormTabView"
-                        process="@form" /> 
+                <p:ajax event="tabChange" global="false" /> 
 
                 <p:tab title="General">
                     <h:panelGrid columns="2" cellspacing="10">
@@ -89,7 +87,7 @@ Email: info@dpbennett.com.jm
                             <f:validator validatorId="requiredFieldValidator" />
 
                             <p:ajax event="change"    
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     listener="#{energyLabelManager.updateEnergyLabel}"
                                     process="@this"/>
 
@@ -104,7 +102,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -118,7 +116,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -129,7 +127,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -143,7 +141,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -157,7 +155,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -171,7 +169,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -192,7 +190,7 @@ Email: info@dpbennett.com.jm
                                             itemLabel="#{productType}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:selectOneMenu>
@@ -209,7 +207,7 @@ Email: info@dpbennett.com.jm
                                             itemLabel="#{defrost}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:selectOneMenu>
@@ -226,7 +224,7 @@ Email: info@dpbennett.com.jm
                                             itemLabel="#{feature1}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:selectOneMenu>
@@ -243,7 +241,7 @@ Email: info@dpbennett.com.jm
                                             itemLabel="#{feature2}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:selectOneMenu>
@@ -257,7 +255,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -273,7 +271,7 @@ Email: info@dpbennett.com.jm
                                             itemLabel="#{ratedVoltage}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:selectOneMenu>
@@ -285,7 +283,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -301,7 +299,7 @@ Email: info@dpbennett.com.jm
                                             itemLabel="#{ratedFrequency}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:selectOneMenu>                        
@@ -320,7 +318,7 @@ Email: info@dpbennett.com.jm
                                             itemLabel="#{letterRating}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:selectOneMenu>
@@ -331,7 +329,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -343,7 +341,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -355,7 +353,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -367,7 +365,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -379,7 +377,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -391,7 +389,7 @@ Email: info@dpbennett.com.jm
 
                             <p:ajax event="change"                
                                     listener="#{energyLabelManager.updateEnergyLabel}"
-                                    update=":labelForm"
+                                    update=":labelForm:topToolbar"
                                     process="@this"/>
 
                         </p:inputText>
@@ -411,7 +409,7 @@ Email: info@dpbennett.com.jm
                 <p:toolbarGroup align="left">
                     <p:commandButton value="Save"
                                      actionListener="#{energyLabelManager.saveEnergyLabel}"
-                                     update=":labelForm"     
+                                     update=":labelForm:topToolbar"     
                                      process="@form"
                                      icon="pi pi-check"/>
 
