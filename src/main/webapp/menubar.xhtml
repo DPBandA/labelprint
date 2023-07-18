@@ -25,6 +25,13 @@ Email: info@dpbennett.com.jm
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <p:menubar id="main_menubar" style="width: 100%;">
+        
+        <p:menuitem 
+            actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+            title="System administration" 
+            rendered="#{systemManager.user.hasModule('systemManager')}"
+            value="System" 
+            icon="pi pi-database" />     
 
         <p:submenu label="Settings" 
                    rendered="#{systemManager.user.hasModule('energyLabelManager')}"

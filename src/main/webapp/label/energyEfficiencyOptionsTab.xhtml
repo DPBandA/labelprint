@@ -29,6 +29,7 @@ Email: info@dpbennett.com.jm
         <p:toolbarGroup align="left" >   
             <p:commandButton title="Add new setting"                                  
                              value="New"
+                             disabled="#{!systemManager.user.can('BeSuperUser')}"
                              actionListener="#{systemManager.createNewSystemOption('Energy Efficiency')}"                                                     
                              global="true"
                              process="@this"

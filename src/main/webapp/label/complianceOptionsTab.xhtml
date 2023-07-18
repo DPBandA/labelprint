@@ -29,7 +29,8 @@ Email: info@dpbennett.com.jm
         <p:toolbarGroup align="left" >   
             <p:commandButton title="Add new setting"                                  
                              value="New"
-                             actionListener="#{systemManager.createNewSystemOption('Compliance')}"                                                     
+                             actionListener="#{systemManager.createNewSystemOption('Compliance')}"   
+                             disabled="#{!systemManager.user.can('BeSuperUser')}"
                              global="true"
                              process="@this"
                              icon="pi pi-plus" >

@@ -162,6 +162,10 @@ Email: info@dpbennett.com.jm
 
                                             <p:tab title="#{t.name}" closable="true"  >
 
+                                                <h:panelGroup rendered="#{t.id == 'System Administration'}" >
+                                                    <ui:include src="admin/generalAdminTab.xhtml" /> 
+                                                </h:panelGroup>  
+
                                                 <h:panelGroup rendered="#{t.id == 'Label Browser'}" >
                                                     <ui:include src="label/labelsTab.xhtml" /> 
                                                 </h:panelGroup> 

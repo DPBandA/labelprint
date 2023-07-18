@@ -25,9 +25,10 @@ Email: info@dpbennett.com.jm
       xmlns:f="http://java.sun.com/jsf/core">
 
 
-    <p:commandButton title="Add new option"                                  
+    <p:commandButton title="Add new setting"                                  
                      value="New"
                      actionListener="#{systemManager.createNewSystemOption}" 
+                     disabled="#{!systemManager.user.can('BeSuperUser')}"
                      global="true"
                      process="@this"
                      icon="pi pi-plus" >
