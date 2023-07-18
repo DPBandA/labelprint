@@ -133,6 +133,17 @@ Email: info@dpbennett.com.jm
                                     process="@this"/>
 
                         </p:inputText>
+                        
+                        <h:outputLabel value="Serial number" for="serialNumber" />        
+                        <p:inputText value="#{energyLabelManager.selectedEnergyLabel.serialNumber}"
+                                     id="serialNumber" >
+
+                            <p:ajax event="change"                
+                                    listener="#{energyLabelManager.updateEnergyLabel}"
+                                    update=":labelForm:topToolbar"
+                                    process="@this"/>
+
+                        </p:inputText>
 
                         <h:outputLabel value="Distributor *" for="distributor" 
                                        style="font-weight: bold;" />        
