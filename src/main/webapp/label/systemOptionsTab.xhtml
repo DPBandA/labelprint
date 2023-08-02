@@ -24,29 +24,32 @@ Email: info@dpbennett.com.jm
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
 
+    <p:toolbar>
+        <p:toolbarGroup align="left" > 
+            <p:commandButton title="Add new setting"                                  
+                             value="New"
+                             actionListener="#{systemManager.createNewSystemOption}" 
+                             disabled="#{!systemManager.user.can('BeSuperUser')}"
+                             global="true"
+                             process="@this"
+                             icon="pi pi-plus" >
 
-    <p:commandButton title="Add new setting"                                  
-                     value="New"
-                     actionListener="#{systemManager.createNewSystemOption}" 
-                     disabled="#{!systemManager.user.can('BeSuperUser')}"
-                     global="true"
-                     process="@this"
-                     icon="pi pi-plus" >
+                <p:ajax event="dialogReturn" 
+                        update=":appForm:mainTabView:systemOptionsTable"/>
 
-        <p:ajax event="dialogReturn" 
-                update=":appForm:mainTabView:systemOptionsTable"/>
-
-    </p:commandButton>
-    <p:spacer width="20" />
-    <p:inputText value="#{systemManager.systemOptionSearchText}"
-                 id="systemOptionSearchTextId"
-                 placeholder="Enter search text">
-        <p:ajax event="keyup"
-                global="false"
-                update=":appForm:mainTabView:systemOptionsTable"
-                listener="#{systemManager.doSystemOptionSearch}"
-                process="@this"/>
-    </p:inputText>
+            </p:commandButton>
+            <p:spacer width="20" />
+            <p:inputText value="#{systemManager.systemOptionSearchText}"
+                         id="systemOptionSearchTextId"
+                         placeholder="Enter search text">
+                <p:ajax event="keyup"
+                        global="false"
+                        update=":appForm:mainTabView:systemOptionsTable"
+                        listener="#{systemManager.doSystemOptionSearch}"
+                        process="@this"/>
+            </p:inputText>
+        </p:toolbarGroup>
+    </p:toolbar>
 
     <p:dataTable id="systemOptionsTable"                                       
                  var="systemOption"     
@@ -62,6 +65,10 @@ Email: info@dpbennett.com.jm
 
         <p:ajax event="cellEdit" listener="#{systemManager.onSystemOptionCellEdit}" />
         <p:ajax event="rowSelect" listener="#{systemManager.onRowSelect}" />
+
+        <f:facet name="header">
+            System Settings
+        </f:facet>
 
         <p:column>
             <f:facet name="header">

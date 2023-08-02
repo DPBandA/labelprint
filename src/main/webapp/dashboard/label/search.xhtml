@@ -37,8 +37,9 @@ Email: info@dpbennett.com.jm
 
         </p:selectOneMenu>
 
-        <p:outputLabel value="Date field" />
+        <p:outputLabel value="Date field" rendered="false" />
         <p:selectOneMenu value="#{energyLabelManager.dateSearchPeriod.dateField}" 
+                         rendered="false"
                          id="dateField" >
             <p:ajax                        
                 listener="#{energyLabelManager.updateDateSearchField}"
@@ -49,8 +50,9 @@ Email: info@dpbennett.com.jm
 
         </p:selectOneMenu>
 
-        <p:outputLabel value="Date period" />               
+        <p:outputLabel value="Date period" rendered="false" />               
         <p:selectOneMenu value= "#{energyLabelManager.dateSearchPeriod.name}" 
+                         rendered="false"
                          id="datePeriod" >
 
             <p:ajax listener="#{energyLabelManager.dateSearchPeriod.initDatePeriod}"
@@ -61,9 +63,11 @@ Email: info@dpbennett.com.jm
             <f:selectItems value="#{energyLabelManager.datePeriods}"/>
 
         </p:selectOneMenu>
-        <p:outputLabel value="Start" />
+        
+        <p:outputLabel value="Start" rendered="false" />
         <p:calendar id="startSearchDate"
-                    value="#{energyLabelManager.dateSearchPeriod.startDate}"                    
+                    value="#{energyLabelManager.dateSearchPeriod.startDate}"   
+                    rendered="false"
                     size="17"
                     navigator="true"
                     autocomplete="off"
@@ -71,10 +75,11 @@ Email: info@dpbennett.com.jm
                     disabled="#{energyLabelManager.dateSearchPeriod.startDateDisabled}"
                     pattern="MMM dd, yyyy" />
 
-        <p:outputLabel value="End" />
+        <p:outputLabel value="End" rendered="false" />
         <p:calendar id="endSearchDate"
                     value="#{energyLabelManager.dateSearchPeriod.endDate}"
                     size="17"
+                    rendered="false"
                     navigator="true"
                     validator="requiredFieldValidator"
                     disabled="#{energyLabelManager.dateSearchPeriod.endDateDisabled}"
