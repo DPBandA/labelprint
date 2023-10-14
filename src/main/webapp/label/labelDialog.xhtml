@@ -191,16 +191,18 @@ Email: info@dpbennett.com.jm
 
                 <p:tab title="Description &amp; Features">
                     <h:panelGrid columns="2" cellspacing="10">
-                        <h:outputLabel value="Product type" 
+                        <p:outputLabel value="Product type" 
+                                       style="font-weight: bold;"
                                        for="productType"/>
                         <p:selectOneMenu id="productType" 
-                                         style="width: 300px;"
+                                         required="true"
+                                         style="width: 100%;"
                                          value="#{energyLabelManager.selectedEnergyLabel.type}">
 
                             <f:selectItems  value="#{energyLabelManager.energyEfficiencyProductTypes}"
                                             var="productType"                            
-                                            itemValue="#{productType}"
-                                            itemLabel="#{productType}"/>
+                                            itemValue="#{productType.value}"
+                                            itemLabel="#{productType.label}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
                                     update=":labelForm:topToolbar"
@@ -208,16 +210,17 @@ Email: info@dpbennett.com.jm
 
                         </p:selectOneMenu>
 
-                        <h:outputLabel value="Defrost" 
+                        <p:outputLabel value="Defrost" 
+                                       style="font-weight: bold;"
                                        for="defrost"/>
                         <p:selectOneMenu id="defrost" 
-                                         style="width: 300px;"
+                                         required="true"
                                          value="#{energyLabelManager.selectedEnergyLabel.defrost}">
 
                             <f:selectItems  value="#{energyLabelManager.defrostTypes}"
                                             var="defrost"                            
-                                            itemValue="#{defrost}"
-                                            itemLabel="#{defrost}"/>
+                                            itemValue="#{defrost.value}"
+                                            itemLabel="#{defrost.label}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
                                     update=":labelForm:topToolbar"
@@ -228,13 +231,12 @@ Email: info@dpbennett.com.jm
                         <h:outputLabel value="Feature 1" 
                                        for="feature1"/>
                         <p:selectOneMenu id="feature1" 
-                                         style="width: 300px;"
                                          value="#{energyLabelManager.selectedEnergyLabel.feature1}">
 
                             <f:selectItems  value="#{energyLabelManager.refrigeratorFeatures}"
                                             var="feature1"                            
-                                            itemValue="#{feature1}"
-                                            itemLabel="#{feature1}"/>
+                                            itemValue="#{feature1.value}"
+                                            itemLabel="#{feature1.label}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
                                     update=":labelForm:topToolbar"
@@ -244,14 +246,13 @@ Email: info@dpbennett.com.jm
 
                         <h:outputLabel value="Feature 2" 
                                        for="feature2"/>
-                        <p:selectOneMenu id="feature2" 
-                                         style="width: 300px;"
+                        <p:selectOneMenu id="feature2"
                                          value="#{energyLabelManager.selectedEnergyLabel.feature2}">
 
                             <f:selectItems  value="#{energyLabelManager.refrigeratorFeatures}"
                                             var="feature2"                            
-                                            itemValue="#{feature2}"
-                                            itemLabel="#{feature2}"/>
+                                            itemValue="#{feature2.value}"
+                                            itemLabel="#{feature2.label}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
                                     update=":labelForm:topToolbar"
@@ -273,15 +274,17 @@ Email: info@dpbennett.com.jm
 
                         </p:inputText>
 
-                        <h:outputLabel value="Rated voltage (V)" 
+                        <p:outputLabel value="Rated voltage (V)" 
+                                       style="font-weight: bold;"
                                        for="ratedVoltage"/>
                         <p:selectOneMenu id="ratedVoltage" 
+                                         required="true"
                                          value="#{energyLabelManager.selectedEnergyLabel.ratedVoltage}">
 
                             <f:selectItems  value="#{energyLabelManager.ratedVoltages}"
                                             var="ratedVoltage"                            
-                                            itemValue="#{ratedVoltage}"
-                                            itemLabel="#{ratedVoltage}"/>
+                                            itemValue="#{ratedVoltage.value}"
+                                            itemLabel="#{ratedVoltage.label}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
                                     update=":labelForm:topToolbar"
@@ -301,15 +304,17 @@ Email: info@dpbennett.com.jm
 
                         </p:inputText>
 
-                        <h:outputLabel value="Rated frequency (Hz)" 
+                        <p:outputLabel value="Rated frequency (Hz)" 
+                                       style="font-weight: bold;"
                                        for="ratedFrequency"/>
                         <p:selectOneMenu id="ratedFrequency" 
+                                         required="true"
                                          value="#{energyLabelManager.selectedEnergyLabel.ratedFrequency}">
 
                             <f:selectItems  value="#{energyLabelManager.ratedFrequencies}"
                                             var="ratedFrequency"                            
-                                            itemValue="#{ratedFrequency}"
-                                            itemLabel="#{ratedFrequency}"/>
+                                            itemValue="#{ratedFrequency.value}"
+                                            itemLabel="#{ratedFrequency.label}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
                                     update=":labelForm:topToolbar"
@@ -320,15 +325,17 @@ Email: info@dpbennett.com.jm
                 </p:tab>
                 <p:tab title="Energy Efficiency">
                     <h:panelGrid columns="2" cellspacing="10">
-                        <h:outputLabel value="Energy efficiency class" 
+                        <p:outputLabel value="Energy efficiency class" 
+                                       style="font-weight: bold;"
                                        for="letterRating"/>
                         <p:selectOneMenu id="letterRating" 
+                                         required="true"
                                          value="#{energyLabelManager.selectedEnergyLabel.letterRating}">
 
                             <f:selectItems  value="#{energyLabelManager.energyEfficiencyClasses}"
                                             var="letterRating"                            
-                                            itemValue="#{letterRating}"
-                                            itemLabel="#{letterRating}"/>
+                                            itemValue="#{letterRating.value}"
+                                            itemLabel="#{letterRating.label}"/>
 
                             <p:ajax listener="#{energyLabelManager.updateEnergyLabel}"
                                     update=":labelForm:topToolbar"
@@ -436,7 +443,7 @@ Email: info@dpbennett.com.jm
 
                 <p:toolbarGroup align="right">
 
-                    <h:outputText value="* Fields with bold labels are required to be filled out." 
+                    <h:outputText value="* Field required." 
                                   style="font-weight: bold;" /> 
 
                     <p:spacer width="10"/>
