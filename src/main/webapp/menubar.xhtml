@@ -1,6 +1,6 @@
 <!--
 LabelPrint (LP) 
-Copyright (C) 2023  D P Bennett & Associates Limited
+Copyright (C) 2024  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -24,18 +24,39 @@ Email: info@dpbennett.com.jm
       xmlns:h="http://java.sun.com/jsf/html" 
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <p:menubar id="main_menubar" style="width: 100%;">
-        
-        <p:menuitem 
-            actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
-            title="System administration" 
-            rendered="#{systemManager.user.hasModule('systemManager')}"
-            value="System" 
-            icon="pi pi-database" />     
+    <p:menubar id="main_menubar" style="width: 100%;" autoDisplay="false" >
 
+        <p:submenu label="Label"                            
+                   rendered="#{systemManager.user.hasModule('energyLabelManager')}"
+                   icon="pi pi-images" >
+
+            <p:menuitem value="New"
+                        title="Create new label"
+                        icon="pi pi-plus"
+                        actionListener="#{energyLabelManager.createNewEnergyLabel}" 
+                        rendered="#{energyLabelManager.user.can('CreateEnergyLabel')}"
+                        process="@this" >
+
+                <p:ajax event="dialogReturn" 
+                        update=":appForm:mainTabView"
+                        listener="#{energyLabelManager.energyLabelDialogReturn}" />
+
+            </p:menuitem>  
+
+            <p:divider />
+
+            <p:menuitem value="Label Browser"
+                        title="Open the Energy Label Browser" 
+                        icon="pi pi-images"
+                        actionListener="#{energyLabelManager.openEnergyLabelBrowser}" 
+                        process="@this" />   
+            
+        </p:submenu>
+        
         <p:submenu label="Settings" 
                    rendered="#{systemManager.user.hasModule('energyLabelManager')}"
                    icon="pi pi-cog" >
+            
             <p:menuitem 
                 actionListener="#{energyLabelManager.openComplianceSettingsTab}" 
                 title="Show compliance settings" 
@@ -54,14 +75,17 @@ Email: info@dpbennett.com.jm
                 rendered="#{energyLabelManager.user.can('AccessLabelPrintOptions')}"
                 value="LabelPrint" 
                 icon="pi pi-file" />
+
+            <p:divider rendered="#{systemManager.user.hasModule('systemManager')}" />
+
             <p:menuitem 
-                actionListener="#{systemManager.mainTabView.openTab('System')}" 
-                title="Show system settings" 
+                actionListener="#{systemManager.mainTabView.openTab('System Administration')}" 
+                title="System administration" 
                 rendered="#{systemManager.user.hasModule('systemManager')}"
                 value="System" 
-                icon="pi pi-database" />  
-        </p:submenu>
+                icon="pi pi-database" /> 
 
+        </p:submenu>
 
     </p:menubar>
 

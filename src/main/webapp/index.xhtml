@@ -1,6 +1,6 @@
 <!--
-LabelPrint (LP)  
-Copyright (C) 2023  D P Bennett & Associates Limited
+LabelPrint (LP) 
+Copyright (C) 2024  D P Bennett & Associates Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -26,19 +26,18 @@ Email: info@dpbennett.com.jm
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:f="http://java.sun.com/jsf/core"> 
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>#{energyLabelManager.applicationHeader}</title>     
-        <link rel="shortcut icon" type="image/x-icon" href="#{energyLabelManager.appShortcutIconURL}" />
+    <h:head>        
+        <ui:include src="head.xhtml" />
+        <title>#{energyLabelManager.applicationHeader}</title>         
         <script type="text/javascript" src="js/javascripts.js" /> 
         <h:outputStylesheet library="webjars" name="primeflex/3.2.1/primeflex.min.css" />       
-        <link rel="stylesheet" type="text/css" href="css/main.css" />           
+        <link rel="stylesheet" type="text/css" href="css/main.css" /> 
     </h:head>
-    <h:body>
+
+    <h:body id="appBody" style="margin: 0;">
 
         <ui:include src="common/commonDialogs.xhtml" />          
-        <ui:include src="label/loginDialog.xhtml"/>         
+        <ui:include src="loginDialog.xhtml"/>         
         <ui:include src="common/userProfileDialog.xhtml"/> 
 
         <h:form id="appForm" rendered="#{energyLabelManager.userLoggedIn}">   
@@ -47,161 +46,151 @@ Email: info@dpbennett.com.jm
             <p:panel>
                 <div class="grid">
 
-                    <div class="col-12 md:col-12 col-nogutter">
+                    <div class="col-12 col-nogutter">
                         <div class="grid">
-                            <div class="col-12 col-nogutter">
-                                <div class="grid">
-                                    <div class="col-12 md:col-3">
-                                        <h:panelGroup style="float: left;margin-right: 10px;" >
-                                            <p:graphicImage value="#{energyLabelManager.logoURL}"
-                                                            class="logo"
-                                                            height="#{energyLabelManager.logoURLImageHeight}" 
-                                                            width="#{energyLabelManager.logoURLImageWidth}"/>
-                                        </h:panelGroup>
-                                        <h:panelGrid columns="1" cellspacing="0" >   
+                            <div class="col-12 md:col-3">
+                                <h:panelGroup style="float: left;margin-right: 10px;" >
+                                    <p:graphicImage value="#{energyLabelManager.logoURL}"
+                                                    class="logo"
+                                                    height="#{energyLabelManager.logoURLImageHeight}" 
+                                                    width="#{energyLabelManager.logoURLImageWidth}"/>
+                                </h:panelGroup>
+                                <h:panelGrid columns="1" cellspacing="0" >   
 
-                                            <p:outputLabel value="#{energyLabelManager.applicationHeader}"
-                                                           class="header-text" />
+                                    <p:outputLabel value="#{energyLabelManager.applicationHeader}"
+                                                   class="header-text" />
 
-                                            <p:outputLabel value="#{energyLabelManager.applicationSubheader}"
-                                                           class="subheader-text" />  
+                                    <p:outputLabel value="#{energyLabelManager.applicationSubheader}"
+                                                   class="subheader-text" />  
 
-                                        </h:panelGrid>
-                                    </div>    
-                                    <div class="col-12 md:col-6">
+                                </h:panelGrid>
+                            </div>    
+                            <div class="col-12 md:col-6">
 
-                                    </div>  
-                                    <div class="col-12 md:col-3">
-                                        <h:panelGroup style="float: right;" >
+                            </div>  
+                            <div class="col-12 md:col-3">
+                                <h:panelGroup style="float: right;" >
 
-                                            <p:badge value="#{systemManager.sizeOfActiveNotifications}" 
-                                                     id="notificationBadge"
-                                                     visible="#{systemManager.hasActiveNotifications}" 
-                                                     severity="danger">
+                                    <p:badge value="#{systemManager.sizeOfActiveNotifications}" 
+                                             id="notificationBadge"
+                                             rendered="false"
+                                             visible="#{systemManager.hasActiveNotifications}" 
+                                             severity="danger">
 
-                                                <p:commandButton id="notifications" 
-                                                                 class="notification-button"
-                                                                 icon="pi pi-bell" />
-                                                <p:overlayPanel for="notifications"   
-                                                                widgetVar="NotificationPanelVar"
-                                                                style="width:400px;border: 0;">
-                                                    <p:orderList value="#{systemManager.notifications}" 
-                                                                 var="notification" 
-                                                                 itemValue="#{notification}"
-                                                                 converter="#{notificationConverter}" 
-                                                                 controlsLocation="none" responsive="true" >
+                                        <p:commandButton id="notifications" 
+                                                         class="notification-button"
+                                                         icon="pi pi-bell" />
+                                        <p:overlayPanel for="notifications"   
+                                                        widgetVar="NotificationPanelVar"
+                                                        style="width:400px;border: 0;">
+                                            <p:orderList value="#{systemManager.notifications}" 
+                                                         var="notification" 
+                                                         itemValue="#{notification}"
+                                                         converter="#{notificationConverter}" 
+                                                         controlsLocation="none" responsive="true" >
 
-                                                        <p:ajax event="select" 
-                                                                update=":appForm:notificationBadge"
-                                                                oncomplete="PF('NotificationPanelVar').hide()"
-                                                                listener="#{energyLabelManager.onNotificationSelect}" />
+                                                <p:ajax event="select" 
+                                                        update=":appForm:notificationBadge"
+                                                        oncomplete="PF('NotificationPanelVar').hide()"
+                                                        listener="#{energyLabelManager.onNotificationSelect}" />
 
-                                                        <p:column>
-                                                            <p:outputLabel value="#{notification.name}" 
-                                                                           style="#{notification.style}"/>
-                                                        </p:column>                                           
+                                                <p:column>
+                                                    <p:outputLabel value="#{notification.name}" 
+                                                                   style="#{notification.style}"/>
+                                                </p:column>                                           
 
-                                                    </p:orderList>
-                                                </p:overlayPanel>
+                                            </p:orderList>
+                                        </p:overlayPanel>
 
-                                            </p:badge>
-                                            <p:spacer width="30"/>
-                                            <p:menuButton iconPos="left"
-                                                          icon="pi pi-user"
-                                                          title="#{energyLabelManager.user.employee.firstName} #{energyLabelManager.user.employee.lastName} (#{energyLabelManager.user.username})"
-                                                          id="userMenu"
-                                                          class="usermenu-button" >
+                                    </p:badge>
+                                    <p:spacer width="30"/>
+                                    <p:menuButton iconPos="left"
+                                                  icon="pi pi-user"
+                                                  title="#{energyLabelManager.user.employee.firstName} #{energyLabelManager.user.employee.lastName} (#{energyLabelManager.user.username})"
+                                                  id="userMenu"
+                                                  class="usermenu-button" >
 
-                                                <p:menuitem actionListener="#{systemManager.viewUserProfile}"                                            
-                                                            update=":userProfileDialogForm"
-                                                            oncomplete="PF('userProfileDialog').show();"
-                                                            icon="pi pi-cog"
-                                                            value="Profile"
-                                                            process="@this"/>  
-                                                <p:menuitem actionListener="#{energyLabelManager.logout}"                                             
-                                                            icon="pi pi-sign-out"
-                                                            value="Logout"
-                                                            oncomplete="location.reload();"
-                                                            process="@this"/>    
+                                        <p:menuitem actionListener="#{systemManager.viewUserProfile}"                                            
+                                                    update=":userProfileDialogForm"
+                                                    oncomplete="PF('userProfileDialog').show();"
+                                                    icon="pi pi-cog"
+                                                    value="Profile"
+                                                    process="@this"/>  
+                                        <p:menuitem actionListener="#{energyLabelManager.logout}"                                             
+                                                    icon="pi pi-sign-out"
+                                                    value="Logout"
+                                                    oncomplete="location.reload();"
+                                                    process="@this"/>    
 
-                                            </p:menuButton>   
-                                        </h:panelGroup>
-                                    </div>
-                                </div>
+                                    </p:menuButton>   
+                                </h:panelGroup>
                             </div>
+                        </div>
+                    </div>         
+
+                    <div class="grid">
+                        <div class="col-12">
 
                             <ui:include src="menubar.xhtml" />   
 
-                            <div class="col-12">
-                                <div class="grid">
-                                    <div class="col-12 md:col-4">
+                            <p:tabView id="mainTabView"  
+                                       rendered="#{energyLabelManager.mainTabView.render}"
+                                       value="#{energyLabelManager.mainTabView.tabs}" 
+                                       var="t" 
+                                       dynamic="false"
+                                       widgetVar="mainTabViewVar">
 
-                                        <p:defaultCommand target="defaultCommand" />
+                                <p:ajax event="tabClose" 
+                                        immediate="true"
+                                        process="@this"
+                                        listener="#{systemManager.onMainViewTabClose}" />  
 
-                                        <ui:include src="dashboard/label/adminTab.xhtml" />
-
-                                    </div>    
-                                    <div class="col-12 md:col-8">
-                                        <p:tabView id="mainTabView"  
-                                                   rendered="#{energyLabelManager.mainTabView.render}"
-                                                   value="#{energyLabelManager.mainTabView.tabs}" 
-                                                   var="t" 
-                                                   dynamic="false"
-                                                   widgetVar="mainTabViewVar">
-
-                                            <p:ajax event="tabClose" 
-                                                    immediate="true"
-                                                    process="@this"
-                                                    listener="#{energyLabelManager.onMainViewTabClose}" />  
-
-                                            <p:ajax event="tabChange" 
-                                                    immediate="true"
-                                                    process="@this"                                
-                                                    listener="#{energyLabelManager.onMainViewTabChange}" />  
+                                <p:ajax event="tabChange" 
+                                        process="@form"      
+                                        update=":appForm"
+                                        listener="#{systemManager.onMainViewTabChange}" />  
 
 
-                                            <p:tab title="#{t.name}" closable="true"  >
+                                <p:tab title="#{t.name}" closable="true"  >
 
-                                                <h:panelGroup rendered="#{t.id == 'System Administration'}" >
-                                                    <ui:include src="admin/generalAdminTab.xhtml" /> 
-                                                </h:panelGroup>  
-
-                                                <h:panelGroup rendered="#{t.id == 'Label Browser'}" >
-                                                    <ui:include src="label/labelsTab.xhtml" /> 
-                                                </h:panelGroup> 
-
-                                                <h:panelGroup rendered="#{t.id == 'Compliance'}" >
-                                                    <ui:include src="label/complianceOptionsTab.xhtml" /> 
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{t.id == 'Energy Efficiency'}" >
-                                                    <ui:include src="label/energyEfficiencyOptionsTab.xhtml" /> 
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{t.id == 'LabelPrint'}" >
-                                                    <ui:include src="label/labelPrintOptionsTab.xhtml" /> 
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{t.id == 'System'}" >
-                                                    <ui:include src="label/systemOptionsTab.xhtml" /> 
-                                                </h:panelGroup>                                   
-
-                                            </p:tab>
-
-                                        </p:tabView> 
+                                    <p:defaultCommand id="defaultCmd"
+                                                      target="#{systemManager.defaultCommandTarget}" />
 
 
-                                    </div>                              
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <h:panelGroup rendered="#{t.id == 'System Administration'}" >
+                                        <ui:include src="admin/generalAdminTab.xhtml" /> 
+                                    </h:panelGroup>  
+
+                                    <h:panelGroup rendered="#{t.id == 'Label Browser'}" >
+                                        <ui:include src="label/labelsTab.xhtml" /> 
+                                    </h:panelGroup> 
+
+                                    <h:panelGroup rendered="#{t.id == 'Compliance'}" >
+                                        <ui:include src="label/complianceOptionsTab.xhtml" /> 
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{t.id == 'Energy Efficiency'}" >
+                                        <ui:include src="label/energyEfficiencyOptionsTab.xhtml" /> 
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{t.id == 'LabelPrint'}" >
+                                        <ui:include src="label/labelPrintOptionsTab.xhtml" /> 
+                                    </h:panelGroup>
+
+                                </p:tab>
+
+                            </p:tabView> 
+                        </div>                              
+                    </div>            
+                </div>
+
+                <div class="grid">
                     <div class="col-12">
-                        <p:toolbar id="topToolbar">
+                        <p:toolbar>
                             <p:toolbarGroup align="left">
 
-                                <p:outputLabel value=" &copy; D P Bennett &amp; Associates Ltd."   
-                                               onclick="window.open('https://dpbennett.com.jm');"
+                                <p:outputLabel value=" &copy; #{systemManager.copyrightOrganization}"   
+                                               onclick="window.open('#{systemManager.organizationWebsite}');"
                                                class="header-text" />
 
                             </p:toolbarGroup>
@@ -211,6 +200,7 @@ Email: info@dpbennett.com.jm
                                                class="header-text" />
                             </p:toolbarGroup>
                         </p:toolbar>
+
                     </div>
                 </div>
             </p:panel>
