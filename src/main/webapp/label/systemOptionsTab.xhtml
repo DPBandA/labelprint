@@ -35,7 +35,7 @@ Email: info@dpbennett.com.jm
                              icon="pi pi-plus" >
 
                 <p:ajax event="dialogReturn" 
-                        update=":appForm:mainTabView:systemOptionsTable"/>
+                        update=":mainTabViewForm:mainTabView:systemOptionsTable"/>
 
             </p:commandButton>
             <p:spacer width="20" />
@@ -44,7 +44,7 @@ Email: info@dpbennett.com.jm
                          placeholder="Enter search text">
                 <p:ajax event="keyup"
                         global="false"
-                        update=":appForm:mainTabView:systemOptionsTable"
+                        update=":mainTabViewForm:mainTabView:systemOptionsTable"
                         listener="#{systemManager.doSystemOptionSearch}"
                         process="@this"/>
             </p:inputText>
@@ -120,7 +120,7 @@ Email: info@dpbennett.com.jm
                              icon="pi pi-pencil">
 
                 <p:ajax event="dialogReturn" 
-                        update=":appForm:mainTabView:systemOptionsTable"/>
+                        update=":mainTabViewForm:mainTabView:systemOptionsTable"/>
 
                 <f:setPropertyActionListener value="#{systemOption}"                                                                    
                                              target="#{systemManager.selectedSystemOption}" />

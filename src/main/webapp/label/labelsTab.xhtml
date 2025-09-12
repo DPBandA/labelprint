@@ -37,7 +37,7 @@ Email: info@dpbennett.com.jm
 
                 <p:ajax event="dialogReturn" 
                         listener="#{energyLabelManager.energyLabelDialogReturn}"
-                        update=":appForm:mainTabView:energyLabelsTable"/>
+                        update=":mainTabViewForm:mainTabView:energyLabelsTable"/>
 
             </p:commandButton>
             <p:spacer width="20" />
@@ -48,7 +48,7 @@ Email: info@dpbennett.com.jm
                 <p:commandButton id="energyLabelSearchButton"
                                  class="search-button"   
                                  actionListener="#{energyLabelManager.doEnergyLabelSearch}"
-                                 update=":appForm:mainTabView:energyLabelsTable"
+                                 update=":mainTabViewForm:mainTabView:energyLabelsTable"
                                  icon="pi pi-search"
                                  process="@form" />
             </h:panelGroup>
@@ -177,7 +177,7 @@ Email: info@dpbennett.com.jm
 
                 <p:ajax event="dialogReturn" 
                         listener="#{energyLabelManager.energyLabelDialogReturn}"
-                        update=":appForm:mainTabView"/>
+                        update=":mainTabViewForm:mainTabView"/>
 
             </p:commandButton>
         </p:column>
@@ -195,7 +195,7 @@ Email: info@dpbennett.com.jm
 
                 <p:ajax event="dialogReturn" 
                         listener="#{energyLabelManager.energyLabelDialogReturn}"
-                        update=":appForm:mainTabView:energyLabelsTable"/>
+                        update=":mainTabViewForm:mainTabView:energyLabelsTable"/>
 
             </p:commandButton>
         </p:toolbarGroup>

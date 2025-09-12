@@ -37,7 +37,7 @@ Email: info@dpbennett.com.jm
 
                 <p:ajax event="dialogReturn" 
                         listener="#{systemManager.doSystemOptionSearch('Compliance')}"
-                        update=":appForm:mainTabView:complianceOptionsTable"/>
+                        update=":mainTabViewForm:mainTabView:complianceOptionsTable"/>
 
             </p:commandButton>
             <p:spacer width="20" />
@@ -46,7 +46,7 @@ Email: info@dpbennett.com.jm
 
                 <p:ajax event="keyup"
                         global="false"
-                        update=":appForm:mainTabView:complianceOptionsTable"
+                        update=":mainTabViewForm:mainTabView:complianceOptionsTable"
                         listener="#{systemManager.doSystemOptionSearch('Compliance')}"
                         process="@this"/>
 
@@ -122,7 +122,7 @@ Email: info@dpbennett.com.jm
 
                 <p:ajax event="dialogReturn"
                         listener="#{systemManager.doSystemOptionSearch('Compliance')}"
-                        update=":appForm:mainTabView:complianceOptionsTable"/>
+                        update=":mainTabViewForm:mainTabView:complianceOptionsTable"/>
 
             </p:commandButton>           
         </p:column>
