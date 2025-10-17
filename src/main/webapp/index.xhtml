@@ -138,7 +138,7 @@ Email: info@dpbennett.com.jm
                                         <p:overlayPanel for="notifications"   
                                                         widgetVar="NotificationPanelVar"
                                                         style="width:400px;">
-                                            <p:orderList value="#{jobManager.notifications}" 
+                                            <p:orderList value="#{energyLabelManager.notifications}" 
                                                          var="notification" 
                                                          itemValue="#{notification}"
                                                          converter="#{notificationConverter}" 
@@ -161,7 +161,7 @@ Email: info@dpbennett.com.jm
                                     <p:spacer width="30"/>                                   
 
 
-                                    <p:commandButton actionListener="#{systemManager.viewUserProfile}"                                            
+                                    <p:commandButton actionListener="#{energyLabelManager.viewUserProfile}"                                            
                                                      update=":userProfileDialogForm"
                                                      oncomplete="PF('userProfileDialog').show();"
                                                      icon="pi pi-user"
@@ -206,7 +206,8 @@ Email: info@dpbennett.com.jm
                                 <p:divider style="margin-top: 0;"/>
 
                                 <p:accordionPanel id="dashboardAccordion" 
-                                                  value="#{energyLabelManager.dashboard.tabs}" 
+                                                  value="#{systemManager.dashboard.tabs}" 
+                                                  activeIndex="#{systemManager.dashboard.tabIndex}"
                                                   var="t"   
                                                   widgetVar="dashboardAccordionVar"
                                                   rendered="true"
@@ -216,11 +217,15 @@ Email: info@dpbennett.com.jm
                                             immediate="true"
                                             process="@this"
                                             update=":mainTabViewForm"
-                                            listener="#{energyLabelManager.onDashboardTabChange}" />
+                                            listener="#{systemManager.onDashboardTabChange}" />
 
                                     <p:tab title="#{t.name}" >
 
-                                        <p:defaultCommand target="#{energyLabelManager.defaultCommandTarget}" />
+                                        <p:defaultCommand target="#{systemManager.defaultCommandTarget}" />
+
+                                        <h:panelGroup rendered="#{t.id == 'LabelPrint'}" >
+                                            <ui:include src="dashboard/lp/lpTab.xhtml" /> 
+                                        </h:panelGroup>  
 
                                         <h:panelGroup rendered="#{t.id == 'System Administration'}" >
                                             <ui:include src="dashboard/admin/generalAdminTab.xhtml" /> 
@@ -247,8 +252,9 @@ Email: info@dpbennett.com.jm
                                     <div class="col-12">
 
                                         <p:tabView id="mainTabView"  
-                                                   rendered="#{energyLabelManager.mainTabView.render}"
-                                                   value="#{energyLabelManager.mainTabView.tabs}" 
+                                                   rendered="#{systemManager.mainTabView.render}"
+                                                   value="#{systemManager.mainTabView.tabs}" 
+                                                   activeIndex="#{systemManager.mainTabView.tabIndex}"
                                                    var="t" 
                                                    dynamic="false"
                                                    widgetVar="mainTabViewVar">
@@ -256,17 +262,17 @@ Email: info@dpbennett.com.jm
                                             <p:ajax event="tabClose" 
                                                     immediate="true"
                                                     process="@this"
-                                                    listener="#{energyLabelManager.onMainViewTabClose}" />  
+                                                    listener="#{systemManager.onMainViewTabClose}" />  
 
                                             <p:ajax event="tabChange" 
                                                     process="@form"      
                                                     update=":mainTabViewForm"
-                                                    listener="#{energyLabelManager.onMainViewTabChange}" />  
+                                                    listener="#{systemManager.onMainViewTabChange}" />  
 
 
                                             <p:tab title="#{t.name}" closable="true"  >
 
-                                                <p:defaultCommand target="#{energyLabelManager.defaultCommandTarget}" />
+                                                <p:defaultCommand target="#{systemManager.defaultCommandTarget}" />
 
                                                 <h:panelGroup rendered="#{t.id == 'System Administration'}" >
                                                     <ui:include src="admin/generalAdminTab.xhtml" /> 
