@@ -81,6 +81,10 @@ Email: info@dpbennett.com.jm
                        style="margin-top: 1px;margin-bottom: 1px;"
                        widgetVar="labelFormTabVar" >
 
+                <p:ajax event="tabChange" 
+                        process="@form"      
+                        update="labelForm" /> 
+
                 <p:tab title="General">
                     <h:panelGrid columns="2" cellspacing="10">
                         <h:outputLabel value="Job number *" for="jobNumber" 
@@ -461,9 +465,9 @@ Email: info@dpbennett.com.jm
 
                 </p:toolbarGroup>
             </p:toolbar>
-            
+
         </h:form>
 
     </ui:define>
-    
+
 </ui:composition>
