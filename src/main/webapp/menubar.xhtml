@@ -29,15 +29,14 @@ Email: info@dpbennett.com.jm
 
     <p:menubar id="main_menubar" style="width: 100%;" autoDisplay="false" >
 
-        <p:submenu label="Label"                            
+        <p:submenu label="LabelPrint"                            
                    rendered="#{systemManager.user.hasModule('energyLabelManager')}"
                    icon="pi pi-images" >
 
             <p:menuitem value="New"
                         title="Create new label"
                         icon="pi pi-plus"
-                        actionListener="#{energyLabelManager.createNewEnergyLabel}" 
-                        rendered="#{energyLabelManager.user.can('CreateEnergyLabel')}"
+                        actionListener="#{energyLabelManager.createNewEnergyLabel}"
                         process="@this" >
 
                 <p:ajax event="dialogReturn" 
@@ -63,19 +62,19 @@ Email: info@dpbennett.com.jm
             <p:menuitem 
                 actionListener="#{energyLabelManager.openComplianceSettingsTab}" 
                 title="Show compliance settings" 
-                rendered="#{energyLabelManager.user.can('AccessComplianceOptions')}"
                 value="Compliance" 
                 icon="pi pi-check-square" />
+            
+            <p:divider />
+            
             <p:menuitem 
                 actionListener="#{energyLabelManager.openEnergyEfficiencySettingsTab}" 
                 title="Show energy efficiency settings" 
-                rendered="#{energyLabelManager.user.can('AccessEnergyEfficiencyOptions')}"
                 value="Energy Efficiency" 
                 icon="pi pi-sun" />
             <p:menuitem 
                 actionListener="#{energyLabelManager.openLabelPrintSettingsTab}" 
                 title="Show LabelPrint settings" 
-                rendered="#{energyLabelManager.user.can('AccessLabelPrintOptions')}"
                 value="LabelPrint" 
                 icon="pi pi-file" />
 
