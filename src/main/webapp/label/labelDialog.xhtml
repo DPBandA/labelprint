@@ -76,10 +76,10 @@ Email: info@dpbennett.com.jm
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <p:tabView id="labelFormTabView"
-                       dynamic="false"
-                       style="margin-top: 1px;margin-bottom: 1px;"
-                       widgetVar="labelFormTabVar" >
+            <p:accordionPanel id="labelFormTabView"
+                              dynamic="false"
+                              style="margin-top: 1px;margin-bottom: 1px;"
+                              widgetVar="labelFormTabVar" >
 
                 <p:ajax event="tabChange" 
                         process="@form"      
@@ -430,7 +430,8 @@ Email: info@dpbennett.com.jm
                             stream="false" />
                     </div>
                 </p:tab>
-            </p:tabView>
+            </p:accordionPanel>
+
             <p:toolbar>
                 <p:toolbarGroup align="left">
                     <p:commandButton value="Save"
