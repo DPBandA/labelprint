@@ -7,7 +7,7 @@
     <version>6.0.0</version>
     <packaging>war</packaging>
 
-    <name>i.LP</name>
+    <name>j.LP</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -20,8 +20,8 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>system-management-lib</artifactId>
             <version>6.0.0</version>
-        </dependency> 
-        
+        </dependency>  
+              
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>system-management</artifactId>
